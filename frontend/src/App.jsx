@@ -1,11 +1,11 @@
 import './App.css'
-import ScheduleAndTasks from './pages/ScheduleAndTasks.jsx'
+import Disciplines from './pages/Disciplines.jsx'
 
 function App() {
 
   return (
     <>
-      <ScheduleAndTasks />
+      <Disciplines />
 
     </>
   )

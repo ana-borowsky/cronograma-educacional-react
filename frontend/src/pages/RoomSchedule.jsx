@@ -1,6 +1,6 @@
 import Layout from "../components/Layout"
 
-const Room_schedule = () => {
+const RoomSchedule = () => {
   return (
     <Layout subtitle="Insira seu ensalamento">
       <div className="schedule-container">
@@ -72,4 +72,4 @@ const Room_schedule = () => {
   );
 };
 
-export default Room_schedule;
+export default RoomSchedule;

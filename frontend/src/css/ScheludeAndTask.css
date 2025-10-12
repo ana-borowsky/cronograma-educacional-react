@@ -1,0 +1,90 @@
+.main-content-layout {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.schedule-panel {
+  flex: 3;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #727272;
+}
+
+.todo-list-panel {
+  flex: 1;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #727272;
+}
+
+.schedule-panel h2,
+.todo-list-panel h2 {
+  border-bottom: 2px solid #000000;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.schedule-panel img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+.tasks-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex: 1;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: #eee;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: #ccc;
+  margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .main-content-layout {
+    flex-direction: column;
+  }
+
+  .schedule-panel,
+  .todo-list-panel {
+    flex: initial;
+  }
+}

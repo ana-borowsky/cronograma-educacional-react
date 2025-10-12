@@ -1,11 +1,11 @@
 import './App.css'
-import Syllabus from './pages/Syllabus'
+import ScheduleAndTasks from './pages/ScheduleAndTasks.jsx'
 
 function App() {
 
   return (
     <>
-      <Syllabus />
+      <ScheduleAndTasks />
 
     </>
   )

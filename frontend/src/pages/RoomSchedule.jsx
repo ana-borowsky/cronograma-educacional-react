@@ -24,8 +24,6 @@ const RoomSchedule = () => {
           </button>
         </form>
 
-        <hr className="divider" />
-
         <h2>Ou insira manualmente</h2>
         <form className="manual-form">
 

@@ -1,5 +1,9 @@
 @import './css/ScheludeAndTask.css';
 @import './css/Disciplines.css';
+@import './css/Login.css';
+@import './css/Register.css';
+@import './css/RoomSchedule.css';
+@import './css/Syllabus.css';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

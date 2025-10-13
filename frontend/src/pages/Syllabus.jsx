@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom"
 
 const Syllabus = () => {
   return (
@@ -49,9 +50,10 @@ const Syllabus = () => {
             />
           </div>
 
-          <button type="submit" className="upload-button">
+          <Link to="/home" className="auth-link">
             Salvar
-          </button>
+          </Link>
+          
         </form>
 
         <hr className="form-divider" />
@@ -60,7 +62,6 @@ const Syllabus = () => {
 
         <form className="syllabus-form">
 
-          {/* NOVO: SELECT DE MATÉRIA */}
           <div className="input-group">
             <label htmlFor="course-select">Selecione a Matéria para Inserir Dados</label>
             <select
@@ -148,10 +149,9 @@ const Syllabus = () => {
           </button>
           <hr className="minor-divider" />
 
-
-          <button type="submit" className="submit-syllabus-button">
+          <Link to="/home" className="auth-link">
             Salvar
-          </button>
+          </Link>
         </form>
 
       </div>

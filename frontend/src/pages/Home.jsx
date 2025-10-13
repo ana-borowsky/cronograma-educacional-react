@@ -7,6 +7,11 @@ const Home = () => {
       <div className="home-container">
 
         <div className="sidebar-menu">
+
+          <Link to="/scheduleandtasks" className="auth-link">
+            Cronograma
+          </Link><br></br>
+
           <Link to="/roomschedule" className="auth-link">
             Ensalamento
           </Link><br></br>

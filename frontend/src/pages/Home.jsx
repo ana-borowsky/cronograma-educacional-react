@@ -6,7 +6,7 @@ const Home = () => {
     <Layout subtitle="Visão Geral do Dia">
       <div className="home-container">
 
-        <div className="sidebar-menu">
+        <div className="sidebar-menu panel-style">
 
           <Link to="/scheduleandtasks" className="sidebar-link">
             <span role="img" aria-label="Cronograma">📅</span>
@@ -34,7 +34,7 @@ const Home = () => {
           </Link>
 
         </div>
-        <div className="daily-schedule-view">
+        <div className="daily-schedule-view panel-style">
 
           <div className="schedule-header">
             <button className="nav-arrow left-arrow">

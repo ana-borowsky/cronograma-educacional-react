@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom"
 
 const RoomSchedule = () => {
   return (
@@ -18,10 +19,10 @@ const RoomSchedule = () => {
               required
             />
           </div>
-
-          <button type="submit" className="upload-button">
+          <Link to="/courselist" className="auth-link">
             Enviar e Processar Arquivo
-          </button>
+          </Link>
+        
         </form>
 
         <h2>Ou insira manualmente</h2>
@@ -60,9 +61,9 @@ const RoomSchedule = () => {
             />
           </div>
 
-          <button type="submit" className="manual-submit-button">
+          <Link to="/courselist" className="auth-link">
             Adicionar Matéria ao Ensalamento
-          </button>
+          </Link>
         </form>
 
       </div>

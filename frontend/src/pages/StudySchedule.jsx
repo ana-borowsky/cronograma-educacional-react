@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom"
 
 const StudySchedule = () => {
   return (
@@ -84,9 +85,9 @@ const StudySchedule = () => {
             />
           </div>
 
-          <button type="submit" className="login-button">
+          <Link to="/home" className="auth-link">
             Salvar Horários de Estudo
-          </button>
+          </Link>
         </form>
       </div>
     </Layout>

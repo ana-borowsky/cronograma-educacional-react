@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom"
 
 const Login = () => {
   return (
@@ -29,9 +30,10 @@ const Login = () => {
             />
           </div>
 
-          <button type="submit" className="login-button">
-            Entrar
-          </button>
+          <Link to="/roomschedule" className="auth-link">
+           Entrar
+          </Link>
+         
         </form>
 
         <p className="signup-text">

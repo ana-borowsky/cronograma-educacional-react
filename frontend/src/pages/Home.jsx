@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -6,47 +7,21 @@ const Home = () => {
       <div className="home-container">
 
         <div className="sidebar-menu">
+          <Link to="/roomschedule" className="auth-link">
+            Ensalamento
+          </Link><br></br>
 
-          <button
-            className="sidebar-button"
-            onClick={() => window.location.href = '/ScheduleAndTasks'}
-          >
-            <span role="img" aria-label="Cronograma">📅</span>
-            <span className="button-text">Cronograma</span>
-          </button>
+          <Link to="/syllabus" className="auth-link">
+            Plano de Ensino
+          </Link><br></br>
 
-          <button
-            className="sidebar-button"
-            onClick={() => window.location.href = '/RoomSchelude'}
-          >
-            <span role="img" aria-label="Ensalamento">🏫</span>
-            <span className="button-text">Ensalamento</span>
-          </button>
+          <Link to="/studyschedule" className="auth-link">
+            Horas para estudo
+          </Link><br></br>
 
-          <button
-            className="sidebar-button"
-            onClick={() => window.location.href = '/Syllabus'}
-          >
-            <span role="img" aria-label="Plano de Ensino">📚</span>
-            <span className="button-text">Plano de Ensino</span>
-          </button>
-
-          <button
-            className="sidebar-button"
-            onClick={() => window.location.href = '/StudySchelude'}
-          >
-            <span role="img" aria-label="Horas Vagas">⏳</span>
-            <span className="button-text">Horas Vagas</span>
-          </button>
-
-          <button
-            className="sidebar-button"
-            onClick={() => window.location.href = '/Disciplines'}
-          >
-            <span role="img" aria-label="Lista de Matérias">📋</span>
-            <span className="button-text">Lista de Matérias</span>
-          </button>
-
+          <Link to="/disciplines" className="auth-link">
+            Disciplinas
+          </Link><br></br>
         </div>
         <div className="daily-schedule-view">
 

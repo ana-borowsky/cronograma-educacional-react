@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom"
 
 const CourseList = () => {
   return (
@@ -73,6 +74,9 @@ const CourseList = () => {
             </div>
           </div>
         </div>
+        <Link to="/syllabus" className="auth-link">
+          Salvar
+        </Link>
       </div>
     </Layout>
   );

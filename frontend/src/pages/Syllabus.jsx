@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom"
 
 const Syllabus = () => {
   return (
@@ -17,9 +18,9 @@ const Syllabus = () => {
               required
             />
           </div>
-          <button type="submit" className="upload-button">
+          <Link to="/studyschedule" className="auth-link">
             Enviar Arquivo
-          </button>
+          </Link>
         </form>
 
         <hr className="form-divider" />
@@ -83,9 +84,9 @@ const Syllabus = () => {
             />
           </div>
 
-          <button type="submit" className="submit-syllabus-button">
+          <Link to="/studyschedule" className="auth-link">
             Salvar Plano de Ensino
-          </button>
+          </Link>
         </form>
 
       </div>

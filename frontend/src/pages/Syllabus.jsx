@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const Syllabus = () => {
   return (
-    <Layout subtitle="Insira o Plano de Ensino por Matéria">
+    <Layout subtitle="Nesta página, você deverá adicionar todos os trabalhos, provas e datas importantes para cada matéria. Você pode fazer isso de forma automática ao inserir o plano de ensino, ou manualmente.">
       <div className="syllabus-container">
 
         <h2>Faça upload do plano de ensino por matéria</h2>

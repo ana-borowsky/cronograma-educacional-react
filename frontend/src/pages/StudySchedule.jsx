@@ -85,7 +85,7 @@ const StudySchedule = () => {
             />
           </div>
 
-          <Link to="/home" className="auth-link">
+          <Link to="/todolist" className="auth-link">
             Salvar Horários de Estudo
           </Link>
         </form>

@@ -3,111 +3,53 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <Layout subtitle="Visão Geral do Dia">
-      <div className="home-container">
+    <Layout subtitle="Bem-vindo ao MyStudyFlow">
+      <div className="max-w-[1600px] mx-auto flex gap-5 p-5 items-start">
 
-        <div className="sidebar-menu panel-style">
+        <div className="flex-grow p-8 bg-neutral-800 border border-neutral-700 rounded-lg shadow-xl">
+          <p className="text-neutral-300 text-lg mb-6">
+            O MyStudyFlow é a ferramenta definitiva projetada para estudantes que buscam excelência e organização em sua jornada acadêmica. Com o uso de IA, transforme sua rotina de forma inteligente e não deixe tudo para a última hora.
+          </p>
 
-          <Link to="/home" className="sidebar-link active-link">
-            <span role="img" aria-label="Visão Geral">🏠</span>
-            <span className="link-text">Visão Geral (Hoje)</span>
-          </Link>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
-          <Link to="/scheduleandtasks" className="sidebar-link">
-            <span role="img" aria-label="Cronograma">📅</span>
-            <span className="link-text">Cronograma</span>
-          </Link>
+            <div className="feature-card bg-neutral-700 p-5 rounded-lg border-t-4 border-neutral-500 hover:bg-neutral-600 transition duration-300">
+              <h3 className="text-xl font-bold text-white mb-2">
+                <span role="img" aria-label="Disciplinas">📋</span> Disciplinas Detalhadas
+              </h3>
+              <p className="text-neutral-400 text-sm">Organize as disciplinas e tarefas por prioridade.</p>
+            </div>
 
-          <Link to="/roomschedule" className="sidebar-link">
-            <span role="img" aria-label="Ensalamento">🏫</span>
-            <span className="link-text">Ensalamento</span>
-          </Link>
+            <div className="feature-card bg-neutral-700 p-5 rounded-lg border-t-4 border-neutral-500 hover:bg-neutral-600 transition duration-300">
+              <h3 className="text-xl font-bold text-white mb-2">
+                <span role="img" aria-label="To-Do List">✅</span> Foco Diário
+              </h3>
+              <p className="text-neutral-400 text-sm">Use o *To-Do List* (Visão Geral do Dia) para priorizar as tarefas mais urgentes e gerenciar seu tempo de estudo de forma eficiente.</p>
+            </div>
 
-          <Link to="/syllabus" className="sidebar-link">
-            <span role="img" aria-label="Plano de Ensino">📚</span>
-            <span className="link-text">Plano de Ensino</span>
-          </Link>
+            <div className="feature-card bg-neutral-700 p-5 rounded-lg border-t-4 border-neutral-500 hover:bg-neutral-600 transition duration-300">
+              <h3 className="text-xl font-bold text-white mb-2">
+                <span role="img" aria-label="Cronograma">📅</span> Planejamento Completo
+              </h3>
+              <p className="text-neutral-400 text-sm">Acesse o cronograma, ensalamento e plano de ensino para ter uma visão completa da semana ou semestre.</p>
+            </div>
 
-          <Link to="/studyschedule" className="sidebar-link">
-            <span role="img" aria-label="Horas para estudo">⏳</span>
-            <span className="link-text">Horas para estudo</span>
-          </Link>
-
-          <Link to="/disciplines" className="sidebar-link">
-            <span role="img" aria-label="Disciplinas">📋</span>
-            <span className="link-text">Disciplinas</span>
-          </Link>
-
-        </div>
-        <div className="daily-schedule-view panel-style">
-
-          <div className="schedule-header">
-            <button className="nav-arrow left-arrow">
-              <span role="img" aria-label="Anterior">◀️</span>
-            </button>
-            <h2 className="current-day-title">Terça-feira, 15 de Outubro</h2>
-            <button className="nav-arrow right-arrow">
-              <span role="img" aria-label="Próximo">▶️</span>
-            </button>
           </div>
 
-          <div className="daily-progress">
-            <div className="progress-bar-container">
-              <div className="progress-bar" style={{ width: '40%' }}></div>
+          <div className="mt-8 pt-6 border-t border-neutral-700 text-center">
+            <h4 className="text-xl text-neutral-200 mb-4">Comece agora a dominar sua rotina de estudos!</h4>
+
+            <div className="flex justify-center gap-4">
+
+              <Link to="/signup" className="inline-block px-8 py-3 bg-neutral-600 text-white font-bold rounded-full text-lg hover:bg-neutral-700 transition duration-300 shadow-md">
+                Cadastre-se
+              </Link>
+
+              <Link to="/login" className="inline-block px-8 py-3 bg-neutral-700 text-neutral-300 font-bold rounded-full text-lg hover:bg-neutral-600 hover:text-white transition duration-300 shadow-md border border-neutral-600">
+                Fazer Login
+              </Link>
+
             </div>
-            <p className="progress-info">4 de 10 Horas Concluídas</p>
-          </div>
-
-          <div className="todo-list">
-
-            <div className="todo-item">
-              <span className="item-time">08:00 - 09:00</span>
-              <span className="item-description">Preparação para a aula de Programação</span>
-              <input type="checkbox" className="item-checkbox" />
-            </div>
-
-            <div className="todo-item">
-              <span className="item-time">09:00 - 10:00</span>
-              <span className="item-description">Revisar Capítulo 3 de Cálculo I</span>
-              <input type="checkbox" className="item-checkbox" />
-            </div>
-
-            <div className="todo-item completed">
-              <span className="item-time">10:00 - 12:00</span>
-              <span className="item-description">Estudar para a prova de Física Experimental</span>
-              <input type="checkbox" className="item-checkbox" checked readOnly />
-            </div>
-
-            <div className="todo-item">
-              <span className="item-time">13:00 - 15:00</span>
-              <span className="item-description">Reunião de grupo para Projeto Final</span>
-              <input type="checkbox" className="item-checkbox" />
-            </div>
-
-            <div className="todo-item completed">
-              <span className="item-time">15:00 - 17:00</span>
-              <span className="item-description">Redigir a primeira seção do relatório de Cálculo</span>
-              <input type="checkbox" className="item-checkbox" checked readOnly />
-            </div>
-
-            <div className="todo-item completed">
-              <span className="item-time">17:00 - 19:00</span>
-              <span className="item-description">Aula de Língua Portuguesa (Sala A-102)</span>
-              <input type="checkbox" className="item-checkbox" checked readOnly />
-            </div>
-
-            <div className="todo-item">
-              <span className="item-time">19:00 - 21:00</span>
-              <span className="item-description">Aula de Introdução à Programação (Lab Inf 3)</span>
-              <input type="checkbox" className="item-checkbox" />
-            </div>
-
-            <div className="todo-item">
-              <span className="item-time">21:00 - 22:00</span>
-              <span className="item-description">Planejar tarefas para o dia seguinte</span>
-              <input type="checkbox" className="item-checkbox" />
-            </div>
-
           </div>
         </div>
       </div>

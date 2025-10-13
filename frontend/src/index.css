@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "./css/ScheludeAndTask.css";
 @import "./css/Disciplines.css";
 @import "./css/Login.css";
@@ -5,8 +9,7 @@
 @import "./css/RoomSchedule.css";
 @import "./css/Syllabus.css";
 @import "./css/CourseList.css";
-@import "./css/Home.css";
-@import "tailwindcss";
+@import "./css/ToDoList.css";
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -25,11 +28,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #cccccc;
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+  color: #ffffff;
 }
 
 body {
@@ -52,13 +56,15 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #333333;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: #888888;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -69,10 +75,78 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
+  }
+}
+
+.sidebar-link {
+  @apply flex items-center gap-3 p-3 rounded-md text-gray-400 bg-gray-700 transition duration-200;
+}
+
+.sidebar-link:hover {
+  @apply bg-gray-600 text-white;
+}
+
+.sidebar-link.active-link {
+  @apply bg-gray-600 text-white border-l-4 border-gray-500 pl-2;
+}
+
+.link-text {
+  @apply font-semibold text-sm;
+}
+
+.todo-item {
+  @apply flex items-center p-3 bg-gray-700 rounded-md border-l-4 border-gray-600 transition duration-200;
+}
+
+.todo-item:hover {
+  @apply bg-gray-600;
+}
+
+.item-time {
+  @apply font-bold text-gray-300 min-w-[120px] text-sm;
+}
+
+.item-description {
+  @apply text-gray-400 flex-grow text-sm;
+}
+
+.todo-item.completed {
+  @apply bg-gray-700 border-l-4 border-gray-500 opacity-70;
+}
+
+.todo-item.completed .item-description {
+  @apply line-through text-gray-500;
+}
+
+.item-checkbox {
+  @apply ml-4 w-5 h-5 cursor-pointer accent-gray-500;
+}
+
+@media (max-width: 768px) {
+  .max-w-\[1600px\] {
+    @apply flex-col p-3;
+  }
+
+  .min-w-\[180px\] {
+    @apply min-w-full flex-row flex-wrap justify-center;
+  }
+
+  .min-w-\[180px\] .sidebar-link {
+    @apply flex-grow-0;
+  }
+
+  .link-text {
+    @apply hidden;
+  }
+
+  .sidebar-link span[role="img"] {
+    @apply text-xl;
   }
 }

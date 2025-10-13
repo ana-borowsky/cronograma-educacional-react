@@ -4,21 +4,23 @@ import Login from './pages/Login.jsx'
 import SingUp from './pages/SingUp.jsx'
 import RoomSchedule from './pages/RoomSchedule.jsx'
 import Disciplines from './pages/Disciplines.jsx'
-import Home from './pages/Home.jsx'
+import ToDoList from './pages/ToDoList.jsx'
 import ScheduleAndTasks from './pages/ScheduleAndTasks.jsx'
 import Syllabus from './pages/Syllabus.jsx'
 import CourseList from './pages/CourseList.jsx'
 import StudySchedule from './pages/StudySchedule.jsx'
+import Home from './pages/Home.jsx'
 
 const App = () => {
   return (
       <Router>
         <Routes>
-          <Route path="/" element={<SingUp />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SingUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/roomschedule" element={<RoomSchedule />} />
           <Route path="/disciplines" element={<Disciplines />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/Ttodolist" element={<ToDoList />} />
           <Route path="/scheduleandtasks" element={<ScheduleAndTasks />} />
           <Route path="/syllabus" element={<Syllabus />} />
           <Route path="/courselist" element={<CourseList />} />

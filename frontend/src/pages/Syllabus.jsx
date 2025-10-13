@@ -46,7 +46,7 @@ const Syllabus = () => {
             />
           </div>
 
-          <Link to="/home" className="auth-link">
+          <Link to="/todolist" className="auth-link">
             Salvar
           </Link>
 
@@ -149,7 +149,7 @@ const Syllabus = () => {
           </button>
           <hr className="minor-divider" />
 
-          <Link to="/home" className="auth-link">
+          <Link to="/todolist" className="auth-link">
             Salvar
           </Link>
         </form>

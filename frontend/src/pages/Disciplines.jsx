@@ -8,7 +8,7 @@ const Disciplines = () => {
 
         <div className="sidebar-menu panel-style">
 
-          <Link to="/home" className="sidebar-link">
+          <Link to="/todolist" className="sidebar-link">
             <span role="img" aria-label="Visão Geral">🏠</span>
             <span className="link-text">Visão Geral (Hoje)</span>
           </Link>

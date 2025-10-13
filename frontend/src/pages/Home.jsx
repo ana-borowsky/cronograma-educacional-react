@@ -8,6 +8,11 @@ const Home = () => {
 
         <div className="sidebar-menu panel-style">
 
+          <Link to="/home" className="sidebar-link active-link">
+            <span role="img" aria-label="Visão Geral">🏠</span>
+            <span className="link-text">Visão Geral (Hoje)</span>
+          </Link>
+
           <Link to="/scheduleandtasks" className="sidebar-link">
             <span role="img" aria-label="Cronograma">📅</span>
             <span className="link-text">Cronograma</span>

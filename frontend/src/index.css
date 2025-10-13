@@ -2,16 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./css/ScheludeAndTask.css";
-@import "./css/Disciplines.css";
-@import "./css/Login.css";
-@import "./css/SingUp.css";
-@import "./css/RoomSchedule.css";
-@import "./css/Syllabus.css";
-@import "./css/CourseList.css";
-@import "./css/ToDoList.css";
-
 @layer base {
+
+  :root {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+
+  button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #333333;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    @apply text-white;
+
+  }
+
+  button:hover {
+    border-color: #888888;
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
   a {
     @apply text-white;
     text-decoration: none;
@@ -21,55 +64,6 @@
   a:hover {
     @apply text-gray-300 underline;
   }
-}
-
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #333333;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-
-button:hover {
-  border-color: #888888;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {
@@ -87,49 +81,6 @@ button:focus-visible {
   }
 }
 
-.sidebar-link {
-  @apply flex items-center gap-3 p-3 rounded-md text-gray-400 bg-gray-700 transition duration-200;
-}
-
-.sidebar-link:hover {
-  @apply bg-gray-600 text-white;
-}
-
-.sidebar-link.active-link {
-  @apply bg-gray-600 text-white border-l-4 border-gray-500 pl-2;
-}
-
-.link-text {
-  @apply font-semibold text-sm;
-}
-
-.todo-item {
-  @apply flex items-center p-3 bg-gray-700 rounded-md border-l-4 border-gray-600 transition duration-200;
-}
-
-.todo-item:hover {
-  @apply bg-gray-600;
-}
-
-.item-time {
-  @apply font-bold text-gray-300 min-w-[120px] text-sm;
-}
-
-.item-description {
-  @apply text-gray-400 flex-grow text-sm;
-}
-
-.todo-item.completed {
-  @apply bg-gray-700 border-l-4 border-gray-500 opacity-70;
-}
-
-.todo-item.completed .item-description {
-  @apply line-through text-gray-500;
-}
-
-.item-checkbox {
-  @apply ml-4 w-5 h-5 cursor-pointer accent-gray-500;
-}
 
 @media (max-width: 768px) {
   .max-w-\[1600px\] {

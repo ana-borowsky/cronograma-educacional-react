@@ -1,6 +1,7 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom"
 
-const Room_schedule = () => {
+const RoomSchedule = () => {
   return (
     <Layout subtitle="Insira seu ensalamento">
       <div className="schedule-container">
@@ -18,13 +19,11 @@ const Room_schedule = () => {
               required
             />
           </div>
-
-          <button type="submit" className="upload-button">
+          <Link to="/courselist" className="auth-link">
             Enviar e Processar Arquivo
-          </button>
+          </Link>
+        
         </form>
-
-        <hr className="divider" />
 
         <h2>Ou insira manualmente</h2>
         <form className="manual-form">
@@ -62,9 +61,9 @@ const Room_schedule = () => {
             />
           </div>
 
-          <button type="submit" className="manual-submit-button">
+          <Link to="/courselist" className="auth-link">
             Adicionar Matéria ao Ensalamento
-          </button>
+          </Link>
         </form>
 
       </div>
@@ -72,4 +71,4 @@ const Room_schedule = () => {
   );
 };
 
-export default Room_schedule;
+export default RoomSchedule;

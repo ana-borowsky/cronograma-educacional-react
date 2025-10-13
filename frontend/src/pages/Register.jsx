@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom"
 
 const Register = () => {
   return (
@@ -51,9 +52,9 @@ const Register = () => {
             />
           </div>
 
-          <button type="submit" className="register-button">
+          <Link to="/login" className="auth-link">
             Cadastrar
-          </button>
+          </Link>
         </form>
 
         <p className="login-text">

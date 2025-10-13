@@ -49,7 +49,7 @@ const Syllabus = () => {
           <Link to="/home" className="auth-link">
             Salvar
           </Link>
-          
+
         </form>
 
         <hr className="form-divider" />
@@ -82,6 +82,16 @@ const Syllabus = () => {
               id="assignment-1-name"
               name="assignment-1-name"
               placeholder="Ex: Projeto Final"
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="assignment-1-hours">Duração Estimada (Horas)</label>
+            <input
+              type="number"
+              id="assignment-1-hours"
+              name="assignment-1-hours"
+              placeholder="Ex: 10"
+              min="1"
             />
           </div>
           <div className="input-group">

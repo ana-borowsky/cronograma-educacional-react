@@ -1,11 +1,12 @@
-@import './css/ScheludeAndTask.css';
-@import './css/Disciplines.css';
-@import './css/Login.css';
-@import './css/SingUp.css';
-@import './css/RoomSchedule.css';
-@import './css/Syllabus.css';
-@import './css/CourseList.css';
-@import './css/Home.css';
+@import "./css/ScheludeAndTask.css";
+@import "./css/Disciplines.css";
+@import "./css/Login.css";
+@import "./css/SingUp.css";
+@import "./css/RoomSchedule.css";
+@import "./css/Syllabus.css";
+@import "./css/CourseList.css";
+@import "./css/Home.css";
+@import "tailwindcss";
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

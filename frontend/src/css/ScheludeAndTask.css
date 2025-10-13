@@ -17,47 +17,31 @@
 }
 
 .sidebar-menu {
-  /* Ocupa uma fatia pequena do espaço */
   min-width: 180px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  /* Aplica o estilo de painel para ter bordas e fundo */
 }
 
 .schedule-panel {
   flex: 3;
   min-width: 550px;
-  /* Remove estilos de painel duplicados, confia no panel-style */
-  /* Remove flex: 3 e min-width, ajusta para o novo layout de 3 colunas */
   background-color: #2c2c2c;
-  /* Mantido se você não quiser usar .panel-style */
   border-radius: 8px;
-  /* Mantido se você não quiser usar .panel-style */
   padding: 20px;
-  /* Mantido se você não quiser usar .panel-style */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  /* Mantido se você não quiser usar .panel-style */
   border: 1px solid #444444;
-  /* Mantido se você não quiser usar .panel-style */
 }
 
 .todo-list-panel {
   flex: 1;
   min-width: 250px;
-  /* Remove estilos de painel duplicados, confia no panel-style */
-  /* Remove flex: 1 e min-width, ajusta para o novo layout de 3 colunas */
   background-color: #2c2c2c;
-  /* Mantido se você não quiser usar .panel-style */
   border-radius: 8px;
-  /* Mantido se você não quiser usar .panel-style */
   padding: 20px;
-  /* Mantido se você não quiser usar .panel-style */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  /* Mantido se você não quiser usar .panel-style */
   border: 1px solid #444444;
-  /* Mantido se você não quiser usar .panel-style */
 }
 
 .sidebar-link {

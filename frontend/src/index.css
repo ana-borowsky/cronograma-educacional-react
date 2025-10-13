@@ -4,6 +4,8 @@
 @import './css/Register.css';
 @import './css/RoomSchedule.css';
 @import './css/Syllabus.css';
+@import './css/CourseList.css';
+@import './css/Home.css';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

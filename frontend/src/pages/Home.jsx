@@ -8,25 +8,31 @@ const Home = () => {
 
         <div className="sidebar-menu">
 
-          <Link to="/scheduleandtasks" className="auth-link">
-            Cronograma
-          </Link><br></br>
+          <Link to="/scheduleandtasks" className="sidebar-link">
+            <span role="img" aria-label="Cronograma">📅</span>
+            <span className="link-text">Cronograma</span>
+          </Link>
 
-          <Link to="/roomschedule" className="auth-link">
-            Ensalamento
-          </Link><br></br>
+          <Link to="/roomschedule" className="sidebar-link">
+            <span role="img" aria-label="Ensalamento">🏫</span>
+            <span className="link-text">Ensalamento</span>
+          </Link>
 
-          <Link to="/syllabus" className="auth-link">
-            Plano de Ensino
-          </Link><br></br>
+          <Link to="/syllabus" className="sidebar-link">
+            <span role="img" aria-label="Plano de Ensino">📚</span>
+            <span className="link-text">Plano de Ensino</span>
+          </Link>
 
-          <Link to="/studyschedule" className="auth-link">
-            Horas para estudo
-          </Link><br></br>
+          <Link to="/studyschedule" className="sidebar-link">
+            <span role="img" aria-label="Horas para estudo">⏳</span>
+            <span className="link-text">Horas para estudo</span>
+          </Link>
 
-          <Link to="/disciplines" className="auth-link">
-            Disciplinas
-          </Link><br></br>
+          <Link to="/disciplines" className="sidebar-link">
+            <span role="img" aria-label="Disciplinas">📋</span>
+            <span className="link-text">Disciplinas</span>
+          </Link>
+
         </div>
         <div className="daily-schedule-view">
 

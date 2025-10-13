@@ -16,7 +16,6 @@ const Syllabus = () => {
               type="file"
               id="syllabus-calc"
               name="syllabus-calc"
-              required
             />
           </div>
 
@@ -26,7 +25,6 @@ const Syllabus = () => {
               type="file"
               id="syllabus-prog"
               name="syllabus-prog"
-              required
             />
           </div>
 
@@ -36,7 +34,6 @@ const Syllabus = () => {
               type="file"
               id="syllabus-fisica"
               name="syllabus-fisica"
-              required
             />
           </div>
 
@@ -46,7 +43,6 @@ const Syllabus = () => {
               type="file"
               id="syllabus-port"
               name="syllabus-port"
-              required
             />
           </div>
 
@@ -67,7 +63,6 @@ const Syllabus = () => {
             <select
               id="course-select"
               name="course-select"
-              required
             >
               <option value="">-- Escolha a Matéria --</option>
               <option value="calculo-i">Cálculo I</option>
@@ -87,7 +82,6 @@ const Syllabus = () => {
               id="assignment-1-name"
               name="assignment-1-name"
               placeholder="Ex: Projeto Final"
-              required
             />
           </div>
           <div className="input-group">
@@ -96,7 +90,6 @@ const Syllabus = () => {
               type="date"
               id="assignment-1-date"
               name="assignment-1-date"
-              required
             />
           </div>
           <div className="input-group">
@@ -122,7 +115,6 @@ const Syllabus = () => {
               id="exam-1-name"
               name="exam-1-name"
               placeholder="Ex: P1 - Avaliação Intermediária"
-              required
             />
           </div>
           <div className="input-group">
@@ -131,7 +123,6 @@ const Syllabus = () => {
               type="date"
               id="exam-1-date"
               name="exam-1-date"
-              required
             />
           </div>
           <div className="input-group">
@@ -140,7 +131,6 @@ const Syllabus = () => {
               type="file"
               id="full-syllabus-files"
               name="full-syllabus-files"
-              multiple
             />
           </div>
 

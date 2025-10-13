@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login.jsx'
-import Register from './pages/Register.jsx'
+import SingUp from './pages/SingUp.jsx'
 import RoomSchedule from './pages/RoomSchedule.jsx'
 import Disciplines from './pages/Disciplines.jsx'
 import Home from './pages/Home.jsx'
@@ -14,7 +14,7 @@ const App = () => {
   return (
       <Router>
         <Routes>
-          <Route path="/" element={<Register />} />
+          <Route path="/" element={<SingUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/roomschedule" element={<RoomSchedule />} />
           <Route path="/disciplines" element={<Disciplines />} />

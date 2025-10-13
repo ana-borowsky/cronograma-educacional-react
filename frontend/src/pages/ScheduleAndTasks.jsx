@@ -1,4 +1,5 @@
 import Layout from "../components/Layout"
+import { Link } from "react-router-dom";
 
 const ScheduleAndTasks = () => {
   const timeSlots = Array.from({ length: 17 }, (_, i) => {
@@ -61,6 +62,41 @@ const ScheduleAndTasks = () => {
   return (
     <Layout subtitle="Cronograma Semanal">
       <div className="main-content-layout">
+
+        <div className="sidebar-menu panel-style">
+
+          <Link to="/home" className="sidebar-link">
+            <span role="img" aria-label="Visão Geral">🏠</span>
+            <span className="link-text">Visão Geral (Hoje)</span>
+          </Link>
+
+          <Link to="/scheduleandtasks" className="sidebar-link active-link">
+            <span role="img" aria-label="Cronograma">📅</span>
+            <span className="link-text">Cronograma</span>
+          </Link>
+
+          <Link to="/roomschedule" className="sidebar-link">
+            <span role="img" aria-label="Ensalamento">🏫</span>
+            <span className="link-text">Ensalamento</span>
+          </Link>
+
+          <Link to="/syllabus" className="sidebar-link">
+            <span role="img" aria-label="Plano de Ensino">📚</span>
+            <span className="link-text">Plano de Ensino</span>
+          </Link>
+
+          <Link to="/studyschedule" className="sidebar-link">
+            <span role="img" aria-label="Horas para estudo">⏳</span>
+            <span className="link-text">Horas para estudo</span>
+          </Link>
+
+          <Link to="/disciplines" className="sidebar-link">
+            <span role="img" aria-label="Disciplinas">📋</span>
+            <span className="link-text">Disciplinas</span>
+          </Link>
+
+        </div>
+
         <div className="schedule-panel">
           <h2>Agenda da Semana</h2>
 

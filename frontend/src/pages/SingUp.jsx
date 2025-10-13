@@ -1,11 +1,11 @@
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
-const Register = () => {
+const SingUp = () => {
   return (
     <Layout subtitle="Faça seu cadastro!">
-      <div className="register-container">
-        <form className="register-form">
+      <div className="signup-container">
+        <form className="signup-form">
           <h2>Crie sua conta</h2>
 
           <div className="input-group">
@@ -66,4 +66,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SingUp;

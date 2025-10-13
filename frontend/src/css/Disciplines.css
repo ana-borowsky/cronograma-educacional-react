@@ -1,118 +1,275 @@
-.disciplines-container {
+.main-content-layout {
   display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding: 15px 10px;
+  gap: 20px;
+  padding: 20px;
   width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
   box-sizing: border-box;
+  align-items: flex-start;
+  min-height: calc(100vh - 80px);
+}
+
+.panel-style {
+  background-color: #2c2c2c;
+  border: 1px solid #444444;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+}
+
+.sidebar-menu {
+  min-width: 180px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 100px);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  color: #cccccc;
+  text-decoration: none;
+  background-color: #333333;
+  transition: background-color 0.2s;
+}
+
+.sidebar-link:hover {
+  background-color: #444444;
+  color: #ffffff;
+}
+
+.sidebar-link.active-link {
+  background-color: #555555;
+  color: #ffffff;
+  border-left: 3px solid #00b300;
+  padding-left: 7px;
+}
+
+.link-text {
+  font-weight: bold;
+}
+
+.disciplines-container {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
 }
 
 .discipline-panel {
-  min-width: 250px;
-  max-width: 250px;
-  background-color: #333333;
-  border: 1px solid #555555;
-  border-radius: 6px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s;
-  flex-shrink: 0;
-}
-
-.discipline-panel:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  flex: 0 0 320px;
+  min-width: 320px;
+  background-color: #2c2c2c;
+  border: 1px solid #444444;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  box-sizing: border-box;
+  max-height: calc(100vh - 100px);
+  overflow-y: hidden;
 }
 
 .discipline-title {
-  color: #ffffff;
-  border-bottom: 2px solid #666666;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  font-size: 1.1em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #f0f0f0;
+  border-bottom: 2px solid #555555;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .section h3 {
   color: #cccccc;
-  margin-top: 8px;
-  margin-bottom: 5px;
-  font-size: 0.9em;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.1em;
 }
 
 .activity-list,
 .exam-list {
   list-style: none;
   padding: 0;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .activity-item,
 .exam-item {
-  padding: 2px 0;
-  border-left: 3px solid #999999;
-  padding-left: 6px;
-  margin-bottom: 2px;
-  font-size: 0.75em;
-  color: #eeeeee;
-  line-height: 1.3;
+  color: #999999;
+  padding: 8px 0;
+  border-bottom: 1px dashed #333333;
+  font-size: 0.9em;
+}
+
+.activity-item:last-child,
+.exam-item:last-child {
+  border-bottom: none;
 }
 
 .activity-item.completed {
-  border-left-color: #aaaaaa;
   text-decoration: line-through;
-  color: #999999;
-}
-
-.add-form {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 5px;
-  align-items: stretch;
-}
-
-.add-input,
-.date-input {
-  padding: 5px;
-  border: 1px solid #666666;
-  border-radius: 3px;
-  background-color: #444444;
-  color: #ffffff;
-  font-size: 0.75em;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.add-button {
-  padding: 5px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  color: #ffffff;
-  background-color: #555555;
-  transition: background-color 0.2s;
-  font-size: 0.8em;
-  width: 100%;
-}
-
-.add-button:hover {
-  background-color: #777777;
-}
-
-.primary-btn {
-  background-color: #4a4a4a;
-}
-
-.secondary-btn {
-  background-color: #6a6a6a;
+  color: #555555;
 }
 
 .section-divider {
   border: 0;
   height: 1px;
-  background: #666666;
-  margin: 10px 0;
+  background: #555555;
+  margin: 25px 0;
+}
+
+.minor-divider {
+  border: 0;
+  height: 1px;
+  background: #333333;
+  margin: 15px 0;
+}
+
+.add-form-title {
+  color: #cccccc;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 0.95em;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-group {
+  margin-bottom: 5px;
+}
+
+.add-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #999999;
+  font-size: 0.85em;
+}
+
+.add-input,
+.date-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #555555;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1em;
+  background-color: #444444;
+  color: #ffffff;
+}
+
+.file-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #555555;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+  background-color: #444444;
+  color: #cccccc;
+}
+
+.add-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+}
+
+.primary-btn {
+  background-color: #2e8b57;
+  color: #ffffff;
+}
+
+.primary-btn:hover {
+  background-color: #3cb371;
+}
+
+.secondary-btn {
+  background-color: #4682b4;
+  color: #ffffff;
+}
+
+.secondary-btn:hover {
+  background-color: #5f9ea0;
+}
+
+.uploaded-files-container {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px dashed #444444;
+  border-radius: 4px;
+}
+
+.uploaded-files-container h4 {
+  color: #cccccc;
+  font-size: 0.9em;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.uploaded-files-list {
+  list-style: none;
+  padding: 0;
+}
+
+.uploaded-file-item {
+  color: #999999;
+  font-size: 0.85em;
+}
+
+.uploaded-file-item span {
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .main-content-layout {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .sidebar-menu {
+    min-width: 100%;
+    flex: initial;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    position: static;
+    max-height: initial;
+  }
+
+  .sidebar-link {
+    flex: 1 1 auto;
+    min-width: 150px;
+    justify-content: center;
+  }
+
+  .disciplines-container {
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    width: 100%;
+    padding: 0;
+  }
+
+  .discipline-panel {
+    flex: 1 1 100%;
+    min-width: auto;
+    max-height: initial;
+    overflow-y: initial;
+  }
 }

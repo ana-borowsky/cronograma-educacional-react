@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const CourseList = () => {
   return (
-    <Layout subtitle="Matérias e Ensalamento">
+    <Layout subtitle="Confira as matérias e suas informações.">
       <div className="course-list-container">
         <h2>Minhas Matérias Cadastradas</h2>
 
@@ -74,6 +74,11 @@ const CourseList = () => {
             </div>
           </div>
         </div>
+
+        <Link className="add-course-button">
+          + Adicionar Matéria
+        </Link>
+
         <Link to="/syllabus" className="auth-link">
           Salvar
         </Link>

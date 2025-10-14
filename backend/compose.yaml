@@ -1,0 +1,16 @@
+services:
+  database:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: bee
+      MYSQL_DATABASE: beezer
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: bee
+    ports:
+      - "3306:3306"
+    volumes:
+      - beezer_dataset:/var/lib/mysql
+      - ./initial.sql:/docker-entrypoint-initdb.d/initial.sql:ro
+volumes:
+  beezer_dataset:

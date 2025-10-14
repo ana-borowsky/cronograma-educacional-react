@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -68,12 +69,12 @@ const SingUp = () => {
             />
           </div>
 
-          <Link
+          <Button
             to="/login"
-            className="w-full block text-center py-3 mt-5 border border-transparent rounded-md bg-neutral-600 text-white text-base cursor-pointer transition duration-200 hover:bg-neutral-500"
+            className="w-full"
           >
             Cadastrar
-          </Link>
+          </Button>
         </form>
 
         <p className="text-center mt-5 text-neutral-400 text-sm">

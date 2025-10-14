@@ -2,7 +2,7 @@ import Title from "./Title";
 
 const Layout = ({ subtitle, children }) => {
   return (
-    <div className="container">
+    <div className="container flex flex-col place-items-center w-screen min-w-[320px] min-h-[100vh]">
       <Title>
         Cronograma EC
       </Title>

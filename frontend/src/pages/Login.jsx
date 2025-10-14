@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -40,14 +41,12 @@ const Login = () => {
             />
           </div>
 
-          <Link
+          <Button
             to="/roomschedule"
-            // CLASSES DE BOTÃO:
-            className="w-full block text-center py-3 mt-5 border border-transparent rounded-md text-base cursor-pointer transition duration-200 
-                       bg-btn-primary hover:bg-btn-hover text-text-light font-semibold no-underline"
+            className="w-full bg-funciona"
           >
             Entrar
-          </Link>
+          </Button>
 
         </form>
 

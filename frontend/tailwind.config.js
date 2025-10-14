@@ -42,9 +42,8 @@ const Login = () => {
 
           <Link
             to="/roomschedule"
-            // CLASSES DE BOTÃO:
-            className="w-full block text-center py-3 mt-5 border border-transparent rounded-md text-base cursor-pointer transition duration-200 
-                       bg-btn-primary hover:bg-btn-hover text-text-light font-semibold no-underline"
+            // Classe que garante que o Link se pareça com um botão, usando os estilos definidos em @layer components
+            className="w-full block mt-5 btn-base"
           >
             Entrar
           </Link>
@@ -53,7 +52,10 @@ const Login = () => {
 
         <p className="text-center mt-5 text-text-dark text-sm">
           Não tem conta?
-          <Link to="/signup" className="ml-1 text-text-medium font-bold no-underline hover:underline">
+          <Link
+            to="/signup"
+            className="ml-1 text-text-medium font-bold hover:underline"
+          >
             Cadastre-se
           </Link>
         </p>

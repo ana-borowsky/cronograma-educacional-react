@@ -1,5 +1,6 @@
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Disciplines = () => {
   return (
@@ -73,7 +74,7 @@ const Disciplines = () => {
                   <label htmlFor="calc-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
                   <input type="file" id="calc-t-file" name="calc-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
                 </div>
-                <button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</button>
+                <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
               </form>
             </div>
 
@@ -117,7 +118,7 @@ const Disciplines = () => {
                   </ul>
                 </div>
 
-                <button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</button>
+                <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
               </form>
             </div>
           </div>
@@ -152,7 +153,7 @@ const Disciplines = () => {
                   <label htmlFor="prog-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
                   <input type="file" id="prog-t-file" name="prog-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
                 </div>
-                <button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</button>
+                <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
               </form>
             </div>
 
@@ -196,7 +197,7 @@ const Disciplines = () => {
                   </ul>
                 </div>
 
-                <button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</button>
+                <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
               </form>
             </div>
           </div>
@@ -231,7 +232,7 @@ const Disciplines = () => {
                   <label htmlFor="fisica-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
                   <input type="file" id="fisica-t-file" name="fisica-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
                 </div>
-                <button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</button>
+                <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
               </form>
             </div>
 
@@ -270,7 +271,7 @@ const Disciplines = () => {
                   </ul>
                 </div>
 
-                <button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</button>
+                <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
               </form>
             </div>
           </div>
@@ -305,7 +306,7 @@ const Disciplines = () => {
                   <label htmlFor="port-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
                   <input type="file" id="port-t-file" name="port-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
                 </div>
-                <button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</button>
+                <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
               </form>
             </div>
 
@@ -352,7 +353,7 @@ const Disciplines = () => {
                   </ul>
                 </div>
 
-                <button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</button>
+                <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
               </form>
             </div>
           </div>

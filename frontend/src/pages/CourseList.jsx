@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -19,12 +20,12 @@ const CourseList = () => {
               </p>
             </div>
             <div className="flex space-x-2 ml-4">
-              <button className="p-2 bg-neutral-700 rounded-full text-white hover:bg-neutral-600 transition duration-150" aria-label="Editar">
+              <Button className="p-2 bg-neutral-700 rounded-full text-white hover:bg-neutral-600 transition duration-150" aria-label="Editar">
                 <span role="img" aria-label="lápis">✏️</span>
-              </button>
-              <button className="p-2 bg-red-700 rounded-full text-white hover:bg-red-600 transition duration-150" aria-label="Excluir">
+              </Button>
+              <Button className="p-2 bg-red-700 rounded-full text-white hover:bg-red-600 transition duration-150" aria-label="Excluir">
                 <span role="img" aria-label="lixeira">🗑️</span>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -36,12 +37,12 @@ const CourseList = () => {
               </p>
             </div>
             <div className="flex space-x-2 ml-4">
-              <button className="p-2 bg-neutral-700 rounded-full text-white hover:bg-neutral-600 transition duration-150" aria-label="Editar">
+              <Button className="p-2 bg-neutral-700 rounded-full text-white hover:bg-neutral-600 transition duration-150" aria-label="Editar">
                 <span role="img" aria-label="lápis">✏️</span>
-              </button>
-              <button className="p-2 bg-red-700 rounded-full text-white hover:bg-red-600 transition duration-150" aria-label="Excluir">
+              </Button>
+              <Button className="p-2 bg-red-700 rounded-full text-white hover:bg-red-600 transition duration-150" aria-label="Excluir">
                 <span role="img" aria-label="lixeira">🗑️</span>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -53,12 +54,12 @@ const CourseList = () => {
               </p>
             </div>
             <div className="flex space-x-2 ml-4">
-              <button className="p-2 bg-neutral-700 rounded-full text-white hover:bg-neutral-600 transition duration-150" aria-label="Editar">
+              <Button className="p-2 bg-neutral-700 rounded-full text-white hover:bg-neutral-600 transition duration-150" aria-label="Editar">
                 <span role="img" aria-label="lápis">✏️</span>
-              </button>
-              <button className="p-2 bg-red-700 rounded-full text-white hover:bg-red-600 transition duration-150" aria-label="Excluir">
+              </Button>
+              <Button className="p-2 bg-red-700 rounded-full text-white hover:bg-red-600 transition duration-150" aria-label="Excluir">
                 <span role="img" aria-label="lixeira">🗑️</span>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -70,12 +71,12 @@ const CourseList = () => {
               </p>
             </div>
             <div className="flex space-x-2 ml-4">
-              <button className="p-2 bg-neutral-700 rounded-full text-white hover:bg-neutral-600 transition duration-150" aria-label="Editar">
+              <Button className="p-2 bg-neutral-700 rounded-full text-white hover:bg-neutral-600 transition duration-150" aria-label="Editar">
                 <span role="img" aria-label="lápis">✏️</span>
-              </button>
-              <button className="p-2 bg-red-700 rounded-full text-white hover:bg-red-600 transition duration-150" aria-label="Excluir">
+              </Button>
+              <Button className="p-2 bg-red-700 rounded-full text-white hover:bg-red-600 transition duration-150" aria-label="Excluir">
                 <span role="img" aria-label="lixeira">🗑️</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -85,13 +86,14 @@ const CourseList = () => {
           <Link className="text-center md:text-left text-lg font-bold text-neutral-300 hover:text-white transition duration-200 mb-4 md:mb-0">
             + Adicionar Matéria
           </Link>
+          <Button size={"lg"} className="font-semibold" asChild>
+            <Link
+              to="/syllabus"
+            >
+              Salvar
+            </Link>
 
-          <Link
-            to="/syllabus"
-            className="inline-block px-6 py-2 border border-transparent rounded-md bg-neutral-600 text-white font-semibold text-base text-center transition duration-200 hover:bg-neutral-500"
-          >
-            Salvar
-          </Link>
+          </Button>
         </div>
       </div>
     </Layout>

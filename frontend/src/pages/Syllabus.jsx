@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -52,10 +53,11 @@ const Syllabus = () => {
                   className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500 cursor-pointer"
                 />
               </div>
-
-              <Link to="/todolist" className="w-full py-2.5 px-4 rounded-md text-white font-semibold text-center bg-gray-600 hover:bg-gray-500 transition duration-200 block mt-6">
-                Salvar
-              </Link>
+              <Button className="w-full font-semibold" asChild>
+                <Link to="/todolist">
+                  Salvar
+                </Link>
+              </Button>
 
             </form>
           </div>
@@ -126,9 +128,9 @@ const Syllabus = () => {
                   />
                 </div>
 
-                <button type="button" className="w-full py-2.5 px-4 rounded-md text-white font-semibold bg-gray-600 hover:bg-gray-500 transition duration-200 block text-sm">
+                <Button type="Button" className="w-full font-semibold">
                   + Adicionar Trabalho
-                </button>
+                </Button>
               </div>
               <hr className="border-neutral-700" />
 
@@ -165,15 +167,17 @@ const Syllabus = () => {
                   />
                 </div>
 
-                <button type="button" className="w-full py-2.5 px-4 rounded-md text-white font-semibold bg-gray-600 hover:bg-gray-500 transition duration-200 block text-sm">
+                <Button type="Button" className="w-full font-semibold">
                   + Adicionar Prova
-                </button>
+                </Button>
               </div>
               <hr className="border-neutral-700" />
+              <Button asChild className="w-full font-semibold">
 
-              <Link to="/todolist" className="w-full py-2.5 px-4 rounded-md text-white font-semibold text-center bg-gray-600 hover:bg-gray-500 transition duration-200 block mt-6">
-                Salvar
-              </Link>
+                <Link to="/todolist">
+                  Salvar
+                </Link>
+              </Button>
             </form>
           </div>
 

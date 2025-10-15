@@ -7,14 +7,14 @@ const Login = () => {
     <Layout subtitle="Faça seu login!">
       <div className="flex flex-col items-center justify-center min-h-[80vh] p-5">
 
-        <form className="bg-panel-bg p-8 md:p-10 rounded-lg shadow-2xl w-full max-w-sm border border-panel-border">
+        <form className="bg-neutral-800 p-8 md:p-10 rounded-lg shadow-2xl w-full max-w-md border border-neutral-600">
 
-          <h2 className="text-center text-text-light text-2xl font-semibold mb-6 border-b-2 border-completed-text pb-3">
+          <h2 className="text-center text-white text-2xl font-semibold mb-6 border-b-2 border-completed-text pb-3">
             Acesso
           </h2>
 
           <div className="mb-4">
-            <label htmlFor="email" className="block mb-1 text-text-medium font-bold text-sm">
+            <label htmlFor="email" className="block mb-1 text-neutral-300 font-bold text-sm">
               E-mail
             </label>
             <input
@@ -23,12 +23,12 @@ const Login = () => {
               name="email"
               placeholder="nome@email.com"
               required
-              className="w-full p-2 border border-panel-border rounded-md box-border text-base bg-input-bg text-text-light focus:outline-none focus:border-text-dark"
+              className="w-full p-2 border border-neutral-600 rounded-md box-border text-base bg-neutral-700 text-white focus:outline-none focus:border-neutral-500"
             />
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block mb-1 text-text-medium font-bold text-sm">
+            <label htmlFor="password" className="block mb-1 text-neutral-300 font-bold text-sm">
               Senha
             </label>
             <input
@@ -37,12 +37,13 @@ const Login = () => {
               name="password"
               placeholder="********"
               required
-              className="w-full p-2 border border-panel-border rounded-md box-border text-base bg-input-bg text-text-light focus:outline-none focus:border-text-dark"
+              className="w-full p-2 border border-neutral-600 rounded-md box-border text-base bg-neutral-700 text-white focus:outline-none focus:border-neutral-500"
             />
           </div>
 
           <Button
-            className="w-full bg-funciona"
+            className="w-full" 
+            asChild
           >
             <Link to="../roomschedule">
               Entrar

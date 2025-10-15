@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom";
 
@@ -40,15 +41,17 @@ const Home = () => {
             <h4 className="text-xl text-neutral-200 mb-4">Comece agora a dominar sua rotina de estudos!</h4>
 
             <div className="flex justify-center gap-4">
-
-              <Link to="/signup" className="inline-block px-8 py-3 bg-neutral-600 text-white font-bold rounded-full text-lg hover:bg-neutral-700 transition duration-300 shadow-md">
+            <Button size={"xl"} asChild>
+              <Link to="/signup">
                 Cadastre-se
               </Link>
+            </Button>
 
-              <Link to="/login" className="inline-block px-8 py-3 bg-neutral-700 text-neutral-300 font-bold rounded-full text-lg hover:bg-neutral-600 hover:text-white transition duration-300 shadow-md border border-neutral-600">
+            <Button size={"xl"} asChild>
+              <Link to="/login">
                 Fazer Login
               </Link>
-
+            </Button>
             </div>
           </div>
         </div>

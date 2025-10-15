@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -24,10 +25,11 @@ const RoomSchedule = () => {
                   className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500 cursor-pointer"
                 />
               </div>
-
-              <Link to="/courselist" className="w-full py-2.5 px-4 rounded-md text-white font-semibold text-center bg-gray-600 hover:bg-gray-500 transition duration-200 block">
-                Enviar e Processar Arquivo
-              </Link>
+              <Button className="py-2.5 px-4 w-full font-bold" size={"lg"} asChild>
+                <Link to="/courselist" >
+                  Enviar e Processar Arquivo
+                </Link>
+              </Button>
 
             </form>
           </div>
@@ -72,10 +74,11 @@ const RoomSchedule = () => {
                   className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 text-sm"
                 />
               </div>
-
-              <Link to="/courselist" className="w-full py-2.5 px-4 rounded-md text-white font-semibold text-center bg-gray-600 hover:bg-gray-500 transition duration-200 block mt-6">
-                Adicionar Matéria ao Ensalamento
-              </Link>
+              <Button className="py-2.5 px-4 w-full font-bold" size={"lg"}>
+                <Link to="/courselist">
+                  Adicionar Matéria ao Ensalamento
+                </Link>
+              </Button>
             </form>
           </div>
 

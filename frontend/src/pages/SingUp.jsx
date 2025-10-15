@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+  import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -69,7 +69,7 @@ const SingUp = () => {
             />
           </div>
 
-          <Button className="w-full">
+          <Button className="w-full" asChild>
             <Link to="../login">
               Cadastrar
             </Link>

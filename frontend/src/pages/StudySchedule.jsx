@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -91,10 +92,11 @@ const StudySchedule = () => {
               className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 text-sm"
             />
           </div>
-
-          <Link to="/todolist" className="w-full py-2.5 px-4 rounded-md text-white font-semibold text-center bg-gray-600 hover:bg-gray-500 transition duration-200 block">
+          <Button asChild className="w-full">
+          <Link to="/todolist">
             Salvar Horários de Estudo
           </Link>
+          </Button>
         </form>
       </div>
     </Layout>

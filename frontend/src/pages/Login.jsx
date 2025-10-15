@@ -42,10 +42,11 @@ const Login = () => {
           </div>
 
           <Button
-            to="/roomschedule"
             className="w-full bg-funciona"
           >
-            Entrar
+            <Link to="../roomschedule">
+              Entrar
+            </Link>
           </Button>
 
         </form>

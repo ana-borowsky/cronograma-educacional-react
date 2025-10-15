@@ -69,11 +69,10 @@ const SingUp = () => {
             />
           </div>
 
-          <Button
-            to="/login"
-            className="w-full"
-          >
-            Cadastrar
+          <Button className="w-full">
+            <Link to="../login">
+              Cadastrar
+            </Link>
           </Button>
         </form>
 

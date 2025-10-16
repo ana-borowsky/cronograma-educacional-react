@@ -1,8 +1,24 @@
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+
+const ChevronDown = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+const ChevronUp = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
 
 const Disciplines = () => {
+  const [isCalcWorkFormOpen, setIsCalcWorkFormOpen] = useState(false);
+  const [isCalcExamFormOpen, setIsCalcExamFormOpen] = useState(false);
+
+  const [isProgWorkFormOpen, setIsProgWorkFormOpen] = useState(false);
+  const [isProgExamFormOpen, setIsProgExamFormOpen] = useState(false);
+
+  const [isFisicaWorkFormOpen, setIsFisicaWorkFormOpen] = useState(false);
+  const [isFisicaExamFormOpen, setIsFisicaExamFormOpen] = useState(false);
+
+  const [isPortWorkFormOpen, setIsPortWorkFormOpen] = useState(false);
+  const [isPortExamFormOpen, setIsPortExamFormOpen] = useState(false);
+
   return (
     <Layout subtitle="Visão Geral das Disciplinas">
       <div className="flex flex-col md:flex-row max-w-[1600px] mx-auto p-5 gap-6 items-start">
@@ -43,8 +59,9 @@ const Disciplines = () => {
 
         <div className="flex-grow flex overflow-x-auto space-x-6 pb-4 w-full">
 
+          {/* Cálculo I */}
           <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[250px]">
-            
+
             <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">
               <span className="w-3 h-3 bg-yellow-600 rounded-full mr-3 flex-shrink-0"></span>
               Cálculo I
@@ -59,24 +76,36 @@ const Disciplines = () => {
               </ul>
 
               <hr className="my-4 border-neutral-700" />
-              <p className="text-neutral-300 font-medium mb-3 text-sm">Adicionar Novo Trabalho</p>
-              <form className="space-y-3">
-                <div className="flex flex-col">
-                  <input type="text" placeholder="Nome do Trabalho" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <input type="number" placeholder="Duração Estimada (Horas)" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="calc-t-date" className="text-neutral-400 text-xs mb-1">Data de Entrega</label>
-                  <input type="date" id="calc-t-date" title="Data de Entrega" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="calc-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
-                  <input type="file" id="calc-t-file" name="calc-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-                </div>
-                <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
-              </form>
+
+              <div
+                className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
+                onClick={() => setIsCalcWorkFormOpen(!isCalcWorkFormOpen)}
+              >
+                <p className="text-neutral-300 font-medium text-sm">Adicionar Novo Trabalho</p>
+                <span className="text-neutral-300">
+                  {isCalcWorkFormOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
+
+              {isCalcWorkFormOpen && (
+                <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col">
+                    <input type="text" placeholder="Nome do Trabalho" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <input type="number" placeholder="Duração Estimada (Horas)" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="calc-t-date" className="text-neutral-400 text-xs mb-1">Data de Entrega</label>
+                    <input type="date" id="calc-t-date" title="Data de Entrega" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="calc-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
+                    <input type="file" id="calc-t-file" name="calc-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
+                  </div>
+                  <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
+                </form>
+              )}
             </div>
 
             <hr className="my-6 border-neutral-600" />
@@ -91,45 +120,58 @@ const Disciplines = () => {
               </ul>
 
               <hr className="my-4 border-neutral-700" />
-              <p className="text-neutral-300 font-medium mb-3 text-sm">Adicionar Nova Prova</p>
-              <form className="space-y-3">
-                <div className="flex flex-col">
-                  <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="calc-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
-                  <input type="date" id="calc-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="calc-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
-                  <input type="file" id="calc-p-file" name="calc-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-                </div>
 
-                <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
-                  <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
-                  <ul className="space-y-1 text-neutral-400 text-xs">
-                    <li className="flex items-center gap-1.5 truncate">
-                      <span role="img" aria-label="PDF Icon">📕</span>
-                      Notas_Aula_Derivadas.pdf
-                    </li>
-                    <li className="flex items-center gap-1.5 truncate">
-                      <span role="img" aria-label="Document Icon">📄</span>
-                      Exemplos_Integrais.docx
-                    </li>
-                  </ul>
-                </div>
+              <div
+                className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
+                onClick={() => setIsCalcExamFormOpen(!isCalcExamFormOpen)}
+              >
+                <p className="text-neutral-300 font-medium text-sm">Adicionar Nova Prova</p>
+                <span className="text-neutral-300">
+                  {isCalcExamFormOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
 
-                <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
-              </form>
+              {isCalcExamFormOpen && (
+                <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col">
+                    <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="calc-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
+                    <input type="date" id="calc-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="calc-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
+                    <input type="file" id="calc-p-file" name="calc-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
+                  </div>
+
+                  <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
+                    <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
+                    <ul className="space-y-1 text-neutral-400 text-xs">
+                      <li className="flex items-center gap-1.5 truncate">
+                        <span role="img" aria-label="PDF Icon">📕</span>
+                        Notas_Aula_Derivadas.pdf
+                      </li>
+                      <li className="flex items-center gap-1.5 truncate">
+                        <span role="img" aria-label="Document Icon">📄</span>
+                        Exemplos_Integrais.docx
+                      </li>
+                    </ul>
+                  </div>
+
+                  <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
+                </form>
+              )}
             </div>
           </div>
 
+          {/* Introdução à Programação */}
           <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[250px]">
             <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">
               <span className="w-3 h-3 bg-green-600 rounded-full mr-3 flex-shrink-0"></span>
               Introdução à Programação
             </h2>
-          
+
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>
               <ul className="space-y-2 text-neutral-400 text-xs">
@@ -140,24 +182,36 @@ const Disciplines = () => {
               </ul>
 
               <hr className="my-4 border-neutral-700" />
-              <p className="text-neutral-300 font-medium mb-3 text-sm">Adicionar Novo Trabalho</p>
-              <form className="space-y-3">
-                <div className="flex flex-col">
-                  <input type="text" placeholder="Nome do Trabalho" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <input type="number" placeholder="Duração Estimada (Horas)" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="prog-t-date" className="text-neutral-400 text-xs mb-1">Data de Entrega</label>
-                  <input type="date" id="prog-t-date" title="Data de Entrega" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="prog-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
-                  <input type="file" id="prog-t-file" name="prog-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-                </div>
-                <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
-              </form>
+
+              <div
+                className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
+                onClick={() => setIsProgWorkFormOpen(!isProgWorkFormOpen)}
+              >
+                <p className="text-neutral-300 font-medium text-sm">Adicionar Novo Trabalho</p>
+                <span className="text-neutral-300">
+                  {isProgWorkFormOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
+
+              {isProgWorkFormOpen && (
+                <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col">
+                    <input type="text" placeholder="Nome do Trabalho" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <input type="number" placeholder="Duração Estimada (Horas)" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="prog-t-date" className="text-neutral-400 text-xs mb-1">Data de Entrega</label>
+                    <input type="date" id="prog-t-date" title="Data de Entrega" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="prog-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
+                    <input type="file" id="prog-t-file" name="prog-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
+                  </div>
+                  <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
+                </form>
+              )}
             </div>
 
             <hr className="my-6 border-neutral-600" />
@@ -172,39 +226,52 @@ const Disciplines = () => {
               </ul>
 
               <hr className="my-4 border-neutral-700" />
-              <p className="text-neutral-300 font-medium mb-3 text-sm">Adicionar Nova Prova</p>
-              <form className="space-y-3">
-                <div className="flex flex-col">
-                  <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="prog-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
-                  <input type="date" id="prog-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="prog-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
-                  <input type="file" id="prog-p-file" name="prog-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-                </div>
 
-                <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
-                  <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
-                  <ul className="space-y-1 text-neutral-400 text-xs">
-                    <li className="flex items-center gap-1.5 truncate">
-                      <span role="img" aria-label="PDF Icon">📕</span>
-                      Aula_01_Logica.pdf
-                    </li>
-                    <li className="flex items-center gap-1.5 truncate">
-                      <span role="img" aria-label="PDF Icon">📕</span>
-                      Guia_Referencia_JS.pdf
-                    </li>
-                  </ul>
-                </div>
+              <div
+                className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
+                onClick={() => setIsProgExamFormOpen(!isProgExamFormOpen)}
+              >
+                <p className="text-neutral-300 font-medium text-sm">Adicionar Nova Prova</p>
+                <span className="text-neutral-300">
+                  {isProgExamFormOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
 
-                <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
-              </form>
+              {isProgExamFormOpen && (
+                <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col">
+                    <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="prog-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
+                    <input type="date" id="prog-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="prog-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
+                    <input type="file" id="prog-p-file" name="prog-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
+                  </div>
+
+                  <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
+                    <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
+                    <ul className="space-y-1 text-neutral-400 text-xs">
+                      <li className="flex items-center gap-1.5 truncate">
+                        <span role="img" aria-label="PDF Icon">📕</span>
+                        Aula_01_Logica.pdf
+                      </li>
+                      <li className="flex items-center gap-1.5 truncate">
+                        <span role="img" aria-label="PDF Icon">📕</span>
+                        Guia_Referencia_JS.pdf
+                      </li>
+                    </ul>
+                  </div>
+
+                  <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
+                </form>
+              )}
             </div>
           </div>
 
+          {/* Física Experimental */}
           <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[250px]">
             <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">
               <span className="w-3 h-3 bg-red-600 rounded-full mr-3 flex-shrink-0"></span>
@@ -221,24 +288,36 @@ const Disciplines = () => {
               </ul>
 
               <hr className="my-4 border-neutral-700" />
-              <p className="text-neutral-300 font-medium mb-3 text-sm">Adicionar Novo Trabalho</p>
-              <form className="space-y-3">
-                <div className="flex flex-col">
-                  <input type="text" placeholder="Nome do Trabalho" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <input type="number" placeholder="Duração Estimada (Horas)" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="fisica-t-date" className="text-neutral-400 text-xs mb-1">Data de Entrega</label>
-                  <input type="date" id="fisica-t-date" title="Data de Entrega" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="fisica-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
-                  <input type="file" id="fisica-t-file" name="fisica-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-                </div>
-                <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
-              </form>
+
+              <div
+                className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
+                onClick={() => setIsFisicaWorkFormOpen(!isFisicaWorkFormOpen)}
+              >
+                <p className="text-neutral-300 font-medium text-sm">Adicionar Novo Trabalho</p>
+                <span className="text-neutral-300">
+                  {isFisicaWorkFormOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
+
+              {isFisicaWorkFormOpen && (
+                <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col">
+                    <input type="text" placeholder="Nome do Trabalho" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <input type="number" placeholder="Duração Estimada (Horas)" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="fisica-t-date" className="text-neutral-400 text-xs mb-1">Data de Entrega</label>
+                    <input type="date" id="fisica-t-date" title="Data de Entrega" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="fisica-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
+                    <input type="file" id="fisica-t-file" name="fisica-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
+                  </div>
+                  <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
+                </form>
+              )}
             </div>
 
             <hr className="my-6 border-neutral-600" />
@@ -252,35 +331,48 @@ const Disciplines = () => {
               </ul>
 
               <hr className="my-4 border-neutral-700" />
-              <p className="text-neutral-300 font-medium mb-3 text-sm">Adicionar Nova Prova</p>
-              <form className="space-y-3">
-                <div className="flex flex-col">
-                  <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="fisica-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
-                  <input type="date" id="fisica-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="fisica-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
-                  <input type="file" id="fisica-p-file" name="fisica-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-                </div>
 
-                <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
-                  <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
-                  <ul className="space-y-1 text-neutral-400 text-xs">
-                    <li className="flex items-center gap-1.5 truncate">
-                      <span role="img" aria-label="PDF Icon">📕</span>
-                      Apostila_Cap_7_Eletricidade.pdf
-                    </li>
-                  </ul>
-                </div>
+              <div
+                className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
+                onClick={() => setIsFisicaExamFormOpen(!isFisicaExamFormOpen)}
+              >
+                <p className="text-neutral-300 font-medium text-sm">Adicionar Nova Prova</p>
+                <span className="text-neutral-300">
+                  {isFisicaExamFormOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
 
-                <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
-              </form>
+              {isFisicaExamFormOpen && (
+                <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col">
+                    <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="fisica-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
+                    <input type="date" id="fisica-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="fisica-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
+                    <input type="file" id="fisica-p-file" name="fisica-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
+                  </div>
+
+                  <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
+                    <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
+                    <ul className="space-y-1 text-neutral-400 text-xs">
+                      <li className="flex items-center gap-1.5 truncate">
+                        <span role="img" aria-label="PDF Icon">📕</span>
+                        Apostila_Cap_7_Eletricidade.pdf
+                      </li>
+                    </ul>
+                  </div>
+
+                  <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
+                </form>
+              )}
             </div>
           </div>
 
+          {/* Língua Portuguesa e Comunicação */}
           <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[250px]">
             <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">
               <span className="w-3 h-3 bg-blue-600 rounded-full mr-3 flex-shrink-0"></span>
@@ -297,24 +389,36 @@ const Disciplines = () => {
               </ul>
 
               <hr className="my-4 border-neutral-700" />
-              <p className="text-neutral-300 font-medium mb-3 text-sm">Adicionar Novo Trabalho</p>
-              <form className="space-y-3">
-                <div className="flex flex-col">
-                  <input type="text" placeholder="Nome do Trabalho" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <input type="number" placeholder="Duração Estimada (Horas)" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="port-t-date" className="text-neutral-400 text-xs mb-1">Data de Entrega</label>
-                  <input type="date" id="port-t-date" title="Data de Entrega" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="port-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
-                  <input type="file" id="port-t-file" name="port-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-                </div>
-                <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
-              </form>
+
+              <div
+                className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
+                onClick={() => setIsPortWorkFormOpen(!isPortWorkFormOpen)}
+              >
+                <p className="text-neutral-300 font-medium text-sm">Adicionar Novo Trabalho</p>
+                <span className="text-neutral-300">
+                  {isPortWorkFormOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
+
+              {isPortWorkFormOpen && (
+                <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col">
+                    <input type="text" placeholder="Nome do Trabalho" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <input type="number" placeholder="Duração Estimada (Horas)" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="port-t-date" className="text-neutral-400 text-xs mb-1">Data de Entrega</label>
+                    <input type="date" id="port-t-date" title="Data de Entrega" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="port-t-file" className="text-neutral-400 text-xs mb-1">Upload do Arquivo do Trabalho</label>
+                    <input type="file" id="port-t-file" name="port-t-file" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
+                  </div>
+                  <Button type="submit" className="w-full py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-600 transition duration-200 text-sm">+ Adicionar Trabalho</Button>
+                </form>
+              )}
             </div>
 
             <hr className="my-6 border-neutral-600" />
@@ -328,40 +432,52 @@ const Disciplines = () => {
               </ul>
 
               <hr className="my-4 border-neutral-700" />
-              <p className="text-neutral-300 font-medium mb-3 text-sm">Adicionar Nova Prova</p>
-              <form className="space-y-3">
-                <div className="flex flex-col">
-                  <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="port-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
-                  <input type="date" id="port-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="port-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
-                  <input type="file" id="port-p-file" name="port-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-                </div>
 
-                <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
-                  <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
-                  <ul className="space-y-1 text-neutral-400 text-xs">
-                    <li className="flex items-center gap-1.5 truncate">
-                      <span role="img" aria-label="Document Icon">📄</span>
-                      Guia_Redacao_Final.docx
-                    </li>
-                    <li className="flex items-center gap-1.5 truncate">
-                      <span role="img" aria-label="PDF Icon">📕</span>
-                      Verbos_e_Concordancia.pdf
-                    </li>
-                    <li className="flex items-center gap-1.5 truncate">
-                      <span role="img" aria-label="Document Icon">📄</span>
-                      Exemplos_Argumentacao.pptx
-                    </li>
-                  </ul>
-                </div>
+              <div
+                className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
+                onClick={() => setIsPortExamFormOpen(!isPortExamFormOpen)}
+              >
+                <p className="text-neutral-300 font-medium text-sm">Adicionar Nova Prova</p>
+                <span className="text-neutral-300">
+                  {isPortExamFormOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </div>
 
-                <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
-              </form>
+              {isPortExamFormOpen && (
+                <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col">
+                    <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="port-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
+                    <input type="date" id="port-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="port-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
+                    <input type="file" id="port-p-file" name="port-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
+                  </div>
+
+                  <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
+                    <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
+                    <ul className="space-y-1 text-neutral-400 text-xs">
+                      <li className="flex items-center gap-1.5 truncate">
+                        <span role="img" aria-label="Document Icon">📄</span>
+                        Guia_Redacao_Final.docx
+                      </li>
+                      <li className="flex items-center gap-1.5 truncate">
+                        <span role="img" aria-label="PDF Icon">📕</span>
+                        Verbos_e_Concordancia.pdf
+                      </li>
+                      <li className="flex items-center gap-1.5 truncate">
+                        <span role="img" aria-label="Document Icon">📄</span>
+                        Exemplos_Argumentacao.pptx
+                      </li>
+                    </ul>
+                  </div>
+
+                  <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
+                </form>
+              )}
             </div>
           </div>
         </div>

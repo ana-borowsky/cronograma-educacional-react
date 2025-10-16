@@ -42,7 +42,6 @@ const Login = () => {
 
           <Link
             to="/roomschedule"
-            // Classe que garante que o Link se pareça com um botão, usando os estilos definidos em @layer components
             className="w-full block mt-5 btn-base"
           >
             Entrar

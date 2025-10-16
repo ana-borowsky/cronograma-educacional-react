@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <Layout subtitle="Bem-vindo ao MyStudyFlow">
+    <Layout subtitle="A rotina que funciona">
       <div className="max-w-[1600px] mx-auto flex gap-5 p-5 items-start">
 
         <div className="flex-grow p-8 bg-neutral-800 border border-neutral-700 rounded-lg shadow-xl">
           <p className="text-neutral-300 text-lg mb-6">
-            O MyStudyFlow é a ferramenta definitiva projetada para estudantes que buscam excelência e organização em sua jornada acadêmica. Com o uso de IA, transforme sua rotina de forma inteligente e não deixe tudo para a última hora.
+            O Beezer é a ferramenta definitiva projetada para estudantes que buscam excelência e organização em sua jornada acadêmica. Com o uso de IA, transforme sua rotina de forma inteligente e não deixe tudo para a última hora.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

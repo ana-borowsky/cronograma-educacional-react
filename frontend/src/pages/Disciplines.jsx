@@ -41,13 +41,14 @@ const Disciplines = () => {
 
         </div>
 
-        {/* CONTAINER DE DISCIPLINAS: Flex horizontal com rolagem e espaçamento */}
         <div className="flex-grow flex overflow-x-auto space-x-6 pb-4 w-full">
 
-          {/* CÁLCULO I - Largura definida como w-[250px] */}
           <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[250px]">
-            <h2 className="text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Cálculo I</h2>
-
+            
+            <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">
+              <span className="w-3 h-3 bg-yellow-600 rounded-full mr-3 flex-shrink-0"></span>
+              Cálculo I
+            </h2>
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>
               <ul className="space-y-2 text-neutral-400 text-xs">
@@ -123,10 +124,12 @@ const Disciplines = () => {
             </div>
           </div>
 
-          {/* INTRODUÇÃO À PROGRAMAÇÃO - Largura definida como w-[250px] */}
           <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[250px]">
-            <h2 className="text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Introdução à Programação</h2>
-
+            <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">
+              <span className="w-3 h-3 bg-green-600 rounded-full mr-3 flex-shrink-0"></span>
+              Introdução à Programação
+            </h2>
+          
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>
               <ul className="space-y-2 text-neutral-400 text-xs">
@@ -202,9 +205,11 @@ const Disciplines = () => {
             </div>
           </div>
 
-          {/* FÍSICA EXPERIMENTAL - Largura definida como w-[250px] */}
           <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[250px]">
-            <h2 className="text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Física Experimental</h2>
+            <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">
+              <span className="w-3 h-3 bg-red-600 rounded-full mr-3 flex-shrink-0"></span>
+              Física Experimental
+            </h2>
 
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>
@@ -276,9 +281,11 @@ const Disciplines = () => {
             </div>
           </div>
 
-          {/* LÍNGUA PORTUGUESA E COMUNICAÇÃO - Largura definida como w-[250px] */}
           <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[250px]">
-            <h2 className="text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Língua Portuguesa e Comunicação</h2>
+            <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">
+              <span className="w-3 h-3 bg-blue-600 rounded-full mr-3 flex-shrink-0"></span>
+              Língua Portuguesa e Comunicação
+            </h2>
 
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>

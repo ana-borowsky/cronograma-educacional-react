@@ -45,7 +45,7 @@ const Login = () => {
             className="w-full" 
             asChild
           >
-            <Link to="../roomschedule">
+            <Link to="../disciplines">
               Entrar
             </Link>
           </Button>

@@ -121,7 +121,7 @@ const Disciplines = () => {
                   />
                 </div>
                 <Button className="w-full" asChild>
-                  <a href="/courselist" >
+                  <a href="/disciplines" >
                     Processar Arquivo
                   </a>
                 </Button>
@@ -178,7 +178,7 @@ const Disciplines = () => {
                 </div>
 
                 <Button className="w-full" asChild>
-                  <a href="/courselist">
+                  <a href="/disciplines">
                     Adicionar Matéria
                   </a>
                 </Button>

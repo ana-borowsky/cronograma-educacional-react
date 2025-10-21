@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 const Syllabus = () => {
   return (
-    <Layout subtitle="Nesta página, você deverá adicionar todos os trabalhos, provas e datas importantes para cada matéria. Você pode fazer isso de forma automática ao inserir o plano de ensino, ou manualmente.">
+    <Layout subtitle="Nesta página, você deverá adicionar todos os trabalhos, provas e datas importantes para cada matéria.">
       <div className="flex flex-col items-center justify-start p-4 sm:p-6 w-full max-w-4xl mx-auto">
 
         <div className="w-full space-y-8">
@@ -54,7 +54,7 @@ const Syllabus = () => {
                 />
               </div>
               <Button className="w-full font-semibold" asChild>
-                <Link to="/todolist">
+                <Link to="/studyschedule">
                   Salvar
                 </Link>
               </Button>

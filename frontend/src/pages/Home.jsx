@@ -86,7 +86,6 @@ const Home = () => {
     <Layout subtitle="A rotina que funciona">
       <div className="max-w-[1600px] mx-auto p-5 space-y-16">
 
-        {/* 1. HERO SECTION - MAIS IMPRESSIONANTE */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 pt-10">
           <div className="lg:w-1/2">
 
@@ -100,20 +99,14 @@ const Home = () => {
             </p>
 
             <div className="flex gap-4">
-              <Button size="lg" className="bg-yellow-500 hover:bg-orange-600 text-lg font-semibold shadow-lg transition duration-200" asChild>
+              <Button size="lg" className= "text-lg font-semibold shadow-lg transition duration-200" asChild>
                 <Link to="/signup">
                   Comece Grátis <Zap className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" className="bg-neutral-700 border-neutral-600 hover:bg-neutral-600 text-neutral-300 text-lg font-semibold transition duration-200" asChild>
-                <Link to="/login">
-                  Fazer Login
                 </Link>
               </Button>
             </div>
           </div>
 
-          {/* Mockup Simulado de Agenda Otimizada (AGORA PREENCHIDO) */}
           <div className="lg:w-1/2 p-6 bg-neutral-700 rounded-xl border border-neutral-600 shadow-2xl relative min-h-[300px]">
             <div className="absolute top-4 left-4 text-sm text-yellow-400 font-bold flex items-center gap-1">
               <Clock /> Planejamento Otimizado por I.A.
@@ -139,7 +132,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* 2. VISÃO GERAL DAS ESPECIFICAÇÕES - Foco na Otimização */}
         <div className="pt-10">
           <h2 className="text-4xl font-bold text-neutral-200 mb-8 text-center border-b border-neutral-700 pb-4">
             Como Beezer Transforma Sua Jornada
@@ -147,7 +139,6 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            {/* OTIMIZAÇÃO (Gráfico Fictício) */}
             <div className="bg-neutral-800 p-6 rounded-lg border border-neutral-700 shadow-xl col-span-2">
               <h3 className="text-2xl font-bold text-neutral-100 mb-4 flex items-center gap-2">
                 <DatasetIcon className="text-yellow-500" /> Otimização Inteligente de Tempo
@@ -177,7 +168,6 @@ const Home = () => {
               </div>
             </div>
 
-            {/* CICLO DE FEEDBACK */}
             <div className="bg-neutral-800 p-6 rounded-lg border border-neutral-700 shadow-xl">
               <h3 className="text-2xl font-bold text-neutral-100 mb-4 flex items-center gap-2">
                 <CheckCircle className="text-blue-500" /> Ciclo de Revisão e Conclusão
@@ -210,7 +200,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* 3. RECURSOS CHAVE DETALHADOS (ANTIGOS FEATURE CARDS) */}
         <div className="pt-10">
           <h2 className="text-4xl font-bold text-neutral-200 mb-8 text-center border-b border-neutral-700 pb-4">
             Funcionalidades Essenciais

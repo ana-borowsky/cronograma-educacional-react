@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
+
 const StudySchedule = () => {
   return (
     <Layout subtitle="Defina suas Horas de Estudo">

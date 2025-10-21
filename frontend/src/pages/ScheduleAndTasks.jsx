@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState } from "react"
 import Layout from "../components/Layout"
+import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 const ScheduleAndTasks = () => {
   const [activeTab, setActiveTab] = useState('agenda');
@@ -123,7 +125,7 @@ const ScheduleAndTasks = () => {
               ))}
               <div className="time-slot bg-neutral-800 text-neutral-400 text-xs font-semibold p-1 text-center border-r border-neutral-700" style={{ gridRow: 19, gridColumn: 1 }}>00:00</div>
 
-              {/* Células do Calendário (fundo) */}
+
               {daysOfWeek.map((day, dayIndex) => (
                 timeSlots.map((time, timeIndex) => {
                   const slotKey = `${dayIndex}-${timeIndex}`;
@@ -150,7 +152,7 @@ const ScheduleAndTasks = () => {
                 })
               ))}
 
-              {/* Eventos (Agora são invisíveis em vez de removidos) */}
+
               {dayEvents.map((event, index) => (
                 <div
                   key={index}
@@ -165,6 +167,16 @@ const ScheduleAndTasks = () => {
                   <span className="truncate block">{event.text}</span>
                 </div>
               ))}
+            </div>
+            <div className="flex justify-center mt-8">
+                <Button
+                  className="w-1/4"
+                  asChild
+                >
+                  <Link to="../scheduleandtasks">
+                    Recalcular
+                  </Link>
+                </Button>
             </div>
           </div>
           <div className="flex-grow p-6 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg">

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 const Title = ({ children }) => {
   return (
@@ -11,7 +11,7 @@ const Title = ({ children }) => {
     </Link>
 
 
-  );
-};
+  )
+}
 
-export default Title;
+export default Title

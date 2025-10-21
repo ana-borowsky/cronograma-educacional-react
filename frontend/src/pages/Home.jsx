@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import Layout from "../components/Layout"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 // Ícones SVG no estilo Google Material Icons
 
@@ -10,7 +10,7 @@ const DatasetIcon = () => (
     <path d="M0 0h24v24H0V0z" fill="none" />
     <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 19V5h14v14H5zm2-10h2V7H7v2zm0 4h2v-2H7v2zm0 4h2v-2H7v2zm4-8h2V7h-2v2zm0 4h2v-2h-2v2zm0 4h2v-2h-2v2zm4-8h2V7h-2v2zm0 4h2v-2h-2v2z" stroke="none" fill="currentColor" />
   </svg>
-);
+)
 
 // Ícone de Notificação (Circle Notifications / notifications_active)
 const NotificationsActiveIcon = () => (
@@ -20,7 +20,7 @@ const NotificationsActiveIcon = () => (
     <circle cx="18" cy="8" r="4" fill="red" stroke="white" strokeWidth="1.5" />
     <text x="18" y="9" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">!</text>
   </svg>
-);
+)
 
 
 // Ícone de Alarme (Alarm)
@@ -29,12 +29,12 @@ const AlarmIcon = () => (
     <path d="M0 0h24v24H0V0z" fill="none" />
     <path d="M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.61 1.86 2 5.71l1.29 1.53 4.59-3.85zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9-4.02-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7zm-1-8h2v4h-2zm0-6h2v2h-2z" stroke="none" fill="currentColor" />
   </svg>
-);
+)
 
-const Zap = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>;
-const Clock = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
-const BarChart3 = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6v7.5M9.75 21H12m0 0h2.25M12 21V9.75M8.25 21h7.5" /></svg>;
-const CheckCircle = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+const Zap = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+const Clock = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-4 w-4"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+const BarChart3 = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6v7.5M9.75 21H12m0 0h2.25M12 21V9.75M8.25 21h7.5" /></svg>
+const CheckCircle = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
 
 
 const Home = () => {
@@ -80,7 +80,7 @@ const Home = () => {
       { h: 'h-1/3', color: 'bg-green-700', label: 'Leitura G.' },
       { h: 'h-[10%]', color: 'bg-neutral-600' },
     ]
-  ];
+  ]
 
   return (
     <Layout subtitle="A rotina que funciona">
@@ -238,7 +238,7 @@ const Home = () => {
 
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

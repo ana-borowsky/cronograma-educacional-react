@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -184,7 +184,7 @@ const Syllabus = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Syllabus;
+export default Syllabus

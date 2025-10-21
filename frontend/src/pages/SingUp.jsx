@@ -1,4 +1,4 @@
-  import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -85,7 +85,7 @@ const SingUp = () => {
 
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default SingUp;
+export default SingUp

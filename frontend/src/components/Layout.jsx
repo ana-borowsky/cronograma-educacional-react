@@ -1,6 +1,6 @@
-import Title from "./Title";
-import { Button } from "@/components/ui/button";
-import { Link } from 'react-router-dom';
+import Title from "./Title"
+import { Button } from "@/components/ui/button"
+import { Link } from 'react-router-dom'
 
 const Layout = ({ subtitle, children }) => {
   return (
@@ -45,7 +45,7 @@ const Layout = ({ subtitle, children }) => {
       </main>
 
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

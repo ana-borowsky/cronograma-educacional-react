@@ -4,31 +4,31 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
 const ScheduleAndTasks = () => {
-  const [activeTab, setActiveTab] = useState('agenda');
-  const [studySlots, setStudySlots] = useState([]);
+  const [activeTab, setActiveTab] = useState('agenda')
+  const [studySlots, setStudySlots] = useState([])
 
   const timeSlots = Array.from({ length: 17 }, (_, i) => {
-    const hour = i + 7;
-    return `${String(hour).padStart(2, '0')}:00`;
-  });
+    const hour = i + 7
+    return `${String(hour).padStart(2, '0')}:00`
+  })
 
-  const daysOfWeek = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+  const daysOfWeek = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']
 
 
   const getGridRow = (hour) => {
-    return hour - 7 + 2;
-  };
+    return hour - 7 + 2
+  }
 
   const handleSlotClick = (dayIndex, timeIndex) => {
-    const slotKey = `${dayIndex}-${timeIndex}`;
+    const slotKey = `${dayIndex}-${timeIndex}`
     setStudySlots(prevSlots => {
       if (prevSlots.includes(slotKey)) {
-        return prevSlots.filter(key => key !== slotKey);
+        return prevSlots.filter(key => key !== slotKey)
       } else {
-        return [...prevSlots, slotKey];
+        return [...prevSlots, slotKey]
       }
-    });
-  };
+    })
+  }
 
   const dayEvents = [
     { dayIndex: 0, text: "Aula Cálculo I", startHour: 10, endHour: 12, className: "bg-red-700/80 hover:bg-red-700 border-red-900" },
@@ -57,7 +57,7 @@ const ScheduleAndTasks = () => {
     { dayIndex: 6, text: "Revisão Semanal", startHour: 8, endHour: 11, className: "bg-red-700/80 hover:bg-red-700 border-red-900" },
     { dayIndex: 6, text: "Preparar Semana", startHour: 14, endHour: 16, className: "bg-neutral-600/80 hover:bg-neutral-600 border-neutral-700" },
     { dayIndex: 6, text: "Leitura de Apoio", startHour: 17, endHour: 19, className: "bg-yellow-700/80 hover:bg-yellow-700 border-yellow-900" },
-  ];
+  ]
 
   return (
     <Layout subtitle="Cronograma Semanal">
@@ -128,17 +128,17 @@ const ScheduleAndTasks = () => {
 
               {daysOfWeek.map((day, dayIndex) => (
                 timeSlots.map((time, timeIndex) => {
-                  const slotKey = `${dayIndex}-${timeIndex}`;
-                  const isSelected = studySlots.includes(slotKey);
-                  const isWeekend = dayIndex >= 5;
+                  const slotKey = `${dayIndex}-${timeIndex}`
+                  const isSelected = studySlots.includes(slotKey)
+                  const isWeekend = dayIndex >= 5
 
-                  let bgColor = 'bg-neutral-800/50';
+                  let bgColor = 'bg-neutral-800/50'
                   if (activeTab === 'estudo') {
                     bgColor = isSelected
                       ? 'bg-green-500/80'
-                      : (isWeekend ? 'bg-neutral-700/50' : 'bg-neutral-800/50 hover:bg-neutral-600/50');
+                      : (isWeekend ? 'bg-neutral-700/50' : 'bg-neutral-800/50 hover:bg-neutral-600/50')
                   } else {
-                    bgColor = isWeekend ? 'bg-neutral-700/50' : 'bg-neutral-800/50';
+                    bgColor = isWeekend ? 'bg-neutral-700/50' : 'bg-neutral-800/50'
                   }
 
                   return (
@@ -148,7 +148,7 @@ const ScheduleAndTasks = () => {
                       style={{ gridColumn: dayIndex + 2, gridRow: timeIndex + 2 }}
                       onClick={activeTab === 'estudo' ? () => handleSlotClick(dayIndex, timeIndex) : undefined}
                     ></div>
-                  );
+                  )
                 })
               ))}
 
@@ -236,7 +236,7 @@ const ScheduleAndTasks = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default ScheduleAndTasks;
+export default ScheduleAndTasks

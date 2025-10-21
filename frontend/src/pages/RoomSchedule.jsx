@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from "@/components/ui/button";
+import React from 'react'
+import { Button } from "@/components/ui/button"
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
 
@@ -8,7 +8,7 @@ const RoomSchedule = () => {
     { id: 1, name: "Cálculo I", schedule: "Segunda e Quarta, 19:00 - 21:00", room: "Sala B-205" },
     { id: 2, name: "Introdução à Programação", schedule: "Terça e Quinta, 19:00 - 21:00", room: "Lab de Informática 3" },
     { id: 3, name: "Física Experimental", schedule: "Sexta, 19:00 - 22:00", room: "Lab de Física 101" },
-  ];
+  ]
   
 
   return (
@@ -107,7 +107,7 @@ const RoomSchedule = () => {
       </Button>
       </div >
     </Layout>
-  );
-};
+  )
+}
 
-export default RoomSchedule;
+export default RoomSchedule

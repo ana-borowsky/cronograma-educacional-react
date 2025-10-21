@@ -1,5 +1,5 @@
 import Layout from "../components/Layout"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 const ToDoList = () => {
   return (
@@ -106,7 +106,7 @@ const ToDoList = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default ToDoList;
+export default ToDoList

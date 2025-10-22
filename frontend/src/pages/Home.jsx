@@ -99,7 +99,7 @@ const Home = () => {
             </p>
 
             <div className="flex gap-4">
-              <Button size="lg" className= "text-lg font-semibold shadow-lg transition duration-200" asChild>
+              <Button size="xl" className= "text-lg font-semibold shadow-lg transition duration-200" asChild>
                 <Link to="/signup">
                   Comece Grátis <Zap className="ml-2 h-5 w-5" />
                 </Link>

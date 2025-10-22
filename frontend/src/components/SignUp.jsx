@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 
-const SingUp = ({ children }) => {
+const SingUp = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] p-5">
       <form className="bg-neutral-800 p-8 md:p-10 rounded-lg shadow-2xl w-full max-w-md border border-neutral-600">

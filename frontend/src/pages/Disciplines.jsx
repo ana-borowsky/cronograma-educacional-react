@@ -3,8 +3,11 @@ import Layout from "../components/Layout"
 import NavigationBar from "../containers/NavigationBar"
 import Discipline from "../containers/Discipline"
 import AddDiscipline from "../containers/AddDiscipline"
-import LoginModal from "../components/LoginModal"  
+import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
+// 🚨 Importações adicionadas:
+import { WorkFormModal } from "@/components/WorkFormModal"
+import { ExamFormModal } from "@/components/ExamFormModal"
 
 const ChevronDown = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
 const ChevronUp = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
@@ -39,6 +42,8 @@ const Disciplines = () => {
         />
         <div className="w-full flex flex-col md:flex-row md:space-x-8">
           <div className="w-full flex overflow-x-auto space-x-6 pb-4">
+            {/* O WorkFormModal e ExamFormModal devem ser renderizados dentro de Discipline, 
+               como você já fez no código anterior, para que eles acessem o estado correto de cada card de disciplina. */}
             <Discipline />
             <Discipline />
             <Discipline />
@@ -60,6 +65,17 @@ const Disciplines = () => {
           onLoginClick={switchToLogin}
         />
       )}
+
+      {/* NOTA: Se você estivesse renderizando os modais aqui, ficaria assim:
+         <WorkFormModal
+           isOpen={...} 
+           onClose={...} 
+         /> 
+         <ExamFormModal
+           isOpen={...} 
+           onClose={...} 
+         /> 
+      */}
     </Layout>
   )
 }

@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { ListItem } from "@/components/ListItem"
 import { DisciplineTitle } from "@/components/DisciplineTitle"
-import { WorkForm } from "@/components/WorkForm"
-import { ExamForm } from "@/components/ExamForm"
+import { WorkFormModal } from "@/components/WorkFormModal"
+import { ExamFormModal } from "@/components/ExamFormModal"
 import { useState } from "react"
 
 const DisciplineWorkFormModal = ({ isOpen, onClose }) => {
@@ -13,7 +13,7 @@ const DisciplineWorkFormModal = ({ isOpen, onClose }) => {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-md p-4"
       onClick={onClose}
     >
-      <WorkForm onClose={onClose} />
+      <WorkFormModal onClose={onClose} />
     </div>
   )
 }
@@ -26,7 +26,7 @@ const DisciplineExamFormModal = ({ isOpen, onClose }) => {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-md p-4"
       onClick={onClose}
     >
-      <ExamForm onClose={onClose} />
+      <ExamFormModal onClose={onClose} />
     </div>
   )
 }
@@ -109,11 +109,11 @@ const Discipline = () => {
         </Button>
       </div>
 
-      <DisciplineWorkFormModal
+      <WorkFormModal
         isOpen={isWorkModalOpen}
         onClose={() => setIsWorkModalOpen(false)}
       />
-      <DisciplineExamFormModal
+      <ExamFormModal
         isOpen={isExamModalOpen}
         onClose={() => setIsExamModalOpen(false)}
       />

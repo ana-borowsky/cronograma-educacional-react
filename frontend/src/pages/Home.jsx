@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import Layout from "../components/Layout"
 import { Link } from "react-router-dom"
+import LoginModal from "../components/LoginModal"
+import SignupModal from "../components/SignupModal"
 
 const DatasetIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" strokeWidth={2} stroke="currentColor" fill="none" className="h-6 w-6">
@@ -32,18 +35,38 @@ const CheckCircle = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" vi
 
 
 const Home = () => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
+
+  const openLoginModal = () => {
+    setIsSignupModalOpen(false)
+    setIsLoginModalOpen(true)
+  }
+  const closeLoginModal = () => setIsLoginModalOpen(false)
+
+  const openSignupModal = () => {
+    setIsLoginModalOpen(false)
+    setIsSignupModalOpen(true)
+  }
+  const closeSignupModal = () => setIsSignupModalOpen(false)
+
+  const switchToLogin = () => {
+    closeSignupModal()
+    openLoginModal()
+  }
+
   const timeBlocks = [
     // SEG
     [
-      { h: 'h-1/4', color: 'bg-blue-800', label: 'Aula C.' }, // Aula
-      { h: 'h-[10%]', color: 'bg-neutral-600' }, // Intervalo
-      { h: 'h-1/3', color: 'bg-orange-600', label: 'Estudo P1' }, // Estudo Prioridade Alta
-      { h: 'h-[10%]', color: 'bg-neutral-600' }, // Intervalo
-      { h: 'h-1/5', color: 'bg-green-700', label: 'Revisão Lógica' }, // Estudo Prioridade Média
+      { h: 'h-1/4', color: 'bg-blue-800', label: 'Aula C.' },
+      { h: 'h-[10%]', color: 'bg-neutral-600' },
+      { h: 'h-1/3', color: 'bg-orange-600', label: 'Estudo P1' },
+      { h: 'h-[10%]', color: 'bg-neutral-600' },
+      { h: 'h-1/5', color: 'bg-green-700', label: 'Revisão Lógica' },
     ],
     // TER
     [
-      { h: 'h-1/5', color: 'bg-blue-800', label: 'Aula Lógica' }, // Aula
+      { h: 'h-1/5', color: 'bg-blue-800', label: 'Aula Lógica' },
       { h: 'h-1/4', color: 'bg-orange-600', label: 'Estudo P2' },
       { h: 'h-[10%]', color: 'bg-neutral-600' },
       { h: 'h-1/4', color: 'bg-green-700', label: 'Revisão C.' },
@@ -96,11 +119,9 @@ const Home = () => {
                 size="xl"
                 variant="yellow-primary"
                 className="text-lg font-semibold shadow-lg transition duration-200"
-                asChild
+                onClick={openSignupModal}
               >
-                <Link to="/signup">
-                  Comece Grátis <Zap className="ml-2 h-5 w-5" />
-                </Link>
+                Comece Grátis <Zap className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>
@@ -235,6 +256,19 @@ const Home = () => {
         </div>
 
       </div>
+
+      {isLoginModalOpen && (
+        <LoginModal
+          onClose={closeLoginModal}
+        />
+      )}
+
+      {isSignupModalOpen && (
+        <SignupModal
+          onClose={closeSignupModal}
+          onLoginClick={switchToLogin}
+        />
+      )}
     </Layout>
   )
 }

@@ -2,20 +2,36 @@ import Title from "./Title"
 import { Button } from "@/components/ui/button"
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-// 1. Importar o modal
-import LoginModal from './LoginModal' // Assumindo que LoginModal está no mesmo diretório ou em ./LoginModal
+import LoginModal from './LoginModal'
+import SignupModal from './SignupModal' 
 
 const Layout = ({ subtitle, children }) => {
+
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
-  const openLoginModal = () => setIsLoginModalOpen(true)
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false) 
+
+  const openLoginModal = () => {
+    setIsSignupModalOpen(false) 
+    setIsLoginModalOpen(true)
+  }
   const closeLoginModal = () => setIsLoginModalOpen(false)
+
+  const openSignupModal = () => { 
+    setIsLoginModalOpen(false) 
+    setIsSignupModalOpen(true)
+  }
+  const closeSignupModal = () => setIsSignupModalOpen(false) 
+
+  const switchToLogin = () => {
+    closeSignupModal()
+    openLoginModal()
+  }
 
   return (
     <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh]">
 
       <header className="relative w-full p-5 flex justify-center items-start">
-        {/* ... (cabeçalho) ... */}
         <div className="flex flex-col items-center">
           <Title>
             Beezer
@@ -27,17 +43,16 @@ const Layout = ({ subtitle, children }) => {
         </div>
 
         <div className="absolute top-5 right-5 space-x-4">
-          <Button asChild
+          <Button
             variant="secondary"
+            onClick={openSignupModal} 
           >
-            <Link to="/signup">
-              Cadastro
-            </Link>
+            Cadastro
           </Button>
 
           <Button
-            variant="default" 
-            onClick={openLoginModal} // Este botão abre o modal
+            variant="default"
+            onClick={openLoginModal}
           >
             Login
           </Button>
@@ -47,10 +62,18 @@ const Layout = ({ subtitle, children }) => {
       <main className="flex flex-col justify-center items-center flex-grow p-5">
         {children}
       </main>
-      
-      {/* 2. SUBSTITUIR o placeholder pela chamada do LoginModal */}
+
       {isLoginModalOpen && (
-        <LoginModal onClose={closeLoginModal} />
+        <LoginModal
+          onClose={closeLoginModal}
+        />
+      )}
+
+      {isSignupModalOpen && (
+        <SignupModal
+          onClose={closeSignupModal}
+          onLoginClick={switchToLogin}
+        />
       )}
     </div>
   )

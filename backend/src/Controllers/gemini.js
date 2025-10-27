@@ -12,6 +12,7 @@ export class GeminiController {
       let freeTIme = []
       freeTime = await request(app).get(`/freeTime/${idUser}`).query({ idUser: idUser })
 
+
       const disciplines = await request(app).get(`/discipline/${idUser}`).query({ idUser: idUser })
       let tasks = []
       for (const d of disciplines) {

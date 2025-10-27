@@ -11,7 +11,7 @@ const NavigationBar = ({ currentPath = "/disciplines" }) => {
           transition duration-200 ease-in-out cursor-pointer relative z-10
           
           ${isActive
-            ? 'text-yellow-400 bg-neutral-800 border-t border-l border-r border-yellow-400/50 rounded-t-lg border-b-2'
+            ? 'text-yellow-400  border-t border-l border-r border-yellow-400/50 rounded-t-lg border-b-2'
             : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50 border-b border-transparent'
           }
         `}

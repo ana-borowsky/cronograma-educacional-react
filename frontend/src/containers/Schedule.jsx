@@ -57,22 +57,38 @@ const Schedule = () => {
     { dayIndex: 6, text: "Preparar Semana", startHour: 14, endHour: 16, className: "bg-neutral-600/80 hover:bg-neutral-600 border-neutral-700" },
     { dayIndex: 6, text: "Leitura de Apoio", startHour: 17, endHour: 19, className: "bg-yellow-700/80 hover:bg-yellow-700 border-yellow-900" },
   ]
+
+  const TabButton = ({ tabId, children }) => {
+    const isActive = activeTab === tabId;
+
+    return (
+      <button
+        onClick={() => setActiveTab(tabId)}
+        className={`
+          relative z-10 text-lg font-bold px-4 pt-3 pb-2 transition duration-200 ease-in-out cursor-pointer
+          ${isActive
+            ? 'text-yellow-400 bg-neutral-800 border-t border-l border-r border-yellow-400/50 rounded-t-lg border-b-2'
+            : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50 border-b border-transparent'
+          }
+        `}
+      >
+        {children}
+        {isActive && (
+          <span className="absolute bottom-[-2px] left-0 w-full h-0.5 bg-neutral-800 z-20" aria-hidden="true"></span>
+        )}
+      </button>
+    )
+  }
+
   return (
     <div className="flex-grow flex flex-col xl:flex-row gap-6">
       <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-grow xl:w-3/4">
-        <div className="flex mb-4 border-b border-neutral-700">
-          <button
-            onClick={() => setActiveTab('agenda')}
-            className={`text-lg font-bold pb-2 px-4 transition-colors duration-200 ${activeTab === 'agenda' ? 'text-white border-b-2 border-blue-500' : 'text-neutral-400 hover:text-white'}`}
-          >
-            Agenda da Semana
-          </button>
-          <button
-            onClick={() => setActiveTab('estudo')}
-            className={`text-lg font-bold pb-2 px-4 transition-colors duration-200 ${activeTab === 'estudo' ? 'text-white border-b-2 border-blue-500' : 'text-neutral-400 hover:text-white'}`}
-          >
-            Horários de Estudo
-          </button>
+
+        <div className="flex mb-4 border-neutral-700 -mt-6 -mx-6 px-6 pt-6 ">
+          <div className="flex flex-row gap-0 border-b-2 border-neutral-700 w-full">
+            <TabButton tabId="agenda">Agenda da Semana</TabButton>
+            <TabButton tabId="estudo">Horários de Estudo</TabButton>
+          </div>
         </div>
 
         <div className="flex items-center justify-between mb-4">
@@ -85,7 +101,7 @@ const Schedule = () => {
           </button>
         </div>
         <div
-          className="calendar-grid grid gap-px bg-neutral-700 border border-neutral-700 rounded-lg overflow-hidden relative" // Adicionado relative para contexto de posicionamento
+          className="calendar-grid grid gap-px bg-neutral-700 border border-neutral-700 rounded-lg overflow-hidden relative"
           style={{
             gridTemplateColumns: `80px repeat(${daysOfWeek.length}, 1fr)`,
             gridTemplateRows: `auto repeat(${timeSlots.length + 1}, 40px)`,
@@ -151,8 +167,8 @@ const Schedule = () => {
         </div>
         <div className="flex justify-center mt-8">
           <Button
-            className="w-1/4" 
-            variant="yellow-primary" 
+            className="w-1/4"
+            variant="yellow-primary"
             asChild
           >
             <Link to="../scheduleandtasks">

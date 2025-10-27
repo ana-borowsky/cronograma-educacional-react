@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ListItem } from "@/components/ListItem"
-import { ToDoListTitle } from "@/components/ToDoListTitle"
+import { DateTitle } from "@/components/DateTitle"
 import { TimeProgress } from "@/components/TimeProgress"
 
 const getNextDate = (currentDate) => {
@@ -30,7 +30,7 @@ const ToDoList = () => {
   return (
     <div className="flex-grow p-6 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg">
 
-      <ToDoListTitle
+      <DateTitle
         currentDate={displayedDate}
         onPrevClick={handlePrevDate}
         onNextClick={handleNextDate}

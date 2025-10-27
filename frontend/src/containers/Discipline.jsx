@@ -3,20 +3,45 @@ import { ListItem } from "@/components/ListItem"
 import { DisciplineTitle } from "@/components/DisciplineTitle"
 import { WorkFormModal } from "@/components/WorkFormModal"
 import { ExamFormModal } from "@/components/ExamFormModal"
+import { DisciplineFormModal } from "@/components/DisciplineFormModal"
 import { useState } from "react"
+
+const PencilIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-400 group-hover:text-yellow-400 transition-colors">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6.3 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+  </svg>
+)
 
 const Discipline = ({ disciplineData }) => {
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
   const [isExamModalOpen, setIsExamModalOpen] = useState(false)
+  const [isDisciplineModalOpen, setIsDisciplineModalOpen] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
 
   const { title, color, works, exams } = disciplineData
 
+  const openDisciplineModal = () => setIsDisciplineModalOpen(true)
+
   return (
     <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[312px] flex flex-col">
-      <DisciplineTitle
-        title={title}
-        color={color}
-      />
+
+      <div
+        className="relative flex items-start justify-between cursor-pointer group mb-6 transition-all duration-200"
+        onClick={openDisciplineModal}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
+        <DisciplineTitle
+          title={title}
+          color={color}
+        />
+
+        <div
+          className={`absolute top-0 right-0 p-1 rounded-full transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <PencilIcon />
+        </div>
+      </div>
 
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>
@@ -78,6 +103,12 @@ const Discipline = ({ disciplineData }) => {
       <ExamFormModal
         isOpen={isExamModalOpen}
         onClose={() => setIsExamModalOpen(false)}
+      />
+
+      <DisciplineFormModal
+        isOpen={isDisciplineModalOpen}
+        onClose={() => setIsDisciplineModalOpen(false)}
+        disciplineData={disciplineData}
       />
     </div>
   )

@@ -31,8 +31,8 @@ const Layout = ({ subtitle, children }) => {
   return (
     <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh] overflow-x-hidden">
 
-      <header className="relative w-full p-5 flex justify-center items-start">
-        <div className="flex flex-col items-center">
+      <header className="relative w-full p-5">
+        <div className="flex flex-col items-center min-h-[100px] justify-start">
           <Title>
             Beezer
           </Title>
@@ -63,6 +63,7 @@ const Layout = ({ subtitle, children }) => {
         {children}
       </main>
 
+      {/* Os modais não afetam o fluxo vertical, mas podem causar o problema de rolagem */}
       {isLoginModalOpen && (
         <LoginModal
           onClose={closeLoginModal}

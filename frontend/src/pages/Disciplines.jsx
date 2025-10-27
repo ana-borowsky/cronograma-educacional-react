@@ -89,14 +89,14 @@ const Disciplines = () => {
 
   return (
     <Layout subtitle="Visão Geral das Disciplinas">
-      <div className="flex flex-col p-5 gap-6">
+      <div className="flex flex-col p-5 gap-6 min-h-screen">
         <NavigationBar
           currentPath={location.pathname}
           openLoginModal={openLoginModal}
           openSignupModal={openSignupModal}
         />
         <div className="w-full flex flex-col md:flex-row md:space-x-8">
-          <div className="w-full flex overflow-x-auto space-x-6 pb-4">
+          <div className="w-full flex overflow-x-auto space-x-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {DUMMY_DISCIPLINES.map((discipline) => (
               <Discipline key={discipline.id} disciplineData={discipline} />
             ))}

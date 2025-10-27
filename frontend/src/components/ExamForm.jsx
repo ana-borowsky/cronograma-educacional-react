@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input" 
 
 const XMark = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
 
@@ -35,34 +36,36 @@ export const ExamForm = ({ onClose }) => {
       </div>
 
       <form onSubmit={handleFormSubmit} className="space-y-4 p-5">
+
         <div className="flex flex-col">
-          <input
+          <Input 
             type="text"
             placeholder="Nome da Prova/Avaliação (Ex: P1 - Unidade 1)"
-            className="w-full p-3 border border-neutral-600 rounded-lg bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
+            variant="dark" 
             required
           />
         </div>
 
         <div className="flex flex-col">
           <label htmlFor="modal-p-date" className="text-neutral-400 text-xs mb-1 font-medium">Data da Prova</label>
-          <input
+          <Input 
             type="date"
             id="modal-p-date"
             title="Data da Prova"
-            className="w-full p-3 border border-neutral-600 rounded-lg bg-neutral-700 text-neutral-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
+            variant="dark" 
             required
           />
         </div>
 
         <div className="flex flex-col">
           <label htmlFor="modal-p-file" className="text-neutral-400 text-xs mb-1 font-medium">Upload de Arquivos (Material/Escopo)</label>
-          <input
+          <Input
             type="file"
             id="modal-p-file"
             name="modal-p-file"
             multiple
-            className="w-full p-2 border border-neutral-600 rounded-lg bg-neutral-700 text-neutral-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-500 cursor-pointer"
+            variant="dark"
+            className="w-full p-2 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-500 cursor-pointer focus:ring-2 focus:ring-red-500 focus:border-red-500"
           />
         </div>
 

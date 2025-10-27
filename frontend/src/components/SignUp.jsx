@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 const SingUp = () => {
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] p-5">
       <form className="bg-neutral-800 p-8 md:p-10 rounded-lg shadow-2xl w-full max-w-md border border-neutral-600">
@@ -14,13 +16,13 @@ const SingUp = () => {
           <label htmlFor="name" className="block mb-1 text-neutral-300 font-bold text-sm">
             Nome Completo
           </label>
-          <input
+          <Input
             type="text"
             id="name"
             name="name"
             placeholder="Seu Nome"
             required
-            className="w-full p-2 border border-neutral-600 rounded-md box-border text-base bg-neutral-700 text-white focus:outline-none focus:border-neutral-500"
+            variant="dark"
           />
         </div>
 
@@ -28,13 +30,13 @@ const SingUp = () => {
           <label htmlFor="email" className="block mb-1 text-neutral-300 font-bold text-sm">
             E-mail
           </label>
-          <input
+          <Input
             type="email"
             id="email"
             name="email"
             placeholder="nome@email.com"
             required
-            className="w-full p-2 border border-neutral-600 rounded-md box-border text-base bg-neutral-700 text-white focus:outline-none focus:border-neutral-500"
+            variant="dark"
           />
         </div>
 
@@ -42,13 +44,13 @@ const SingUp = () => {
           <label htmlFor="password" className="block mb-1 text-neutral-300 font-bold text-sm">
             Senha
           </label>
-          <input
+          <Input
             type="password"
             id="password"
             name="password"
             placeholder="Crie uma senha forte"
             required
-            className="w-full p-2 border border-neutral-600 rounded-md box-border text-base bg-neutral-700 text-white focus:outline-none focus:border-neutral-500"
+            variant="dark"
           />
         </div>
 
@@ -56,17 +58,20 @@ const SingUp = () => {
           <label htmlFor="confirm-password" className="block mb-1 text-neutral-300 font-bold text-sm">
             Confirme a Senha
           </label>
-          <input
+          <Input
             type="password"
             id="confirm-password"
             name="confirm-password"
             placeholder="Repita a senha"
             required
-            className="w-full p-2 border border-neutral-600 rounded-md box-border text-base bg-neutral-700 text-white focus:outline-none focus:border-neutral-500"
+            variant="dark"
           />
         </div>
 
-        <Button className="w-full" asChild>
+        <Button
+          className="w-full bg-yellow-600 text-white hover:bg-yellow-500 py-2 transition duration-200 text-base"
+          asChild
+        >
           <Link to="../login">
             Cadastrar
           </Link>

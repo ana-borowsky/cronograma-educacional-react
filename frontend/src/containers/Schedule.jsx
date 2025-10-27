@@ -58,7 +58,7 @@ const Schedule = () => {
     { dayIndex: 6, text: "Leitura de Apoio", startHour: 17, endHour: 19, className: "bg-yellow-700/80 hover:bg-yellow-700 border-yellow-900" },
   ]
   return (
-    < div className = "flex-grow flex flex-col xl:flex-row gap-6" >
+    <div className="flex-grow flex flex-col xl:flex-row gap-6">
       <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-grow xl:w-3/4">
         <div className="flex mb-4 border-b border-neutral-700">
           <button
@@ -151,7 +151,8 @@ const Schedule = () => {
         </div>
         <div className="flex justify-center mt-8">
           <Button
-            className="w-1/4"
+            className="w-1/4" 
+            variant="yellow-primary" 
             asChild
           >
             <Link to="../scheduleandtasks">
@@ -160,7 +161,7 @@ const Schedule = () => {
           </Button>
         </div>
       </div>
-        </div >
+    </div>
   )
 }
 

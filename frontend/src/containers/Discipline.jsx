@@ -72,7 +72,8 @@ const Discipline = () => {
 
         <hr className="my-4 border-neutral-700" />
         <Button
-          className="w-full justify-start flex items-center bg-yellow-700 text-white hover:bg-yellow-600 shadow-md transition duration-200"
+          className="w-full" 
+          variant="yellow-primary"
           onClick={() => setIsWorkModalOpen(true)}
         >
           <span className="text-lg font-bold mr-2">+</span>
@@ -99,7 +100,8 @@ const Discipline = () => {
 
         <hr className="my-4 border-neutral-700" />
         <Button
-          className="w-full justify-start flex items-center bg-yellow-700 text-white hover:bg-yellow-600 shadow-md transition duration-200"
+          className="w-full"
+          variant="yellow-primary"
           onClick={() => setIsExamModalOpen(true)}
         >
           <span className="text-lg font-bold mr-2">+</span>

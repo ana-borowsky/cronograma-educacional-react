@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input" 
+import { Input } from "@/components/ui/input"
 
 const XMark = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
 
@@ -37,26 +37,33 @@ export const ExamForm = ({ onClose }) => {
 
       <form onSubmit={handleFormSubmit} className="space-y-4 p-5">
 
+        {/* Campo 1: Nome da Prova - Usando Input com variant="dark" e focus vermelho */}
         <div className="flex flex-col">
-          <Input 
+          <Input
             type="text"
             placeholder="Nome da Prova/Avaliação (Ex: P1 - Unidade 1)"
-            variant="dark" 
+            variant="dark"
             required
+            // Sobrescrevendo o anel de foco padrão da variante "dark"
+            className="focus:ring-2 focus:ring-red-500 focus:border-red-500"
           />
         </div>
 
+        {/* Campo 2: Data da Prova - Usando Input com variant="dark" e focus vermelho */}
         <div className="flex flex-col">
           <label htmlFor="modal-p-date" className="text-neutral-400 text-xs mb-1 font-medium">Data da Prova</label>
-          <Input 
+          <Input
             type="date"
             id="modal-p-date"
             title="Data da Prova"
-            variant="dark" 
+            variant="dark"
             required
+            // Sobrescrevendo o anel de foco padrão da variante "dark"
+            className="focus:ring-2 focus:ring-red-500 focus:border-red-500"
           />
         </div>
 
+        {/* Campo 3: Upload de Arquivos - Usando Input com variant="dark" e customização para 'file' */}
         <div className="flex flex-col">
           <label htmlFor="modal-p-file" className="text-neutral-400 text-xs mb-1 font-medium">Upload de Arquivos (Material/Escopo)</label>
           <Input
@@ -65,7 +72,7 @@ export const ExamForm = ({ onClose }) => {
             name="modal-p-file"
             multiple
             variant="dark"
-            className="w-full p-2 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-500 cursor-pointer focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            className="w-full p-2 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-sm"
           />
         </div>
 
@@ -83,7 +90,8 @@ export const ExamForm = ({ onClose }) => {
 
         <Button
           type="submit"
-          className="w-full py-3 rounded-lg bg-red-600 text-white font-bold hover:bg-red-500 transition duration-200 text-base shadow-md"
+          className="w-full"
+          variant="yellow-primary"
         >
           + Adicionar Prova
         </Button>

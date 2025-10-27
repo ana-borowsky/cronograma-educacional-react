@@ -69,7 +69,8 @@ const SingUp = () => {
         </div>
 
         <Button
-          className="w-full bg-yellow-600 text-white hover:bg-yellow-500 py-2 transition duration-200 text-base"
+          className="w-full"
+          variant="yellow-primary" 
           asChild
         >
           <Link to="../login">

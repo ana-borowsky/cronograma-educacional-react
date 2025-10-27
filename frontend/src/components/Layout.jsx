@@ -19,19 +19,16 @@ const Layout = ({ subtitle, children }) => {
         </div>
 
         <div className="absolute top-5 right-5 space-x-4">
-
           <Button asChild
-            className="bg-secondary text-white"
-            style={{ width: 'auto', paddingLeft: '1rem', paddingRight: '1rem' }}
+            variant="yellow-primary"
           >
-
             <Link to="/signup">
               Cadastro
             </Link>
           </Button>
 
           <Button asChild
-            style={{ width: 'auto', paddingLeft: '1rem', paddingRight: '1rem' }}
+            variant="yellow-primary"
           >
             <Link to="/login">
               Login

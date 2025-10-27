@@ -74,7 +74,8 @@ export const WorkForm = ({ onClose }) => {
 
         <Button
           type="submit"
-          className="w-full py-3 rounded-lg bg-green-600 text-white font-bold hover:bg-green-500 transition duration-200 text-base shadow-md"
+          className="w-full"
+          variant="yellow-primary"
         >
           + Adicionar Trabalho
         </Button>

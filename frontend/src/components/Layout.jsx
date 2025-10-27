@@ -1,14 +1,38 @@
 import Title from "./Title"
 import { Button } from "@/components/ui/button"
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import LoginModal from './LoginModal'
+import SignupModal from './SignupModal'
 
 const Layout = ({ subtitle, children }) => {
+
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
+
+  const openLoginModal = () => {
+    setIsSignupModalOpen(false)
+    setIsLoginModalOpen(true)
+  }
+  const closeLoginModal = () => setIsLoginModalOpen(false)
+
+  const openSignupModal = () => {
+    setIsLoginModalOpen(false)
+    setIsSignupModalOpen(true)
+  }
+  const closeSignupModal = () => setIsSignupModalOpen(false)
+
+  const switchToLogin = () => {
+    closeSignupModal()
+    openLoginModal()
+  }
+
   return (
-    <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh]">
+    <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh] overflow-x-hidden">
 
-      <header className="relative w-full p-5 flex justify-center items-start">
-
-        <div className="flex flex-col items-center">
+      <header className="relative w-full p-5">
+        <div className="flex flex-col items-center min-h-[100px] justify-start">
           <Title>
             Beezer
           </Title>
@@ -19,23 +43,18 @@ const Layout = ({ subtitle, children }) => {
         </div>
 
         <div className="absolute top-5 right-5 space-x-4">
-
-          <Button asChild
-            className="bg-secondary text-white"
-            style={{ width: 'auto', paddingLeft: '1rem', paddingRight: '1rem' }}
+          <Button
+            variant="secondary"
+            onClick={openSignupModal}
           >
-
-            <Link to="/signup">
-              Cadastro
-            </Link>
+            Cadastro
           </Button>
 
-          <Button asChild
-            style={{ width: 'auto', paddingLeft: '1rem', paddingRight: '1rem' }}
+          <Button
+            variant="default"
+            onClick={openLoginModal}
           >
-            <Link to="/login">
-              Login
-            </Link>
+            Login
           </Button>
         </div>
       </header>
@@ -44,6 +63,19 @@ const Layout = ({ subtitle, children }) => {
         {children}
       </main>
 
+      {/* Os modais não afetam o fluxo vertical, mas podem causar o problema de rolagem */}
+      {isLoginModalOpen && (
+        <LoginModal
+          onClose={closeLoginModal}
+        />
+      )}
+
+      {isSignupModalOpen && (
+        <SignupModal
+          onClose={closeSignupModal}
+          onLoginClick={switchToLogin}
+        />
+      )}
     </div>
   )
 }

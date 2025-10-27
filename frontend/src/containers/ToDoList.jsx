@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TaskItem } from "@/components/TaskItem"
+import { ListItem } from "@/components/ListItem"
 import { ToDoListTitle } from "@/components/ToDoListTitle"
 import { TimeProgress } from "@/components/TimeProgress"
 
@@ -42,18 +42,58 @@ const ToDoList = () => {
       />
 
       <div className="space-y-4">
-        <TaskItem
+        <ListItem
           id="tarefa-1"
-          timeRange="09:00 - 10:00"
-          description="Revisar Capítulo 3 de Cálculo I"
+          fullDescription="08:00 - 09:30 | Cálculo I: Resolver Lista de Exercícios 3 (Integrais)."
           borderColor="yellow"
         />
-        <TaskItem
+        <ListItem
           id="tarefa-2"
-          timeRange="10:00 - 12:00"
-          description="Estudar para a prova de Física Experimental"
+          fullDescription="09:30 - 11:00 | Física Experimental: Preparar Relatório 2 sobre Conservação de Energia."
           borderColor="red"
           defaultChecked={true}
+        />
+        <ListItem
+          id="tarefa-3"
+          fullDescription="11:00 - 12:30 | Algoritmos: Debugar a implementação da Tabela Hash do Projeto 1."
+          borderColor="yellow"
+        />
+        <ListItem
+          id="tarefa-4"
+          fullDescription="14:00 - 15:00 | Filosofia: Leitura do artigo sobre Metafísica de Aristóteles."
+          borderColor="red"
+        />
+        <ListItem
+          id="tarefa-5"
+          fullDescription="15:00 - 16:30 | Engenharia de Software: Reunião com a equipa para refinar os requisitos do caso de uso."
+          borderColor="green"
+        />
+        <ListItem
+          id="tarefa-6"
+          fullDescription="16:30 - 17:30 | Cálculo I: Assistir à vídeo aula sobre Regra da Cadeia e Derivadas Parciais."
+          borderColor="yellow"
+          defaultChecked={true}
+        />
+        <ListItem
+          id="tarefa-7"
+          fullDescription="17:30 - 18:00 | Revisão geral do Plano de Estudos da semana."
+          borderColor="green"
+        />
+        <ListItem
+          id="tarefa-8"
+          fullDescription="19:30 - 21:00 | Física Experimental: Resolver 5 exercícios avançados de Eletromagnetismo (preparação para P2)."
+          borderColor="red"
+        />
+        <ListItem
+          id="tarefa-9"
+          fullDescription="21:00 - 22:00 | Algoritmos: Revisão de notação Big O e análise de complexidade."
+          borderColor="yellow"
+          defaultChecked={true}
+        />
+        <ListItem
+          id="tarefa-10"
+          fullDescription="22:00 - 23:00 | Engenharia de Software: Finalizar o Diagrama de Classes UML."
+          borderColor="yellow"
         />
       </div>
     </div>

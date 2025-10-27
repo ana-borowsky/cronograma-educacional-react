@@ -1,3 +1,5 @@
+import { TaskItem } from "@/components/TaskItem"
+
 const ToDoList = () => {
   return (
 
@@ -18,41 +20,19 @@ const ToDoList = () => {
         <p className="text-neutral-300 text-sm font-medium">4 de 10 Horas Concluídas</p>
       </div>
       <div className="space-y-4">
-        <div className="flex items-center bg-neutral-700 p-4 rounded-lg border-l-4 border-green-500 hover:border-neutral-500 transition duration-200">
-          <span className="w-24 text-neutral-400 font-medium text-sm flex-shrink-0">08:00 - 09:00</span>
-          <span className="text-white flex-grow ml-4">Preparação para a aula de Programação</span>
-          <input type="checkbox" className="ml-4 w-5 h-5 form-checkbox text-blue-600 bg-neutral-700 border-neutral-500 rounded focus:ring-blue-500 cursor-pointer" />
-        </div>
-        <div className="flex items-center bg-neutral-700 p-4 rounded-lg border-l-4 border-yellow-600 hover:border-neutral-500 transition duration-200">
-          <span className="w-24 text-neutral-400 font-medium text-sm flex-shrink-0">09:00 - 10:00</span>
-          <span className="text-white flex-grow ml-4">Revisar Capítulo 3 de Cálculo I</span>
-          <input type="checkbox" className="ml-4 w-5 h-5 form-checkbox text-blue-600 bg-neutral-700 border-neutral-500 rounded focus:ring-blue-500 cursor-pointer" />
-        </div>
-        <div className="flex items-center bg-neutral-700 p-4 rounded-lg border-l-4 border-red-600 hover:border-neutral-500 transition duration-200">
-          <span className="w-24 text-neutral-500 font-medium text-sm line-through flex-shrink-0">10:00 - 12:00</span>
-          <span className="text-neutral-500 flex-grow ml-4 line-through">Estudar para a prova de Física Experimental</span>
-          <input type="checkbox" className="ml-4 w-5 h-5 form-checkbox text-blue-600 bg-neutral-700 border-neutral-500 rounded focus:ring-blue-500 cursor-pointer" checked readOnly />
-        </div>
-        <div className="flex items-center bg-neutral-700 p-4 rounded-lg border-l-4 border-blue-600 hover:border-neutral-500 transition duration-200">
-          <span className="w-24 text-neutral-400 font-medium text-sm flex-shrink-0">13:00 - 15:00</span>
-          <span className="text-white flex-grow ml-4">Reunião de grupo para Projeto Final</span>
-          <input type="checkbox" className="ml-4 w-5 h-5 form-checkbox text-blue-600 bg-neutral-700 border-neutral-500 rounded focus:ring-blue-500 cursor-pointer" />
-        </div>
-        <div className="flex items-center bg-neutral-700 p-4 rounded-lg border-l-4 border-yellow-600 hover:border-neutral-500 transition duration-200">
-          <span className="w-24 text-neutral-500 font-medium text-sm line-through flex-shrink-0">15:00 - 17:00</span>
-          <span className="text-neutral-500 flex-grow ml-4 line-through">Redigir a primeira seção do relatório de Cálculo</span>
-          <input type="checkbox" className="ml-4 w-5 h-5 form-checkbox text-blue-600 bg-neutral-700 border-neutral-500 rounded focus:ring-blue-500 cursor-pointer" checked readOnly />
-        </div>
-        <div className="flex items-center bg-neutral-700 p-4 rounded-lg border-l-4 border-green-500 hover:border-neutral-500 transition duration-200">
-          <span className="w-24 text-neutral-400 font-medium text-sm flex-shrink-0">19:00 - 21:00</span>
-          <span className="text-white flex-grow ml-4">Aula de Introdução à Programação (Lab Inf 3)</span>
-          <input type="checkbox" className="ml-4 w-5 h-5 form-checkbox text-blue-600 bg-neutral-700 border-neutral-500 rounded focus:ring-blue-500 cursor-pointer" />
-        </div>
-        <div className="flex items-center bg-neutral-700 p-4 rounded-lg border-l-4 border-blue-600 hover:border-neutral-500 transition duration-200">
-          <span className="w-24 text-neutral-400 font-medium text-sm flex-shrink-0">21:00 - 22:00</span>
-          <span className="text-white flex-grow ml-4">TDE 1</span>
-          <input type="checkbox" className="ml-4 w-5 h-5 form-checkbox text-blue-600 bg-neutral-700 border-neutral-500 rounded focus:ring-blue-500 cursor-pointer" />
-        </div>
+        <TaskItem
+          id="tarefa-1"
+          timeRange="09:00 - 10:00"
+          description="Revisar Capítulo 3 de Cálculo I"
+          borderColor="yellow"
+        />
+        <TaskItem
+          id="tarefa-2"
+          timeRange="10:00 - 12:00"
+          description="Estudar para a prova de Física Experimental"
+          borderColor="red"
+          defaultChecked={true}
+        />
       </div>
     </div>
   )

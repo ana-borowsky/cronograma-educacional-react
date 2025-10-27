@@ -2,9 +2,13 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 
+// Ícones Reais (simulação)
 const ChevronLeft = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
-const ChevronRight = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinecap="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+const ChevronRight = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
 
+// --- Dados e Funções Auxiliares ---
+
+// timeSlots vai de 07:00 até 23:00 (17 rótulos de hora de início)
 const timeSlots = Array.from({ length: 17 }, (_, i) => {
   const hour = i + 7
   return `${String(hour).padStart(2, '0')}:00`
@@ -44,6 +48,34 @@ const dayEvents = [
   { dayIndex: 6, text: "Preparar Semana", startHour: 14, endHour: 16, className: "bg-neutral-600/80 hover:bg-neutral-600 border-neutral-700" },
   { dayIndex: 6, text: "Leitura de Apoio", startHour: 17, endHour: 19, className: "bg-yellow-700/80 hover:bg-yellow-700 border-yellow-900" },
 ]
+
+// 🚨 FUNÇÃO ATUALIZADA: Inclui as horas de TODOS os eventos na lista de slots selecionados.
+const getAllActivitySlots = (events) => {
+  const allSlots = new Set();
+  const minHour = 7;
+  // totalGridSlots é 18 (índices 0 a 17)
+  const totalGridSlots = timeSlots.length + 1;
+
+  events.forEach(event => {
+    // Garante que endHour 24 seja o limite de parada do loop
+    const end = event.endHour === 24 ? 24 : event.endHour;
+
+    // Loop para cada hora de duração do evento (ex: 10-12 seleciona 10:00 e 11:00)
+    for (let hour = event.startHour; hour < end; hour++) {
+      const timeIndex = hour - minHour;
+
+      // Verifica se o índice está dentro dos 18 slots visíveis (0 a 17)
+      if (timeIndex >= 0 && timeIndex < totalGridSlots) {
+        const slotKey = `${event.dayIndex}-${timeIndex}`;
+        allSlots.add(slotKey);
+      }
+    }
+  });
+
+  return Array.from(allSlots);
+}
+
+// --- Componentes Reutilizáveis de Renderização (Mantidos) ---
 
 const TabButton = ({ tabId, children, activeTab, setActiveTab }) => {
   const isActive = activeTab === tabId;
@@ -88,10 +120,12 @@ const EventSlot = ({ event, isVisible }) => (
 const GridSlot = ({ slotKey, dayIndex, timeIndex, isSelected, activeTab, handleSlotClick }) => {
   const isStudyMode = activeTab === 'estudo'
 
+  // Fundo padrão uniforme para todos os slots do calendário
   let bgColor = 'bg-neutral-800/50'
   let cursor = isStudyMode ? 'cursor-pointer' : ''
 
   if (isStudyMode && isSelected) {
+    // 🚨 A cor verde representa um slot que faz parte do cronograma de atividades
     bgColor = 'bg-green-500/80 hover:bg-green-600'
   } else if (isStudyMode) {
     bgColor = 'bg-neutral-800/50 hover:bg-neutral-700/50'
@@ -111,9 +145,13 @@ const GridSlot = ({ slotKey, dayIndex, timeIndex, isSelected, activeTab, handleS
   )
 }
 
+
+// --- Componente Principal Schedule ---
+
 const Schedule = () => {
   const [activeTab, setActiveTab] = useState('agenda')
-  const [studySlots, setStudySlots] = useState([])
+  // 🚨 Usando a nova função que inclui TODOS os eventos como slots selecionados
+  const [studySlots, setStudySlots] = useState(getAllActivitySlots(dayEvents))
 
   const handleSlotClick = (dayIndex, timeIndex) => {
     const slotKey = `${dayIndex}-${timeIndex}`
@@ -126,16 +164,14 @@ const Schedule = () => {
     })
   }
 
-  const totalTimeLabels = timeSlots.length + 1
-
-  const totalGridSlots = timeSlots.length + 1
-
-  const totalGridRows = 1 + totalGridSlots
+  const totalGridSlots = timeSlots.length + 1 // 18 slots (7:00 até 00:00)
+  const totalGridRows = 1 + totalGridSlots // 1 cabeçalho + 18 linhas de tempo
 
   return (
     <div className="flex-grow flex flex-col gap-6">
       <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-2xl flex-grow">
 
+        {/* --- Abas --- */}
         <div className="flex mb-4 border-neutral-700 -mt-6 -mx-6 px-6 pt-6 ">
           <div className="flex flex-row gap-0 border-b-2 border-neutral-700 w-full">
             <TabButton tabId="agenda" activeTab={activeTab} setActiveTab={setActiveTab}>Agenda da Semana</TabButton>
@@ -143,6 +179,7 @@ const Schedule = () => {
           </div>
         </div>
 
+        {/* Navegação de Data */}
         <div className="flex items-center justify-between mb-4 mt-2 p-2 bg-neutral-700/50 rounded-lg">
           <Button
             className="p-1 rounded-full bg-transparent hover:bg-neutral-600 text-white"
@@ -161,6 +198,7 @@ const Schedule = () => {
           </Button>
         </div>
 
+        {/* --- Grid do Calendário --- */}
         <div
           className="calendar-grid grid gap-px bg-neutral-700 border border-neutral-700 rounded-lg overflow-hidden relative"
           style={{
@@ -168,6 +206,7 @@ const Schedule = () => {
             gridTemplateRows: `auto repeat(${totalGridSlots}, 40px)`,
           }}
         >
+          {/* Cabeçalhos (Coluna 1) */}
           <div className="day-label bg-neutral-700 text-neutral-300 font-bold p-2 text-sm" style={{ gridColumn: 1, gridRow: 1 }}>Hora</div>
           {daysOfWeek.map((day, dayIndex) => (
             <div
@@ -179,6 +218,7 @@ const Schedule = () => {
             </div>
           ))}
 
+          {/* Horários da Coluna Lateral (7:00 até 23:00) */}
           {timeSlots.map((time, timeIndex) => (
             <div
               key={time}
@@ -189,6 +229,7 @@ const Schedule = () => {
             </div>
           ))}
 
+          {/* Rótulo 00:00 */}
           <div
             className="time-slot bg-neutral-800 text-neutral-400 text-xs font-semibold p-1 text-center border-r border-neutral-700 flex items-center justify-center"
             style={{ gridRow: totalGridRows, gridColumn: 1 }}
@@ -196,6 +237,7 @@ const Schedule = () => {
             00:00
           </div>
 
+          {/* Slots de Fundo / Interação (18 linhas) */}
           {daysOfWeek.map((day, dayIndex) => (
             Array.from({ length: totalGridSlots }, (_, timeIndex) => {
               const slotKey = `${dayIndex}-${timeIndex}`
@@ -215,6 +257,7 @@ const Schedule = () => {
             })
           ))}
 
+          {/* Eventos da Agenda (visível na aba "Agenda") */}
           {dayEvents.map((event, index) => (
             <EventSlot
               key={index}
@@ -224,6 +267,7 @@ const Schedule = () => {
           ))}
         </div>
 
+        {/* Rodapé / Ação */}
         <div className="flex justify-center mt-8">
           <Button
             className="w-full md:w-1/3"
@@ -231,7 +275,7 @@ const Schedule = () => {
             asChild
           >
             <Link to="../scheduleandtasks">
-              {activeTab === 'agenda' ? 'Recalcular' : 'Salvar Horários de Estudo'}
+              {activeTab === 'agenda' ? 'Adicionar Novo Evento' : 'Salvar Horários de Estudo'}
             </Link>
           </Button>
         </div>

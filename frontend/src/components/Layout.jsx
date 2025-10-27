@@ -3,25 +3,25 @@ import { Button } from "@/components/ui/button"
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import LoginModal from './LoginModal'
-import SignupModal from './SignupModal' 
+import SignupModal from './SignupModal'
 
 const Layout = ({ subtitle, children }) => {
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false) 
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
 
   const openLoginModal = () => {
-    setIsSignupModalOpen(false) 
+    setIsSignupModalOpen(false)
     setIsLoginModalOpen(true)
   }
   const closeLoginModal = () => setIsLoginModalOpen(false)
 
-  const openSignupModal = () => { 
-    setIsLoginModalOpen(false) 
+  const openSignupModal = () => {
+    setIsLoginModalOpen(false)
     setIsSignupModalOpen(true)
   }
-  const closeSignupModal = () => setIsSignupModalOpen(false) 
+  const closeSignupModal = () => setIsSignupModalOpen(false)
 
   const switchToLogin = () => {
     closeSignupModal()
@@ -29,7 +29,7 @@ const Layout = ({ subtitle, children }) => {
   }
 
   return (
-    <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh]">
+    <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh] overflow-x-hidden">
 
       <header className="relative w-full p-5 flex justify-center items-start">
         <div className="flex flex-col items-center">
@@ -45,7 +45,7 @@ const Layout = ({ subtitle, children }) => {
         <div className="absolute top-5 right-5 space-x-4">
           <Button
             variant="secondary"
-            onClick={openSignupModal} 
+            onClick={openSignupModal}
           >
             Cadastro
           </Button>

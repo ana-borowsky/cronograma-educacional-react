@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TaskItem } from "@/components/TaskItem"
 import { ToDoListTitle } from "@/components/ToDoListTitle"
+import { TimeProgress } from "@/components/TimeProgress"
 
 const getNextDate = (currentDate) => {
   return "Quarta-feira, 16 de Outubro";
@@ -21,6 +22,11 @@ const ToDoList = () => {
     setDisplayedDate(getNextDate(displayedDate));
   };
 
+  const totalHours = 10;
+  const completedHours = 4;
+  const progressPercent = (completedHours / totalHours) * 100;
+  const progressLabel = `${completedHours} de ${totalHours} Horas Concluídas`;
+
   return (
     <div className="flex-grow p-6 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg">
 
@@ -30,15 +36,11 @@ const ToDoList = () => {
         onNextClick={handleNextDate}
       />
 
-      {/* Barra de Progresso */}
-      <div className="mb-8 p-4 bg-neutral-700 rounded-lg border border-neutral-600">
-        <div className="h-2 bg-neutral-600 rounded-full mb-1">
-          <div className="h-2 bg-green-500 rounded-full" style={{ width: '40%' }}></div>
-        </div>
-        <p className="text-neutral-300 text-sm font-medium">4 de 10 Horas Concluídas</p>
-      </div>
+      <TimeProgress
+        progressValue={progressPercent}
+        progressText={progressLabel}
+      />
 
-      {/* Lista de Tarefas */}
       <div className="space-y-4">
         <TaskItem
           id="tarefa-1"

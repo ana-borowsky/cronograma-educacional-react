@@ -64,8 +64,7 @@ const AddDiscipline = () => {
                   />
                   <Button
                     type="button"
-                    className="shrink-0 px-4 py-2.5 text-sm"
-                    variant="secondary"
+                    variant="yellow-primary"
                   >
                     Criar
                   </Button>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import Layout from "../components/Layout"
+import NavigationBar from "../containers/NavigationBar"
 
 const ChevronDown = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
 const ChevronUp = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
@@ -24,17 +25,7 @@ const Disciplines = () => {
   return (
     <Layout subtitle="Visão Geral das Disciplinas">
       <div className="flex flex-col p-5 gap-6">
-        {/* --- 1. BARRA DE NAVEGAÇÃO --- */}
-        <div className="w-full p-4 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg flex flex-row gap-4">
-          <a href="/scheduleandtasks" className="flex items-center gap-3 p-3 rounded-md text-neutral-300 hover:bg-neutral-700 hover:text-white transition duration-200">
-            <span role="img" aria-label="Cronograma">📅</span>
-            <span className="font-semibold text-sm">Cronograma</span>
-          </a>
-          <a href="/disciplines" className="flex items-center gap-3 p-3 rounded-md bg-neutral-700 text-white border-b-4 border-neutral-500">
-            <span role="img" aria-label="Disciplinas">📋</span>
-            <span className="font-semibold text-sm">Disciplinas</span>
-          </a>
-        </div>
+        <NavigationBar />
 
         {/* --- 2. CONTAINER DO CONTEÚDO PRINCIPAL --- */}
         <div className="w-full flex flex-col md:flex-row md:space-x-8">

@@ -7,6 +7,7 @@ import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
 import { WorkFormModal } from "@/components/WorkFormModal"
 import { ExamFormModal } from "@/components/ExamFormModal"
+import { useLocation } from 'react-router-dom'
 
 const ChevronDown = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
 const ChevronUp = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
@@ -65,6 +66,7 @@ const DUMMY_DISCIPLINES = [
 ]
 
 const Disciplines = () => {
+  const location = useLocation()
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
 
@@ -89,6 +91,7 @@ const Disciplines = () => {
     <Layout subtitle="Visão Geral das Disciplinas">
       <div className="flex flex-col p-5 gap-6">
         <NavigationBar
+          currentPath={location.pathname}
           openLoginModal={openLoginModal}
           openSignupModal={openSignupModal}
         />

@@ -5,8 +5,11 @@ import ToDoList from "../containers/ToDoList"
 import Schedule from "../containers/Schedule"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal" 
+import { useLocation } from 'react-router-dom'
 
 const ScheduleAndTasks = () => {
+
+  const location = useLocation()
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
@@ -21,6 +24,7 @@ const ScheduleAndTasks = () => {
   return (
     <Layout subtitle="Cronograma Semanal">
       <NavigationBar
+        currentPath={location.pathname}
         openLoginModal={openLoginModal}
         openSignupModal={openSignupModal} 
       />

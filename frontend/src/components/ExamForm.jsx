@@ -4,9 +4,9 @@ const XMark = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox=
 
 export const ExamForm = ({ onClose }) => {
   const handleFormSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    onClose();
+    onClose()
   };
 
   const uploadedFiles = [

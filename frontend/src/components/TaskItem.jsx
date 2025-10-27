@@ -55,5 +55,5 @@ export function TaskItem({ id, timeRange, description, defaultChecked = false, b
         className="ml-4 w-5 h-5 data-[state=checked]:bg-blue-600 border-neutral-500 data-[state=checked]:text-white focus-visible:ring-offset-neutral-700"
       />
     </div>
-  );
+  )
 }

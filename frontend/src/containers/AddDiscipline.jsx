@@ -7,7 +7,6 @@ const AddDiscipline = () => {
 
     <div className="w-full space-y-8 mb-8 md:mb-0">
       <div className="bg-neutral-800 p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl transition-all duration-300">
-        {/* Cabeçalho Clicável */}
         <div
           className="flex justify-between items-center cursor-pointer w-[312px]"
           onClick={() => setIsFormVisible(!isFormVisible)}
@@ -24,8 +23,6 @@ const AddDiscipline = () => {
           )}
         </div>
 
-
-        {/* Conteúdo Expansível */}
         {isFormVisible && (
           <div className="mt-5 border-t border-neutral-700 pt-5">
             <form className="space-y-6">

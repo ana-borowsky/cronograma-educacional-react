@@ -60,7 +60,6 @@ const Schedule = () => {
   return (
     < div className = "flex-grow flex flex-col xl:flex-row gap-6" >
       <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-grow xl:w-3/4">
-        {/* --- ABAS DE NAVEGAÇÃO DO CALENDÁRIO --- */}
         <div className="flex mb-4 border-b border-neutral-700">
           <button
             onClick={() => setActiveTab('agenda')}

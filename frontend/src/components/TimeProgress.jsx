@@ -21,5 +21,5 @@ export function TimeProgress({ progressValue, progressText }) {
         {progressText}
       </p>
     </div>
-  );
+  )
 }

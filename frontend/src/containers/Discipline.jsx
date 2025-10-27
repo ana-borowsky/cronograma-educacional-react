@@ -6,7 +6,7 @@ import { ExamForm } from "@/components/ExamForm"
 import { useState } from "react"
 
 const DisciplineWorkFormModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <div
@@ -15,8 +15,8 @@ const DisciplineWorkFormModal = ({ isOpen, onClose }) => {
     >
       <WorkForm onClose={onClose} />
     </div>
-  );
-};
+  )
+}
 
 const DisciplineExamFormModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -28,8 +28,8 @@ const DisciplineExamFormModal = ({ isOpen, onClose }) => {
     >
       <ExamForm onClose={onClose} />
     </div>
-  );
-};
+  )
+}
 
 const Discipline = () => {
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)

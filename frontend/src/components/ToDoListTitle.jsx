@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 /**
  * @param {object} props
@@ -30,5 +30,5 @@ export function ToDoListTitle({ currentDate, onPrevClick, onNextClick }) {
         <span role="img">▶️</span>
       </button>
     </div>
-  );
+  )
 }

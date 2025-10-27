@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { TaskItem } from "@/components/TaskItem"
 import { ToDoListTitle } from "@/components/ToDoListTitle"
 import { TimeProgress } from "@/components/TimeProgress"
 
 const getNextDate = (currentDate) => {
-  return "Quarta-feira, 16 de Outubro";
-};
+  return "Quarta-feira, 16 de Outubro"
+}
 
 const getPrevDate = (currentDate) => {
-  return "Segunda-feira, 14 de Outubro";
-};
+  return "Segunda-feira, 14 de Outubro"
+}
 
 const ToDoList = () => {
-  const [displayedDate, setDisplayedDate] = useState("Terça-feira, 15 de Outubro");
+  const [displayedDate, setDisplayedDate] = useState("Terça-feira, 15 de Outubro")
 
   const handlePrevDate = () => {
-    setDisplayedDate(getPrevDate(displayedDate));
-  };
+    setDisplayedDate(getPrevDate(displayedDate))
+  }
 
   const handleNextDate = () => {
-    setDisplayedDate(getNextDate(displayedDate));
-  };
+    setDisplayedDate(getNextDate(displayedDate))
+  }
 
-  const totalHours = 10;
-  const completedHours = 4;
-  const progressPercent = (completedHours / totalHours) * 100;
-  const progressLabel = `${completedHours} de ${totalHours} Horas Concluídas`;
+  const totalHours = 10
+  const completedHours = 4
+  const progressPercent = (completedHours / totalHours) * 100
+  const progressLabel = `${completedHours} de ${totalHours} Horas Concluídas`
 
   return (
     <div className="flex-grow p-6 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg">

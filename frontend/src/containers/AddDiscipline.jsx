@@ -1,5 +1,9 @@
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { useState } from "react"
+
+const ChevronUp = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 text-neutral-400"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
+const ChevronDown = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 text-neutral-400"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg> // Corrigido d="M19.5 8.25l7.5 7.5-7.5-7.5" para d="M19.5 8.25l-7.5 7.5-7.5-7.5" (assume-se que o original deveria ser a seta para baixo)
 
 const AddDiscipline = () => {
   const [isFormVisible, setIsFormVisible] = useState(false)
@@ -12,15 +16,7 @@ const AddDiscipline = () => {
           onClick={() => setIsFormVisible(!isFormVisible)}
         >
           <h2 className="text-2xl font-bold text-white">Insira matérias</h2>
-          {isFormVisible ? (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 text-neutral-400">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 text-neutral-400">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l7.5 7.5-7.5-7.5" />
-            </svg>
-          )}
+          {isFormVisible ? <ChevronUp /> : <ChevronDown />}
         </div>
 
         {isFormVisible && (
@@ -59,14 +55,18 @@ const AddDiscipline = () => {
                   Criar novo projeto
                 </label>
                 <div className="flex space-x-2">
-                  <input
+                  <Input
                     type="text"
                     id="new-project"
                     name="new-project"
                     placeholder="Nome do novo projeto..."
-                    className="flex-grow p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 text-sm"
+                    variant="dark"
                   />
-                  <Button type="button" className="shrink-0 px-4 py-2.5 text-sm">
+                  <Button
+                    type="button"
+                    className="shrink-0 px-4 py-2.5 text-sm"
+                    variant="secondary"
+                  >
                     Criar
                   </Button>
                 </div>
@@ -78,26 +78,28 @@ const AddDiscipline = () => {
               <p className="text-neutral-400 text-sm text-center">Carregue um arquivo (ex: print) contendo a lista de matérias, salas e horários.</p>
               <div className="space-y-2">
                 <label htmlFor="file-upload-ensalamento" className="block text-neutral-300 font-semibold text-sm">Selecione o Arquivo do Ensalamento</label>
-                <input
+                <Input
                   type="file"
                   id="file-upload-ensalamento"
                   name="schedule-file"
                   required
-                  className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500 cursor-pointer"
+                  variant="dark"
+                  className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
                 />
               </div>
               <div className="space-y-1">
                 <label htmlFor="file-upload-planos" className="block text-neutral-300 font-semibold text-sm">Selecione os arquivos dos planos de ensino das matérias</label>
-                <input
+                <Input
                   type="file"
                   id="file-upload-planos"
                   name="schedule-file"
                   required
                   multiple
-                  className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500 cursor-pointer"
+                  variant="dark"
+                  className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
                 />
               </div>
-              <Button className="w-full" asChild>
+              <Button className="w-full" asChild variant="yellow-primary">
                 <a href="/disciplines">
                   Adicionar matéria
                 </a>
@@ -107,48 +109,50 @@ const AddDiscipline = () => {
             <form className="space-y-4">
               <div className="space-y-1">
                 <label htmlFor="course-name" className="block text-neutral-300 font-semibold text-sm">Nome da Matéria</label>
-                <input
+                <Input
                   type="text"
                   id="course-name"
                   name="course-name"
                   placeholder="Ex: Cálculo I"
                   required
-                  className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 text-sm"
+                  variant="dark"
                 />
               </div>
               <div className="space-y-1">
                 <label htmlFor="room-name" className="block text-neutral-300 font-semibold text-sm">Sala / Local</label>
-                <input
+                <Input
                   type="text"
                   id="room-name"
                   name="room-name"
                   placeholder="Ex: Sala B-205 ou Laboratório de Física"
                   required
-                  className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 text-sm"
+                  variant="dark"
                 />
               </div>
               <div className="space-y-1">
                 <label htmlFor="schedule-time" className="block text-neutral-300 font-semibold text-sm">Horário e Dia</label>
-                <input
+                <Input
                   type="text"
                   id="schedule-time"
                   name="schedule-time"
                   placeholder="Ex: Segunda e Quarta, 19:00 - 21:00"
                   required
-                  className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 text-sm"
+                  variant="dark"
                 />
               </div>
               <div className="space-y-1">
                 <label htmlFor="file-upload-manual" className="block text-neutral-300 font-semibold text-sm">Selecione o arquivo de plano de ensino da matéria</label>
-                <input
+  
+                <Input
                   type="file"
                   id="file-upload-manual"
                   name="schedule-file"
                   required
-                  className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500 cursor-pointer"
+                  variant="dark"
+                  className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
                 />
               </div>
-              <Button className="w-full" asChild>
+              <Button className="w-full" asChild variant="yellow-primary">
                 <a href="/disciplines">
                   Adicionar Matéria
                 </a>

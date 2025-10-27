@@ -6,7 +6,7 @@ const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
 
 export async function gemini(pdfBuffer) {
   const contents = [
-    { text: "Faça um cronograma para estudos no periodo de 1 semana do conteúdo do pds recebido. O tempo de estudo diário é de apenas uma hora. Monte uma tabela separando por topicos de estudos." },
+    { text: "Faça um cronograma para estudos no periodo de 1 semana do conteúdo do pdf recebido. O tempo de estudo diário é de apenas uma hora. Monte uma tabela separando por topicos de estudos." },
     {
       inlineData: {
         mimeType: "application/pdf",

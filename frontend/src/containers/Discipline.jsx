@@ -2,10 +2,8 @@ import { Button } from "@/components/ui/button"
 import { ListItem } from "@/components/ListItem"
 import { DisciplineTitle } from "@/components/DisciplineTitle"
 import { WorkForm } from "@/components/WorkForm"
+import { ExamForm } from "@/components/ExamForm"
 import { useState } from "react"
-
-const ChevronDown = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-const ChevronUp = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
 
 const DisciplineWorkFormModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -20,9 +18,22 @@ const DisciplineWorkFormModal = ({ isOpen, onClose }) => {
   );
 };
 
+const DisciplineExamFormModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-md p-4"
+      onClick={onClose}
+    >
+      <ExamForm onClose={onClose} />
+    </div>
+  );
+};
+
 const Discipline = () => {
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
-  const [isDisciplineExamFormOpen, setisDisciplineExamFormOpen] = useState(false)
+  const [isExamModalOpen, setIsExamModalOpen] = useState(false)
 
   const works = [
     { id: 'w-1', description: 'Revisão Bibliográfica (Entrega: 05/Nov) | Duração: 5h. Foco nos artigos de 2022.', borderColor: 'yellow', completed: false },
@@ -87,49 +98,22 @@ const Discipline = () => {
         </div>
 
         <hr className="my-4 border-neutral-700" />
-        <div
-          className="flex justify-between items-center cursor-pointer p-2 rounded-md bg-neutral-700 hover:bg-neutral-600 transition duration-200"
-          onClick={() => setisDisciplineExamFormOpen(!isDisciplineExamFormOpen)}
+        <Button
+          className="w-full justify-start flex items-center bg-yellow-700 text-white hover:bg-yellow-600 shadow-md transition duration-200"
+          onClick={() => setIsExamModalOpen(true)}
         >
-          <p className="text-neutral-300 font-medium text-sm">Adicionar Nova Prova</p>
-          <span className="text-neutral-300">
-            {isDisciplineExamFormOpen ? <ChevronUp /> : <ChevronDown />}
-          </span>
-        </div>
-        {isDisciplineExamFormOpen && (
-          <form className="space-y-3 pt-4 transition-all duration-300 ease-in-out">
-            <div className="flex flex-col">
-              <input type="text" placeholder="Nome da Prova/Avaliação" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 text-sm" required />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="calc-p-date" className="text-neutral-400 text-xs mb-1">Data da Prova</label>
-              <input type="date" id="calc-p-date" title="Data da Prova" className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 focus:outline-none focus:border-neutral-500 text-sm" required />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="calc-p-file" className="text-neutral-400 text-xs mb-1">Upload de PDFs (Material)</label>
-              <input type="file" id="calc-p-file" name="calc-p-file" multiple className="w-full p-2 border border-neutral-600 rounded-md bg-neutral-700 text-neutral-300 file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-neutral-600 file:text-white hover:file:bg-neutral-500" />
-            </div>
-            <div className="p-3 bg-neutral-700 rounded-md border border-neutral-600">
-              <h4 className="text-neutral-300 font-semibold mb-2 text-sm">Arquivos Enviados:</h4>
-              <ul className="space-y-1 text-neutral-400 text-xs">
-                <li className="flex items-center gap-1.5 truncate">
-                  <span role="img" aria-label="PDF Icon">📕</span>
-                  Notas_Aula_Derivadas.pdf
-                </li>
-                <li className="flex items-center gap-1.5 truncate">
-                  <span role="img" aria-label="Document Icon">📄</span>
-                  Exemplos_Integrais.docx
-                </li>
-              </ul>
-            </div>
-            <Button type="submit" className="w-full py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-600 transition duration-200 text-sm">+ Adicionar Prova</Button>
-          </form>
-        )}
+          <span className="text-lg font-bold mr-2">+</span>
+          <p className="font-medium text-sm">Adicionar Nova Prova</p>
+        </Button>
       </div>
 
       <DisciplineWorkFormModal
         isOpen={isWorkModalOpen}
         onClose={() => setIsWorkModalOpen(false)}
+      />
+      <DisciplineExamFormModal
+        isOpen={isExamModalOpen}
+        onClose={() => setIsExamModalOpen(false)}
       />
     </div>
   )

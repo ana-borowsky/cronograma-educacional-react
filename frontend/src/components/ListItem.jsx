@@ -10,15 +10,10 @@ const borderColors = {
   yellow: "border-yellow-600",
   green: "border-green-600",
   red: "border-red-600",
+  blue: "border-blue-600",
+  purple: "border-purple-600",
 };
 
-/**
- * @param {object} props
- * @param {string} props.id
- * @param {string} props.fullDescription
- * @param {'yellow' | 'green' | 'red'} props.borderColor
- * @param {boolean} [props.defaultChecked=false]
- */
 export function ListItem({
   id,
   fullDescription,
@@ -68,7 +63,6 @@ export function ListItem({
 
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          
           className="p-1 ml-2 -mr-1 mt-0.5 text-neutral-400 hover:text-white rounded-full transition-transform duration-200 flex-shrink-0"
           aria-expanded={isExpanded}
           aria-controls={`content-${id}`}

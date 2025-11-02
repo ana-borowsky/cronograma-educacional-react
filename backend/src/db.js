@@ -1,8 +1,14 @@
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 
-export const db = mysql.createConnection({
+
+dotenv.config();
+
+export const db = await mysql.createConnection({
   host: "localhost",
-  user: "admin",
-  password: "bee",
+  user: "root",
+  password: process.env.DB_PASSWORD,
   database: "beezer"
-});
+})
+
+export default db

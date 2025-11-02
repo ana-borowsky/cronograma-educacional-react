@@ -62,9 +62,7 @@ export const getDisciplines = (_, res) => {
   }
 }
 
-
 class DisciplineController {
-
   static async insertDiscipline(req, res) {
     try {
       const {
@@ -159,7 +157,6 @@ class DisciplineController {
       const { idUser } = req.params
       const repo = new DisciplineRepository()
       const result = await repo.getAll(Number(idUser))
-
       if (!result || (result.length === 0)) {
         return res.status(404).json({ error: "Usuário não encontrado!" })
       }

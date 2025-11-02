@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS beezer.discipline(
     color SMALLINT NOT NULL,
     project VARCHAR(45) NOT NULL,
     classroom VARCHAR(45),
-    day DATE,
+    day VARCHAR(45),
     startTime TIME,
     endTime TIME,
     weight SMALLINT NOT NULL,

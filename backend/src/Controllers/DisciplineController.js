@@ -1,12 +1,35 @@
 import DisciplineModel from "../Models/DisciplineModel.js"
+import DisciplineRepository from "../Models/Repositories/DisciplineRepository.js"
 
 class DisciplineController {
+
   static async insertDiscipline(req, res) {
     try {
-      const { name, color, project, classroom, day, startTime, endTime, weight, idUser } = req.body
-
-      const discipline = new DisciplineModel(name, color, project, classroom, day, startTime, endTime, weight, idUser)
-      const result = await discipline.insert()
+      const { 
+        idDiscipline,
+        idUser,
+        name,
+        color,
+        project,
+        classroom,
+        day,
+        startTime,
+        endTime,
+        weight 
+      } = req.body
+      const repo = new DisciplineRepository()
+      const result = await repo.insert(new DisciplineModel(
+        idDiscipline,
+        idUser,
+        name,
+        color,
+        project,
+        classroom,
+        day,
+        startTime,
+        endTime,
+        weight
+      ))
 
       res.status(200).json({ id: result.insertId, name })
     } catch (err) {
@@ -17,9 +40,9 @@ class DisciplineController {
 
   static async delete(req, res) {
     try {
-      const { idDiscipline } = req.body
-      const discipline = new DisciplineModel({ ...req.body })
-      const deleteResult = await discipline.delete(idDiscipline)
+      const { idDiscipline } = req.params
+      const repo = new DisciplineRepository()
+      const deleteResult = await repo.delete(idDiscipline)
       if (deleteResult.affectedRows === 0) {
         return res.status(404).json({ error: "Disciplina não encontrada" })
       }
@@ -33,12 +56,36 @@ class DisciplineController {
 
   static async updateDiscipline(req, res) {
     try {
-      const { idDiscipline, name, color, project, classroom, day, startTime, endTime, weight } = req.body
+      const { idUser, idDiscipline, name, color, project, classroom, day, startTime, endTime, weight } = req.body
+      const repo = new DisciplineRepository()
 
-      const discipline = new DisciplineModel(name, color, project, classroom, day, startTime, endTime, weight)
-      const updateResult = await discipline.update(idDiscipline)
+      const updateResult = await repo.update(
+        new DisciplineModel(
+          idDiscipline,
+          idUser,
+          name,
+          color,
+          project,
+          classroom,
+          day,
+          startTime,
+          endTime,
+          weight
+        )
+      )
 
-      res.status(200).json({ idDiscipline, name, color, project, classroom, day, startTime, endTime, weight })
+      res.status(200).json({
+        idDiscipline,
+        idUser,
+        name,
+        color,
+        project,
+        classroom,
+        day,
+        startTime,
+        endTime,
+        weight
+      })
     } catch (err) {
       console.error(err)
       res.status(500).json({ error: "Erro ao atualizar a disciplina" })
@@ -47,9 +94,9 @@ class DisciplineController {
 
   static async getAll(req, res) {
     try {
-      const { idUser } = req.body
-      const discipline = new DisciplineModel({ ...req.body })
-      const result = await discipline.getAll(idUser)
+      const { idUser } = req.params
+      const repo = new DisciplineRepository()
+      const result = await repo.getAll(Number(idUser))
 
       if (!result || (result.length === 0)) {
         return res.status(404).json({ error: "Usuário não encontrado!" })

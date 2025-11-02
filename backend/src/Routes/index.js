@@ -15,5 +15,7 @@ router.get("/Disciplines", index)
 
 router.post("/discipline", DisciplineController.insertDiscipline)
 router.put("/discipline", DisciplineController.updateDiscipline)
+router.delete("/discipline", DisciplineController.delete)
+router.get("/discipline", DisciplineController.getAll)
 
 export default router

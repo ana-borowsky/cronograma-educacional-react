@@ -1,8 +1,6 @@
 import request from "supertest";
 import app from "../index.js"
 import { db } from "../db.js"
-import DisciplineModel from "../Models/DisciplineModel.js";
-import DisciplineRepository from "../Models/Repositories/DisciplineRepository.js";
 
 describe("Testes da disciplina", () => {
   beforeAll(async () => {
@@ -75,10 +73,31 @@ describe("Testes da disciplina", () => {
         endTime: "09:45",
         weight: 2
       })
-      const res = await request(app).get("/discipline/1").query({ idUser: discipline.idUser })
+    const res = await request(app).get("/discipline/1").query({ idUser: discipline.idUser })
 
     expect(res.statusCode).toBe(200)
 
+  })
+
+  it("Delete disciplina", async () => {
+    const discipline = await request(app)
+      .post("/discipline")
+      .send({
+        idDiscipline: null,
+        idUser: 1,
+        name: "Português",
+        color: 1,
+        project: "Projeto A",
+        classroom: "101",
+        day: "Segunda-Feira",
+        startTime: "08:00",
+        endTime: "09:45",
+        weight: 2
+      })
+    const res = await request(app).delete(`/discipline/${discipline.body.id}`)
+      .query({ idDiscipline: discipline.body.idDiscipline })
+
+    expect(res.statusCode).toBe(200)
   })
 
 })

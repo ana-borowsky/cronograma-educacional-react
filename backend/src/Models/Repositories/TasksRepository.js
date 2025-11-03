@@ -1,5 +1,5 @@
-import { db } from "../../db";
-import TasksModel from "../TasksModel";
+import { db } from "../../db.js";
+import TasksModel from "../TasksModel.js";
 
 class TasksRepository {
   constructor() { }

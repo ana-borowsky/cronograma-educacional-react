@@ -12,7 +12,7 @@ describe("Testes Taredas", () => {
       .post("/tasks")
       .send({
         idTask: null,
-        idDiscipline: 36,
+        idDiscipline: 1,
         name: "Revisão Bibliográfica",
         estimatedHours: "06:00:00",
         dueDate: "2025-11-05",
@@ -25,7 +25,7 @@ describe("Testes Taredas", () => {
   it("Atualiza tarefa", async () => {
     const task = {
         idTask: null,
-        idDiscipline: 36,
+        idDiscipline: 1,
         name: "Revisão Bibliográfica",
         estimatedHours: "06:00:00",
         dueDate: "2025-11-05",
@@ -57,7 +57,7 @@ describe("Testes Taredas", () => {
       .post("/tasks")
       .send({
         idTask: null,
-        idDiscipline: 36,
+        idDiscipline: 1,
         name: "Revisão Bibliográfica",
         estimatedHours: "06:00:00",
         dueDate: "2025-11-05",
@@ -65,12 +65,25 @@ describe("Testes Taredas", () => {
         weight: 8
     })
 
-    const res = await request(app).get("/tasks/36").query({ idDiscipline: task.idDiscipline})
+    const res = await request(app).get("/tasks/1").query({ idDiscipline: task.idDiscipline})
 
     expect(res.statusCode).toBe(200)
   })
 
   it("Deletar tarefas" , async () => {
-    const res = await request(app).delete("/tasks/38")
+    const tasks = await request(app)
+      .post("/tasks")
+      .send({
+        idTask: null,
+        idDiscipline: 1,
+        name: "Revisão Bibliográfica",
+        estimatedHours: "06:00:00",
+        dueDate: "2025-11-05",
+        status: "Pending",
+        weight: 8
+    })
+
+    const res = await request(app).delete(`/tasks/${tasks.body.idTask}`).query({idTask: tasks.body.idTask})
+    expect(res.statusCode).toBe(200)
   })
 })

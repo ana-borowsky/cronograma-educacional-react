@@ -3,10 +3,10 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: bee
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: beezer
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: bee
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:

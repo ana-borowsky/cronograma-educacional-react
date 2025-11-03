@@ -53,7 +53,6 @@ class DisciplineRepository {
     const [result] = await db.query(query, values)
     let disciplines = []
     result.forEach(discipline => {
-      console.log(discipline)
       disciplines.push(new DisciplineModel(
         discipline.idDiscipline,
         discipline.idUser,

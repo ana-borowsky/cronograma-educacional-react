@@ -3,9 +3,6 @@ import app from "../index.js"
 import { db } from "../db.js"
 
 describe("Testes Taredas", () => {
-  beforeAll(async () => {
-    await db.query("DELETE FROM task");
-  })
 
   it("Criar tarefa", async () => {
     const created = await request(app)

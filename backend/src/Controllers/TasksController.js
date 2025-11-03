@@ -68,7 +68,6 @@ class TasksController {
         idDiscipline
       )
     )
-      console.log("Tarefa inserida:", result.insertId)
       res.status(200).json({idTask: result.insertId, name})
     } catch (err) {
       console.error(err)

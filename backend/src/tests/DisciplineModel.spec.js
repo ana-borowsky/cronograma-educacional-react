@@ -1,11 +1,7 @@
 import request from "supertest";
-import app from "../index.js"
-import { db } from "../db.js"
+import app from "../app.js"
 
 describe("Testes da disciplina", () => {
-  beforeAll(async () => {
-    await db.query("DELETE FROM discipline");
-  })
 
   it("Cria disciplina", async () => {
     const created = await request(app)

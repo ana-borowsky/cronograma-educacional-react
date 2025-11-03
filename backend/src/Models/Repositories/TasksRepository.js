@@ -44,7 +44,6 @@ class TasksRepository {
       let tasks = []
       
       result.forEach(task => {
-        console.log(task)
         tasks.push(new TasksModel(
           task.idTask,
           task.name,

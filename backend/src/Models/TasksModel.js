@@ -82,3 +82,25 @@ export const findAllTasks = () => {
 export const findTasksByDiscipline = (idDiscipline) => {
   return DUMMY_TASKS.filter(t => t.idDiscipline === idDiscipline);
 };
+
+class TasksModel {
+  constructor(
+    idTask,
+    name, 
+    estimatedHours, 
+    dueDate, 
+    status, 
+    weight, 
+    idDiscipline
+  ) {
+    this.idTask = idTask,
+    this.name = name,
+    this.estimatedHours = estimatedHours,
+    this.dueDate = dueDate,
+    this.status = status,
+    this.weight = weight
+    this.idDiscipline = idDiscipline
+  }
+}
+
+export default TasksModel

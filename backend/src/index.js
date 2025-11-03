@@ -9,8 +9,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use("/discipline", disciplineRoutes)
-app.use("/tasks", taskRoutes);
-
+app.use("/tasks", taskRoutes)
 
 app.listen(8800)
 

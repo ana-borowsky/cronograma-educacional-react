@@ -1,6 +1,5 @@
 import request from "supertest";
-import app from "../index.js"
-import { db } from "../db.js"
+import app from "../app.js"
 
 describe("Testes Taredas", () => {
 

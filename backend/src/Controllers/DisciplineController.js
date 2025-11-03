@@ -61,7 +61,6 @@ export const getDisciplines = (_, res) => {
     return res.status(500).json({ message: "Erro interno do servidor" })
   }
 }
-
 class DisciplineController {
 
   static async insertDiscipline(req, res) {
@@ -158,7 +157,7 @@ class DisciplineController {
       const { idUser } = req.params
       const repo = new DisciplineRepository()
       const result = await repo.getAll(Number(idUser))
-      
+
       if (!result || (result.length === 0)) {
         return res.status(404).json({ error: "Usuário não encontrado!" })
       }

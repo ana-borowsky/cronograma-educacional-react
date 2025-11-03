@@ -1,4 +1,3 @@
--- Ensure the script and connection use UTF-8 (utf8mb4) to preserve accents
 SET NAMES utf8mb4;
 SET @@session.character_set_connection = 'utf8mb4';
 

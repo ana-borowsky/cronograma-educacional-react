@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"
 import DisciplineController from "../Controllers/DisciplineController.js"
 
 const router = express.Router()

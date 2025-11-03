@@ -1,5 +1,5 @@
 import express from "express"
-import disciplineRoutes from "./Routes/dicipline-router.js"
+import disciplineRoutes from "./Routes/discipline-router.js"
 import cors from "cors"
 
 const app = express()

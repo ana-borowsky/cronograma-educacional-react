@@ -2,8 +2,8 @@ import Title from "./Title"
 import { Button } from "@/components/ui/button"
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import LoginModal from './LoginModal'
-import SignupModal from './SignupModal'
+import LoginModal from '../LoginModal'
+import SignupModal from '../SignupModal'
 
 const Layout = ({ subtitle, children }) => {
 

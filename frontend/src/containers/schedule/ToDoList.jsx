@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ListItem } from "@/components/ListItem"
-import { DateTitle } from "@/components/DateTitle"
-import { TimeProgress } from "@/components/TimeProgress"
+import { DateTitle } from "@/components/schedule/DateTitle"
+import { TimeProgress } from "@/components/schedule/TimeProgress"
 
 const getNextDate = (currentDate) => {
   return "Quarta-feira, 16 de Outubro"
@@ -13,7 +13,7 @@ const getPrevDate = (currentDate) => {
 
 const ToDoList = () => {
   const [displayedDate, setDisplayedDate] = useState("Terça-feira, 15 de Outubro")
-  
+
   const [tasks, setTasks] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [progressPercent, setProgressPercent] = useState(0)
@@ -54,7 +54,7 @@ const ToDoList = () => {
   const handleNextDate = () => {
     setDisplayedDate(getNextDate(displayedDate))
   }
-  
+
   return (
     <div className="flex-grow p-6 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg">
 

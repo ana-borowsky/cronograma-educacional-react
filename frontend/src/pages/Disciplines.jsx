@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import Layout from "../components/Layout"
+import Layout from "../components/layout/Layout"
 import NavigationBar from "../containers/NavigationBar"
-import Discipline from "../containers/Discipline"
-import AddDiscipline from "../containers/AddDiscipline"
+import Discipline from "../containers/discipline/Discipline"
+import AddDiscipline from "../containers/discipline/AddDiscipline"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
 import { useLocation } from 'react-router-dom'
@@ -18,11 +18,12 @@ const Disciplines = () => {
   useEffect(() => {
     const fetchDisciplines = async () => {
       try {
-        const response = await fetch('http://localhost:8800/Disciplines');
+        const response = await fetch('http://localhost:8800/discipline/1');
         if (!response.ok) {
           throw new Error('Falha ao buscar dados');
         }
         const data = await response.json();
+        console.log("📘 Disciplinas recebidas:", data);
         setDisciplines(data);
       } catch (error) {
         console.error("Erro buscando disciplinas:", error);
@@ -65,7 +66,10 @@ const Disciplines = () => {
               <p className="text-neutral-400">Carregando disciplinas...</p>
             ) : (
               disciplines.map((discipline) => (
-                <Discipline key={discipline.id} disciplineData={discipline} />
+                <Discipline
+                  key={discipline.idDiscipline}
+                  disciplineData={discipline}
+                />
               ))
             )}
             <AddDiscipline />

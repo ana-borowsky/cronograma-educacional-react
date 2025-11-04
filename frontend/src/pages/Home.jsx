@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
-import Layout from "../components/Layout"
+import Layout from "../components/layout/Layout"
 import { Link } from "react-router-dom"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import Layout from "../components/Layout"
+import Layout from "../components/layout/Layout"
 import NavigationBar from "../containers/NavigationBar"
-import ToDoList from "../containers/ToDoList"
-import Schedule from "../containers/Schedule"
+import ToDoList from "../containers/schedule/ToDoList"
+import Schedule from "../containers/schedule/Schedule"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal" 
 import { useLocation } from 'react-router-dom'

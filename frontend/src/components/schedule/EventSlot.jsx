@@ -1,4 +1,4 @@
-import { getGridRow } from "@/components/ScheduleData.jsx"
+import { getGridRow } from "@/components/schedule/ScheduleData.jsx"
 import { cn } from "@/lib/utils"
 
 const colorMap = {
@@ -10,9 +10,9 @@ const colorMap = {
 };
 
 export const EventSlot = ({ event, isVisible }) => {
-  
+
   const colorClass = colorMap[event.color] || "bg-neutral-600/80 hover:bg-neutral-600 border-neutral-700";
-  
+
   return (
     <div
       className={cn(

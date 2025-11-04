@@ -10,9 +10,10 @@ describe("Testes Taredas", () => {
         idTask: null,
         idDiscipline: 1,
         name: "Revisão Bibliográfica",
+        type: "Prova",
         estimatedHours: "06:00:00",
         dueDate: "2025-11-05",
-        status: "Pending",
+        status: "Pendente",
         weight: 8
       })
       expect(created.statusCode).toBe(200)
@@ -23,9 +24,10 @@ describe("Testes Taredas", () => {
         idTask: null,
         idDiscipline: 1,
         name: "Revisão Bibliográfica",
+        type: "Prova",
         estimatedHours: "06:00:00",
         dueDate: "2025-11-05",
-        status: "Pending",
+        status: "Pendente",
         weight: 8
     }
 
@@ -55,9 +57,10 @@ describe("Testes Taredas", () => {
         idTask: null,
         idDiscipline: 1,
         name: "Revisão Bibliográfica",
+        type: "Prova",
         estimatedHours: "06:00:00",
         dueDate: "2025-11-05",
-        status: "Pending",
+        status: "Pendente",
         weight: 8
     })
 
@@ -73,9 +76,10 @@ describe("Testes Taredas", () => {
         idTask: null,
         idDiscipline: 1,
         name: "Revisão Bibliográfica",
+        type: "Prova",
         estimatedHours: "06:00:00",
         dueDate: "2025-11-05",
-        status: "Pending",
+        status: "Pendente",
         weight: 8
     })
 

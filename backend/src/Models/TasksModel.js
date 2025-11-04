@@ -87,6 +87,7 @@ class TasksModel {
   constructor(
     idTask,
     name, 
+    type,
     estimatedHours, 
     dueDate, 
     status, 
@@ -95,6 +96,7 @@ class TasksModel {
   ) {
     this.idTask = idTask,
     this.name = name,
+    this.type = type,
     this.estimatedHours = estimatedHours,
     this.dueDate = dueDate,
     this.status = status,

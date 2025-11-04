@@ -7,6 +7,7 @@ class TasksRepository {
   async insert(tasksModel) {
       const values = [
         tasksModel.name,
+        tasksModel.type,
         tasksModel.estimatedHours,
         tasksModel.dueDate,
         tasksModel.status,
@@ -14,7 +15,7 @@ class TasksRepository {
         tasksModel.idDiscipline
       ]
   
-      const query = "INSERT INTO task(name, estimatedHours, dueDate, status, weight, idDiscipline) VALUES (?,?,?,?,?,?)"
+      const query = "INSERT INTO task(name, type, estimatedHours, dueDate, status, weight, idDiscipline) VALUES (?,?,?,?,?,?,?)"
       const [result] = await db.query(query, values)
   
       return result
@@ -23,6 +24,7 @@ class TasksRepository {
     async update(tasksModel) {
       const values = [
         tasksModel.name,
+        tasksModel.type,
         tasksModel.estimatedHours,
         tasksModel.dueDate,
         tasksModel.status,
@@ -30,7 +32,7 @@ class TasksRepository {
         tasksModel.idTask
       ]
   
-      const query = "UPDATE task SET name = ?, estimatedHours = ?, dueDate = ?, status = ?, weight = ? WHERE idTask = ?"
+      const query = "UPDATE task SET name = ?, type = ?, estimatedHours = ?, dueDate = ?, status = ?, weight = ? WHERE idTask = ?"
       const result = await db.query(query, values)
   
       return result
@@ -47,6 +49,7 @@ class TasksRepository {
         tasks.push(new TasksModel(
           task.idTask,
           task.name,
+          task.type,
           task.estimatedHours,
           task.dueDate,
           task.status,

@@ -50,6 +50,7 @@ class TasksController {
       const {
         idTask,
         name, 
+        type,
         estimatedHours, 
         dueDate, 
         status, 
@@ -61,6 +62,7 @@ class TasksController {
       const result = await repo.insert(new TasksModel(
         idTask,
         name, 
+        type,
         estimatedHours, 
         dueDate, 
         status, 
@@ -80,6 +82,7 @@ class TasksController {
       const {
         idTask,
         name, 
+        type,
         estimatedHours, 
         dueDate, 
         status, 
@@ -92,6 +95,7 @@ class TasksController {
       const updateResult = await repo.update(new TasksModel( 
         idTask,
         name, 
+        type,
         estimatedHours, 
         dueDate, 
         status, 
@@ -103,6 +107,7 @@ class TasksController {
     res.status(200).json({
        idTask,
         name, 
+        type,
         estimatedHours, 
         dueDate, 
         status, 

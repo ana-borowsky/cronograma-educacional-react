@@ -10,9 +10,9 @@ export const DisciplineForm = ({ disciplineData }) => {
   const mainButtonText = isEditing ? 'Salvar Disciplina' : 'Adicionar Matéria';
 
   return (
-    <div className="mt-5 border-t border-neutral-700 pt-5">
+    <div className="pt-5">
       <div>
-        <h3 className="text-xl font-bold text-neutral-300 mb-4">Gerenciamento de Projeto</h3>
+        <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Gerenciamento de Projeto</h2>
         <form className="space-y-6">
           <div className="space-y-1">
             <label htmlFor="project-select" className="block text-neutral-300 font-semibold text-sm">

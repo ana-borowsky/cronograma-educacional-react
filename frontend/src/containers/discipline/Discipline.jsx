@@ -35,7 +35,7 @@ const Discipline = ({ disciplineData }) => {
   const openDisciplineModal = () => setIsDisciplineModalOpen(true)
 
   return (
-    <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[312px] flex flex-col">
+    <div className="w-[330px] bg-neutral-800 p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl transition-all duration-300">
       <div
         className="relative flex items-start justify-between cursor-pointer group mb-6 transition-all duration-200"
         onClick={openDisciplineModal}

@@ -11,7 +11,7 @@ describe("Testes Horas livres", () => {
         idUser: 1,
         weekDay: "Segunda-feira",
         startTime: "14:00:00",
-        endTime: "18:00:00"
+        durationTime: 45
       })
     expect(created.statusCode).toBe(200)
   })
@@ -22,7 +22,7 @@ describe("Testes Horas livres", () => {
       idUser: 1,
       weekDay: "Segunda-feira",
       startTime: "14:00:00",
-      endTime: "18:00:00"
+      durationTime: 45
     }
 
     const created = await request(app)
@@ -33,7 +33,7 @@ describe("Testes Horas livres", () => {
       ...freeTime,
       idTime: created.body.idTime,
       startTime: "12:00:00",
-      endTime: "13:00:00"
+      durationTime: 60
     }
 
     const res = await request(app).put("/freeTime").send(updateData)
@@ -41,7 +41,7 @@ describe("Testes Horas livres", () => {
     expect(res.statusCode).toBe(200)
     expect(res.body).toHaveProperty("idTime", created.body.id)
     expect(res.body.startTime).toBe("12:00:00")
-    expect(res.body.endTime).toBe("13:00:00")
+    expect(res.body.durationTime).toBe(60)
   })
 
   it("Selecionar todos os tempos livres", async () => {
@@ -52,7 +52,7 @@ describe("Testes Horas livres", () => {
         idUser: 1,
         weekDay: "Segunda-feira",
         startTime: "14:00:00",
-        endTime: "18:00:00"
+        durationTime: 45
       })
 
     const res = await request(app).get("/freeTime/1").query({ idUser: freeTime.idUser })
@@ -68,7 +68,7 @@ describe("Testes Horas livres", () => {
         idUser: 1,
         weekDay: "Segunda-feira",
         startTime: "14:00:00",
-        endTime: "18:00:00"
+        durationTime: 45
       })
 
     const res = await request(app).delete(`/freeTime/${freeTime.body.id}`).query({ idTime: freeTime.body.idTime })

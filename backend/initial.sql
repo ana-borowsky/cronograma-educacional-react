@@ -1,6 +1,5 @@
 SET NAMES utf8mb4;
 SET @@session.character_set_connection = 'utf8mb4';
-
 CREATE DATABASE IF NOT EXISTS beezer CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE beezer;
 
@@ -17,9 +16,9 @@ CREATE TABLE IF NOT EXISTS freeTime (
     idUser INTEGER NOT NULL,
     weekDay VARCHAR(45) NOT NULL,
     startTime TIME NOT NULL,
-    endTime TIME NOT NULL,
+    durationTime INTEGER NOT NULL,
     PRIMARY KEY(idTime),
-    FOREIGN KEY(idUser) REFERENCES user(idUser)
+    FOREIGN KEY(idUser) REFERENCES user(idUser) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS discipline (
@@ -34,7 +33,7 @@ CREATE TABLE IF NOT EXISTS discipline (
     endTime TIME,
     weight SMALLINT NOT NULL,
     PRIMARY KEY(idDiscipline),
-    FOREIGN KEY(idUser) REFERENCES user(idUser)
+    FOREIGN KEY(idUser) REFERENCES user(idUser) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS task (
@@ -47,7 +46,7 @@ CREATE TABLE IF NOT EXISTS task (
     status ENUM('Pendente', 'Concluído') NOT NULL,
     weight SMALLINT NOT NULL,
     PRIMARY KEY(idTask),
-    FOREIGN KEY(idDiscipline) REFERENCES discipline(idDiscipline)
+    FOREIGN KEY(idDiscipline) REFERENCES discipline(idDiscipline) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS planning (
@@ -58,7 +57,7 @@ CREATE TABLE IF NOT EXISTS planning (
     endTime TIME NOT NULL,
     finalWeight INTEGER NOT NULL,
     PRIMARY KEY(idPlanning),
-    FOREIGN KEY(idTask) REFERENCES task(idTask)
+    FOREIGN KEY(idTask) REFERENCES task(idTask) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS schedule (
@@ -66,8 +65,8 @@ CREATE TABLE IF NOT EXISTS schedule (
     idUser INTEGER NOT NULL,
     idPlanning INTEGER NOT NULL,
     PRIMARY KEY(idSchedule),
-    FOREIGN KEY(idUser) REFERENCES user(idUser),
-    FOREIGN KEY(idPlanning) REFERENCES planning(idPlanning)
+    FOREIGN KEY(idUser) REFERENCES user(idUser) ON DELETE CASCADE,
+    FOREIGN KEY(idPlanning) REFERENCES planning(idPlanning) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS file (
@@ -77,7 +76,7 @@ CREATE TABLE IF NOT EXISTS file (
     type VARCHAR(50) NOT NULL,
     data BLOB NOT NULL,
     PRIMARY KEY(idFile),
-    FOREIGN KEY(idUser) REFERENCES user(idUser)
+    FOREIGN KEY(idUser) REFERENCES user(idUser) ON DELETE CASCADE
 );
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -89,23 +88,23 @@ INSERT INTO user (name, email, password) VALUES
 ('Pedro Costa', 'pedro.costa@email.com', '$2a$10$defghijklmnopqrstuvwxyz456789');
 
 -- Inserindo horários livres
-INSERT INTO freeTime (idUser, weekDay, startTime, endTime) VALUES
+INSERT INTO freeTime (idUser, weekDay, startTime, durationTime) VALUES
 -- Maria Silva
-(1, 'Segunda-feira', '14:00:00', '18:00:00'),
-(1, 'Terça-feira', '09:00:00', '12:00:00'),
-(1, 'Quarta-feira', '14:00:00', '17:00:00'),
-(1, 'Quinta-feira', '10:00:00', '12:00:00'),
-(1, 'Sexta-feira', '15:00:00', '18:00:00'),
+(1, 'Segunda-feira', '14:00:00', 240),
+(1, 'Terça-feira', '09:00:00', 180),
+(1, 'Quarta-feira', '14:00:00', 180),
+(1, 'Quinta-feira', '10:00:00', 120),
+(1, 'Sexta-feira', '15:00:00', 180),
 -- João Santos
-(2, 'Segunda-feira', '08:00:00', '10:00:00'),
-(2, 'Terça-feira', '14:00:00', '18:00:00'),
-(2, 'Quarta-feira', '08:00:00', '12:00:00'),
-(2, 'Quinta-feira', '16:00:00', '19:00:00'),
+(2, 'Segunda-feira', '08:00:00', 120),
+(2, 'Terça-feira', '14:00:00', 240),
+(2, 'Quarta-feira', '08:00:00', 240),
+(2, 'Quinta-feira', '16:00:00', 180),
 -- Ana Oliveira
-(3, 'Segunda-feira', '19:00:00', '22:00:00'),
-(3, 'Quarta-feira', '19:00:00', '22:00:00'),
-(3, 'Sexta-feira', '14:00:00', '18:00:00'),
-(3, 'Sábado', '09:00:00', '12:00:00');
+(3, 'Segunda-feira', '19:00:00', 180),
+(3, 'Quarta-feira', '19:00:00', 180),
+(3, 'Sexta-feira', '14:00:00', 240),
+(3, 'Sábado', '09:00:00', 180);
 
 -- Inserindo disciplinas
 INSERT INTO discipline (idUser, name, color, project, classroom, day, startTime, endTime, weight) VALUES

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DisciplineForm } from "@/components/discipline/DisciplineForm"
+import { Container } from "@/components/ui/container"
 
 const ChevronUp = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 text-neutral-400">
@@ -15,19 +16,19 @@ const ChevronDown = () => (
   </svg>
 )
 
-export const AddDiscipline = ({ onToggle }) => {
+export const AddDiscipline = () => {
   const [isFormVisible, setIsFormVisible] = useState(false)
   const isEditing = false
   const mainButtonText = isEditing ? "Salvar Disciplina" : "Adicionar Matéria"
 
   const toggleForm = () => {
     setIsFormVisible(!isFormVisible)
-    onToggle?.(!isFormVisible)
   }
 
   return (
     <div className="w-[330px] space-y-8 mb-8 md:mb-0 transition-all duration-500 ease-in-out">
-      <div className="bg-neutral-800 p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl overflow-hidden transition-all duration-500 ease-in-out">
+      <Container className="overflow-hidden duration-500 ease-in-out">
+
         <div className="flex justify-between items-center cursor-pointer w-full" onClick={toggleForm}>
           <h2 className="w-full text-xl font-bold text-white border-b border-neutral-700 pb-1">Insira matérias</h2>
           {isFormVisible ? <ChevronUp /> : <ChevronDown />}
@@ -98,7 +99,7 @@ export const AddDiscipline = ({ onToggle }) => {
             <DisciplineForm />
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   )
 }

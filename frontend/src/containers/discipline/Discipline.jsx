@@ -4,6 +4,7 @@ import { DisciplineTitle } from "@/components/discipline/DisciplineTitle"
 import { WorkFormModal } from "@/components/discipline/WorkFormModal"
 import { ExamFormModal } from "@/components/discipline/ExamFormModal"
 import { DisciplineFormModal } from "@/components/discipline/DisciplineFormModal"
+import { Container } from "@/components/ui/container"
 import { useState } from "react"
 
 const PencilIcon = () => (
@@ -35,7 +36,7 @@ const Discipline = ({ disciplineData }) => {
   const openDisciplineModal = () => setIsDisciplineModalOpen(true)
 
   return (
-    <div className="w-[330px] bg-neutral-800 p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl transition-all duration-300">
+    <Container className="w-[330px]">
       <div
         className="relative flex items-start justify-between cursor-pointer group mb-6 transition-all duration-200"
         onClick={openDisciplineModal}
@@ -136,7 +137,7 @@ const Discipline = ({ disciplineData }) => {
         onClose={() => setIsDisciplineModalOpen(false)}
         disciplineData={disciplineData}
       />
-    </div>
+    </Container>
   )
 }
 

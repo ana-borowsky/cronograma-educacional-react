@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { ListItem } from "@/components/ListItem"
-import { DisciplineTitle } from "@/components/DisciplineTitle"
-import { WorkFormModal } from "@/components/WorkFormModal"
-import { ExamFormModal } from "@/components/ExamFormModal"
-import { DisciplineFormModal } from "@/components/DisciplineFormModal"
+import { DisciplineTitle } from "@/components/discipline/DisciplineTitle"
+import { WorkFormModal } from "@/components/discipline/WorkFormModal"
+import { ExamFormModal } from "@/components/discipline/ExamFormModal"
+import { DisciplineFormModal } from "@/components/discipline/DisciplineFormModal"
 import { useState } from "react"
 
 const PencilIcon = () => (

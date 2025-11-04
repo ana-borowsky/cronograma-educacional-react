@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import Layout from "../components/Layout"
+import Layout from "../components/layout/Layout"
 import NavigationBar from "../containers/NavigationBar"
-import Discipline from "../containers/Discipline"
-import AddDiscipline from "../containers/AddDiscipline"
+import Discipline from "../containers/discipline/Discipline"
+import AddDiscipline from "../containers/discipline/AddDiscipline"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
 import { useLocation } from 'react-router-dom'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChevronLeft, ChevronRight } from "@/components/ScheduleData.jsx"
+import { ChevronLeft, ChevronRight } from "@/components/schedule/ScheduleData.jsx"
 
 /**
  * @param {object} props

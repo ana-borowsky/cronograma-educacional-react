@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
-import { DateTitle } from "@/components/DateTitle"
-import { TabButton } from "@/components/TabButton"
-import { GridSlot } from "@/components/GridSlot"
-import { EventSlot } from "@/components/EventSlot"
+import { DateTitle } from "@/components/schedule/DateTitle"
+import { TabButton } from "@/components/schedule/TabButton"
+import { GridSlot } from "@/components/schedule/GridSlot"
+import { EventSlot } from "@/components/schedule/EventSlot"
 import {
   daysOfWeek,
   timeSlots,
   getAllActivitySlots,
   totalGridSlots,
-} from "@/components/ScheduleData.jsx"
+} from "@/components/schedule/ScheduleData.jsx"
 
 const Schedule = () => {
   const [activeTab, setActiveTab] = useState('agenda')
-  
+
   const [dayEvents, setDayEvents] = useState([])
   const [studySlots, setStudySlots] = useState([])
   const [isLoading, setIsLoading] = useState(true)

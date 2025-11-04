@@ -21,10 +21,10 @@ class FreeTimeController {
         endTime
       ))
 
-      res.status(200).json({ id: result.insertId, weekDay })
+  res.status(200).json({ id: result.insertId, idTime: result.insertId, weekDay })
     } catch (err) {
-      console.err(err)
-      res.status(500).json({ error: "Erro ao inserir a tempo livre" })
+      console.error(err)
+      res.status(500).json({ error: "Erro ao inserir o tempo livre" })
     }
   }
 
@@ -67,18 +67,18 @@ class FreeTimeController {
           endTime
         )
       )
+      
+      if (!updateResult || (updateResult.affectedRows === 0)) {
+        return res.status(404).json({ error: "Tempo livre não encontrado!" })
+      }
 
-      res.status(200).json({
+      return res.status(200).json({
         idTime,
         idUser,
         weekDay,
         startTime,
         endTime
       })
-      if (!updateResult || (updateResult.affectedRows === 0)) {
-        return res.status(404).json({ error: "Usuário não encontrado!" })
-      }
-      return res.status(200).json()
     } catch (err) {
       console.error(err)
       res.status(500).json({ error: "Erro ao atualizar a tempo livre" })

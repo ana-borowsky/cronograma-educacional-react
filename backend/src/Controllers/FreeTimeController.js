@@ -10,7 +10,7 @@ class FreeTimeController {
         idUser,
         weekDay,
         startTime,
-        endTime
+        durationTime
       } = req.body
       const repo = new FreeTimeRepository()
       const result = await repo.insert(new FreeTimeModel(
@@ -18,7 +18,7 @@ class FreeTimeController {
         idUser,
         weekDay,
         startTime,
-        endTime
+        durationTime
       ))
 
   res.status(200).json({ id: result.insertId, idTime: result.insertId, weekDay })
@@ -54,7 +54,7 @@ class FreeTimeController {
         idUser,
         weekDay,
         startTime,
-        endTime
+        durationTime
       } = req.body
       const repo = new FreeTimeRepository()
 
@@ -64,7 +64,7 @@ class FreeTimeController {
           idUser,
           weekDay,
           startTime,
-          endTime
+          durationTime
         )
       )
       
@@ -77,7 +77,7 @@ class FreeTimeController {
         idUser,
         weekDay,
         startTime,
-        endTime
+        durationTime
       })
     } catch (err) {
       console.error(err)

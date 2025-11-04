@@ -9,9 +9,9 @@ class FreeTimeRepository {
       freeTimeModel.idUser,
       freeTimeModel.weekDay,
       freeTimeModel.startTime,
-      freeTimeModel.endTime
+      freeTimeModel.durationTime
     ]
-    const query = "INSERT INTO freeTime (idUser, weekDay, startTime, endTime) VALUES (?,?,?,?)"
+    const query = "INSERT INTO freeTime (idUser, weekDay, startTime, durationTime) VALUES (?,?,?,?)"
     const [result] = await db.query(query, values)
     return result
   }
@@ -21,10 +21,10 @@ class FreeTimeRepository {
       freeTimeModel.idUser,
       freeTimeModel.weekDay,
       freeTimeModel.startTime,
-      freeTimeModel.endTime,
+      freeTimeModel.durationTime,
       freeTimeModel.idTime
     ]
-    const query = "UPDATE freeTime SET idUser = ?, weekDay = ?, startTime = ?, endTime = ? WHERE idTime = ?"
+    const query = "UPDATE freeTime SET idUser = ?, weekDay = ?, startTime = ?, durationTime = ? WHERE idTime = ?"
     const [result] = await db.query(query, values)
     return result
   }
@@ -47,7 +47,7 @@ class FreeTimeRepository {
         row.idUser,
         row.weekDay,
         row.startTime,
-        row.endTime
+        row.durationTime
       ))
     })
     return freeTime

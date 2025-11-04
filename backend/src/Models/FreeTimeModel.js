@@ -4,13 +4,13 @@ class FreeTimeModel {
     idUser,
     weekDay,
     startTime,
-    endTime
+    durationTime
   ) {
     this.idTime = idTime,
     this.idUser = idUser,
     this.weekDay = weekDay,
     this.startTime = startTime,
-    this.endTime = endTime
+    this.durationTime = durationTime
   }
 }
 export default FreeTimeModel

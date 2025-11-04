@@ -74,6 +74,10 @@ class DisciplineController {
         )
       )
 
+      if (!updateResult || (updateResult.affectedRows === 0)) {
+        return res.status(404).json({ error: "Usuário não encontrado!" })
+      }
+
       res.status(200).json({
         idDiscipline,
         idUser,
@@ -86,10 +90,6 @@ class DisciplineController {
         endTime,
         weight
       })
-      if (!updateResult || (updateResult.affectedRows === 0)) {
-        return res.status(404).json({ error: "Usuário não encontrado!" })
-      }
-      return res.status(200).json()
     } catch (err) {
       console.error(err)
       res.status(500).json({ error: "Erro ao atualizar a disciplina" })

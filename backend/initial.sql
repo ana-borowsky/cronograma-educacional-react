@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS freeTime (
     idUser INTEGER NOT NULL,
     weekDay VARCHAR(45) NOT NULL,
     startTime TIME NOT NULL,
-    endTime TIME NOT NULL,
+    durationMin INTEGER NOT NULL,
     PRIMARY KEY(idTime),
-    FOREIGN KEY(idUser) REFERENCES user(idUser)
+    FOREIGN KEY(idUser) REFERENCES user(idUser) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS discipline (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS discipline (
     endTime TIME,
     weight SMALLINT NOT NULL,
     PRIMARY KEY(idDiscipline),
-    FOREIGN KEY(idUser) REFERENCES user(idUser)
+    FOREIGN KEY(idUser) REFERENCES user(idUser) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS task (
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS task (
     status ENUM('Pendente', 'Concluído') NOT NULL,
     weight SMALLINT NOT NULL,
     PRIMARY KEY(idTask),
-    FOREIGN KEY(idDiscipline) REFERENCES discipline(idDiscipline)
+    FOREIGN KEY(idDiscipline) REFERENCES discipline(idDiscipline) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS planning (
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS planning (
     endTime TIME NOT NULL,
     finalWeight INTEGER NOT NULL,
     PRIMARY KEY(idPlanning),
-    FOREIGN KEY(idTask) REFERENCES task(idTask)
+    FOREIGN KEY(idTask) REFERENCES task(idTask) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS schedule (
@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS schedule (
     idUser INTEGER NOT NULL,
     idPlanning INTEGER NOT NULL,
     PRIMARY KEY(idSchedule),
-    FOREIGN KEY(idUser) REFERENCES user(idUser),
-    FOREIGN KEY(idPlanning) REFERENCES planning(idPlanning)
+    FOREIGN KEY(idUser) REFERENCES user(idUser), ON DELETE CASCADE
+    FOREIGN KEY(idPlanning) REFERENCES planning(idPlanning) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS file (
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS file (
     type VARCHAR(50) NOT NULL,
     data BLOB NOT NULL,
     PRIMARY KEY(idFile),
-    FOREIGN KEY(idUser) REFERENCES user(idUser)
+    FOREIGN KEY(idUser) REFERENCES user(idUser) ON DELETE CASCADE
 );
 
 SET FOREIGN_KEY_CHECKS = 0;

@@ -15,3 +15,11 @@
 - put/tasks/
 - delete/tasks/:idtasks
 - post/tasks/
+
+## FreeTime
+---
+
+- get/freeTime/:idUser
+- put/freeTime/
+- delete/freeTime/:idTime
+- post/freeTime/

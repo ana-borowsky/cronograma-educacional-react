@@ -6,6 +6,6 @@ const router = express.Router()
 router.post("/", TasksController.insertTask)
 router.put("/", TasksController.updateTask)
 router.get("/:idDiscipline", TasksController.getAll)
-router.delete("/:idTask", TasksController.deleteTask)
+router.delete("/:idTask", TasksController.delete)
 
 export default router

@@ -18,11 +18,12 @@ const Disciplines = () => {
   useEffect(() => {
     const fetchDisciplines = async () => {
       try {
-        const response = await fetch('http://localhost:8800/Disciplines');
+        const response = await fetch('http://localhost:8800/discipline/1');
         if (!response.ok) {
           throw new Error('Falha ao buscar dados');
         }
         const data = await response.json();
+        console.log("📘 Disciplinas recebidas:", data);
         setDisciplines(data);
       } catch (error) {
         console.error("Erro buscando disciplinas:", error);
@@ -65,7 +66,10 @@ const Disciplines = () => {
               <p className="text-neutral-400">Carregando disciplinas...</p>
             ) : (
               disciplines.map((discipline) => (
-                <Discipline key={discipline.id} disciplineData={discipline} />
+                <Discipline
+                  key={discipline.idDiscipline}
+                  disciplineData={discipline}
+                />
               ))
             )}
             <AddDiscipline />

@@ -18,13 +18,24 @@ const Discipline = ({ disciplineData }) => {
   const [isDisciplineModalOpen, setIsDisciplineModalOpen] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
 
-  const { title, color, works, exams } = disciplineData
+  const {
+    name,
+    color,
+    project,
+    classroom,
+    day,
+    startTime,
+    endTime,
+    weight,
+  } = disciplineData
+
+  const works = disciplineData.works || []
+  const exams = disciplineData.exams || []
 
   const openDisciplineModal = () => setIsDisciplineModalOpen(true)
 
   return (
     <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[312px] flex flex-col">
-
       <div
         className="relative flex items-start justify-between cursor-pointer group mb-6 transition-all duration-200"
         onClick={openDisciplineModal}
@@ -32,7 +43,7 @@ const Discipline = ({ disciplineData }) => {
         onMouseLeave={() => setIsHovering(false)}
       >
         <DisciplineTitle
-          title={title}
+          title={name}
           color={color}
         />
 
@@ -43,19 +54,32 @@ const Discipline = ({ disciplineData }) => {
         </div>
       </div>
 
+      <div className="mb-4 text-neutral-300">
+        <p><strong>Projeto:</strong> {project}</p>
+        <p><strong>Sala:</strong> {classroom}</p>
+        <p><strong>Dia:</strong> {day}</p>
+        <p><strong>Horário:</strong> {startTime} - {endTime}</p>
+        <p><strong>Peso:</strong> {weight}</p>
+      </div>
+
+      <hr className="my-6 border-neutral-600" />
+
       <div className="mb-6">
         <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>
-
         <div className="space-y-2 mb-4">
-          {works.map((work) => (
-            <ListItem
-              key={work.id}
-              id={work.id}
-              fullDescription={work.description}
-              borderColor={work.borderColor}
-              defaultChecked={work.completed}
-            />
-          ))}
+          {works.length > 0 ? (
+            works.map((work) => (
+              <ListItem
+                key={work.id}
+                id={work.id}
+                fullDescription={work.description}
+                borderColor={work.borderColor}
+                defaultChecked={work.completed}
+              />
+            ))
+          ) : (
+            <p className="text-neutral-500 text-sm">Nenhum trabalho cadastrado.</p>
+          )}
         </div>
 
         <Button
@@ -72,20 +96,22 @@ const Discipline = ({ disciplineData }) => {
 
       <div className="mb-4">
         <h3 className="text-lg font-semibold text-neutral-300 mb-3">Provas e Avaliações</h3>
-
         <div className="space-y-2 mb-4">
-          {exams.map((exam) => (
-            <ListItem
-              key={exam.id}
-              id={exam.id}
-              fullDescription={exam.description}
-              borderColor={exam.borderColor}
-              defaultChecked={exam.completed}
-            />
-          ))}
+          {exams.length > 0 ? (
+            exams.map((exam) => (
+              <ListItem
+                key={exam.id}
+                id={exam.id}
+                fullDescription={exam.description}
+                borderColor={exam.borderColor}
+                defaultChecked={exam.completed}
+              />
+            ))
+          ) : (
+            <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
+          )}
         </div>
 
-        <hr className="my-4 border-neutral-700" />
         <Button
           className="w-full"
           variant="yellow-primary"

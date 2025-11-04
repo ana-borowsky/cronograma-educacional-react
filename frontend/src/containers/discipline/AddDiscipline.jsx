@@ -8,14 +8,14 @@ export const AddDiscipline = () => {
   const [isFormVisible, setIsFormVisible] = useState(false)
 
   return (
-    <div className="w-full space-y-8 mb-8 md:mb-0">
+    <div className="w-[312px] space-y-8 mb-8 md:mb-0">
       <div className="bg-neutral-800 p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl transition-all duration-300">
 
         <div
           className="flex justify-between items-center cursor-pointer w-full"
           onClick={() => setIsFormVisible(!isFormVisible)}
         >
-          <h2 className="text-2xl font-bold text-white">Insira matérias</h2>
+          <h2 className="w-full flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Insira matérias</h2>
           {isFormVisible ? <ChevronUp /> : <ChevronDown />}
         </div>
 

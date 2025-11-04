@@ -8,19 +8,19 @@ export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden'
-      document.body.style.position = 'fixed'
-      document.body.style.width = '100%'
+      document.body.style.overflow = "hidden"
+      document.body.style.position = "fixed"
+      document.body.style.width = "100%"
     } else {
-      document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.body.style.width = ''
+      document.body.style.overflow = ""
+      document.body.style.position = ""
+      document.body.style.width = ""
     }
 
     return () => {
-      document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.body.style.width = ''
+      document.body.style.overflow = ""
+      document.body.style.position = ""
+      document.body.style.width = ""
     }
   }, [isOpen])
 
@@ -42,7 +42,12 @@ export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
       <div className="relative w-full max-w-lg mx-4 md:mx-auto max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden transition-all duration-500 ease-in-out scale-100 opacity-100">
         <div className="bg-neutral-800 p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl transition-all duration-500 ease-in-out">
           <h2 className="text-2xl font-bold text-white mb-5">{modalTitle}</h2>
-          <DisciplineForm />
+          <DisciplineForm
+            disciplineData={disciplineData}
+            onCancel={onClose}
+            onDelete={() => console.log("Excluir disciplina")}
+            onSave={() => console.log("Salvar disciplina")}
+          />
         </div>
 
         <Button
@@ -50,7 +55,14 @@ export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
           className="absolute top-4 right-4 text-white p-2 rounded-full bg-neutral-700 hover:bg-neutral-600 transition-colors"
           aria-label="Fechar Modal"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </Button>

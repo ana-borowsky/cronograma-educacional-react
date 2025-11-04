@@ -23,3 +23,11 @@
 - put/freeTime/
 - delete/freeTime/:idTime
 - post/freeTime/
+
+## Planning
+---
+
+- get/plannings/:idTask
+- put/plannings/
+- delete/plannings/:idPlanning
+- post/plannings/

@@ -52,6 +52,7 @@ class PlanningModel {
         this.startTime = startTime,
         this.endTime = endTime,
         this.finalWeight = finalWeight,
+        // this.isDeleted = isDeleted,
         this.idTask = idTask
     }
 }

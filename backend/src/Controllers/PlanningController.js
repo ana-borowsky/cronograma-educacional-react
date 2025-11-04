@@ -68,11 +68,10 @@ class PlanningController {
         startTime,
         endTime,
         finalWeight,
-        // isDeleted,
         idTask
     })
     } catch (err) {
-      console.erro(err)
+      console.error(err)
       res.status(500).json({ error: "Erro ao atualizar o planejamento!"})
     }
   }
@@ -110,6 +109,24 @@ class PlanningController {
       console.log(err)
       res.status(400).json({ error: "Erro ao excluir o planejamento!" })
     }
+
+    // try {
+    //   const { idPlanning } = req.params
+
+    //   const repo = new PlanningRepository()
+    //   const planning = new PlanningModel(idPlanning)
+
+    //   const result = await repo.delete(planning)
+
+    //   if(!result || (result.affectedRows === 0)) {
+    //     return res.status(404).json({ error: "Planejamento não encontrado!"})
+    //   }
+
+    // res.status(200).json({ idPlanning })
+    // } catch (err) {
+    //   console.error(err)
+    //   res.status(500).json({ error: "Erro ao exluir o planejamento!"})
+    // }
   }
 }
 

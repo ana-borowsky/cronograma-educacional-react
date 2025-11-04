@@ -67,7 +67,7 @@ describe("Testes planejamento", () => {
     expect(res.statusCode).toBe(200)
   })
 
-  it("Deletar tarefas",  async() => {
+  it("Deletar planejamento",  async() => {
      const planning = await request(app)
       .post("/plannings")
       .send({
@@ -80,6 +80,10 @@ describe("Testes planejamento", () => {
     })
 
     const res = await request(app).delete(`/plannings/${planning.body.idPlanning}`).query({ idPlanning: planning.idPlanning })
+
+    // const deleteData = { idPlanning: planning.body.idPlanning }
+
+    // const res = await request(app).put(`/plannings/${deleteData.idPlanning}`).send(deleteData)
 
     expect(res.statusCode).toBe(200)
   })

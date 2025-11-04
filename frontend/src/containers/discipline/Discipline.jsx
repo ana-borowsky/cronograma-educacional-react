@@ -88,8 +88,7 @@ const Discipline = ({ disciplineData }) => {
           variant="yellow-primary"
           onClick={() => setIsWorkModalOpen(true)}
         >
-          <span className="text-lg font-bold mr-2">+</span>
-          <p className="font-medium text-sm">Adicionar Novo Trabalho</p>
+          <p className="font-medium text-sm">Adicionar trabalho</p>
         </Button>
       </div>
 
@@ -118,8 +117,7 @@ const Discipline = ({ disciplineData }) => {
           variant="yellow-primary"
           onClick={() => setIsExamModalOpen(true)}
         >
-          <span className="text-lg font-bold mr-2">+</span>
-          <p className="font-medium text-sm">Adicionar Nova Prova</p>
+          <p className="font-medium text-sm">Adicionar prova</p>
         </Button>
       </div>
 

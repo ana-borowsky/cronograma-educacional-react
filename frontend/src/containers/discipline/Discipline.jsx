@@ -3,7 +3,7 @@ import { ListItem } from "@/components/ListItem"
 import { DisciplineTitle } from "@/components/discipline/DisciplineTitle"
 import { WorkFormModal } from "@/components/discipline/WorkFormModal"
 import { ExamFormModal } from "@/components/discipline/ExamFormModal"
-import { DisciplineFormModal } from "@/components/discipline/DisciplineFormModal"
+import { DisciplineFormModal } from "@/components/discipline/EditDisciplineModal"
 import { Container } from "@/components/ui/container"
 import { useState } from "react"
 

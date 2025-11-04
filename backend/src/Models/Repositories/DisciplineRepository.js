@@ -65,7 +65,7 @@ class DisciplineRepository {
         discipline.endTime,
         discipline.weight
       ))
-    });
+    })
     return disciplines
   }
 }

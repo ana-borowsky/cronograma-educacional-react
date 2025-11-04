@@ -13,26 +13,32 @@ const ChevronDown = () => (
   </svg>
 )
 
-export const AddDiscipline = () => {
+export const AddDiscipline = ({ onToggle }) => {
   const [isFormVisible, setIsFormVisible] = useState(false)
 
+  const toggleForm = () => {
+    setIsFormVisible(!isFormVisible)
+    onToggle?.(!isFormVisible)
+  }
+
   return (
-    <div className="w-[330px] space-y-8 mb-8 md:mb-0">
-      <div className="bg-neutral-800 p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="w-[330px] space-y-8 mb-8 md:mb-0 transition-all duration-500 ease-in-out">
+      <div className="bg-neutral-800 p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl overflow-hidden transition-all duration-500 ease-in-out">
 
         <div
           className="flex justify-between items-center cursor-pointer w-full"
-          onClick={() => setIsFormVisible(!isFormVisible)}
+          onClick={toggleForm}
         >
-          <h2 className="text-xl font-bold text-white border-b border-neutral-700 pb-1">
+          <h2 className="w-full text-xl font-bold text-white border-b border-neutral-700 pb-1">
             Insira matérias
           </h2>
           {isFormVisible ? <ChevronUp /> : <ChevronDown />}
         </div>
 
         <div
-          className={`transition-all duration-500 ease-in-out overflow-hidden ${isFormVisible ? "max-h-[1300px] mt-5 pt-5" : "max-h-0"
-            }`}
+          className={`transition-all duration-500 ease-in-out overflow-hidden ${
+            isFormVisible ? "max-h-[1300px] mt-5 pt-5" : "max-h-0"
+          }`}
         >
           <DisciplineForm />
         </div>

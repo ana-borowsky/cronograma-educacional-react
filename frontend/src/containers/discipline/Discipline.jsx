@@ -65,7 +65,7 @@ const Discipline = ({ disciplineData }) => {
       <hr className="my-6 border-neutral-600" />
 
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>
+        <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Atividades e Trabalhos</h2>
         <div className="space-y-2 mb-4">
           {works.length > 0 ? (
             works.map((work) => (
@@ -95,7 +95,7 @@ const Discipline = ({ disciplineData }) => {
       <hr className="my-6 border-neutral-600" />
 
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-neutral-300 mb-3">Provas e Avaliações</h3>
+        <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Provas e Avaliações</h2>
         <div className="space-y-2 mb-4">
           {exams.length > 0 ? (
             exams.map((exam) => (

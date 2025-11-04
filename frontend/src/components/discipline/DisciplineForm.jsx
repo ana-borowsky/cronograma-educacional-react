@@ -12,7 +12,7 @@ export const DisciplineForm = ({ disciplineData }) => {
   return (
     <div className="pt-5">
       <div>
-        <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Gerenciamento de Projeto</h2>
+        <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Gerenciamento de Projeto</h2>
         <form className="space-y-6">
           <div className="space-y-1">
             <label htmlFor="project-select" className="block text-neutral-300 font-semibold text-sm">
@@ -66,7 +66,7 @@ export const DisciplineForm = ({ disciplineData }) => {
         <hr className="border-t border-neutral-700 my-6" />
       </div>
 
-      <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Ler arquivo com IA</h2>
+      <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Ler arquivo com IA</h2>
       <form className="space-y-6">
         <p className="text-neutral-400 text-sm text-center">Carregue um arquivo (ex: print) contendo a lista de matérias, salas e horários.</p>
         <div className="space-y-2">
@@ -102,7 +102,7 @@ export const DisciplineForm = ({ disciplineData }) => {
       <br />
       <hr className="border-t border-neutral-700 my-4" />
 
-      <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Ou insira manualmente</h2>
+      <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Ou insira manualmente</h2>
       <form className="space-y-4">
         <div className="space-y-1">
           <label htmlFor="course-name" className="block text-neutral-300 font-semibold text-sm">Nome da Matéria</label>

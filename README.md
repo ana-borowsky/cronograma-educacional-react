@@ -13,6 +13,11 @@ Entre na pasta backend usando cd backend e configure as variaveis de ambiente cr
 - npm i
 - npm start
 
+**Caso não funcione limpe o docker:**
+- docker compose down -v ( remove os container do docker )
+- docker compose up -d ( monta o container )
+
+
 ### Frontend:
 Entre no diretório do frontend: cd frontend
 

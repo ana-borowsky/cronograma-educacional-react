@@ -21,5 +21,6 @@ export async function gemini(pdfBuffer) {
   })
 
   return response.text
+
 }
 

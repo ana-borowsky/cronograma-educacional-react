@@ -80,11 +80,7 @@ describe("Testes planejamento", () => {
     })
 
     const res = await request(app).delete(`/plannings/${planning.body.idPlanning}`).query({ idPlanning: planning.idPlanning })
-
-    // const deleteData = { idPlanning: planning.body.idPlanning }
-
-    // const res = await request(app).put(`/plannings/${deleteData.idPlanning}`).send(deleteData)
-
+    
     expect(res.statusCode).toBe(200)
   })
 })

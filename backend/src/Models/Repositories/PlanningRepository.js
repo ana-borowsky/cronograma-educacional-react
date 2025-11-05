@@ -15,7 +15,6 @@ class PlanningRepository {
 
     const query = "INSERT INTO planning(executionDate, startTime, endTime, finalWeight, idTask) VALUES (?,?,?,?,?)"
 
-    // const query = "INSERT INTO planning(executionDate, startTime, endTime, finalWeight, isDeleted, idTask) VALUES (?,?,?,?,NULL,?)"
 
     const [result] = await db.query(query, values)
 
@@ -40,7 +39,6 @@ class PlanningRepository {
   async getAll(idTask) {
     const values = [idTask]
     const query = "SELECT * FROM planning WHERE idTask = ?"
-    // const query = "SELECT * FROM planning WHERE idTask = ? AND isDeleted IS NULL"
     const [result] = await db.query(query, values)
     let plannings = []
 
@@ -51,25 +49,16 @@ class PlanningRepository {
         planning.startTime,
         planning.endTime,
         planning.finalWeight,
-        // planning.isDeleted,
         planning.idTask
       ))
     })
     return plannings
   }
 
-  //Mudar o parametro para planningModel se for utilizar o soft delete
   async delete(idPlanning) {
     const values = [idPlanning]
     const query = "DELETE FROM planning WHERE idPlanning = ?"
     const [result] = await db.query(query, values)
-
-    // const values = [
-    //   planningModel.idPlanning
-    // ]
-
-    // const query = "UPDATE planning SET isDeleted = 1 WHERE idPlanning = ?"
-    // const [result] = await db.query(query, values)
 
     return result
   }

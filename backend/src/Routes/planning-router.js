@@ -8,5 +8,5 @@ router.post("/", PlanningController.insertPlannning)
 router.put("/", PlanningController.updatePlanning)
 router.get("/:idTask", PlanningController.getAll)
 router.delete("/:idPlanning", PlanningController.delete)
-// router.put("/:idPlanning", PlanningController.delete)
+
 export default router

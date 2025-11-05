@@ -55,6 +55,25 @@ class PlanningRepository {
     return plannings
   }
 
+    async getDayPlanning(idTask) {
+    const values = [idTask]
+    const query = "SELECT * FROM planning WHERE idTask = ? AND executionDate = CURDATE()"
+    const [result] = await db.query(query, values)
+    let plannings = []
+
+    result.forEach(planning => {
+      plannings.push(new PlanningModel(
+        planning.idPlanning,
+        planning.executionDate,
+        planning.startTime,
+        planning.endTime,
+        planning.finalWeight,
+        planning.idTask
+      ))
+    })
+    return plannings
+  }
+
   async delete(idPlanning) {
     const values = [idPlanning]
     const query = "DELETE FROM planning WHERE idPlanning = ?"

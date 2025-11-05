@@ -107,6 +107,25 @@ describe("Testes tarefas", () => {
     expect(res.statusCode).toBe(200)
   })
 
+  it("Selecionar todas as tarefas do dia", async() => {
+    const task = await request(app)
+      .post("/tasks")
+      .send({
+        idTask: null,
+        idDiscipline: 1,
+        name: "Revisão Bibliográfica",
+        type: "Prova",
+        estimatedHours: "06:00:00",
+        dueDate: "2025-11-05",
+        status: "Concluído",
+        weight: 8
+    })
+
+    const res = await request(app).get("/tasks/dayTasks/1").query({ idDiscipline: task.idDiscipline})
+
+    expect(res.statusCode).toBe(200)
+  })
+
   it("Deletar tarefas" , async () => {
     const tasks = await request(app)
       .post("/tasks")

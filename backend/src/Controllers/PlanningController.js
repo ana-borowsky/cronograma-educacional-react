@@ -90,6 +90,24 @@ class PlanningController {
     }
   }
 
+  static async getDayPlanning(req, res) {
+    try {
+      const {idTask} = req.params
+      const repo = new PlanningRepository()
+      const result = await repo.getDayPlanning(Number(idTask))
+
+      if(!result || result.length == 0){
+        return res.status(400).json({ error: "A tarefa não foi encontrada!"})
+      }
+
+      return res.status(200).json(result)
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ error: "Erro ao obter os planejamentos!"})
+      
+    }
+  }
+
   static async delete(req, res) {
     try {
       const {idPlanning} = req.params

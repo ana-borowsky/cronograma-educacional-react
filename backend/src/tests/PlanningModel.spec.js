@@ -62,11 +62,27 @@ describe("Testes planejamento", () => {
         finalWeight: 10
     })
 
-    const res = await request(app).get("/plannings/1").query({ idTask: planning.idTask })
+    const res = await request(app).get("/plannings/all/1").query({ idTask: planning.idTask })
 
     expect(res.statusCode).toBe(200)
   })
+  
+    it("Selecionar todas os planejamentos do dia", async() => {
+    const planning = await request(app)
+      .post("/plannings")
+      .send({
+        idPlanning: null,
+        idTask: 1,
+        executionDate: "2025-11-05",
+        startTime: "10:30:00",
+        endTime: "12:00:00",
+        finalWeight: 10
+    })
 
+    const res = await request(app).get("/plannings/dayPlannings/1").query({ idTask: planning.idTask })
+
+    expect(res.statusCode).toBe(200)
+  })
   it("Deletar planejamento",  async() => {
      const planning = await request(app)
       .post("/plannings")

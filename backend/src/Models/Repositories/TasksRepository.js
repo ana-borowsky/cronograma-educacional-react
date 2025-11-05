@@ -101,6 +101,28 @@ class TasksRepository {
       })
       return tasks
     }
+
+
+    async getDayTask(idDiscipline) {
+      const values = [idDiscipline]
+      const query = "SELECT * FROM beezer.task WHERE idDiscipline = ? AND status = 'Pendente' AND dueDate = CURDATE()"
+      const [result] = await db.query(query, values)
+      let tasks = []
+      
+      result.forEach(task => {
+        tasks.push(new TasksModel(
+          task.idTask,
+          task.name,
+          task.type,
+          task.estimatedHours,
+          task.dueDate,
+          task.status,
+          task.weight,
+          task.idDiscipline
+        ))
+      })
+      return tasks
+    }
     
     async delete(idTask) {
       const values = [idTask]

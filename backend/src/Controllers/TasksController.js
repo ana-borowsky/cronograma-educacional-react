@@ -132,6 +132,23 @@ class TasksController {
       res.status(500).json({ error: "Erro ao obter os trabalhos" })
     }
   }
+
+    static async getDayTask(req, res) {
+    try {
+      const {idDiscipline} = req.params
+      const repo = new TasksRepository()
+      const result = await repo.getDayTask(Number(idDiscipline))
+
+      if(!result || result.length == 0){
+        return res.status(404).json({ error: "A disciplina não foi encontrada!" })
+      } 
+
+      return res.status(200).json(result)
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ error: "Erro ao obter os trabalhos" })
+    }
+  }
   
 
   static async delete(req, res) {

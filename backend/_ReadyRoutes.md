@@ -14,6 +14,7 @@
 - get/tasks/all/:idDiscipline
 - get/tasks/exams/:idDiscipline
 - get/tasks/works/:idDiscipline
+- get/tasks/dayTasks/:idDiscipline
 - put/tasks/
 - delete/tasks/:idtasks
 - post/tasks/
@@ -29,7 +30,8 @@
 ## Planning
 ---
 
-- get/plannings/:idTask
+- get/plannings/all/:idTask
+- get/plannings/dayPlannings/id:Task
 - put/plannings/
 - delete/plannings/:idPlanning
 - post/plannings/

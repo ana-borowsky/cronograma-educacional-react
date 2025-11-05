@@ -60,7 +60,7 @@ class TasksRepository {
       return tasks
     }
 
-     async getExam(idDiscipline) {
+    async getExam(idDiscipline) {
       const values = [idDiscipline]
       const query = "SELECT * FROM task WHERE idDiscipline = ? AND type = 'Prova'"
       const [result] = await db.query(query, values)
@@ -81,7 +81,7 @@ class TasksRepository {
       return tasks
     }
 
-     async getWork(idDiscipline) {
+    async getWork(idDiscipline) {
       const values = [idDiscipline]
       const query = "SELECT * FROM task WHERE idDiscipline = ? AND type = 'Trabalho'"
       const [result] = await db.query(query, values)

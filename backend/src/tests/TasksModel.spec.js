@@ -69,7 +69,7 @@ describe("Testes Taredas", () => {
     expect(res.statusCode).toBe(200)
   })
 
-   it("Selecionar todas as provas", async() => {
+  it("Selecionar todas as provas", async() => {
     const task = await request(app)
       .post("/tasks")
       .send({
@@ -88,7 +88,7 @@ describe("Testes Taredas", () => {
     expect(res.statusCode).toBe(200)
   })
 
-   it("Selecionar todos os trabalhos", async() => {
+  it("Selecionar todos os trabalhos", async() => {
     const task = await request(app)
       .post("/tasks")
       .send({

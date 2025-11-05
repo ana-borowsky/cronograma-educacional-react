@@ -59,6 +59,48 @@ class TasksRepository {
       })
       return tasks
     }
+
+     async getExam(idDiscipline) {
+      const values = [idDiscipline]
+      const query = "SELECT * FROM task WHERE idDiscipline = ? AND type = 'Prova'"
+      const [result] = await db.query(query, values)
+      let tasks = []
+      
+      result.forEach(task => {
+        tasks.push(new TasksModel(
+          task.idTask,
+          task.name,
+          task.type,
+          task.estimatedHours,
+          task.dueDate,
+          task.status,
+          task.weight,
+          task.idDiscipline
+        ))
+      })
+      return tasks
+    }
+
+     async getWork(idDiscipline) {
+      const values = [idDiscipline]
+      const query = "SELECT * FROM task WHERE idDiscipline = ? AND type = 'Trabalho'"
+      const [result] = await db.query(query, values)
+      let tasks = []
+      
+      result.forEach(task => {
+        tasks.push(new TasksModel(
+          task.idTask,
+          task.name,
+          task.type,
+          task.estimatedHours,
+          task.dueDate,
+          task.status,
+          task.weight,
+          task.idDiscipline
+        ))
+      })
+      return tasks
+    }
     
     async delete(idTask) {
       const values = [idTask]

@@ -64,7 +64,45 @@ describe("Testes Taredas", () => {
         weight: 8
     })
 
-    const res = await request(app).get("/tasks/1").query({ idDiscipline: task.idDiscipline})
+    const res = await request(app).get("/tasks/all/1").query({ idDiscipline: task.idDiscipline})
+
+    expect(res.statusCode).toBe(200)
+  })
+
+   it("Selecionar todas as provas", async() => {
+    const task = await request(app)
+      .post("/tasks")
+      .send({
+        idTask: null,
+        idDiscipline: 1,
+        name: "Revisão Bibliográfica",
+        type: "Prova",
+        estimatedHours: "06:00:00",
+        dueDate: "2025-11-05",
+        status: "Pendente",
+        weight: 8
+    })
+
+    const res = await request(app).get("/tasks/exams/1").query({ idDiscipline: task.idDiscipline})
+
+    expect(res.statusCode).toBe(200)
+  })
+
+   it("Selecionar todos os trabalhos", async() => {
+    const task = await request(app)
+      .post("/tasks")
+      .send({
+        idTask: null,
+        idDiscipline: 1,
+        name: "Revisão Bibliográfica",
+        type: "Prova",
+        estimatedHours: "06:00:00",
+        dueDate: "2025-11-05",
+        status: "Pendente",
+        weight: 8
+    })
+
+    const res = await request(app).get("/tasks/works/1").query({ idDiscipline: task.idDiscipline})
 
     expect(res.statusCode).toBe(200)
   })

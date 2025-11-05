@@ -11,7 +11,9 @@
 ## Tasks
 ---
 
-- get/tasks/:idDiscipline
+- get/tasks/all/:idDiscipline
+- get/tasks/exams/:idDiscipline
+- get/tasks/works/:idDiscipline
 - put/tasks/
 - delete/tasks/:idtasks
 - post/tasks/

@@ -61,23 +61,23 @@ class TasksController {
       )
     )
     
+    if (!updateResult || (updateResult.affectedRows === 0)) {
+      return res.status(404).json({ error: "Tarefa não encontrado!" })
+    }
+
     res.status(200).json({
-       idTask,
-        name, 
-        type,
-        estimatedHours, 
-        dueDate, 
-        status, 
-        weight,
-        idDiscipline
+      idTask,
+      name, 
+      type,
+      estimatedHours, 
+      dueDate, 
+      status, 
+      weight,
+      idDiscipline
     })
-      if (!updateResult || (updateResult.affectedRows === 0)) {
-        return res.status(404).json({ error: "Usuário não encontrado!" })
-      }
-      return res.status(200).json()
     } catch (err) {
       console.error(err)
-      res.status(500).json({ error: "Erro ao atualizar a tarefa" })
+      res.status(500).json({ error: "Erro ao atualizar a tarefa!" })
     }
   }
 
@@ -146,7 +146,7 @@ class TasksController {
 
       res.status(200).json({...req.body})
     } catch (err) {
-       console.log(err)
+      console.log(err)
       res.status(400).json({ error: "Erro ao excluir a tarefas" })
     }
   }

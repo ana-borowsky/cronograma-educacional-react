@@ -109,6 +109,6 @@ class TasksRepository {
       
       return result
     }
-  }
+}
   
 export default TasksRepository

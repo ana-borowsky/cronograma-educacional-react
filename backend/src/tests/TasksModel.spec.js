@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../app.js"
 
-describe("Testes Taredas", () => {
+describe("Testes tarefas", () => {
 
   it("Criar tarefa", async () => {
     const created = await request(app)

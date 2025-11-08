@@ -1,5 +1,4 @@
 import DisciplineModel from "../Models/DisciplineModel.js"
-import DisciplineRepository from "../Models/Repositories/DisciplineRepository.js"
 import DisciplineService from "../Services/DisciplineService.js"
 
 class DisciplineController {

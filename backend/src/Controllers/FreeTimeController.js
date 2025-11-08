@@ -1,5 +1,4 @@
 import FreeTimeModel from "../Models/FreeTimeModel.js"
-import FreeTimeRepository from "../Models/Repositories/FreeTimeRepository.js"
 import FreeTimeService from "../Services/FreeTimeService.js"
 
 class FreeTimeController {

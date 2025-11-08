@@ -1,5 +1,6 @@
 import FreeTimeModel from "../Models/FreeTimeModel.js"
 import FreeTimeRepository from "../Models/Repositories/FreeTimeRepository.js"
+import FreeTimeService from "../Services/FreeTimeService.js"
 
 class FreeTimeController {
 
@@ -12,16 +13,17 @@ class FreeTimeController {
         startTime,
         durationTime
       } = req.body
-      const repo = new FreeTimeRepository()
-      const result = await repo.insert(new FreeTimeModel(
-        idTime,
-        idUser,
-        weekDay,
-        startTime,
-        durationTime
-      ))
-
-  res.status(200).json({ id: result.insertId, idTime: result.insertId, weekDay })
+      
+      const result = await new FreeTimeService().insert(
+        new FreeTimeModel(
+          idTime,
+          idUser,
+          weekDay,
+          startTime,
+          durationTime
+        )
+      )
+      res.status(200).json({ id: result.insertId, idTime: result.insertId, weekDay })
     } catch (err) {
       console.error(err)
       res.status(500).json({ error: "Erro ao inserir o tempo livre" })
@@ -32,8 +34,7 @@ class FreeTimeController {
   static async delete(req, res) {
     try {
       const { idTime } = req.params
-      const repo = new FreeTimeRepository()
-      const deleteResult = await repo.delete(idTime)
+      const deleteResult = new FreeTimeService().delete(Number(idTime))
       if (deleteResult.affectedRows === 0) {
         return res.status(404).json({ error: "Tempo livre não encontrada" })
       }
@@ -56,11 +57,10 @@ class FreeTimeController {
         startTime,
         durationTime
       } = req.body
-      const repo = new FreeTimeRepository()
 
-      const updateResult = await repo.update(
+      const updateResult = await new FreeTimeService().update(
         new FreeTimeModel(
-          idTime,
+          idTime, 
           idUser,
           weekDay,
           startTime,
@@ -88,8 +88,7 @@ class FreeTimeController {
   static async getAll(req, res) {
     try {
       const { idUser } = req.params
-      const repo = new FreeTimeRepository()
-      const result = await repo.getAll(Number(idUser))
+      const result = await new FreeTimeService().getAll(Number(idUser))
 
       if (!result || (result.length === 0)) {
         return res.status(404).json({ error: "Usuário não encontrado!" })

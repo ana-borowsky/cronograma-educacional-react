@@ -15,6 +15,6 @@ app.use("/discipline", disciplineRoutes)
 app.use("/tasks", taskRoutes)
 app.use("/freeTime", freeTimeRouter)
 app.use("/plannings", planningRouter)
-app.use("/createPlanning", geminiRouter)
+app.use("/buildPlanning", geminiRouter)
 
 export default app;

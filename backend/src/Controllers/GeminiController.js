@@ -1,6 +1,8 @@
 import { GoogleGenAI } from "@google/genai"
 import dotenv from "dotenv"
-import app from "../app.js"
+import FreeTimeService from "../Services/FreeTimeService.js"
+import DisciplineService from "../Services/DisciplineService.js"
+import TasksService from "../Services/TaskService.js"
 dotenv.config()
 
 export class GeminiController {
@@ -8,19 +10,19 @@ export class GeminiController {
     try {
       const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
       const { idUser } = req.params
+      const freeTime = await new FreeTimeService().getAll(Number(idUser))
+      const disciplines = await new DisciplineService().getAll(Number(idUser))
 
-      let freeTIme = []
-      freeTime = await request(app).get(`/freeTime/${idUser}`).query({ idUser: idUser })
-      
-      const disciplines = await request(app).get(`/discipline/${idUser}`).query({ idUser: idUser })
       let tasks = []
+      const tasksService = new TasksService()
       for (const d of disciplines) {
-        const taskResp = await request(app).get(`/tasks/${d.idDiscipline}`).query({ idDiscipline: d.idDiscipline })
+        const taskResp = await tasksService.getAll(Number(d.idDiscipline))
         tasks.push(taskResp)
       }
+      tasks = tasks.flatMap((t) => t)
       
       const payload = {
-        freeTime: freeTIme.map((free) => ({
+        freeTime: freeTime.map((free) => ({
           idTime: free.idTime,
           idUser: free.idUser,
           weekDay: free.weekDay,
@@ -38,7 +40,7 @@ export class GeminiController {
           idDiscipline: task.idDiscipline,
         })),
         instructions: {
-          objective: "Retorne um json se cronograma seguindo as regras especificas",
+          objective: "Retorne apenas um json de cronograma seguindo as regras especificas",
           rules: [
             "Os horários dos planejamentos devem ser nos mesmos horários dos tempos livres",
             "Atividades com o nível de prioridade (weight) maior devem ser finalizadas antes das demais",
@@ -82,8 +84,8 @@ export class GeminiController {
       })
 
       return res.status(200).json(response.text)
-    } catch (err) {
-
+    } catch (err) {z
+      return res.status(500).json({ error: err.message })
     }
   }
 

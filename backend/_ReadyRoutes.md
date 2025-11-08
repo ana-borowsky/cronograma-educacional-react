@@ -35,3 +35,8 @@
 - put/plannings/
 - delete/plannings/:idPlanning
 - post/plannings/
+
+## Gemini
+---
+
+- get/buildPlanning/:idUser  ( retorna os plannings gerados )

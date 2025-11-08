@@ -8,6 +8,12 @@
 ### Backend:
 Entre na pasta backend usando cd backend e configure as variaveis de ambiente criando um arquivo `.env` e configure as variaveis de acordo com o `template.env`.
 
+**Defina a chave api do gemini**
+- entre no [Google AI studio](https://aistudio.google.com/app/api-keys)
+- crie uma chave api
+- copie sua chave api
+- coloque ela no arquivo `.env` criado
+
 **Rode os seguintes comandos:**
 - docker compose up -d
 - npm i

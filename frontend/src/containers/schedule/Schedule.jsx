@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { DateTitle } from "@/components/schedule/DateTitle"
 import { TabButton } from "@/components/schedule/TabButton"
@@ -18,6 +18,7 @@ const Schedule = () => {
   const [dayEvents, setDayEvents] = useState([])
   const [studySlots, setStudySlots] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -44,6 +45,33 @@ const Schedule = () => {
         return [...prevSlots, slotKey]
       }
     })
+  }
+
+  const handleScheduleAction = async () => {
+    try {
+      let response;
+      if (activeTab === 'agenda') {
+        console.log("Chamado 😘")
+        response = await fetch('http://localhost:8800/buildPlanning/1', {
+          method: 'POST',
+        });
+        if (!response.ok) throw new Error('Erro ao recalcular cronograma');
+      } else {
+        response = await fetch('http://localhost:8800/saveStudySlots', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ slots: studySlots }),
+        });
+        if (!response.ok) throw new Error('Erro ao salvar horários');
+      }
+      
+      navigate('../scheduleandtasks');
+
+    } catch (error) {
+      console.error("Falha na ação do cronograma:", error);
+    }
   }
 
   const totalGridRows = 1 + totalGridSlots
@@ -135,11 +163,9 @@ const Schedule = () => {
           <Button
             className="w-full md:w-1/3"
             variant="yellow-primary"
-            asChild
+            onClick={handleScheduleAction}
           >
-            <Link to="../scheduleandtasks">
-              {activeTab === 'agenda' ? 'Recalcular Cronograma' : 'Salvar Horários de Estudo'}
-            </Link>
+            {activeTab === 'agenda' ? 'Recalcular Cronograma' : 'Salvar Horários de Estudo'}
           </Button>
         </div>
       </div>

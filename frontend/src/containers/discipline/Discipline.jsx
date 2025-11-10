@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button"
 import { ListItem } from "@/components/ListItem"
 import { DisciplineTitle } from "@/components/discipline/DisciplineTitle"
@@ -5,7 +6,16 @@ import { WorkFormModal } from "@/components/discipline/WorkFormModal"
 import { ExamFormModal } from "@/components/discipline/ExamFormModal"
 import { DisciplineFormModal } from "@/components/discipline/EditDisciplineModal"
 import { Container } from "@/components/ui/container"
-import { useState } from "react"
+import { useState, useEffect } from 'react'
+
+/*- get/tasks/all/:idDiscipline
+- get/tasks/exams/:idDiscipline
+- get/tasks/works/:idDiscipline
+- get/tasks/dayTasks/:idDiscipline
+- put/tasks/
+- delete/tasks/:idtasks
+- post/tasks/
+*/
 
 const PencilIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-400 group-hover:text-yellow-400 transition-colors">
@@ -18,6 +28,9 @@ const Discipline = ({ disciplineData }) => {
   const [isExamModalOpen, setIsExamModalOpen] = useState(false)
   const [isDisciplineModalOpen, setIsDisciplineModalOpen] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
+  const [works, setWorks] = useState([])
+  const [exams, setExams] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const {
     name,
@@ -32,10 +45,35 @@ const Discipline = ({ disciplineData }) => {
     idDiscipline
   } = disciplineData
 
-  const works = disciplineData.works || []
-  const exams = disciplineData.exams || []
-
   const openDisciplineModal = () => setIsDisciplineModalOpen(true)
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch(`http://localhost:8800/tasks/all/${disciplineData.idDiscipline}`)
+        if (!response.ok) {
+          throw new Error('Falha ao buscar tarefas')
+        }
+
+        const data = await response.json()
+        console.log("📘 Tarefas recebidas:", data)
+        const worksData = data.filter(task => task.type === "Prova")
+        const examsData = data.filter(task => task.type === "Trabalho")
+
+        setWorks(worksData)
+        setExams(examsData)
+        console.log("WORKS:", worksData)
+        console.log("EXAMS:", examsData)
+      } catch (error) {
+        console.error("❌ Erro buscando tarefas:", error)
+      } finally {
+        setLoading(false)
+      }
+      
+    }
+
+    fetchTasks()
+  }, [disciplineData.idDiscipline])
 
   return (
     <Container className="w-[330px]">
@@ -45,14 +83,8 @@ const Discipline = ({ disciplineData }) => {
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <DisciplineTitle
-          title={name}
-          color={color}
-        />
-
-        <div
-          className={`absolute top-0 right-0 p-1 rounded-full transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
-        >
+        <DisciplineTitle title={name} color={color} />
+        <div className={`absolute top-0 right-0 p-1 rounded-full transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
           <PencilIcon />
         </div>
       </div>
@@ -67,76 +99,70 @@ const Discipline = ({ disciplineData }) => {
 
       <hr className="my-6 border-neutral-600" />
 
-      <div className="mb-6">
-        <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Atividades e Trabalhos</h2>
-        <div className="space-y-2 mb-4">
-          {works.length > 0 ? (
-            works.map((work) => (
-              <ListItem
-                key={work.id}
-                id={work.id}
-                fullDescription={work.description}
-                borderColor={work.borderColor}
-                defaultChecked={work.completed}
-              />
-            ))
-          ) : (
-            <p className="text-neutral-500 text-sm">Nenhum trabalho cadastrado.</p>
-          )}
-        </div>
+      {loading ? (
+        <p className="text-neutral-500 text-sm">Carregando tarefas...</p>
+      ) : (
+        <>
+          {/* Trabalhos */}
+          <div className="mb-6">
+            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
+              Atividades e Trabalhos
+            </h2>
 
-        <Button
-          className="w-full"
-          variant="yellow-primary"
-          onClick={() => setIsWorkModalOpen(true)}
-        >
-          <p className="font-medium text-sm">Adicionar trabalho</p>
-        </Button>
-      </div>
+            <div className="space-y-2 mb-4">
+              {works.length > 0 ? (
+                works.map((work) => (
+                  <ListItem
+                    key={work.idTask}
+                    id={work.idTask}
+                    fullDescription={work.name}
+                    borderColor={"#facc15"}
+                  />
+                ))
+              ) : (
+                <p className="text-neutral-500 text-sm">Nenhum trabalho cadastrado.</p>
+              )}
+            </div>
 
-      <hr className="my-6 border-neutral-600" />
+            <Button className="w-full" variant="yellow-primary" onClick={() => setIsWorkModalOpen(true)}>
+              <p className="font-medium text-sm">Adicionar trabalho</p>
+            </Button>
+          </div>
 
-      <div className="mb-4">
-        <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Provas e Avaliações</h2>
-        <div className="space-y-2 mb-4">
-          {exams.length > 0 ? (
-            exams.map((exam) => (
-              <ListItem
-                key={exam.id}
-                id={exam.id}
-                fullDescription={exam.description}
-                borderColor={exam.borderColor}
-                defaultChecked={exam.completed}
-              />
-            ))
-          ) : (
-            <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
-          )}
-        </div>
+          <hr className="my-6 border-neutral-600" />
 
-        <Button
-          className="w-full"
-          variant="yellow-primary"
-          onClick={() => setIsExamModalOpen(true)}
-        >
-          <p className="font-medium text-sm">Adicionar prova</p>
-        </Button>
-      </div>
+          {/* Provas */}
+          <div className="mb-4">
+            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
+              Provas e Avaliações
+            </h2>
 
-      <WorkFormModal
-        isOpen={isWorkModalOpen}
-        onClose={() => setIsWorkModalOpen(false)}
-      />
-      <ExamFormModal
-        isOpen={isExamModalOpen}
-        onClose={() => setIsExamModalOpen(false)}
-      />
+            <div className="space-y-2 mb-4">
+              {exams.length > 0 ? (
+                exams.map((exam) => (
+                  <ListItem
+                    key={exam.idTask}
+                    id={exam.idTask}
+                    fullDescription={exam.name}
+                    borderColor={"#3b82f6"}
+                  />
+                ))
+              ) : (
+                <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
+              )}
+            </div>
 
-      <DisciplineFormModal
-        isOpen={isDisciplineModalOpen}
-        onClose={() => setIsDisciplineModalOpen(false)}
-        disciplineData={disciplineData}
-      />
+            <Button className="w-full" variant="yellow-primary" onClick={() => setIsExamModalOpen(true)}>
+              <p className="font-medium text-sm">Adicionar prova</p>
+            </Button>
+          </div>
+        </>
+      )}
+
+      {/* Modais */}
+      <WorkFormModal isOpen={isWorkModalOpen} onClose={() => setIsWorkModalOpen(false)} />
+      <ExamFormModal isOpen={isExamModalOpen} onClose={() => setIsExamModalOpen(false)} />
+      <DisciplineFormModal isOpen={isDisciplineModalOpen} onClose={() => setIsDisciplineModalOpen(false)} disciplineData={disciplineData} />
     </Container>
   )
 }

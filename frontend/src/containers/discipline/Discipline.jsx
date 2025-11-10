@@ -173,7 +173,12 @@ const Discipline = ({ disciplineData }) => {
       )}
 
       {/* Modais */}
-      <WorkFormModal isOpen={isWorkModalOpen} onClose={() => setIsWorkModalOpen(false)} />
+      <WorkFormModal
+        isOpen={isWorkModalOpen}
+        onClose={() => setIsWorkModalOpen(false)}
+        idDiscipline={disciplineData.idDiscipline}
+        onWorkAdded={(newWork) => setWorks((prev) => [...prev, newWork])}
+      />
       <ExamFormModal isOpen={isExamModalOpen} onClose={() => setIsExamModalOpen(false)} />
       <DisciplineFormModal isOpen={isDisciplineModalOpen} onClose={() => setIsDisciplineModalOpen(false)} disciplineData={disciplineData} />
     </Container>

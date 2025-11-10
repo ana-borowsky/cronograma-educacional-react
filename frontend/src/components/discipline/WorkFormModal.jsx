@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -12,8 +12,9 @@ const XMark = () => (
   </svg>
 )
 
-export const WorkFormModal = ({ isOpen, onClose, idDiscipline }) => {
-  console.log("Discipline ID recebido:", idDiscipline)
+export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type }) => {
+  const isEditMode = !!editData
+
   const [formData, setFormData] = useState({
     name: "",
     estimatedHours: "",
@@ -21,6 +22,20 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline }) => {
     weight: "",
     file: null,
   })
+
+  useEffect(() => {
+    if (editData) {
+      setFormData({
+        name: editData.name || "",
+        estimatedHours: editData.estimatedHours
+          ? editData.estimatedHours.replace(":00:00", "")
+          : "",
+        dueDate: editData.dueDate ? editData.dueDate.split("T")[0] : "",
+        weight: editData.weight || "",
+        file: null,
+      })
+    }
+  }, [editData])
 
   if (!isOpen) return null
 
@@ -32,35 +47,59 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline }) => {
     }))
   }
 
-  const handleFormSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
       const body = {
+        id: editData?.id,
         name: formData.name,
         type: "Trabalho",
         estimatedHours: `${formData.estimatedHours}:00:00`,
         dueDate: formData.dueDate,
         status: "Pendente",
         weight: formData.weight,
-        idDiscipline: idDiscipline, 
+        idDiscipline: idDiscipline,
       }
 
-      const response = await fetch("http://localhost:8800/tasks/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const url = isEditMode
+        ? "http://localhost:8800/tasks"
+        : "http://localhost:8800/tasks/"
+
+      const method = isEditMode ? "PUT" : "POST"
+
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       })
 
-      if (!response.ok) throw new Error("Falha ao adicionar trabalho")
+      if (!response.ok) throw new Error("Falha ao salvar atividade")
 
-      alert("Trabalho adicionado com sucesso!")
+      alert(isEditMode ? "Trabalho atualizado com sucesso!" : "Atividade adicionada com sucesso!")
       onClose()
     } catch (error) {
-      console.error("Erro ao enviar trabalho:", error)
-      alert("Erro ao enviar trabalho.")
+      console.error("Erro ao enviar atividade:", error)
+      alert("Erro ao salvar atividade.")
+    }
+  }
+
+  const handleDelete = async () => {
+    if (!editData?.id) return
+    if (!confirm("Tem certeza que deseja excluir esta atividade?")) return
+
+    try {
+      const response = await fetch(`http://localhost:8800/tasks/${editData.id}`, {
+        method: "DELETE",
+      })
+
+      if (!response.ok) throw new Error("Erro ao excluir atividade")
+
+      alert("Atividade excluída com sucesso!")
+      onClose()
+    } catch (error) {
+      console.error("Erro ao excluir atividade:", error)
+      alert("Erro ao excluir trabalho.")
     }
   }
 
@@ -76,7 +115,11 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-5 border-b border-neutral-700 flex justify-between items-center">
-          <h3 className="text-xl font-bold text-white">Adicionar trabalho</h3>
+          <h3 className="text-xl font-bold text-white">
+            {isEditMode
+              ? `Editar ${type.toLowerCase()}`
+              : `Adicionar ${type.toLowerCase()}`}
+          </h3>
           <Button
             className="bg-transparent text-neutral-400 hover:bg-neutral-700 p-1 rounded-full"
             onClick={onClose}
@@ -86,10 +129,10 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline }) => {
           </Button>
         </div>
 
-        <form onSubmit={handleFormSubmit} className="space-y-4 p-5">
+        <form onSubmit={handleSubmit} className="space-y-4 p-5">
           <div className="flex flex-col">
             <label className="text-neutral-400 text-xs mb-1 font-medium">
-              Nome do trabalho
+              Nome
             </label>
             <Input
               type="text"
@@ -133,10 +176,9 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline }) => {
             />
           </div>
 
-          {/* Campo de peso */}
           <div className="flex flex-col">
             <label className="text-neutral-400 text-xs mb-1 font-medium">
-              Peso do trabalho
+              Peso
             </label>
             <Input
               type="number"
@@ -151,7 +193,6 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline }) => {
             />
           </div>
 
-          {/* Upload de arquivo */}
           <div className="flex flex-col">
             <label className="text-neutral-400 text-xs mb-1 font-medium">
               Upload de Arquivo (opcional)
@@ -165,9 +206,22 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline }) => {
             />
           </div>
 
-          <Button type="submit" className="w-full" variant="yellow-primary">
-            Adicionar trabalho
-          </Button>
+          <div className="flex space-x-2">
+            <Button type="submit" className="w-1/2" variant="yellow-primary">
+              {isEditMode ? "Salvar alterações" : "Adicionar trabalho"}
+            </Button>
+
+            {isEditMode && (
+              <Button
+                type="button"
+                className="w-1/2"
+                variant="destructive"
+                onClick={handleDelete}
+              >
+                Excluir
+              </Button>
+            )}
+          </div>
         </form>
       </div>
     </div>

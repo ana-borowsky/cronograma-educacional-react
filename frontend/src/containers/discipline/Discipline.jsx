@@ -14,14 +14,26 @@ const PencilIcon = () => (
 
 const Discipline = ({ disciplineData }) => {
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
-  const [isExamModalOpen, setIsExamModalOpen] = useState(false)
   const [isDisciplineModalOpen, setIsDisciplineModalOpen] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [works, setWorks] = useState([])
   const [exams, setExams] = useState([])
   const [loading, setLoading] = useState(true)
+  const [editingTask, setEditingTask] = useState(null)
+  const [modalType, setModalType] = useState("Trabalho")
+  const [selectedIdTask, setSelectedIdTask] = useState(null)
 
-  const { name, color, project, classroom, day, startTime, endTime, weight, idDiscipline } = disciplineData
+  const {
+    name,
+    color,
+    project,
+    classroom,
+    day,
+    startTime,
+    endTime,
+    weight,
+    idDiscipline
+  } = disciplineData
 
   const openDisciplineModal = () => setIsDisciplineModalOpen(true)
 
@@ -32,34 +44,51 @@ const Discipline = ({ disciplineData }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
       })
-
       if (!response.ok) throw new Error("Erro ao atualizar status da tarefa")
-
-      setWorks(prev => prev.map(task => task.idTask === idTask ? { ...task, status: newStatus } : task))
-      setExams(prev => prev.map(task => task.idTask === idTask ? { ...task, status: newStatus } : task))
+      setWorks(prev =>
+        prev.map(task => task.idTask === idTask ? { ...task, status: newStatus } : task)
+      )
+      setExams(prev =>
+        prev.map(task => task.idTask === idTask ? { ...task, status: newStatus } : task)
+      )
     } catch (error) {
-      console.error("❌ Erro ao atualizar status:", error)
+      console.error("Erro ao atualizar status:", error)
+    }
+  }
+
+  const fetchTasks = async () => {
+    try {
+      const response = await fetch(`http://localhost:8800/tasks/all/${disciplineData.idDiscipline}`)
+      if (!response.ok) throw new Error('Falha ao buscar tarefas')
+      const data = await response.json()
+      const worksData = data.filter(task => task.type === "Trabalho")
+      const examsData = data.filter(task => task.type === "Prova")
+      setWorks(worksData)
+      setExams(examsData)
+    } catch (error) {
+      console.error("Erro buscando tarefas:", error)
+    } finally {
+      setLoading(false)
     }
   }
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await fetch(`http://localhost:8800/tasks/all/${idDiscipline}`)
-        if (!response.ok) throw new Error('Falha ao buscar tarefas')
-
-        const data = await response.json()
-        setWorks(data.filter(task => task.type === "Trabalho"))
-        setExams(data.filter(task => task.type === "Prova"))
-      } catch (error) {
-        console.error("❌ Erro buscando tarefas:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchTasks()
-  }, [idDiscipline])
+  }, [disciplineData.idDiscipline])
+
+  const handleOpenModal = (type, task = null) => {
+    setModalType(type)
+    setEditingTask(task)
+    setSelectedIdTask(task ? task.idTask : null)
+    setIsWorkModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsWorkModalOpen(false)
+    setEditingTask(null)
+    setSelectedIdTask(null)
+    fetchTasks()
+  }
 
   return (
     <Container className="w-[330px]">
@@ -89,12 +118,10 @@ const Discipline = ({ disciplineData }) => {
         <p className="text-neutral-500 text-sm">Carregando tarefas...</p>
       ) : (
         <>
-          {/* Trabalhos */}
           <div className="mb-6">
             <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
               Atividades e Trabalhos
             </h2>
-
             <div className="space-y-2 mb-4">
               {works.length > 0 ? (
                 works.map((work) => (
@@ -102,28 +129,31 @@ const Discipline = ({ disciplineData }) => {
                     key={work.idTask}
                     id={work.idTask}
                     fullDescription={work.name}
-                    borderColor={"blue"}
+                    borderColor="blue"
                     onStatusChange={handleStatusChange}
+                    onEdit={() => handleOpenModal("Trabalho", work)}
+                    taskData={work}
                   />
                 ))
               ) : (
                 <p className="text-neutral-500 text-sm">Nenhum trabalho cadastrado.</p>
               )}
             </div>
-
-            <Button className="w-full" variant="yellow-primary" onClick={() => setIsWorkModalOpen(true)}>
+            <Button
+              className="w-full"
+              variant="yellow-primary"
+              onClick={() => handleOpenModal("Trabalho")}
+            >
               <p className="font-medium text-sm">Adicionar trabalho</p>
             </Button>
           </div>
 
           <hr className="my-6 border-neutral-600" />
 
-          {/* Provas */}
           <div className="mb-4">
             <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
               Provas e Avaliações
             </h2>
-
             <div className="space-y-2 mb-4">
               {exams.length > 0 ? (
                 exams.map((exam) => (
@@ -131,16 +161,21 @@ const Discipline = ({ disciplineData }) => {
                     key={exam.idTask}
                     id={exam.idTask}
                     fullDescription={exam.name}
-                    borderColor={"red"}
+                    borderColor="red"
                     onStatusChange={handleStatusChange}
+                    onEdit={() => handleOpenModal("Prova", exam)}
+                    taskData={exam}
                   />
                 ))
               ) : (
                 <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
               )}
             </div>
-
-            <Button className="w-full" variant="yellow-primary" onClick={() => setIsExamModalOpen(true)}>
+            <Button
+              className="w-full"
+              variant="yellow-primary"
+              onClick={() => handleOpenModal("Prova")}
+            >
               <p className="font-medium text-sm">Adicionar prova</p>
             </Button>
           </div>
@@ -149,18 +184,10 @@ const Discipline = ({ disciplineData }) => {
 
       <WorkFormModal
         isOpen={isWorkModalOpen}
-        onClose={() => setIsWorkModalOpen(false)}
+        onClose={handleCloseModal}
         idDiscipline={idDiscipline}
-        defaultType="Trabalho"
-        onWorkAdded={(newWork) => setWorks((prev) => [...prev, newWork])}
-      />
-
-      <WorkFormModal
-        isOpen={isExamModalOpen}
-        onClose={() => setIsExamModalOpen(false)}
-        idDiscipline={idDiscipline}
-        defaultType="Prova"
-        onWorkAdded={(newExam) => setExams((prev) => [...prev, newExam])}
+        editData={editingTask ? { ...editingTask, id: selectedIdTask } : null}
+        type={modalType}
       />
 
       <DisciplineFormModal

@@ -1,5 +1,5 @@
 import DisciplineModel from "../Models/DisciplineModel.js"
-import DisciplineRepository from "../Models/Repositories/DisciplineRepository.js"
+import DisciplineService from "../Services/DisciplineService.js"
 
 class DisciplineController {
 
@@ -17,19 +17,21 @@ class DisciplineController {
         endTime,
         weight
       } = req.body
-      const repo = new DisciplineRepository()
-      const result = await repo.insert(new DisciplineModel(
-        idDiscipline,
-        idUser,
-        name,
-        color,
-        project,
-        classroom,
-        day,
-        startTime,
-        endTime,
-        weight
-      ))
+
+      const result = await new DisciplineService().insert(
+        new DisciplineModel(
+          idDiscipline,
+          idUser,
+          name,
+          color,
+          project,
+          classroom,
+          day,
+          startTime,
+          endTime,
+          weight
+        )
+      )
 
       res.status(200).json({ id: result.insertId, name })
     } catch (err) {
@@ -41,8 +43,9 @@ class DisciplineController {
   static async delete(req, res) {
     try {
       const { idDiscipline } = req.params
-      const repo = new DisciplineRepository()
-      const deleteResult = await repo.delete(idDiscipline)
+      const deleteResult = await new DisciplineService().delete(
+        Number(idDiscipline)
+      )
       if (deleteResult.affectedRows === 0) {
         return res.status(404).json({ error: "Disciplina não encontrada" })
       }
@@ -57,9 +60,7 @@ class DisciplineController {
   static async updateDiscipline(req, res) {
     try {
       const { idUser, idDiscipline, name, color, project, classroom, day, startTime, endTime, weight } = req.body
-      const repo = new DisciplineRepository()
-
-      const updateResult = await repo.update(
+      const updateResult = await new DisciplineService().update(
         new DisciplineModel(
           idDiscipline,
           idUser,
@@ -99,8 +100,9 @@ class DisciplineController {
   static async getAll(req, res) {
     try {
       const { idUser } = req.params
-      const repo = new DisciplineRepository()
-      const result = await repo.getAll(Number(idUser))
+      const result = await new DisciplineService().getAll(
+        Number(idUser)
+      )
 
       if (!result || (result.length === 0)) {
         return res.status(404).json({ error: "Usuário não encontrado!" })

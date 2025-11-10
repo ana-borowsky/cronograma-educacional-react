@@ -1,168 +1,149 @@
+'use client'
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 /**
- * * @param {object} props
- * @param {object} [props.disciplineData]
+ * @param {object} props
+ * @param {object} [props.disciplineData] 
+ * @param {number} [props.idUser=1] 
+ * @param {Function} [props.onCancel] 
+ * @param {Function} [props.onRefresh] 
  */
-export const DisciplineForm = ({ disciplineData }) => {
-  const isEditing = !!disciplineData;
-  const mainButtonText = isEditing ? 'Salvar Disciplina' : 'Adicionar Matéria';
+export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh }) => {
+  const isEditing = !!disciplineData
+
+  const formatTimeForInput = (time) => {
+    if (!time) return ""
+    return time.length === 8 ? time.slice(0, 5) : time 
+  }
+
+  const [formData, setFormData] = useState({
+    name: disciplineData?.name || "",
+    project: disciplineData?.project || "",
+    classroom: disciplineData?.classroom || "",
+    day: disciplineData?.day || "",
+    startTime: formatTimeForInput(disciplineData?.startTime) || "",
+    endTime: formatTimeForInput(disciplineData?.endTime) || "",
+    weight: disciplineData?.weight || "",
+    color: disciplineData?.color || 1,
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const formatTimeForBackend = (time) => {
+    if (!time) return null
+    return time.length === 5 ? `${time}:00` : time
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const payload = {
+      ...formData,
+      startTime: formatTimeForBackend(formData.startTime),
+      endTime: formatTimeForBackend(formData.endTime),
+      idUser,
+      ...(isEditing && { idDiscipline: disciplineData.idDiscipline }),
+    }
+
+    console.log("📦 Enviando payload:", payload)
+
+    const method = isEditing ? "PUT" : "POST"
+
+    try {
+      const response = await fetch("http://localhost:8800/discipline/", {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) throw new Error("Erro ao salvar a disciplina.")
+
+      alert(isEditing ? "Disciplina atualizada com sucesso!" : "Disciplina adicionada com sucesso!")
+      onRefresh?.()
+      onCancel?.()
+    } catch (err) {
+      alert(err.message)
+    }
+  }
+
+  const handleDelete = async () => {
+    if (!disciplineData?.idDiscipline) return alert("ID da disciplina não encontrado.")
+    if (!confirm("Tem certeza que deseja excluir esta disciplina?")) return
+
+    try {
+      const response = await fetch(`http://localhost:8800/discipline/${disciplineData.idDiscipline}`, { method: "DELETE" })
+      if (!response.ok) throw new Error("Erro ao excluir a disciplina.")
+      alert("Disciplina excluída com sucesso!")
+      onRefresh?.()
+      onCancel?.()
+    } catch (err) {
+      alert(err.message)
+    }
+  }
 
   return (
-    <div className="mt-5 border-t border-neutral-700 pt-5">
-      <div>
-        <h3 className="text-xl font-bold text-neutral-300 mb-4">Gerenciamento de Projeto</h3>
-        <form className="space-y-6">
-          <div className="space-y-1">
-            <label htmlFor="project-select" className="block text-neutral-300 font-semibold text-sm">
-              Selecione o projeto
-            </label>
-            <div className="relative">
-              <select
-                id="project-select"
-                name="project-select"
-                className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-blue-500 text-sm appearance-none pr-10"
-                defaultValue="vestibular"
-              >
-                <option value="vestibular">Vestibular</option>
-                <option value="quinto-periodo">Quinto Período</option>
-                <option value="terceirao">Terceirão</option>
-                <option disabled>──────────</option>
-                <option value="" disabled>Selecione ou Crie um Novo</option>
-              </select>
-              <svg
-                className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-400"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01-.02-1.06z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div>
-          <div className="space-y-1">
-            <label htmlFor="new-project" className="block text-neutral-300 font-semibold text-sm">
-              Criar novo projeto
-            </label>
-            <div className="flex space-x-2">
-              <Input
-                type="text"
-                id="new-project"
-                name="new-project"
-                placeholder="Nome do novo projeto..."
-                variant="dark"
-              />
-              <Button
-                type="button"
-                variant="yellow-primary"
-              >
-                Criar
-              </Button>
-            </div>
-          </div>
-        </form>
-        <hr className="border-t border-neutral-700 my-6" />
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="space-y-1">
+        <label className="block text-neutral-300 font-semibold text-sm">Nome</label>
+        <Input name="name" value={formData.name} onChange={handleChange} required variant="dark" placeholder="Ex: Banco de Dados" />
       </div>
 
-      <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Ler arquivo com IA</h2>
-      <form className="space-y-6">
-        <p className="text-neutral-400 text-sm text-center">Carregue um arquivo (ex: print) contendo a lista de matérias, salas e horários.</p>
-        <div className="space-y-2">
-          <label htmlFor="file-upload-ensalamento" className="block text-neutral-300 font-semibold text-sm">Selecione o Arquivo do Ensalamento</label>
-          <Input
-            type="file"
-            id="file-upload-ensalamento"
-            name="schedule-file"
-            required
-            variant="dark"
-            className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
-          />
-        </div>
-        <div className="space-y-1">
-          <label htmlFor="file-upload-planos" className="block text-neutral-300 font-semibold text-sm">Selecione os arquivos dos planos de ensino das matérias</label>
-          <Input
-            type="file"
-            id="file-upload-planos"
-            name="schedule-file"
-            required
-            multiple
-            variant="dark"
-            className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
-          />
-        </div>
-        <Button className="w-full" asChild variant="yellow-primary">
-          <a href="/disciplines">
-            {mainButtonText} (via IA)
-          </a>
-        </Button>
-      </form>
+      <div className="space-y-1">
+        <label className="block text-neutral-300 font-semibold text-sm">Projeto</label>
+        <Input name="project" value={formData.project} onChange={handleChange} required variant="dark" placeholder="Ex: Sistema Web" />
+      </div>
 
-      <br />
-      <hr className="border-t border-neutral-700 my-4" />
+      <div className="space-y-1">
+        <label className="block text-neutral-300 font-semibold text-sm">Sala / Local</label>
+        <Input name="classroom" value={formData.classroom} onChange={handleChange} required variant="dark" placeholder="Ex: Sala 203" />
+      </div>
 
-      <h2 className="flex items-center text-xl font-bold text-white mb-4 border-b border-neutral-700 pb-2 truncate">Ou insira manualmente</h2>
-      <form className="space-y-4">
-        <div className="space-y-1">
-          <label htmlFor="course-name" className="block text-neutral-300 font-semibold text-sm">Nome da Matéria</label>
-          <Input
-            type="text"
-            id="course-name"
-            name="course-name"
-            placeholder="Ex: Cálculo I"
-            required
-            variant="dark"
-            defaultValue={isEditing ? (disciplineData.title || "") : ""}
-          />
-        </div>
+      <div className="space-y-1">
+        <label className="block text-neutral-300 font-semibold text-sm">Dia</label>
+        <Input name="day" value={formData.day} onChange={handleChange} required variant="dark" placeholder="Ex: Segunda-feira" />
+      </div>
 
-        <div className="space-y-1">
-          <label htmlFor="room-name" className="block text-neutral-300 font-semibold text-sm">Sala / Local</label>
-          <Input
-            type="text"
-            id="room-name"
-            name="room-name"
-            placeholder="Ex: Sala B-205 ou Laboratório de Física"
-            required
-            variant="dark"
-          />
+      <div className="flex space-x-2">
+        <div className="space-y-1 flex-1">
+          <label className="block text-neutral-300 font-semibold text-sm">Início</label>
+          <Input name="startTime" type="time" step="60" value={formData.startTime} onChange={handleChange} required variant="dark" />
         </div>
-        <div className="space-y-1">
-          <label htmlFor="schedule-time" className="block text-neutral-300 font-semibold text-sm">Horário e Dia</label>
-          <Input
-            type="text"
-            id="schedule-time"
-            name="schedule-time"
-            placeholder="Ex: Segunda e Quarta, 19:00 - 21:00"
-            required
-            variant="dark"
-          />
+        <div className="space-y-1 flex-1">
+          <label className="block text-neutral-300 font-semibold text-sm">Fim</label>
+          <Input name="endTime" type="time" step="60" value={formData.endTime} onChange={handleChange} required variant="dark" />
         </div>
-        <div className="space-y-1">
-          <label htmlFor="file-upload-manual" className="block text-neutral-300 font-semibold text-sm">Selecione o arquivo de plano de ensino da matéria</label>
+      </div>
 
-          <Input
-            type="file"
-            id="file-upload-manual"
-            name="schedule-file"
-            required
-            variant="dark"
-            className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
-          />
-        </div>
-        <Button className="w-full" asChild variant="yellow-primary">
-          <a href="/disciplines">
-            {mainButtonText} (Manual)
-          </a>
-        </Button>
+      <div className="space-y-1">
+        <label className="block text-neutral-300 font-semibold text-sm">Peso</label>
+        <Input name="weight" type="number" value={formData.weight} onChange={handleChange} required variant="dark" min="0" max="10" />
+      </div>
 
-        {isEditing && (
-          <Button className="w-full mt-4" variant="destructive" onClick={() => { console.log("Excluir disciplina") }}>
-            Excluir Disciplina
+      <div className="space-y-1">
+        <label className="block text-neutral-300 font-semibold text-sm">Cor</label>
+        <Input name="color" type="number" value={formData.color} onChange={handleChange} required variant="dark" min="1" max="5" />
+      </div>
+
+      {isEditing ? (
+        <div className="flex justify-between gap-3 pt-3">
+          <Button type="button" variant="destructive" className="flex-1" onClick={handleDelete}>
+            Excluir
           </Button>
-        )}
-      </form>
-    </div>
+          <Button type="submit" variant="yellow-primary" className="flex-1">
+            Salvar
+          </Button>
+        </div>
+      ) : (
+        <Button type="submit" className="w-full" variant="yellow-primary">
+          Adicionar disciplina
+        </Button>
+      )}
+    </form>
   )
 }

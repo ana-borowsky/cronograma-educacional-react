@@ -1,5 +1,5 @@
-import { db } from "../../db.js";
-import DisciplineModel from "../DisciplineModel.js";
+import { db } from "../db.js";
+import DisciplineModel from "../Models/DisciplineModel.js";
 
 class DisciplineRepository {
   constructor() { }

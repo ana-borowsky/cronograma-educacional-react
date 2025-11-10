@@ -1,5 +1,5 @@
-import db from "../../db.js"
-import FreeTimeModel from "../FreeTimeModel.js"
+import db from "../db.js"
+import FreeTimeModel from "../Models/FreeTimeModel.js"
 
 class FreeTimeRepository {
   constructor() { }

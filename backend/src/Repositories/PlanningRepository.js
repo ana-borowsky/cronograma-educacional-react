@@ -1,5 +1,5 @@
-import db from "../../db.js"
-import PlanningModel from "../PlanningModel.js"
+import db from "../db.js"
+import PlanningModel from "../Models/PlanningModel.js"
 
 class PlanningRepository {
   constructor() { }

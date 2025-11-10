@@ -1,5 +1,5 @@
-import { db } from "../../db.js";
-import ScheduleModel from "../ScheduleModel.js"
+import { db } from "../db.js";
+import ScheduleModel from "../Models/ScheduleModel.js"
 
 class ScheduleRespository {
   constructor () { }

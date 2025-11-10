@@ -1,4 +1,4 @@
-import FreeTimeRepository from "../Models/Repositories/FreeTimeRepository.js"
+import FreeTimeRepository from "../Repositories/FreeTimeRepository.js"
 
 class FreeTimeService {
   constructor() {}

@@ -1,5 +1,4 @@
- import ScheduleModel from "../Models/ScheduleModel.js";
- import ScheduleRepository from "../Models/Repositories/ScheduleRepository.js"
+ import ScheduleRepository from "../Repositories/ScheduleRepository.js"
 
  class ScheduleController {
   static async insertSchedule (req, res) {

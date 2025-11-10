@@ -1,4 +1,4 @@
-import DisciplineRepository from "../Models/Repositories/DisciplineRepository.js"
+import DisciplineRepository from "../Repositories/DisciplineRepository.js"
 
 class DisciplineService {
   constructor() { }

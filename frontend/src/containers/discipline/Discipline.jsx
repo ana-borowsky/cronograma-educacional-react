@@ -1,9 +1,7 @@
-
 import { Button } from "@/components/ui/button"
 import { ListItem } from "@/components/ListItem"
 import { DisciplineTitle } from "@/components/discipline/DisciplineTitle"
 import { WorkFormModal } from "@/components/discipline/WorkFormModal"
-import { ExamFormModal } from "@/components/discipline/ExamFormModal"
 import { DisciplineFormModal } from "@/components/discipline/EditDisciplineModal"
 import { Container } from "@/components/ui/container"
 import { useState, useEffect } from 'react'
@@ -23,18 +21,7 @@ const Discipline = ({ disciplineData }) => {
   const [exams, setExams] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const {
-    name,
-    color,
-    project,
-    classroom,
-    day,
-    startTime,
-    endTime,
-    weight,
-    idUser,
-    idDiscipline
-  } = disciplineData
+  const { name, color, project, classroom, day, startTime, endTime, weight, idDiscipline } = disciplineData
 
   const openDisciplineModal = () => setIsDisciplineModalOpen(true)
 
@@ -46,16 +33,10 @@ const Discipline = ({ disciplineData }) => {
         body: JSON.stringify({ status: newStatus }),
       })
 
-      if (!response.ok) {
-        throw new Error("Erro ao atualizar status da tarefa")
-      }
+      if (!response.ok) throw new Error("Erro ao atualizar status da tarefa")
 
-      setWorks(prev => prev.map(task =>
-        task.idTask === idTask ? { ...task, status: newStatus } : task
-      ))
-      setExams(prev => prev.map(task =>
-        task.idTask === idTask ? { ...task, status: newStatus } : task
-      ))
+      setWorks(prev => prev.map(task => task.idTask === idTask ? { ...task, status: newStatus } : task))
+      setExams(prev => prev.map(task => task.idTask === idTask ? { ...task, status: newStatus } : task))
     } catch (error) {
       console.error("❌ Erro ao atualizar status:", error)
     }
@@ -64,27 +45,21 @@ const Discipline = ({ disciplineData }) => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch(`http://localhost:8800/tasks/all/${disciplineData.idDiscipline}`)
-        if (!response.ok) {
-          throw new Error('Falha ao buscar tarefas')
-        }
+        const response = await fetch(`http://localhost:8800/tasks/all/${idDiscipline}`)
+        if (!response.ok) throw new Error('Falha ao buscar tarefas')
 
         const data = await response.json()
-        const worksData = data.filter(task => task.type === "Trabalho")
-        const examsData = data.filter(task => task.type === "Prova")
-
-        setWorks(worksData)
-        setExams(examsData)
+        setWorks(data.filter(task => task.type === "Trabalho"))
+        setExams(data.filter(task => task.type === "Prova"))
       } catch (error) {
         console.error("❌ Erro buscando tarefas:", error)
       } finally {
         setLoading(false)
       }
-      
     }
 
     fetchTasks()
-  }, [disciplineData.idDiscipline])
+  }, [idDiscipline])
 
   return (
     <Container className="w-[330px]">
@@ -172,15 +147,27 @@ const Discipline = ({ disciplineData }) => {
         </>
       )}
 
-      {/* Modais */}
       <WorkFormModal
         isOpen={isWorkModalOpen}
         onClose={() => setIsWorkModalOpen(false)}
-        idDiscipline={disciplineData.idDiscipline}
+        idDiscipline={idDiscipline}
+        defaultType="Trabalho"
         onWorkAdded={(newWork) => setWorks((prev) => [...prev, newWork])}
       />
-      <ExamFormModal isOpen={isExamModalOpen} onClose={() => setIsExamModalOpen(false)} />
-      <DisciplineFormModal isOpen={isDisciplineModalOpen} onClose={() => setIsDisciplineModalOpen(false)} disciplineData={disciplineData} />
+
+      <WorkFormModal
+        isOpen={isExamModalOpen}
+        onClose={() => setIsExamModalOpen(false)}
+        idDiscipline={idDiscipline}
+        defaultType="Prova"
+        onWorkAdded={(newExam) => setExams((prev) => [...prev, newExam])}
+      />
+
+      <DisciplineFormModal
+        isOpen={isDisciplineModalOpen}
+        onClose={() => setIsDisciplineModalOpen(false)}
+        disciplineData={disciplineData}
+      />
     </Container>
   )
 }

@@ -99,9 +99,12 @@ const Discipline = ({ disciplineData }) => {
         onMouseLeave={() => setIsHovering(false)}
       >
         <DisciplineTitle title={name} color={color} />
-        <div className={`absolute top-0 right-0 p-1 rounded-full transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
-          <PencilIcon />
+        <div
+          className={`absolute top-0 right-0 p-1.5 bg-neutral-800 flex items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <PencilIcon className="w-4 h-4 text-white" />
         </div>
+
       </div>
 
       <div className="mb-4 text-neutral-300">

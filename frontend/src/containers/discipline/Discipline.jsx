@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button"
 import { ListItem } from "@/components/ListItem"
 import { DisciplineTitle } from "@/components/discipline/DisciplineTitle"
 import { WorkFormModal } from "@/components/discipline/WorkFormModal"
-import { ExamFormModal } from "@/components/discipline/ExamFormModal"
-import { DisciplineFormModal } from "@/components/discipline/DisciplineFormModal"
-import { useState } from "react"
+import { DisciplineFormModal } from "@/components/discipline/EditDisciplineModal"
+import { Container } from "@/components/ui/container"
+import { useState, useEffect } from 'react'
 
 const PencilIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-400 group-hover:text-yellow-400 transition-colors">
@@ -14,9 +14,14 @@ const PencilIcon = () => (
 
 const Discipline = ({ disciplineData }) => {
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
-  const [isExamModalOpen, setIsExamModalOpen] = useState(false)
   const [isDisciplineModalOpen, setIsDisciplineModalOpen] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
+  const [works, setWorks] = useState([])
+  const [exams, setExams] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [editingTask, setEditingTask] = useState(null)
+  const [modalType, setModalType] = useState("Trabalho")
+  const [selectedIdTask, setSelectedIdTask] = useState(null)
 
   const {
     name,
@@ -27,36 +32,84 @@ const Discipline = ({ disciplineData }) => {
     startTime,
     endTime,
     weight,
+    idDiscipline
   } = disciplineData
-
-  const works = disciplineData.works || []
-  const exams = disciplineData.exams || []
 
   const openDisciplineModal = () => setIsDisciplineModalOpen(true)
 
+  const handleStatusChange = async (idTask, newStatus) => {
+    try {
+      const response = await fetch(`http://localhost:8800/tasks/${idTask}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      })
+      if (!response.ok) throw new Error("Erro ao atualizar status da tarefa")
+      setWorks(prev =>
+        prev.map(task => task.idTask === idTask ? { ...task, status: newStatus } : task)
+      )
+      setExams(prev =>
+        prev.map(task => task.idTask === idTask ? { ...task, status: newStatus } : task)
+      )
+    } catch (error) {
+      console.error("Erro ao atualizar status:", error)
+    }
+  }
+
+  const fetchTasks = async () => {
+    try {
+      const response = await fetch(`http://localhost:8800/tasks/all/${disciplineData.idDiscipline}`)
+      if (!response.ok) throw new Error('Falha ao buscar tarefas')
+      const data = await response.json()
+      const worksData = data.filter(task => task.type === "Trabalho")
+      const examsData = data.filter(task => task.type === "Prova")
+      setWorks(worksData)
+      setExams(examsData)
+    } catch (error) {
+      console.error("Erro buscando tarefas:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchTasks()
+  }, [disciplineData.idDiscipline])
+
+  const handleOpenModal = (type, task = null) => {
+    setModalType(type)
+    setEditingTask(task)
+    setSelectedIdTask(task ? task.idTask : null)
+    setIsWorkModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsWorkModalOpen(false)
+    setEditingTask(null)
+    setSelectedIdTask(null)
+    fetchTasks()
+  }
+
   return (
-    <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-lg flex-shrink-0 w-[312px] flex flex-col">
+    <Container className="w-[330px]">
       <div
         className="relative flex items-start justify-between cursor-pointer group mb-6 transition-all duration-200"
         onClick={openDisciplineModal}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <DisciplineTitle
-          title={name}
-          color={color}
-        />
-
+        <DisciplineTitle title={name} color={color} />
         <div
-          className={`absolute top-0 right-0 p-1 rounded-full transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute top-0 right-0 p-1.5 bg-neutral-800 flex items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
         >
-          <PencilIcon />
+          <PencilIcon className="w-4 h-4 text-white" />
         </div>
+
       </div>
 
       <div className="mb-4 text-neutral-300">
         <p><strong>Projeto:</strong> {project}</p>
-        <p><strong>Sala:</strong> {classroom}</p>
+        <p><strong>Local:</strong> {classroom}</p>
         <p><strong>Dia:</strong> {day}</p>
         <p><strong>Horário:</strong> {startTime} - {endTime}</p>
         <p><strong>Peso:</strong> {weight}</p>
@@ -64,71 +117,80 @@ const Discipline = ({ disciplineData }) => {
 
       <hr className="my-6 border-neutral-600" />
 
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold text-neutral-300 mb-3">Atividades e Trabalhos</h3>
-        <div className="space-y-2 mb-4">
-          {works.length > 0 ? (
-            works.map((work) => (
-              <ListItem
-                key={work.id}
-                id={work.id}
-                fullDescription={work.description}
-                borderColor={work.borderColor}
-                defaultChecked={work.completed}
-              />
-            ))
-          ) : (
-            <p className="text-neutral-500 text-sm">Nenhum trabalho cadastrado.</p>
-          )}
-        </div>
+      {loading ? (
+        <p className="text-neutral-500 text-sm">Carregando tarefas...</p>
+      ) : (
+        <>
+          <div className="mb-6">
+            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
+              Atividades e Trabalhos
+            </h2>
+            <div className="space-y-2 mb-4">
+              {works.length > 0 ? (
+                works.map((work) => (
+                  <ListItem
+                    key={work.idTask}
+                    id={work.idTask}
+                    fullDescription={work.name}
+                    borderColor="blue"
+                    onStatusChange={handleStatusChange}
+                    onEdit={() => handleOpenModal("Trabalho", work)}
+                    taskData={work}
+                  />
+                ))
+              ) : (
+                <p className="text-neutral-500 text-sm">Nenhum trabalho cadastrado.</p>
+              )}
+            </div>
+            <Button
+              className="w-full"
+              variant="yellow-primary"
+              onClick={() => handleOpenModal("Trabalho")}
+            >
+              <p className="font-medium text-sm">Adicionar trabalho</p>
+            </Button>
+          </div>
 
-        <Button
-          className="w-full"
-          variant="yellow-primary"
-          onClick={() => setIsWorkModalOpen(true)}
-        >
-          <span className="text-lg font-bold mr-2">+</span>
-          <p className="font-medium text-sm">Adicionar Novo Trabalho</p>
-        </Button>
-      </div>
+          <hr className="my-6 border-neutral-600" />
 
-      <hr className="my-6 border-neutral-600" />
-
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold text-neutral-300 mb-3">Provas e Avaliações</h3>
-        <div className="space-y-2 mb-4">
-          {exams.length > 0 ? (
-            exams.map((exam) => (
-              <ListItem
-                key={exam.id}
-                id={exam.id}
-                fullDescription={exam.description}
-                borderColor={exam.borderColor}
-                defaultChecked={exam.completed}
-              />
-            ))
-          ) : (
-            <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
-          )}
-        </div>
-
-        <Button
-          className="w-full"
-          variant="yellow-primary"
-          onClick={() => setIsExamModalOpen(true)}
-        >
-          <span className="text-lg font-bold mr-2">+</span>
-          <p className="font-medium text-sm">Adicionar Nova Prova</p>
-        </Button>
-      </div>
+          <div className="mb-4">
+            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
+              Provas e Avaliações
+            </h2>
+            <div className="space-y-2 mb-4">
+              {exams.length > 0 ? (
+                exams.map((exam) => (
+                  <ListItem
+                    key={exam.idTask}
+                    id={exam.idTask}
+                    fullDescription={exam.name}
+                    borderColor="red"
+                    onStatusChange={handleStatusChange}
+                    onEdit={() => handleOpenModal("Prova", exam)}
+                    taskData={exam}
+                  />
+                ))
+              ) : (
+                <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
+              )}
+            </div>
+            <Button
+              className="w-full"
+              variant="yellow-primary"
+              onClick={() => handleOpenModal("Prova")}
+            >
+              <p className="font-medium text-sm">Adicionar prova</p>
+            </Button>
+          </div>
+        </>
+      )}
 
       <WorkFormModal
         isOpen={isWorkModalOpen}
-        onClose={() => setIsWorkModalOpen(false)}
-      />
-      <ExamFormModal
-        isOpen={isExamModalOpen}
-        onClose={() => setIsExamModalOpen(false)}
+        onClose={handleCloseModal}
+        idDiscipline={idDiscipline}
+        editData={editingTask ? { ...editingTask, id: selectedIdTask } : null}
+        type={modalType}
       />
 
       <DisciplineFormModal
@@ -136,7 +198,7 @@ const Discipline = ({ disciplineData }) => {
         onClose={() => setIsDisciplineModalOpen(false)}
         disciplineData={disciplineData}
       />
-    </div>
+    </Container>
   )
 }
 

@@ -40,3 +40,9 @@
 ---
 
 - get/buildPlanning/:idUser  ( retorna os plannings gerados )
+
+## Schedule
+---
+
+- post/schedules
+- get/schedules/:idUser

@@ -23,7 +23,6 @@ const Disciplines = () => {
           throw new Error('Falha ao buscar dados');
         }
         const data = await response.json();
-        console.log("📘 Disciplinas recebidas:", data);
         setDisciplines(data);
       } catch (error) {
         console.error("Erro buscando disciplinas:", error);

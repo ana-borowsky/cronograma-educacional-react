@@ -41,7 +41,7 @@ export function ListItem({
         "p-2"
       )}
     >
-      <div className="flex items-start">
+      <div className="flex items-center">
         <Checkbox
           id={`checkbox-${id}`}
           checked={isCompleted}

@@ -34,7 +34,7 @@ export const AddDiscipline = () => {
           {isFormVisible ? <ChevronUp /> : <ChevronDown />}
         </div>
 
-        <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isFormVisible ? "max-h-[1300px] mt-5 pt-5" : "max-h-0"}`}>
+        <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isFormVisible ? "max-h-[1600px] mt-5 pt-5" : "max-h-0"}`}>
           <div className="pt-5">
             <div>
               <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Gerenciamento de Projeto</h2>

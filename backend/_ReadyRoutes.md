@@ -35,3 +35,9 @@
 - put/plannings/
 - delete/plannings/:idPlanning
 - post/plannings/
+
+## Schedule
+---
+
+- post/schedules
+- get/schedules/:idUser

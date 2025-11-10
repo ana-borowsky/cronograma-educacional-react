@@ -2,6 +2,21 @@
  import ScheduleRepository from "../Models/Repositories/ScheduleRepository.js"
 
  class ScheduleController {
+  static async insertSchedule (req, res) {
+    try {
+      const {idUser} = req.body
+      const repo = new ScheduleRepository()
+      const result = await repo.insertSchedule(idUser)
+  
+      res.status(200).json({ message: "Cronograma criado!", result })
+      
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({error: "Erro ao inserir o cronograma"})
+    }
+  }
+ 
+
   static async getScheduleByUser (req, res) {
     try {
       const {idUser} = req.params

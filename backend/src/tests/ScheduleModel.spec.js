@@ -22,4 +22,18 @@ describe("Testes cronograma",  () => {
     expect(res.statusCode).toBe(200)
   })
 
+  it("Inserir cronograma", async () => {
+    const created = await request(app) 
+    .post("/schedules")
+    .send({
+      idUser: 1
+    })
+
+    expect(created.statusCode).toBe(200)
+
+    const res = await request(app).get("/schedules/1").query({ idUser: 1 })
+  
+    expect(res.statusCode).toBe(200)
+  })
+
 })

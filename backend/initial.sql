@@ -184,19 +184,3 @@ INSERT INTO file (idUser, name, type, data) VALUES
 
 -- Reabilita checagem de chaves estrangeiras
 SET FOREIGN_KEY_CHECKS = 1;
-
--- Trigger para inserir na tabela Schedule quando o for feito um INSERT na tabela PLANNING
-DELIMITER $$
-
-CREATE TRIGGER schedule_insert AFTER INSERT ON beezer.planning 
-	FOR EACH ROW
-	BEGIN
-		DECLARE temp_idUser INTEGER;
-        
-        SELECT discipline.idUser INTO temp_idUser FROM beezer.task AS task JOIN beezer.discipline AS discipline ON task.idDiscipline = discipline.idDiscipline
-        WHERE task.idTask = NEW.idTask LIMIT 1;
-        
-		INSERT INTO beezer.schedule(idUser, idPlanning) VALUES (temp_idUser, NEW.idPlanning);
-	END$$
-
-DELIMITER ;

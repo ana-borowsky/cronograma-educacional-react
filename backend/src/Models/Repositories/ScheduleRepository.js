@@ -4,20 +4,33 @@ import ScheduleModel from "../ScheduleModel.js"
 class ScheduleRespository {
   constructor () { }
 
+  async insertSchedule(idUser) {
+    const values = [idUser]
+    const query =  "INSERT INTO schedule (idUser, idPlanning)\
+                    SELECT DISTINCT d.idUser, p.idPlanning\
+                    FROM planning p\
+                    INNER JOIN task t ON p.idTask = t.idTask\
+                    INNER JOIN discipline d ON t.idDiscipline = d.idDiscipline\
+                    WHERE d.idUser = ? "
+    
+    const [result] = await db.query(query,values)
+
+
+    return result
+  }
+
   async getScheduleByUser(idUser){
     const values = [idUser]
     const query = "SELECT \
                     user.idUser, \
                     user.name AS userName, \
-                    discipline.name AS disciplineName, \
                     task.name AS taskName, \
                     task.type, \
                     task.status, \
-                    discipline.project, \
+                    discipline.color,\
                     planning.executionDate, \
                     planning.startTime, \
-                    planning.endTime, \
-                    planning.finalWeight \
+                    planning.endTime \
                   FROM beezer.schedule \
                   JOIN beezer.planning AS planning ON beezer.schedule.idPlanning = planning.idPlanning \
                   JOIN beezer.task AS task ON planning.idTask = task.idTask \

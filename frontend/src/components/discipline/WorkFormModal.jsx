@@ -207,21 +207,28 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
           </div>
 
           <div className="flex space-x-2">
-            <Button type="submit" className="w-1/2" variant="yellow-primary">
-              {isEditMode ? "Salvar alterações" : "Adicionar trabalho"}
-            </Button>
+            {isEditMode ? (
+              <>
+                <Button
+                  type="button"
+                  className="w-1/2"
+                  variant="destructive"
+                  onClick={handleDelete}
+                >
+                  Excluir
+                </Button>
 
-            {isEditMode && (
-              <Button
-                type="button"
-                className="w-1/2"
-                variant="destructive"
-                onClick={handleDelete}
-              >
-                Excluir
+                <Button type="submit" className="w-1/2" variant="yellow-primary">
+                  Salvar alterações
+                </Button>
+              </>
+            ) : (
+              <Button type="submit" className="w-full" variant="yellow-primary">
+                Adicionar
               </Button>
             )}
           </div>
+
         </form>
       </div>
     </div>

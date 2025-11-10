@@ -8,13 +8,13 @@ import { DisciplineFormModal } from "@/components/discipline/EditDisciplineModal
 import { Container } from "@/components/ui/container"
 import { useState, useEffect } from 'react'
 
-/*- get/tasks/all/:idDiscipline
-- get/tasks/exams/:idDiscipline
-- get/tasks/works/:idDiscipline
-- get/tasks/dayTasks/:idDiscipline
-- put/tasks/
-- delete/tasks/:idtasks
-- post/tasks/
+/*- get - tasks/all/:idDiscipline
+- get - tasks/exams/:idDiscipline
+- get - tasks/works/:idDiscipline
+- get - tasks/dayTasks/:idDiscipline
+- put - tasks/
+- delete - tasks/:idtasks
+- post - tasks/
 */
 
 const PencilIcon = () => (
@@ -47,6 +47,29 @@ const Discipline = ({ disciplineData }) => {
 
   const openDisciplineModal = () => setIsDisciplineModalOpen(true)
 
+  const handleStatusChange = async (idTask, newStatus) => {
+    try {
+      const response = await fetch(`http://localhost:8800/tasks/${idTask}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Erro ao atualizar status da tarefa")
+      }
+
+      setWorks(prev => prev.map(task =>
+        task.idTask === idTask ? { ...task, status: newStatus } : task
+      ))
+      setExams(prev => prev.map(task =>
+        task.idTask === idTask ? { ...task, status: newStatus } : task
+      ))
+    } catch (error) {
+      console.error("❌ Erro ao atualizar status:", error)
+    }
+  }
+
   useEffect(() => {
     const fetchTasks = async () => {
       try {
@@ -56,14 +79,11 @@ const Discipline = ({ disciplineData }) => {
         }
 
         const data = await response.json()
-        console.log("📘 Tarefas recebidas:", data)
-        const worksData = data.filter(task => task.type === "Prova")
-        const examsData = data.filter(task => task.type === "Trabalho")
+        const worksData = data.filter(task => task.type === "Trabalho")
+        const examsData = data.filter(task => task.type === "Prova")
 
         setWorks(worksData)
         setExams(examsData)
-        console.log("WORKS:", worksData)
-        console.log("EXAMS:", examsData)
       } catch (error) {
         console.error("❌ Erro buscando tarefas:", error)
       } finally {
@@ -91,7 +111,7 @@ const Discipline = ({ disciplineData }) => {
 
       <div className="mb-4 text-neutral-300">
         <p><strong>Projeto:</strong> {project}</p>
-        <p><strong>Sala:</strong> {classroom}</p>
+        <p><strong>Local:</strong> {classroom}</p>
         <p><strong>Dia:</strong> {day}</p>
         <p><strong>Horário:</strong> {startTime} - {endTime}</p>
         <p><strong>Peso:</strong> {weight}</p>
@@ -116,7 +136,8 @@ const Discipline = ({ disciplineData }) => {
                     key={work.idTask}
                     id={work.idTask}
                     fullDescription={work.name}
-                    borderColor={"red"}
+                    borderColor={"blue"}
+                    onStatusChange={handleStatusChange}
                   />
                 ))
               ) : (
@@ -144,7 +165,8 @@ const Discipline = ({ disciplineData }) => {
                     key={exam.idTask}
                     id={exam.idTask}
                     fullDescription={exam.name}
-                    borderColor={"blue"}
+                    borderColor={"red"}
+                    onStatusChange={handleStatusChange}
                   />
                 ))
               ) : (

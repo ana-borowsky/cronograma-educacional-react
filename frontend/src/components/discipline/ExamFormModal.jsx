@@ -31,7 +31,7 @@ export const ExamFormModal = ({ isOpen, onClose }) => {
       >
 
         <div className="p-5 border-b border-neutral-700 flex justify-between items-center">
-          <h3 id="modal-title-exam" className="text-xl font-bold text-white">Adicionar Nova Prova/Avaliação</h3>
+          <h3 id="modal-title-exam" className="text-xl font-bold text-white">Adicionar prova</h3>
           <Button
             className="bg-transparent text-neutral-400 hover:bg-neutral-700 p-1 rounded-full"
             onClick={onClose}
@@ -93,7 +93,7 @@ export const ExamFormModal = ({ isOpen, onClose }) => {
             className="w-full"
             variant="yellow-primary"
           >
-            + Adicionar Prova
+            Adicionar prova
           </Button>
         </form>
       </div>

@@ -116,7 +116,7 @@ const Discipline = ({ disciplineData }) => {
                     key={work.idTask}
                     id={work.idTask}
                     fullDescription={work.name}
-                    borderColor={"#facc15"}
+                    borderColor={"red"}
                   />
                 ))
               ) : (
@@ -144,7 +144,7 @@ const Discipline = ({ disciplineData }) => {
                     key={exam.idTask}
                     id={exam.idTask}
                     fullDescription={exam.name}
-                    borderColor={"#3b82f6"}
+                    borderColor={"blue"}
                   />
                 ))
               ) : (

@@ -28,7 +28,7 @@ export function ListItem({
   const textClasses = cn(
     "text-xs font-medium cursor-pointer",
     isCompleted ? "line-through opacity-70 text-neutral-500" : "text-neutral-400"
-  );
+  )
 
   const truncationClass = isExpanded ? "whitespace-normal" : "truncate";
 
@@ -75,5 +75,5 @@ export function ListItem({
       </div>
 
     </div>
-  );
+  )
 }

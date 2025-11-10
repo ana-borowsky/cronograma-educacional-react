@@ -28,6 +28,8 @@ const Discipline = ({ disciplineData }) => {
     startTime,
     endTime,
     weight,
+    idUser,
+    idDiscipline
   } = disciplineData
 
   const works = disciplineData.works || []

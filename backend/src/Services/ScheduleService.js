@@ -3,9 +3,9 @@ import ScheduleRespository from "../Repositories/ScheduleRepository.js"
 class ScheduleService {
   constructor() {}
 
-  async insert(scheduleModel) {
+  async insert(idUser) {
     const repo = new ScheduleRespository()
-    return await repo.insertSchedule(scheduleModel)
+    return await repo.insertSchedule(idUser)
   }
 
   async getSchedule(idUser) {

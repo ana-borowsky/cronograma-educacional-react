@@ -1,4 +1,4 @@
-import TasksRepository from "../Models/Repositories/TasksRepository.js"
+import TasksRepository from "../Repositories/TasksRepository.js"
 
 class TasksService {
   constructor() { }

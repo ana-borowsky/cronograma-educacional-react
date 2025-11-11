@@ -1,13 +1,10 @@
- import ScheduleModel from "../Models/ScheduleModel.js";
- import ScheduleRepository from "../Models/Repositories/ScheduleRepository.js"
+ import ScheduleRepository from "../Repositories/ScheduleRepository.js"
 
  class ScheduleController {
   static async insertSchedule (req, res) {
     try {
       const {idUser} = req.body
-      const repo = new ScheduleRepository()
-      const result = await repo.insertSchedule(idUser)
-  
+      const result =  await new ScheduleRepository().insertSchedule(idUser)
       res.status(200).json({ message: "Cronograma criado!", result })
       
     } catch (err) {
@@ -20,8 +17,7 @@
   static async getScheduleByUser (req, res) {
     try {
       const {idUser} = req.params
-      const repo  = new ScheduleRepository()
-      const result = await repo.getScheduleByUser(Number(idUser))
+      const result = await new ScheduleRepository().getScheduleByUser(idUser) 
 
       if(!result || result.length == 0){
         return res.status(404).json({message: "Nenhum cronograma encontrado!"})

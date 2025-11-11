@@ -1,5 +1,5 @@
 import PlanningModel from "../Models/PlanningModel.js";
-import PlanningRepository from "../Models/Repositories/PlanningRepository.js"
+import PlanningRepository from "../Repositories/PlanningRepository.js"
 
 class PlanningController {
   static async insertPlannning (req, res) {

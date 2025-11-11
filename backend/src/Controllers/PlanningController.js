@@ -1,5 +1,5 @@
 import PlanningModel from "../Models/PlanningModel.js";
-import PlanningRepository from "../Repositories/PlanningRepository.js"
+import PlanningService from "../Services/PlanningService.js";
 
 class PlanningController {
   static async insertPlannning (req, res) {
@@ -13,18 +13,17 @@ class PlanningController {
         idTask
       } = req.body
 
-      const repo = new PlanningRepository()
-      const result = await repo.insert(new PlanningModel(
-        idPlanning,
-        executionDate, 
-        startTime,
-        endTime,
-        finalWeight,
-        idTask
+      const result = await new PlanningService(new PlanningModel(
+          idPlanning,
+          executionDate, 
+          startTime,
+          endTime,
+          finalWeight,
+          idTask
+        )
       )
-    )
 
-    res.status(200).json({idPlanning: result.insertId, idTask})
+      res.status(200).json({idPlanning: result.insertId, idTask})
     } catch (err) {
       console.error(err)
       res.status(500).json({error: "Erro ao criar o planejamento!!"})
@@ -42,9 +41,7 @@ class PlanningController {
         idTask
       } = req.body
 
-      const repo = new PlanningRepository()
-
-      const updateResult =  await repo.update(new PlanningModel(
+      const updateResult = await new PlanningService().update(new PlanningModel(
         idPlanning, 
         executionDate, 
         startTime,
@@ -75,8 +72,7 @@ class PlanningController {
   static async getAll(req, res) {
     try {
       const {idTask} = req.params
-      const repo = new PlanningRepository()
-      const result = await repo.getAll(Number(idTask))
+      const result =  await new PlanningService().getAll(Number(idTask))      
 
       if(!result || result.length == 0){
         return res.status(400).json({ error: "A tarefa não foi encontrada!"})
@@ -93,8 +89,7 @@ class PlanningController {
   static async getDayPlanning(req, res) {
     try {
       const {idTask} = req.params
-      const repo = new PlanningRepository()
-      const result = await repo.getDayPlanning(Number(idTask))
+      const result = await new PlanningService().getDayPlanning(Number(idTask))
 
       if(!result || result.length == 0){
         return res.status(400).json({ error: "A tarefa não foi encontrada!"})
@@ -111,9 +106,7 @@ class PlanningController {
   static async delete(req, res) {
     try {
       const {idPlanning} = req.params
-      const repo = new PlanningRepository()
-      const deletePlanning = await repo.delete(idPlanning)
-
+      const deletePlanning = await new PlanningService().delete(Number(idPlanning))
       if(deletePlanning.affectedRows == 0) {
         return res.status(400).json({erro: "Não foi possível o planejamento!"})
       }

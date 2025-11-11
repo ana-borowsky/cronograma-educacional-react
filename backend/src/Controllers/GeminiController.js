@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import FreeTimeService from "../Services/FreeTimeService.js"
 import DisciplineService from "../Services/DisciplineService.js"
 import TasksService from "../Services/TaskService.js"
+import ScheduleService from "../Services/ScheduleService.js"
 dotenv.config()
 
 export class GeminiController {
@@ -20,7 +21,7 @@ export class GeminiController {
         tasks.push(taskResp)
       }
       tasks = tasks.flatMap((t) => t)
-      
+
       const payload = {
         freeTime: freeTime.map((free) => ({
           idTime: free.idTime,
@@ -83,8 +84,9 @@ export class GeminiController {
         contents: contents,
       })
 
+      const result = await new ScheduleService().insert(idUser)
       return res.status(200).json(response.text)
-    } catch (err) {z
+    } catch (err) {
       return res.status(500).json({ error: err.message })
     }
   }

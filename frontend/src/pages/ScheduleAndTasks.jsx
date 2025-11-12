@@ -29,7 +29,7 @@ const ScheduleAndTasks = () => {
         openSignupModal={openSignupModal} 
       />
 
-      <div className="flex flex-row p-5 gap-6">
+      <div className="flex flex-row p-5 gap-6  min-w-[1674px]">
         <Schedule />
         <ToDoList />
       </div>

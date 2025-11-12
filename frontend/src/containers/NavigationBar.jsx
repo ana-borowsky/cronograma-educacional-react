@@ -1,5 +1,6 @@
 import React from 'react';
 import { MdCalendarMonth, MdDescription } from 'react-icons/md';
+import { TabButton } from "@/components/schedule/TabButton"
 
 const NavigationBar = ({ currentPath = "/disciplines" }) => {
 
@@ -10,7 +11,7 @@ const NavigationBar = ({ currentPath = "/disciplines" }) => {
       <a
         href={href}
         className={`
-          flex items-center justify-center gap-2 px-4 pt-3 pb-2 text-sm font-semibold
+          flex items-center justify-center gap-2 px-4 pt-3 pb-2 text-lg font-semibold
           transition duration-200 ease-in-out cursor-pointer relative z-10
           
           ${isActive

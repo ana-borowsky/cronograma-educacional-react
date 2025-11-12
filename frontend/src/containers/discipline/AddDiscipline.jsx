@@ -19,7 +19,7 @@ const ChevronDown = () => (
 export const AddDiscipline = ({ startOpen = false }) => {
   const [isFormVisible, setIsFormVisible] = useState(startOpen)
   const isEditing = false
-  const mainButtonText = isEditing ? "Salvar Disciplina" : "Adicionar Matéria"
+  const mainButtonText = isEditing ? "Salvar disciplina" : "Adicionar disciplina"
 
   const toggleForm = () => setIsFormVisible(!isFormVisible)
 
@@ -31,7 +31,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
           onClick={toggleForm}
         >
           <h2 className="w-full text-xl font-bold text-white border-b border-neutral-700 pb-1">
-            Insira matérias
+            Insira disciplinas
           </h2>
           {isFormVisible ? <ChevronUp /> : <ChevronDown />}
         </div>
@@ -43,7 +43,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
           <div className="pt-5">
             <div>
               <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
-                Gerenciamento de Projeto
+                Projeto
               </h2>
               <form className="space-y-6">
                 <div className="space-y-1">
@@ -89,7 +89,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
                     htmlFor="new-project"
                     className="block text-neutral-300 font-semibold text-sm"
                   >
-                    Criar novo projeto
+                    Ou crie um novo projeto
                   </label>
                   <div className="flex space-x-2">
                     <Input

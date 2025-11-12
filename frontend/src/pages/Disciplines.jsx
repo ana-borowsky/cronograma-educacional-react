@@ -72,7 +72,9 @@ const Disciplines = () => {
                 />
               ))
             )}
-            <AddDiscipline startOpen={disciplines.length === 0} />
+            {!isLoading && (
+              <AddDiscipline startOpen={disciplines.length === 0} />
+            )}
           </div>
         </div>
       </div>

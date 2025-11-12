@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -8,13 +8,13 @@ import { Input } from "@/components/ui/input"
  * @param {object} props
  * @param {object} [props.disciplineData] 
  * @param {number} [props.idUser=1] 
+ * @param {string} [props.selectedProject] 
  * @param {Function} [props.onCancel] 
  * @param {Function} [props.onRefresh] 
  */
-export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh }) => {
+export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "", onCancel, onRefresh }) => {
   const isEditing = !!disciplineData
 
-  // Lista de cores simples (sem nomes compostos)
   const colorOptions = [
     { pt: "Vermelho", en: "red" },
     { pt: "Azul", en: "blue" },
@@ -40,14 +40,21 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh
 
   const [formData, setFormData] = useState({
     name: disciplineData?.name || "",
-    project: disciplineData?.project || "",
+    project: disciplineData?.project || selectedProject || "",
     classroom: disciplineData?.classroom || "",
     day: disciplineData?.day || "",
     startTime: formatTimeForInput(disciplineData?.startTime) || "",
     endTime: formatTimeForInput(disciplineData?.endTime) || "",
     weight: disciplineData?.weight || "",
-    color: disciplineData?.color || "blue", // padrão azul
+    color: disciplineData?.color || "blue",
   })
+
+  useEffect(() => {
+    // Atualiza o projeto no formulário sempre que o usuário muda o projeto no AddDiscipline
+    if (selectedProject && selectedProject !== formData.project) {
+      setFormData((prev) => ({ ...prev, project: selectedProject }))
+    }
+  }, [selectedProject])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -64,6 +71,7 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh
 
     const payload = {
       ...formData,
+      project: formData.project || selectedProject,
       startTime: formatTimeForBackend(formData.startTime),
       endTime: formatTimeForBackend(formData.endTime),
       idUser,
@@ -108,31 +116,21 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Nome */}
       <div className="space-y-1">
         <label className="block text-neutral-300 font-semibold text-sm">Nome</label>
         <Input name="name" value={formData.name} onChange={handleChange} required variant="dark" placeholder="Ex: Banco de Dados" />
       </div>
 
-      {/* Projeto */}
-      <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Projeto</label>
-        <Input name="project" value={formData.project} onChange={handleChange} required variant="dark" placeholder="Ex: Sistema Web" />
-      </div>
-
-      {/* Sala */}
       <div className="space-y-1">
         <label className="block text-neutral-300 font-semibold text-sm">Sala / Local</label>
         <Input name="classroom" value={formData.classroom} onChange={handleChange} required variant="dark" placeholder="Ex: Sala 203" />
       </div>
 
-      {/* Dia */}
       <div className="space-y-1">
         <label className="block text-neutral-300 font-semibold text-sm">Dia</label>
         <Input name="day" value={formData.day} onChange={handleChange} required variant="dark" placeholder="Ex: Segunda-feira" />
       </div>
 
-      {/* Horários */}
       <div className="flex space-x-2">
         <div className="space-y-1 flex-1">
           <label className="block text-neutral-300 font-semibold text-sm">Início</label>
@@ -144,7 +142,6 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh
         </div>
       </div>
 
-      {/* Peso */}
       <div className="space-y-1">
         <label className="block text-neutral-300 font-semibold text-sm">Nível de dificuldade</label>
         <Input
@@ -160,18 +157,15 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh
         />
       </div>
 
-  
       <div className="space-y-1">
         <label className="block text-neutral-300 font-semibold text-sm">Cor</label>
         <div className="relative">
-
           <select
             name="color"
             value={formData.color}
             onChange={handleChange}
             required
             className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-yellow-500 text-sm appearance-none pr-10"
-    
           >
             {colorOptions.map((color) => (
               <option key={color.en} value={color.en}>
@@ -180,7 +174,6 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh
             ))}
           </select>
 
-        
           <svg
             className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-400"
             xmlns="http://www.w3.org/2000/svg"
@@ -197,7 +190,6 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh
         </div>
       </div>
 
-      {/* Botões */}
       {isEditing ? (
         <div className="flex justify-between gap-3 pt-3">
           <Button type="button" variant="destructive" className="flex-1" onClick={handleDelete}>

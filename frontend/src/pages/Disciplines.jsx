@@ -11,7 +11,7 @@ const Disciplines = () => {
   const location = useLocation()
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
-  
+
   const [disciplines, setDisciplines] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -58,8 +58,8 @@ const Disciplines = () => {
         openLoginModal={openLoginModal}
         openSignupModal={openSignupModal}
       />
-      <div className="flex flex-col p-5 gap-6 min-h-screen">
 
+      <div className="flex flex-col p-5 gap-6 min-h-screen">
         <div className="w-full flex flex-col md:flex-row md:space-x-8">
           <div className="w-full flex overflow-x-auto space-x-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {isLoading ? (
@@ -72,15 +72,13 @@ const Disciplines = () => {
                 />
               ))
             )}
-            <AddDiscipline />
+            <AddDiscipline startOpen={disciplines.length === 0} />
           </div>
         </div>
       </div>
 
       {isLoginModalOpen && (
-        <LoginModal
-          onClose={closeLoginModal}
-        />
+        <LoginModal onClose={closeLoginModal} />
       )}
 
       {isSignupModalOpen && (

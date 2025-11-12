@@ -114,7 +114,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
             </h2>
             <form className="space-y-6">
               <p className="text-neutral-400 text-sm text-center">
-                Carregue um arquivo (ex: print) contendo a lista de matérias,
+                Carregue um arquivo (ex: print) contendo a lista de disciplinas,
                 salas e horários.
               </p>
 
@@ -140,7 +140,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
                   htmlFor="file-upload-planos"
                   className="block text-neutral-300 font-semibold text-sm"
                 >
-                  Selecione os arquivos dos planos de ensino das matérias
+                  Selecione os arquivos dos planos de ensino das disciplinas
                 </label>
                 <Input
                   type="file"
@@ -154,7 +154,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
               </div>
 
               <Button className="w-full" asChild variant="yellow-primary">
-                <a href="/disciplines">{mainButtonText} (via IA)</a>
+                <a href="/disciplines">{mainButtonText}s (via IA)</a>
               </Button>
             </form>
 

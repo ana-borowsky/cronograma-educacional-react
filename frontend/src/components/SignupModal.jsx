@@ -1,25 +1,25 @@
-import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 const SignupModal = ({ onClose, onLoginClick }) => {
-
+  const handleSignupClick = () => {
+    onClose?.()
+    onLoginClick?.()
+  }
 
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm transition-opacity"
-      onClick={onClose} 
+      onClick={onClose}
     >
       <div
         className="bg-neutral-800 p-8 md:p-10 rounded-lg shadow-2xl w-full max-w-md border border-neutral-600 transform transition-all duration-300 scale-100"
-        onClick={(e) => e.stopPropagation()} 
+        onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-
         <form className="space-y-4">
-
           <h2 id="modal-title" className="text-center text-white text-2xl font-semibold mb-6 border-b-2 border-neutral-500 pb-3">
             Crie sua conta
           </h2>
@@ -48,11 +48,9 @@ const SignupModal = ({ onClose, onLoginClick }) => {
             type="button"
             className="w-full"
             variant="yellow-primary"
-            asChild 
+            onClick={handleSignupClick}
           >
-            <Link to="/scheduleandtasks" onClick={onClose}>
-              Cadastrar
-            </Link>
+            Cadastrar
           </Button>
         </form>
 
@@ -74,7 +72,6 @@ const SignupModal = ({ onClose, onLoginClick }) => {
         >
           Ou fechar
         </button>
-
       </div>
     </div>
   )

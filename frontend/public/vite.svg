@@ -26,9 +26,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.5683594"
-     inkscape:cx="-21.3599"
-     inkscape:cy="22.635118"
+     inkscape:zoom="12.546875"
+     inkscape:cx="-10.879203"
+     inkscape:cy="23.870486"
      inkscape:window-width="1854"
      inkscape:window-height="1009"
      inkscape:window-x="66"
@@ -80,7 +80,7 @@
        x2="149.9959"
        y2="30.553816"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(6.8716052,0,0,6.8716052,-775.94908,-82.352148)" />
+       gradientTransform="matrix(6.8716052,0,0,6.8716052,-776.48485,-338.09112)" />
     <linearGradient
        id="linearGradient5323">
       <stop
@@ -94,11 +94,12 @@
     </linearGradient>
   </defs>
   <circle
-     style="fill:url(#linearGradient5325);fill-opacity:1;stroke:#000000;stroke-width:5.36375825;stroke-dasharray:none"
+     style="fill:url(#linearGradient5325);fill-opacity:1;stroke:#000000;stroke-width:5.36376;stroke-dasharray:none"
      id="path249"
-     cx="128.13737"
-     cy="127.6016"
-     r="124.60252" />
+     cx="127.6016"
+     cy="-128.13737"
+     r="124.60252"
+     transform="rotate(90)" />
   <ellipse
      style="fill:none;stroke:#000000;stroke-width:6.0725853;stroke-dasharray:none"
      id="path982"

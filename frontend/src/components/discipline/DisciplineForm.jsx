@@ -146,8 +146,18 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, onCancel, onRefresh
 
       {/* Peso */}
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Peso</label>
-        <Input name="weight" type="number" value={formData.weight} onChange={handleChange} required variant="dark" min="0" max="10" />
+        <label className="block text-neutral-300 font-semibold text-sm">Nível de dificuldade</label>
+        <Input
+          name="weight"
+          type="number"
+          value={formData.weight}
+          onChange={handleChange}
+          required
+          variant="dark"
+          min="1"
+          max="10"
+          placeholder="1 a 10"
+        />
       </div>
 
   

@@ -11,6 +11,15 @@ function getWeekMonth(date){
   return getWeek
 }
 
+function formatDateArray(date) {
+  const currentDate = new Date(date)
+  const day = currentDate.getDate().toString()
+  const month = currentDate.toLocaleString('pt-BR', { month: 'short' })
+  const year = currentDate.getFullYear().toString()
+
+  return [day, month, year]
+}
+
 function groupByWeekDay(schedules) {
   const weeks = {}
 
@@ -31,34 +40,38 @@ function groupByWeekDay(schedules) {
       lastDay.setDate(firstDay.getDate() + 6)
 
       const formatDate = (date) => 
-        date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })
-
+        date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric'})
 
       const range = `${formatDate(firstDay)} - ${formatDate(lastDay)}`
 
+      const daysOfWeek = {
+        0: 'Domingo',
+        1: 'Segunda',
+        2: 'Terca',
+        3: 'Quarta',
+        4: 'Quinta',
+        5: 'Sexta',
+        6: 'Sabado'
+      }
+      
+      const dayName = daysOfWeek[dateNow.getDay()]
+
       if(!weeks[range]) {
-      weeks[range] = {}
-    }
+          weeks[range] = {
+            startDate: formatDateArray(firstDay),
+            endDate: formatDateArray(lastDay),
+            dayWeek: {}
+          }
+        }
 
-    const daysOfWeek = {
-      0: 'Domingo',
-      1: 'Segunda',
-      2: 'Terça',
-      3: 'Quarta',
-      4: 'Quinta',
-      5: 'Sexta',
-      6: 'Sábado'
-    }
+      if (!weeks[range].dayWeek[dayName]) {
+        weeks[range].dayWeek[dayName] = []
+      }
 
-    const dayName = daysOfWeek[dateNow.getDay()]
-
-    if(!weeks[range][dayName]){
-      weeks[range][dayName] = []
-    }
-
-    weeks[range][dayName].push(schedule)
+      weeks[range].dayWeek[dayName].push(schedule)
   })
-    return weeks
+
+  return weeks
 }
 
 class ScheduleRespository {

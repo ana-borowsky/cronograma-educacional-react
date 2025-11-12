@@ -91,4 +91,99 @@ export class GeminiController {
     }
   }
 
+  static async createDisciplineAndTasksByPdfUsingAI(req, res) {
+    try {
+      const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
+      const { idUser } = req.params
+      const { pdfArchive } = req.body
+      const payload = {
+        instructions: {
+          objective: "Retorne apenas um json com duas posições: discipline e tasks, seguindo as regras especificas em 'rules'",
+          rules: [
+            "Leia o plano de ensino do arquivo PDF anexado",
+            "Crie uma 'discipline' com os dados do plano de ensino",
+            "Crie as 'tasks' relacionadas à disciplina criada, baseando-se nas atividades descritas no plano de ensino",
+            "Retorne os dados no formato especificado em 'outputFormat' de schema para 'discipline' sendo a posição 0 e 'tasks' sendo a posição 1",
+          ],
+          outputFormat: {
+            type: "array",
+            description: "Array com duas posições: [ discipline, tasks ]",
+            schema: {
+              discipline: {
+                idDiscipline: "number|null",
+                idUser: `${idUser}`,
+                name: "string",
+                color: "number",
+                project: "string|null",
+                classroom: "string|null",
+                day: "string|null",
+                startTime: "HH:MM:SS|null",
+                endTime: "HH:MM:SS|null",
+                weight: "number",
+              },
+              tasks: {
+                idTask: "null",
+                idDiscipline: "null",
+                name: "varchar(50) NOT NULL",
+                type:  "ENUM('Prova', 'Trabalho') NOT NULL",
+                estimatedHours: "TIME NOT NULL",
+                dueDate: "DATE NOT NULL",
+                status: "ENUM('Pendente', 'Concluído') NOT NULL",
+                weight: "SMALLINT NOT NULL",
+              },
+            },
+            example: [
+              {
+                discipline: {
+                  idDiscipline: null,
+                  idUser: 1,
+                  name: "Introdução à Programação",
+                  color: 5,
+                  project: "Projeto A",
+                  classroom: "Sala 101",
+                  day: "Segunda-feira",
+                  startTime: "08:00:00",
+                  endTime: "10:00:00",
+                  weight: 10,
+                }
+              },
+              {
+                tasks: [
+                  {
+                    idTask: null,
+                    name: "Leitura do plano de ensino",
+                    type: "Leitura",
+                    estimatedHours: 1,
+                    dueDate: "2025-11-10",
+                    status: "Pendente",
+                    weight: 10,
+                    idDiscipline: null,
+                  }
+                ]
+              }
+            ],
+          },
+        }
+      }
+      const prompt = payload.jsonStringify(payload, null, 2)
+      const contents = [
+        { text: prompt },
+        {
+          inlineData: {
+            mineType: "aplication/pdf",
+            data: Buffer.from(pdfArchive).toString("base64"),
+          }
+        }
+      ]
+      const response = await googleAI.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: contents,
+      });
+
+      return res.status(200).json({ message: "Disciplinas e tarefas criadas com sucesso usando AI." })
+    } catch (err) {
+      return res.status(500).json({ error: err.message })
+    }
+  }
+
 }

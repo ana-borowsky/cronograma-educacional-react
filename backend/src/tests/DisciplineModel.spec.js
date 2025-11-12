@@ -10,7 +10,7 @@ describe("Testes da disciplina", () => {
         idDiscipline: null,
         idUser: 1,
         name: "Português",
-        color: 1,
+        color: "red",
         project: "Projeto A",
         classroom: "101",
         day: "Segunda-Feira",
@@ -26,7 +26,7 @@ describe("Testes da disciplina", () => {
       idDiscipline: null,
       idUser: 1,
       name: "Português",
-      color: 1,
+      color: "red",
       project: "Projeto A",
       classroom: "101",
       day: "Segunda-Feira",
@@ -42,7 +42,7 @@ describe("Testes da disciplina", () => {
       ...discipline,
       idDiscipline: created.body.id,
       name: "Matematica",
-      color: 2
+      color: "green"
     };
 
 
@@ -51,7 +51,7 @@ describe("Testes da disciplina", () => {
     expect(res.statusCode).toBe(200)
     expect(res.body).toHaveProperty("idDiscipline", created.body.id)
     expect(res.body.name).toBe("Matematica")
-    expect(res.body.color).toBe(2)
+    expect(res.body.color).toBe("green")
   })
 
   it("Pega todas as diciplinas por usuário", async () => {
@@ -61,7 +61,7 @@ describe("Testes da disciplina", () => {
         idDiscipline: null,
         idUser: 1,
         name: "Português",
-        color: 1,
+        color: "red",
         project: "Projeto A",
         classroom: "101",
         day: "Segunda-Feira",
@@ -82,7 +82,7 @@ describe("Testes da disciplina", () => {
         idDiscipline: null,
         idUser: 1,
         name: "Português",
-        color: 1,
+        color: "red",
         project: "Projeto A",
         classroom: "101",
         day: "Segunda-Feira",

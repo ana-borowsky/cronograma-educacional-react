@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS discipline (
     idDiscipline INTEGER NOT NULL AUTO_INCREMENT,
     idUser INTEGER NOT NULL,
     name VARCHAR(50) NOT NULL,
-    color SMALLINT NOT NULL,
+    color VARCHAR(12) NOT NULL,
     project VARCHAR(45) NOT NULL,
     classroom VARCHAR(45),
     day VARCHAR(45),
@@ -109,16 +109,16 @@ INSERT INTO freeTime (idUser, weekDay, startTime, durationTime) VALUES
 -- Inserindo disciplinas
 INSERT INTO discipline (idUser, name, color, project, classroom, day, startTime, endTime, weight) VALUES
 -- Maria Silva
-(1, 'Algoritmos e Programação', 1, 'Projeto Final', 'Lab 101', 'Segunda-feira', '08:00:00', '10:00:00', 10),
-(1, 'Banco de Dados', 2, 'Sistema Web', 'Sala 203', 'Terça-feira', '14:00:00', '16:00:00', 9),
-(1, 'Engenharia de Software', 3, 'App Mobile', 'Sala 305', 'Quarta-feira', '10:00:00', '12:00:00', 8),
+(1, 'Algoritmos e Programação', "green", 'Projeto Final', 'Lab 101', 'Segunda-feira', '08:00:00', '10:00:00', 10),
+(1, 'Banco de Dados', "blue", 'Sistema Web', 'Sala 203', 'Terça-feira', '14:00:00', '16:00:00', 9),
+(1, 'Engenharia de Software', "sky", 'App Mobile', 'Sala 305', 'Quarta-feira', '10:00:00', '12:00:00', 8),
 -- João Santos
-(2, 'Cálculo I', 4, 'Exercícios', 'Sala 104', 'Segunda-feira', '14:00:00', '16:00:00', 10),
-(2, 'Física I', 5, 'Laboratório', 'Lab 202', 'Quarta-feira', '14:00:00', '16:00:00', 9),
-(2, 'Programação Web', 6, 'Site E-commerce', 'Lab 103', 'Quinta-feira', '10:00:00', '12:00:00', 8),
+(2, 'Cálculo I', "yellow", 'Exercícios', 'Sala 104', 'Segunda-feira', '14:00:00', '16:00:00', 10),
+(2, 'Física I', "red", 'Laboratório', 'Lab 202', 'Quarta-feira', '14:00:00', '16:00:00', 9),
+(2, 'Programação Web', "purple", 'Site E-commerce', 'Lab 103', 'Quinta-feira', '10:00:00', '12:00:00', 8),
 -- Ana Oliveira
-(3, 'Estrutura de Dados', 7, 'Árvores Binárias', 'Lab 105', 'Terça-feira', '08:00:00', '10:00:00', 10),
-(3, 'Redes de Computadores', 8, 'Topologia Rede', 'Lab 301', 'Quinta-feira', '14:00:00', '16:00:00', 9);
+(3, 'Estrutura de Dados', "lime", 'Árvores Binárias', 'Lab 105', 'Terça-feira', '08:00:00', '10:00:00', 10),
+(3, 'Redes de Computadores', "emerald", 'Topologia Rede', 'Lab 301', 'Quinta-feira', '14:00:00', '16:00:00', 9);
 
 -- Inserindo tarefas
 INSERT INTO task (idDiscipline, name, type, estimatedHours, dueDate, status, weight) VALUES

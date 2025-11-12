@@ -4,14 +4,6 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-/**
- * @param {object} props
- * @param {object} [props.disciplineData] 
- * @param {number} [props.idUser=1] 
- * @param {string} [props.selectedProject] 
- * @param {Function} [props.onCancel] 
- * @param {Function} [props.onRefresh] 
- */
 export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "", onCancel, onRefresh }) => {
   const isEditing = !!disciplineData
 
@@ -33,6 +25,16 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
     { pt: "Prata", en: "silver" },
   ]
 
+  const dayOptions = [
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado",
+    "Domingo",
+  ]
+
   const formatTimeForInput = (time) => {
     if (!time) return ""
     return time.length === 8 ? time.slice(0, 5) : time
@@ -50,7 +52,6 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
   })
 
   useEffect(() => {
-    // Atualiza o projeto no formulário sempre que o usuário muda o projeto no AddDiscipline
     if (selectedProject && selectedProject !== formData.project) {
       setFormData((prev) => ({ ...prev, project: selectedProject }))
     }
@@ -128,7 +129,34 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
 
       <div className="space-y-1">
         <label className="block text-neutral-300 font-semibold text-sm">Dia</label>
-        <Input name="day" value={formData.day} onChange={handleChange} required variant="dark" placeholder="Ex: Segunda-feira" />
+        <div className="relative">
+          <select
+            name="day"
+            value={formData.day}
+            onChange={handleChange}
+            required
+            className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-yellow-500 text-sm appearance-none pr-10"
+          >
+            <option value="" disabled>Selecione um dia</option>
+            {dayOptions.map((day) => (
+              <option key={day} value={day}>{day}</option>
+            ))}
+          </select>
+
+          <svg
+            className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-neutral-400"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.27a.75.75 0 01-.02-1.06z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
       </div>
 
       <div className="flex space-x-2">

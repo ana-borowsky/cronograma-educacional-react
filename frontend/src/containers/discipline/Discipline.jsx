@@ -108,11 +108,11 @@ const Discipline = ({ disciplineData }) => {
       </div>
 
       <div className="mb-4 text-neutral-300">
-        <p><strong>Projeto:</strong> {project}</p>
-        <p><strong>Local:</strong> {classroom}</p>
-        <p><strong>Dia:</strong> {day}</p>
-        <p><strong>Horário:</strong> {startTime} - {endTime}</p>
-        <p><strong>Peso:</strong> {weight}</p>
+        <p className="text-sm"><strong>Projeto:</strong> {project}</p>
+        <p className="text-sm"><strong>Local:</strong> {classroom}</p>
+        <p className="text-sm"><strong>Dia:</strong> {day}</p>
+        <p className="text-sm"><strong>Horário:</strong> {startTime} - {endTime}</p>
+        <p className="text-sm"><strong>Peso:</strong> {weight}</p>
       </div>
 
       <hr className="my-6 border-neutral-600" />

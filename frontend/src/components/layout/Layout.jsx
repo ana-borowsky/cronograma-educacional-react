@@ -55,7 +55,7 @@ const Layout = ({ subtitle, children }) => {
           </Button>
 
           <Button
-            variant="default"
+            variant="yellow-primary"
             onClick={openLoginModal}
           >
             Login
@@ -67,7 +67,6 @@ const Layout = ({ subtitle, children }) => {
         {children}
       </main>
 
-      {/* Os modais não afetam o fluxo vertical, mas podem causar o problema de rolagem */}
       {isLoginModalOpen && (
         <LoginModal
           onClose={closeLoginModal}

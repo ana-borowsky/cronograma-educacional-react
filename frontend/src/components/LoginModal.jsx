@@ -56,7 +56,7 @@ const LoginModal = ({ onClose }) => {
             variant="yellow-primary"
             asChild 
           >
-            <Link to="/scheduleandtasks">
+            <Link to="/disciplines">
               Entrar
             </Link>
           </Button>

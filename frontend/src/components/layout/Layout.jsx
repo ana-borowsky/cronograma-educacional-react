@@ -34,7 +34,11 @@ const Layout = ({ subtitle, children }) => {
       <header className="relative w-full p-5">
         <div className="flex flex-col items-center min-h-[100px] justify-start">
           <Title>
-            Beezer
+            <img
+              src="/assets/logo.svg" 
+              alt="Logo da Empresa"
+              style={{ width: '600px', height: 'auto' }}
+            />
           </Title>
           <h3 className="text-xl md:text-2xl font-medium text-neutral-400 mb-5 tracking-wide 
                       drop-shadow-sm">
@@ -51,7 +55,7 @@ const Layout = ({ subtitle, children }) => {
           </Button>
 
           <Button
-            variant="default"
+            variant="yellow-primary"
             onClick={openLoginModal}
           >
             Login
@@ -63,7 +67,6 @@ const Layout = ({ subtitle, children }) => {
         {children}
       </main>
 
-      {/* Os modais não afetam o fluxo vertical, mas podem causar o problema de rolagem */}
       {isLoginModalOpen && (
         <LoginModal
           onClose={closeLoginModal}

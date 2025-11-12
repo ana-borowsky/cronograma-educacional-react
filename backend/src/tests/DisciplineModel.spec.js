@@ -3,8 +3,10 @@ import app from "../app.js"
 
 describe("Testes da disciplina", () => {
 
-  it("Cria disciplina", async () => {
-    const created = await request(app)
+  let created
+
+  beforeAll(async () => {
+    created = await request(app)
       .post("/discipline")
       .send({
         idDiscipline: null,
@@ -18,34 +20,25 @@ describe("Testes da disciplina", () => {
         endTime: "09:45",
         weight: 2
       })
+  })
+
+  it("Cria disciplina", async () => {
     expect(created.statusCode).toBe(200)
   })
 
   it("Atualizar disciplina", async () => {
-    const discipline = {
-      idDiscipline: null,
+     const updatedData = {
+      idDiscipline: created.body.id,
       idUser: 1,
-      name: "Português",
-      color: "red",
+      name: "Matematica",
+      color: "green",
       project: "Projeto A",
       classroom: "101",
       day: "Segunda-Feira",
       startTime: "08:00",
       endTime: "09:45",
       weight: 2
-    }
-
-    const created = await request(app)
-      .post("/discipline")
-      .send(discipline)
-    const updatedData = {
-      ...discipline,
-      idDiscipline: created.body.id,
-      name: "Matematica",
-      color: "green"
-    };
-
-
+  }
     const res = await request(app).put("/discipline").send(updatedData)
 
     expect(res.statusCode).toBe(200)
@@ -55,43 +48,15 @@ describe("Testes da disciplina", () => {
   })
 
   it("Pega todas as diciplinas por usuário", async () => {
-    const discipline = await request(app)
-      .post("/discipline")
-      .send({
-        idDiscipline: null,
-        idUser: 1,
-        name: "Português",
-        color: "red",
-        project: "Projeto A",
-        classroom: "101",
-        day: "Segunda-Feira",
-        startTime: "08:00",
-        endTime: "09:45",
-        weight: 2
-      })
-    const res = await request(app).get("/discipline/1").query({ idUser: discipline.idUser })
 
+    const res = await request(app).get("/discipline/1").query({ idUser: created.idUser })
     expect(res.statusCode).toBe(200)
 
   })
 
   it("Delete disciplina", async () => {
-    const discipline = await request(app)
-      .post("/discipline")
-      .send({
-        idDiscipline: null,
-        idUser: 1,
-        name: "Português",
-        color: "red",
-        project: "Projeto A",
-        classroom: "101",
-        day: "Segunda-Feira",
-        startTime: "08:00",
-        endTime: "09:45",
-        weight: 2
-      })
-    const res = await request(app).delete(`/discipline/${discipline.body.id}`)
-      .query({ idDiscipline: discipline.body.idDiscipline })
+    const res = await request(app).delete(`/discipline/${created.body.id}`)
+      .query({ idDiscipline: created.body.idDiscipline })
 
     expect(res.statusCode).toBe(200)
   })

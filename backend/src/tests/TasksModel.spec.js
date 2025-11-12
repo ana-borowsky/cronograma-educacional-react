@@ -3,8 +3,11 @@ import app from "../app.js"
 
 describe("Testes tarefas", () => {
 
-  it("Criar tarefa", async () => {
-    const created = await request(app)
+  let created
+  let day = new Date().toISOString().split("T")[0]
+
+  beforeAll(async () => {
+    created = await request(app)
       .post("/tasks")
       .send({
         idTask: null,
@@ -12,11 +15,14 @@ describe("Testes tarefas", () => {
         name: "Revisão Bibliográfica",
         type: "Prova",
         estimatedHours: "06:00:00",
-        dueDate: "2025-11-05",
+        dueDate: day,
         status: "Pendente",
         weight: 8
       })
-      expect(created.statusCode).toBe(200)
+  })
+
+  it("Criar tarefa", async () => {
+    expect(created.statusCode).toBe(200)
   })
 
   it("Atualiza tarefa", async () => {
@@ -26,20 +32,16 @@ describe("Testes tarefas", () => {
         name: "Revisão Bibliográfica",
         type: "Prova",
         estimatedHours: "06:00:00",
-        dueDate: "2025-11-05",
+        dueDate: day,
         status: "Pendente",
         weight: 8
     }
-
-    const created =  await request(app)
-      .post("/tasks")
-      .send(task)
 
     const updateData = {
       ...task,
       idTask: created.body.idTask,
       estimatedHours: "07:00:00",
-      dueDate: "2025-12-06"
+      weight: 9
     }
 
     const res = await request(app).put("/tasks").send(updateData)
@@ -47,100 +49,40 @@ describe("Testes tarefas", () => {
     expect(res.statusCode).toBe(200)
     expect(res.body).toHaveProperty("idTask", created.body.idTask)
     expect(res.body.estimatedHours).toBe("07:00:00")
-    expect(res.body.dueDate).toBe("2025-12-06")
+    expect(res.body.weight).toBe(9)
   })
 
   it("Selecionar todas as tarefas", async() => {
-    const task = await request(app)
-      .post("/tasks")
-      .send({
-        idTask: null,
-        idDiscipline: 1,
-        name: "Revisão Bibliográfica",
-        type: "Prova",
-        estimatedHours: "06:00:00",
-        dueDate: "2025-11-05",
-        status: "Pendente",
-        weight: 8
-    })
 
-    const res = await request(app).get("/tasks/all/1").query({ idDiscipline: task.idDiscipline})
+    const res = await request(app).get("/tasks/all/1").query({ idDiscipline: created.idDiscipline})
 
     expect(res.statusCode).toBe(200)
   })
 
   it("Selecionar todas as provas", async() => {
-    const task = await request(app)
-      .post("/tasks")
-      .send({
-        idTask: null,
-        idDiscipline: 1,
-        name: "Revisão Bibliográfica",
-        type: "Prova",
-        estimatedHours: "06:00:00",
-        dueDate: "2025-11-05",
-        status: "Pendente",
-        weight: 8
-    })
-
-    const res = await request(app).get("/tasks/exams/1").query({ idDiscipline: task.idDiscipline})
+    const res = await request(app).get("/tasks/exams/1").query({ idDiscipline: created.idDiscipline})
 
     expect(res.statusCode).toBe(200)
   })
 
   it("Selecionar todos os trabalhos", async() => {
-    const task = await request(app)
-      .post("/tasks")
-      .send({
-        idTask: null,
-        idDiscipline: 1,
-        name: "Revisão Bibliográfica",
-        type: "Prova",
-        estimatedHours: "06:00:00",
-        dueDate: "2025-11-05",
-        status: "Pendente",
-        weight: 8
-    })
 
-    const res = await request(app).get("/tasks/works/1").query({ idDiscipline: task.idDiscipline})
+    const res = await request(app).get("/tasks/works/1").query({ idDiscipline: created.idDiscipline})
 
     expect(res.statusCode).toBe(200)
   })
 
   it("Selecionar todas as tarefas do dia", async() => {
-    const task = await request(app)
-      .post("/tasks")
-      .send({
-        idTask: null,
-        idDiscipline: 1,
-        name: "Revisão Bibliográfica",
-        type: "Prova",
-        estimatedHours: "06:00:00",
-        dueDate: "2025-11-05",
-        status: "Concluído",
-        weight: 8
-    })
 
-    const res = await request(app).get("/tasks/dayTasks/1").query({ idDiscipline: task.idDiscipline})
+    const res = await request(app).get("/tasks/dayTasks/1").query({ idDiscipline: created.idDiscipline})
 
     expect(res.statusCode).toBe(200)
   })
 
   it("Deletar tarefas" , async () => {
-    const tasks = await request(app)
-      .post("/tasks")
-      .send({
-        idTask: null,
-        idDiscipline: 1,
-        name: "Revisão Bibliográfica",
-        type: "Prova",
-        estimatedHours: "06:00:00",
-        dueDate: "2025-11-05",
-        status: "Pendente",
-        weight: 8
-    })
 
-    const res = await request(app).delete(`/tasks/${tasks.body.idTask}`).query({idTask: tasks.body.idTask})
+
+    const res = await request(app).delete(`/tasks/${created.body.idTask}`).query({idTask: created.body.idTask})
     expect(res.statusCode).toBe(200)
   })
 })

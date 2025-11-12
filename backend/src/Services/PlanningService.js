@@ -1,4 +1,4 @@
-import PlanningRepository from "../Repositories/PlanningRepository"
+import PlanningRepository from "../Repositories/PlanningRepository.js"
 
 class PlanningService {
   constructor() {}

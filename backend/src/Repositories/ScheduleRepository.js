@@ -57,6 +57,41 @@ class ScheduleRespository {
     })
     return schedules
   }
+
+  async getWeekScheduleByUser(idUser){
+    const values = [idUser]
+    const query ="SELECT \
+                    user.idUser,\
+                    task.name AS taskName, \
+                    discipline.color, \
+                    planning.startTime, \
+                    planning.endTime, \
+                    planning.executionDate, \
+                    task.status \
+                  FROM beezer.schedule \
+                  JOIN beezer.planning AS planning ON beezer.schedule.idPlanning = planning.idPlanning\
+                  JOIN beezer.task AS task ON planning.idTask = task.idTask JOIN beezer.discipline AS discipline ON task.idDiscipline = discipline.idDiscipline \
+                  JOIN beezer.user AS user  ON beezer.schedule.idUser = user.idUser \
+                  WHERE planning.executionDate BETWEEN DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) AND DATE_ADD(CURDATE(), \
+                  INTERVAL(6- WEEKDAY(CURDATE())) DAY) AND user.idUser = ? \
+                  ORDER BY WEEKDAY(planning.executionDate), planning.executionDate;"
+                      
+    const [result] = await db.query(query, values)
+    let schedules = []
+
+
+    result.forEach(schedule => {
+      schedules.push(new ScheduleModel(
+        schedule.idUser,
+        schedule.taskName,
+        schedule.status,
+        schedule.executionDate,
+        schedule.startTime,
+        schedule.endTime
+      ))
+    })
+    return schedules
+  }
 }
 
 export default ScheduleRespository

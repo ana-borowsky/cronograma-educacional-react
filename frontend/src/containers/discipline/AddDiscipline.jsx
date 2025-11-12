@@ -57,7 +57,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
                     <select
                       id="project-select"
                       name="project-select"
-                      className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-blue-500 text-sm appearance-none pr-10"
+                      className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-yellow-500 text-sm appearance-none pr-10"
                       defaultValue="vestibular"
                     >
                       <option value="vestibular">Vestibular</option>

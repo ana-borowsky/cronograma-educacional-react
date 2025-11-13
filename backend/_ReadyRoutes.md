@@ -45,4 +45,7 @@
 ---
 
 - post/schedules
-- get/schedules/:idUser
+- get/schedules/all/:idUser
+- get/schedules/weekSchedule/:idUser
+- get/shedules/monthSchedule/:idUser
+

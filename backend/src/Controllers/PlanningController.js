@@ -13,7 +13,7 @@ class PlanningController {
         idTask
       } = req.body
 
-      const result = await new PlanningService(new PlanningModel(
+      const result = await new PlanningService().insert(new PlanningModel(
           idPlanning,
           executionDate, 
           startTime,

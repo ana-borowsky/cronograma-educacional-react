@@ -4,7 +4,7 @@ import app from "../app.js"
 describe("Testes tarefas", () => {
 
   let created
-  let day = new Date().toISOString().split("T")[0]
+  const day = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
 
   beforeAll(async () => {
     created = await request(app)
@@ -36,6 +36,8 @@ describe("Testes tarefas", () => {
         status: "Pendente",
         weight: 8
     }
+
+    console.log(task.dueDate)
 
     const updateData = {
       ...task,

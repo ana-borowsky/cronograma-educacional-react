@@ -4,7 +4,7 @@ import app from "../app.js"
 describe("Testes planejamento", () => {
 
   let created 
-  const day = new Date().toISOString().split("T")[0]
+  const day = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
 
   beforeAll(async () => {
     created = await request(app)
@@ -34,7 +34,6 @@ describe("Testes planejamento", () => {
       idTask: 1
     }
 
-    console.log("planning: ", plannings)
     const updateData = {
       ...plannings,
       idPlanning:created.body.idPlanning,

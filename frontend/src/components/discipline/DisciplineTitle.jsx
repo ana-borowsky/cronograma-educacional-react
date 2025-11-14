@@ -6,19 +6,24 @@ const colorMap = {
   red: "bg-red-600",
   green: "bg-green-600",
   blue: "bg-blue-600",
+  purple: "bg-blue-600",
+  orange: "bg-orange-600",
+  pink: "bg-pink-500",
+  white: "bg-white",
+  black: "bg-black",
 };
 
 /**
  * * @param {object} props
  * @param {string} props.title 
- * @param {('yellow' | 'red' | 'green' | 'blue' | string)} props.color 
+ * @param {('yellow' | 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'pink' | 'white' | 'black' | string)} props.color
  */
 export function DisciplineTitle({ title, color }) {
 
   const colorClass = colorMap[color] || "bg-neutral-500";
 
   return (
-    <h2 className="w-full flex items-center text-xl font-bold text-tx mb-4 border-b border-neutral-700 pb-2 truncate">
+    <h2 className="w-full flex items-center text-xl font-bold text-tx mb-2 truncate">
       <span className={cn(
         "w-3 h-3 rounded-full mr-3 flex-shrink-0",
         colorClass

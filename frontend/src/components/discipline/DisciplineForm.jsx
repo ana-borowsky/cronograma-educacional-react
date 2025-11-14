@@ -8,22 +8,16 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
   const isEditing = !!disciplineData
 
   const colorOptions = [
-    { pt: "Vermelho", en: "red" },
-    { pt: "Azul", en: "blue" },
-    { pt: "Verde", en: "green" },
     { pt: "Amarelo", en: "yellow" },
+    { pt: "Vermelho", en: "red" },
+    { pt: "Verde", en: "green" },
+    { pt: "Azul", en: "blue" },
     { pt: "Roxo", en: "purple" },
     { pt: "Laranja", en: "orange" },
     { pt: "Rosa", en: "pink" },
-    { pt: "Cinza", en: "gray" },
-    { pt: "Preto", en: "black" },
     { pt: "Branco", en: "white" },
-    { pt: "Marrom", en: "brown" },
-    { pt: "Ciano", en: "cyan" },
-    { pt: "Magenta", en: "magenta" },
-    { pt: "Dourado", en: "gold" },
-    { pt: "Prata", en: "silver" },
-  ]
+    { pt: "Preto", en: "black" },
+  ];
 
   const dayOptions = [
     "Segunda-feira",
@@ -118,17 +112,17 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Nome</label>
-        <Input name="name" value={formData.name} onChange={handleChange} required variant="dark" placeholder="Ex: Banco de Dados" />
+        <label className="block text-neutral-500 font-semibold text-sm">Nome</label>
+        <Input name="name" value={formData.name} onChange={handleChange} required placeholder="Ex: Banco de Dados" />
       </div>
 
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Sala / Local</label>
-        <Input name="classroom" value={formData.classroom} onChange={handleChange} required variant="dark" placeholder="Ex: Sala 203" />
+        <label className="block text-neutral-500 font-semibold text-sm">Sala / Local</label>
+        <Input name="classroom" value={formData.classroom} onChange={handleChange} required placeholder="Ex: Sala 203" />
       </div>
 
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Dia</label>
+        <label className="block text-neutral-500 font-semibold text-sm">Dia</label>
         <div className="relative">
           <select
             name="day"
@@ -161,24 +155,23 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
 
       <div className="flex space-x-2">
         <div className="space-y-1 flex-1">
-          <label className="block text-neutral-300 font-semibold text-sm">Início</label>
-          <Input name="startTime" type="time" step="60" value={formData.startTime} onChange={handleChange} required variant="dark" />
+          <label className="block text-neutral-500 font-semibold text-sm">Início</label>
+          <Input name="startTime" type="time" step="60" value={formData.startTime} onChange={handleChange} required />
         </div>
         <div className="space-y-1 flex-1">
-          <label className="block text-neutral-300 font-semibold text-sm">Fim</label>
-          <Input name="endTime" type="time" step="60" value={formData.endTime} onChange={handleChange} required variant="dark" />
+          <label className="block text-neutral-500 font-semibold text-sm">Fim</label>
+          <Input name="endTime" type="time" step="60" value={formData.endTime} onChange={handleChange} required />
         </div>
       </div>
 
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Nível de dificuldade</label>
+        <label className="block text-neutral-500 font-semibold text-sm">Nível de dificuldade</label>
         <Input
           name="weight"
           type="number"
           value={formData.weight}
           onChange={handleChange}
           required
-          variant="dark"
           min="1"
           max="10"
           placeholder="1 a 10"
@@ -186,7 +179,7 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
       </div>
 
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Cor</label>
+        <label className="block text-neutral-500 font-semibold text-sm">Cor</label>
         <div className="relative">
           <select
             name="color"

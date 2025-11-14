@@ -5,12 +5,12 @@ import { cn } from "@/lib/utils"
 
 const inputVariants = cva(
 
-  "flex w-full rounded-md shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+  "flex w-full rounded-md transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-neutral-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "h-9 border border-input bg-transparent px-3 py-1 text-base md:text-sm",
+          "h-12 border border-input bg-neutral-200 px-3 py-1 text-base md:text-sm",
         dark:
           "h-auto p-3 text-sm border border-neutral-600 bg-neutral-700 text-white placeholder-neutral-500 focus:ring-yellow-500 focus:border-yellow-500",
       },

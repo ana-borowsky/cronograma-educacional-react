@@ -130,7 +130,7 @@ const Discipline = ({ disciplineData }) => {
                     key={work.idTask}
                     id={work.idTask}
                     fullDescription={work.name}
-                    borderColor="blue"
+                    borderColor="green"
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Trabalho", work)}
                     taskData={work}
@@ -160,7 +160,7 @@ const Discipline = ({ disciplineData }) => {
                     key={exam.idTask}
                     id={exam.idTask}
                     fullDescription={exam.name}
-                    borderColor="red"
+                    borderColor="blue"
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Prova", exam)}
                     taskData={exam}

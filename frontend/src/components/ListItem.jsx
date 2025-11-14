@@ -14,11 +14,8 @@ const PencilIcon = () => (
 )
 
 const borderColors = {
-  yellow: "border-yellow-600",
   green: "border-green-600",
-  red: "border-red-600",
   blue: "border-blue-600",
-  purple: "border-purple-600",
 }
 
 export function ListItem({

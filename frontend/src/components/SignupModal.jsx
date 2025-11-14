@@ -22,7 +22,7 @@ const SignupModal = ({ onClose, onLoginClick }) => {
         <form className="space-y-4 mt-4">
           <h2
             id="modal-title"
-            className="text-center text-neutral-500 text-2xl font-semibold mb-6"
+            className="text-center text-neutral-600 text-2xl font-semibold mb-6"
           >
             Crie sua conta
           </h2>
@@ -30,9 +30,9 @@ const SignupModal = ({ onClose, onLoginClick }) => {
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block mb-1 text-neutral-500 font-bold text-sm"
+              className="block mb-1 text-neutral-600 font-bold text-sm"
             >
-              Nome Completo
+              Nome completo
             </label>
             <Input
               type="text"
@@ -46,7 +46,7 @@ const SignupModal = ({ onClose, onLoginClick }) => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block mb-1 text-neutral-500 font-bold text-sm"
+              className="block mb-1 text-neutral-600 font-bold text-sm"
             >
               E-mail
             </label>
@@ -62,7 +62,7 @@ const SignupModal = ({ onClose, onLoginClick }) => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block mb-1 text-neutral-500 font-bold text-sm"
+              className="block mb-1 text-neutral-600 font-bold text-sm"
             >
               Senha
             </label>
@@ -78,9 +78,9 @@ const SignupModal = ({ onClose, onLoginClick }) => {
           <div className="mb-6">
             <label
               htmlFor="confirm-password"
-              className="block mb-1 text-neutral-500 font-bold text-sm"
+              className="block mb-1 text-neutral-600 font-bold text-sm"
             >
-              Confirme a Senha
+              Confirme a senha
             </label>
             <Input
               type="password"
@@ -101,7 +101,7 @@ const SignupModal = ({ onClose, onLoginClick }) => {
           </Button>
         </form>
 
-        <p className="text-center mt-5 text-neutral-500 text-sm">
+        <p className="text-center mt-5 text-neutral-600 text-sm">
           Já tem uma conta?
           <button
             onClick={onLoginClick || onClose}

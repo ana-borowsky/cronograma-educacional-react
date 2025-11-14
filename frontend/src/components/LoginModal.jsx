@@ -24,12 +24,12 @@ const LoginModal = ({ onClose, onSignupClick }) => {
         aria-labelledby="modal-title"
       >
         <form className="space-y-4 mt-4">
-          <h2 id="modal-title" className="text-center text-neutral-500 text-2xl font-semibold mb-6">
+          <h2 id="modal-title" className="text-center text-neutral-600 text-2xl font-semibold mb-6">
             Acesso
           </h2>
 
           <div className="mb-4">
-            <label htmlFor="email" className="block mb-1 text-neutral-500 font-bold text-sm">
+            <label htmlFor="email" className="block mb-1 text-neutral-600 font-bold text-sm">
               E-mail
             </label>
             <Input
@@ -42,7 +42,7 @@ const LoginModal = ({ onClose, onSignupClick }) => {
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block mb-1 text-neutral-500 font-bold text-sm">
+            <label htmlFor="password" className="block mb-1 text-neutral-600 font-bold text-sm">
               Senha
             </label>
             <Input
@@ -64,7 +64,7 @@ const LoginModal = ({ onClose, onSignupClick }) => {
           </Button>
         </form>
 
-        <p className="text-center mb-2 text-neutral-500 text-sm">
+        <p className="text-center mb-2 text-neutral-600 text-sm">
           Não tem conta?
           <button
             onClick={onSignupClick}

@@ -26,7 +26,7 @@ export function DisciplineTitle({ title, project, weight, color, classroom }) {
   return (
     <div className="w-full">
       {/* Título */}
-      <h2 className="flex items-center text-xl font-semibold text-neutral-700 mb-1 truncate">
+      <h2 className="flex items-center text-xl font-semibold text-neutral-600 mb-1 truncate">
         <span
           className={cn("w-3 h-3 rounded-full mr-3 flex-shrink-0", colorClass)}
         ></span>

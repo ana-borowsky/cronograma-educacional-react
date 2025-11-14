@@ -75,14 +75,6 @@ export function ListItem({
         </div>
 
         <div className="flex items-center">
-          <ChevronDown
-            className={cn(
-              "h-4 w-4 ml-2 text-neutral-400 transition-transform cursor-pointer",
-              isExpanded ? "rotate-180" : "rotate-0"
-            )}
-            onClick={() => setIsExpanded(!isExpanded)}
-          />
-
           {isHovered && (
             <Button
               variant="ghost"

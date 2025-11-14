@@ -129,7 +129,7 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
             value={formData.day}
             onChange={handleChange}
             required
-            className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-yellow-500 text-sm appearance-none pr-10"
+            className="w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-500 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
           >
             <option value="" disabled>Selecione um dia</option>
             {dayOptions.map((day) => (
@@ -186,7 +186,7 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
             value={formData.color}
             onChange={handleChange}
             required
-            className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-yellow-500 text-sm appearance-none pr-10"
+            className="w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-500 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
           >
             {colorOptions.map((color) => (
               <option key={color.en} value={color.en}>

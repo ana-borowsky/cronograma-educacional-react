@@ -107,7 +107,7 @@ const Discipline = ({ disciplineData }) => {
 
       </div>
 
-      <div className="mb-4 text-neutral-300">
+      <div className="mb-4 text-tx">
         <p className="text-sm"><strong>Projeto:</strong> {project}</p>
         <p className="text-sm"><strong>Local:</strong> {classroom}</p>
         <p className="text-sm"><strong>Dia:</strong> {day}</p>
@@ -118,11 +118,11 @@ const Discipline = ({ disciplineData }) => {
       <hr className="my-6 border-neutral-600" />
 
       {loading ? (
-        <p className="text-neutral-500 text-sm">Carregando tarefas...</p>
+        <p className="text-tx text-sm">Carregando tarefas...</p>
       ) : (
         <>
           <div className="mb-6">
-            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
+            <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
               Atividades e Trabalhos
             </h2>
             <div className="space-y-2 mb-4">
@@ -154,7 +154,7 @@ const Discipline = ({ disciplineData }) => {
           <hr className="my-6 border-neutral-600" />
 
           <div className="mb-4">
-            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
+            <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
               Provas e Avaliações
             </h2>
             <div className="space-y-2 mb-4">

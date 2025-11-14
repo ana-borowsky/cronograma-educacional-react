@@ -48,6 +48,7 @@ const Layout = ({ subtitle, children }) => {
           <Button
             variant="secondary"
             onClick={openSignupModal}
+            className="bg-neutral-200"
           >
             Cadastro
           </Button>

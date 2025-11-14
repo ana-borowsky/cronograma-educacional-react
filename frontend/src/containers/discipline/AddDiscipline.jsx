@@ -63,7 +63,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
               <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">Projeto</h2>
               <form className="space-y-6">
                 <div className="space-y-1">
-                  <label htmlFor="project-select" className="block text-neutral-500 font-semibold text-sm">
+                  <label htmlFor="project-select" className="block text-neutral-600 font-semibold text-sm">
                     Selecione o projeto
                   </label>
                   <div className="relative">
@@ -101,7 +101,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
                 </div>
 
                 <div className="space-y-1">
-                  <label htmlFor="new-project" className="block text-neutral-500 font-semibold text-sm">
+                  <label htmlFor="new-project" className="block text-neutral-600 font-semibold text-sm">
                     Ou crie um novo projeto
                   </label>
                   <div className="flex space-x-2">
@@ -129,8 +129,8 @@ export const AddDiscipline = ({ startOpen = false }) => {
               </p>
 
               <div className="space-y-2">
-                <label htmlFor="file-upload-ensalamento" className="block text-neutral-500 font-semibold text-sm">
-                  Selecione o Arquivo do Ensalamento
+                <label htmlFor="file-upload-ensalamento" className="block text-neutral-600 font-semibold text-sm">
+                  Selecione o arquivo do ensalamento
                 </label>
                 <Input
                   type="file"
@@ -143,7 +143,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
               </div>
 
               <div className="space-y-1">
-                <label htmlFor="file-upload-planos" className="block text-neutral-500 font-semibold text-sm">
+                <label htmlFor="file-upload-planos" className="block text-neutral-600 font-semibold text-sm">
                   Selecione os arquivos dos planos de ensino das disciplinas
                 </label>
                 <Input

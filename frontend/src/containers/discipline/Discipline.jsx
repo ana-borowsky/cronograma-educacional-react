@@ -93,7 +93,7 @@ const Discipline = ({ disciplineData }) => {
   return (
     <Container className="w-[400px]">
       <div
-        className="relative flex items-start justify-between cursor-pointer group mb-2 transition-all duration-200"
+        className="relative flex items-start justify-between cursor-pointer group mb-4 transition-all duration-200"
         onClick={openDisciplineModal}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -107,13 +107,12 @@ const Discipline = ({ disciplineData }) => {
 
       </div>
 
-      <div className="mb-4 text-neutral-500">
-        <p className="text-xs font-medium"><strong>Dia:</strong> {day}</p>
-        <p className="text-xs font-medium"><strong>Horário:</strong> {startTime} - {endTime}</p>
+      <div className="mb-10 text-neutral-500">
+        <p className="text-neutral-600 text-sm">{day}: {startTime} - {endTime}</p>
       </div>
 
       {loading ? (
-        <p className="text-tx">Carregando tarefas...</p>
+        <p className="text-neutral-600 text-sm">Carregando tarefas...</p>
       ) : (
         <>
           <div className="mb-6">
@@ -134,11 +133,11 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                <p className="text-neutral-500">Nenhum trabalho cadastrado.</p>
+                    <p className="text-neutral-600 text-sm">Nenhum trabalho cadastrado.</p>
               )}
             </div>
             <Button
-              className="w-full transition duration-200 mt-2"
+              className="w-full transition duration-200 mt-2 mb-6"
               variant="yellow-primary"
               onClick={() => handleOpenModal("Trabalho")}
             >
@@ -164,7 +163,7 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                    <p className="text-neutral-500">Nenhuma prova cadastrada.</p>
+                    <p className="text-neutral-600 text-sm">Nenhuma prova cadastrada.</p>
               )}
             </div>
             <Button

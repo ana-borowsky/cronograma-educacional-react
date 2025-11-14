@@ -50,7 +50,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
   }
 
   return (
-    <div className="w-[330px] transition-all duration-500 ease-in-out">
+    <div className="w-[400px] transition-all duration-500 ease-in-out">
       <Container className="overflow-hidden duration-500 ease-in-out">
         <div className="flex justify-between items-center cursor-pointer w-full" onClick={toggleForm}>
           <h2 className="w-full text-xl font-bold text-neutral-600  pb-2">Insira disciplinas</h2>

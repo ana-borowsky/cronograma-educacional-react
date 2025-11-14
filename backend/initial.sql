@@ -125,13 +125,26 @@ INSERT INTO task (idDiscipline, name, type, estimatedHours, dueDate, status, wei
 -- Algoritmos e Programação (Maria)
 (1, 'Prova Parcial 1', 'Prova', '02:00:00', '2025-11-15', 'Pendente', 10),
 (1, 'Trabalho de Ordenação', 'Trabalho', '08:00:00', '2025-11-20', 'Pendente', 8),
-(1, 'Lista de Exercícios 3', 'Trabalho', '04:00:00', '2025-11-10', 'Concluído', 5),
+(1, 'Lista de Exercícios 3', 'Trabalho', '04:00:00', '2025-11-10', 'Pendente', 5),
+(1, 'Prova Final - Estruturas de Dados', 'Prova', '03:00:00', '2025-12-15', 'Pendente', 10),
+(1, 'Trabalho Prático - Recursividade', 'Trabalho', '08:00:00', '2025-11-28', 'Pendente', 7),
+(1, 'Lista Exercícios - Ponteiros e Alocação', 'Trabalho', '05:00:00', '2025-11-20', 'Pendente', 5),
+(1, 'Prova Parcial 2 - Vetores e Matrizes', 'Prova', '02:00:00', '2025-11-24', 'Pendente', 10),
 -- Banco de Dados (Maria)
 (2, 'Modelagem de Dados', 'Trabalho', '10:00:00', '2025-11-18', 'Pendente', 9),
 (2, 'Prova de SQL', 'Prova', '02:00:00', '2025-11-25', 'Pendente', 10),
+(2, 'Prova Prática - Joins e Views', 'Prova', '03:00:00', '2025-12-02', 'Pendente', 10),
+(2, 'Projeto Físico - Índices e Procedures', 'Trabalho', '12:00:00', '2025-12-08', 'Pendente', 9),
+(2, 'Trabalho Conceitual - Transações (ACID)', 'Trabalho', '06:00:00', '2025-11-26', 'Pendente', 6),
+(2, 'Prova Parcial 1 - MER/DER', 'Prova', '02:00:00', '2025-11-17', 'Pendente', 10),
 -- Engenharia de Software (Maria)
 (3, 'Documentação do Projeto', 'Trabalho', '12:00:00', '2025-11-30', 'Pendente', 7),
 (3, 'Apresentação Seminário', 'Trabalho', '06:00:00', '2025-11-22', 'Pendente', 8),
+(3, 'Trabalho - Requisitos Funcionais (RF)', 'Trabalho', '10:00:00', '2025-11-29', 'Pendente', 8),
+(3, 'Prova Conceitual - Métodos Ágeis (Scrum)', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10),
+(3, 'Trabalho Prático - Diagramas de Caso de Uso', 'Trabalho', '07:00:00', '2025-12-04', 'Pendente', 7),
+(3, 'Relatório de Testes de Unidade', 'Trabalho', '09:00:00', '2025-12-10', 'Pendente', 5),
+(3, 'Prova de Modelagem de Casos de Uso', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10),
 -- Cálculo I (João)
 (4, 'Prova Integral', 'Prova', '02:30:00', '2025-11-17', 'Pendente', 10),
 (4, 'Lista de Derivadas', 'Trabalho', '05:00:00', '2025-11-12', 'Pendente', 6),

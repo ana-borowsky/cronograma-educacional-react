@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../app.js"
-
+import db from "../db.js";
 
 describe("Testes cronograma",  () => {
 
@@ -34,5 +34,9 @@ describe("Testes cronograma",  () => {
     const res = await request(app).get("/schedules/monthSchedule/1").query({ idUser: 1 })
   
     expect(res.statusCode).toBe(200)
+  })
+
+  afterAll(async () => {
+    await db.end();
   })
 })

@@ -1,5 +1,6 @@
 import request from "supertest";
 import app from "../app.js"
+import db from "../db.js";
 
 describe("Testes tarefas", () => {
 
@@ -16,7 +17,7 @@ describe("Testes tarefas", () => {
         type: "Prova",
         estimatedHours: "06:00:00",
         dueDate: day,
-        status: "Pendente",
+        status: "Concluído",
         weight: 8
       })
   })
@@ -33,7 +34,7 @@ describe("Testes tarefas", () => {
         type: "Prova",
         estimatedHours: "06:00:00",
         dueDate: day,
-        status: "Pendente",
+        status: "Concluído",
         weight: 8
     }
 
@@ -53,12 +54,12 @@ describe("Testes tarefas", () => {
   })
 
   it("Atualizar status da tarefa", async () => {
-    const status = "Concluído"
+    const status = "Pendente"
 
     const res = await request(app).patch(`/tasks/${created.body.idTask}`).send({status})
 
     expect(res.statusCode).toBe(200)
-    expect(res.body.status).toBe("Concluído")
+    expect(res.body.status).toBe("Pendente")
   })
 
   it("Selecionar todas as tarefas", async() => {
@@ -93,4 +94,9 @@ describe("Testes tarefas", () => {
     const res = await request(app).delete(`/tasks/${created.body.idTask}`).query({idTask: created.body.idTask})
     expect(res.statusCode).toBe(200)
   })
+
+  afterAll(async () => {
+    await db.end();
+  })
+
 })

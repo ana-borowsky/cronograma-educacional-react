@@ -88,7 +88,7 @@ class TasksController {
       const statusPermitidos = ["Pendente", "Concluído"]
 
       if(!status || !statusPermitidos.includes(status)) {
-        return res.status(422).json({ erro: "Status inválido!"})
+        return res.status(422).json({ error: "Status inválido!"})
       }
       
       const updateResult = await new TasksService().updateStatus(

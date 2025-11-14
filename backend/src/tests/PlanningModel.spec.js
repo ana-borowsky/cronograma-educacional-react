@@ -1,5 +1,6 @@
 import request from "supertest";
 import app from "../app.js"
+import db from "../db.js";
 
 describe("Testes planejamento", () => {
 
@@ -70,5 +71,9 @@ describe("Testes planejamento", () => {
     const res = await request(app).delete(`/plannings/${created.body.idPlanning}`).query({ idPlanning: created.idPlanning })
     
     expect(res.statusCode).toBe(200)
+  })
+
+  afterAll(async () => {
+    await db.end();
   })
 })

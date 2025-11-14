@@ -44,7 +44,7 @@ class TasksRepository {
         taskModel.idTask
       ]
 
-      const query = "UPDATE task SET status = ? WHERE idTask = ?;"
+      const query = "UPDATE task SET status = ? WHERE idTask = ?"
       const result = await db.query(query, values)
 
       return result
@@ -52,7 +52,7 @@ class TasksRepository {
     
     async getAll(idDiscipline) {
       const values = [idDiscipline]
-      const query = "SELECT * FROM task WHERE idDiscipline = ?"
+      const query = "SELECT * FROM task WHERE idDiscipline = ? AND status = 'Pendente'"
       const [result] = await db.query(query, values)
       let tasks = []
       
@@ -73,7 +73,7 @@ class TasksRepository {
 
     async getExam(idDiscipline) {
       const values = [idDiscipline]
-      const query = "SELECT * FROM task WHERE idDiscipline = ? AND type = 'Prova'"
+      const query = "SELECT * FROM task WHERE idDiscipline = ? AND type = 'Prova' AND status = 'Pendente'"
       const [result] = await db.query(query, values)
       let tasks = []
       
@@ -94,7 +94,7 @@ class TasksRepository {
 
     async getWork(idDiscipline) {
       const values = [idDiscipline]
-      const query = "SELECT * FROM task WHERE idDiscipline = ? AND type = 'Trabalho'"
+      const query = "SELECT * FROM task WHERE idDiscipline = ? AND type = 'Trabalho' AND status = 'Pendente'"
       const [result] = await db.query(query, values)
       let tasks = []
       
@@ -116,7 +116,7 @@ class TasksRepository {
 
     async getDayTask(idDiscipline) {
       const values = [idDiscipline]
-      const query = "SELECT * FROM beezer.task WHERE idDiscipline = ? AND status = 'Pendente' AND dueDate = CURDATE()"
+      const query = "SELECT * FROM beezer.task WHERE idDiscipline = ? AND dueDate = CURDATE() AND status = 'Pendente'"
       const [result] = await db.query(query, values)
       let tasks = []
       

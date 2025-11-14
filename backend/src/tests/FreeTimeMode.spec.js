@@ -1,5 +1,6 @@
 import request from "supertest";
 import app from "../app.js"
+import db from "../db.js";
 
 describe("Testes Horas livres", () => {
 
@@ -57,5 +58,9 @@ describe("Testes Horas livres", () => {
     const res = await request(app).delete(`/freeTime/${created.body.id}`).query({ idTime: created.body.idTime })
 
     expect(res.statusCode).toBe(200)
+  })
+
+  afterAll(async () => {
+    await db.end();
   })
 })

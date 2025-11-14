@@ -1,5 +1,6 @@
 import request from "supertest";
 import app from "../app.js"
+import db from "../db.js";
 
 describe("Testes da disciplina", () => {
 
@@ -12,7 +13,7 @@ describe("Testes da disciplina", () => {
         idDiscipline: null,
         idUser: 1,
         name: "Português",
-        color: "red",
+        color: "blue",
         project: "Projeto A",
         classroom: "101",
         day: "Segunda-Feira",
@@ -61,4 +62,7 @@ describe("Testes da disciplina", () => {
     expect(res.statusCode).toBe(200)
   })
 
+  afterAll(async () => {
+    await db.end();
+  })
 })

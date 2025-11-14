@@ -125,7 +125,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
         <form onSubmit={handleSubmit} className="space-y-4">
 
           <div className="flex flex-col">
-            <label className="text-neutral-600 text-sm font-medium mb-1">
+            <label className="block text-neutral-600 font-semibold text-sm mb-1">
               Nome
             </label>
             <Input
@@ -139,7 +139,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
           </div>
 
           <div className="flex flex-col">
-            <label className="text-neutral-600 text-sm font-medium mb-1">
+            <label className="block text-neutral-600 font-semibold text-sm mb-1">
               Duração estimada (horas)
             </label>
             <Input
@@ -155,7 +155,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
           </div>
 
           <div className="flex flex-col">
-            <label className="text-neutral-600 text-sm font-medium mb-1">
+            <label className="block text-neutral-600 font-semibold text-sm mb-1">
               Data de entrega
             </label>
             <Input

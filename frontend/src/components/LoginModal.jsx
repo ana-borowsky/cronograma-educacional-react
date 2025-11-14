@@ -1,7 +1,15 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useNavigate } from "react-router-dom"
 
 const LoginModal = ({ onClose, onSignupClick }) => {
+  const navigate = useNavigate()
+
+  const handleLogin = () => {
+    console.log("Login submit...")
+    onClose?.()
+    navigate("/disciplines")
+  }
 
   return (
     <div
@@ -50,7 +58,7 @@ const LoginModal = ({ onClose, onSignupClick }) => {
             type="button"
             className="w-full mb-4 mt-4"
             variant="yellow-primary"
-            onClick={() => console.log("Login submit...")}
+            onClick={handleLogin}
           >
             Entrar
           </Button>

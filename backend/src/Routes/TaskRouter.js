@@ -5,6 +5,7 @@ const router = express.Router()
 
 router.post("/", TasksController.insertTask)
 router.put("/", TasksController.updateTask)
+router.patch("/:idTask", TasksController.updateStatus)
 router.get("/all/:idDiscipline", TasksController.getAll)
 router.get("/exams/:idDiscipline", TasksController.getExam)
 router.get("/works/:idDiscipline", TasksController.getWork)

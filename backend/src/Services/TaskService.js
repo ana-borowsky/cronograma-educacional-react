@@ -17,6 +17,12 @@ class TasksService {
     const repo = new TasksRepository()
     return await repo.update(taskModel)
   }
+
+  async updateStatus(taskModel) {
+    const repo = new TasksRepository()
+    return await repo.updateStatus(taskModel)
+  }
+  
   async getAll(idDiscipline) {
     const repo = new TasksRepository()
     return await repo.getAll(idDiscipline)

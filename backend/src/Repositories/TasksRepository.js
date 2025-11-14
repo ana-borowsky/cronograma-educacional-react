@@ -38,6 +38,17 @@ class TasksRepository {
       return result
     }
 
+    async updateStatus(taskModel){
+      const values = [
+        taskModel.status,
+        taskModel.idTask
+      ]
+
+      const query = "UPDATE task SET status = ? WHERE idTask = ?;"
+      const result = await db.query(query, values)
+
+      return result
+    }
     
     async getAll(idDiscipline) {
       const values = [idDiscipline]

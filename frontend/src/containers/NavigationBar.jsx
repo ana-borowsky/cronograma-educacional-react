@@ -11,16 +11,15 @@ const NavigationBar = ({ currentPath = "/disciplines" }) => {
       <a
         href={href}
         className={`
-          flex items-center justify-center gap-2 px-4 pt-3 pb-2 text-lg font-semibold
-          transition duration-200 ease-in-out cursor-pointer relative z-10
-          
-          ${isActive
-            ? 'text-yellow-400 border-t border-l border-r border-yellow-400/50 rounded-t-lg **bg-neutral-900**'
-            : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+      flex items-center justify-center gap-2 px-4 pt-3 pb-2 text-lg font-semibold
+      transition duration-200 ease-in-out cursor-pointer relative z-10
+      
+      ${isActive
+            ? 'text-tx border-t border-l border-r border-neutral-800 rounded-tl-lg rounded-tr-lg'
+            :'text-neutral-500 hover:text-white hover:bg-neutral-500/50 hover:rounded-tl-lg hover:rounded-tr-lg'
           }
-          // Garante que o estado inativo se alinhe com a borda do container, MANTENDO A TRANSPARÊNCIA
-          ${!isActive && 'border-b border-transparent'} 
-        `}
+      ${!isActive && 'border-b border-transparent'} 
+    `}
       >
         {icon}
         <span>{children}</span>

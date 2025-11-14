@@ -8,7 +8,7 @@ interface ContainerProps {
 export const Container = ({ children, className = "" }: ContainerProps) => {
   return (
     <div
-      className={`bg-background p-6 sm:p-8 border border-neutral-700 rounded-lg shadow-xl transition-all duration-300 ${className}`}
+      className={`bg-background p-6 sm:p-8 border border-neutral-700 rounded-lg transition-all duration-300 ${className}`}
     >
       {children}
     </div>

@@ -23,7 +23,7 @@ export function DisciplineTitle({ title, color }) {
   const colorClass = colorMap[color] || "bg-neutral-500";
 
   return (
-    <h2 className="w-full flex items-center text-xl font-bold text-tx mb-2 truncate">
+    <h2 className="w-full flex items-center text-xl font-bold text-neutral-700 mb-2 truncate">
       <span className={cn(
         "w-3 h-3 rounded-full mr-3 flex-shrink-0",
         colorClass

@@ -107,7 +107,7 @@ const Discipline = ({ disciplineData }) => {
 
       </div>
 
-      <div className="mb-4 text-neutral-600">
+      <div className="mb-4 text-neutral-500">
         <p className="text-sm"><strong>Projeto:</strong> {project}</p>
         <p className="text-sm"><strong>Local:</strong> {classroom}</p>
         <p className="text-sm"><strong>Dia:</strong> {day}</p>
@@ -120,7 +120,7 @@ const Discipline = ({ disciplineData }) => {
       ) : (
         <>
           <div className="mb-6">
-            <h2 className="text-neutral-600 flex items-center text-xl font-bold mb-4  pb-2 truncate">
+            <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">
               Atividades e Trabalhos
             </h2>
             <div className="space-y-2 mb-4">
@@ -137,7 +137,7 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                <p className="text-neutral-600 text-sm">Nenhum trabalho cadastrado.</p>
+                <p className="text-500 text-sm">Nenhum trabalho cadastrado.</p>
               )}
             </div>
             <Button
@@ -150,7 +150,7 @@ const Discipline = ({ disciplineData }) => {
           </div>
 
           <div className="mb-4">
-            <h2 className="text-neutral-600 flex items-center text-xl font-bold mb-4  pb-2 truncate">
+            <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">
               Provas e Avaliações
             </h2>
             <div className="space-y-2 mb-4">
@@ -167,7 +167,7 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                <p className="text-neutral-600 text-sm">Nenhuma prova cadastrada.</p>
+                <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
               )}
             </div>
             <Button

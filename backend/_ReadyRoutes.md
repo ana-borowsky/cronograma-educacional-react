@@ -16,6 +16,7 @@
 - get/tasks/works/:idDiscipline
 - get/tasks/dayTasks/:idDiscipline
 - put/tasks/
+- patch/tasks/:idTask
 - delete/tasks/:idtasks
 - post/tasks/
 

@@ -37,8 +37,6 @@ describe("Testes tarefas", () => {
         weight: 8
     }
 
-    console.log(task.dueDate)
-
     const updateData = {
       ...task,
       idTask: created.body.idTask,
@@ -52,6 +50,15 @@ describe("Testes tarefas", () => {
     expect(res.body).toHaveProperty("idTask", created.body.idTask)
     expect(res.body.estimatedHours).toBe("07:00:00")
     expect(res.body.weight).toBe(9)
+  })
+
+  it("Atualizar status da tarefa", async () => {
+    const status = "Concluído"
+
+    const res = await request(app).patch(`/tasks/${created.body.idTask}`).send({status})
+
+    expect(res.statusCode).toBe(200)
+    expect(res.body.status).toBe("Concluído")
   })
 
   it("Selecionar todas as tarefas", async() => {
@@ -82,7 +89,6 @@ describe("Testes tarefas", () => {
   })
 
   it("Deletar tarefas" , async () => {
-
 
     const res = await request(app).delete(`/tasks/${created.body.idTask}`).query({idTask: created.body.idTask})
     expect(res.statusCode).toBe(200)

@@ -80,6 +80,42 @@ class TasksController {
     }
   }
 
+    static async updateStatus(req, res) {
+    try {
+      const { status } = req.body
+      const { idTask } = req.params
+
+      const statusPermitidos = ["Pendente", "Concluído"]
+
+      if(!status || !statusPermitidos.includes(status)) {
+        return res.status(422).json({ erro: "Status inválido!"})
+      }
+      
+      const updateResult = await new TasksService().updateStatus(
+        new TasksModel(
+          idTask,
+          null,
+          null,
+          null,
+          null,
+          status,
+          null,
+          null
+        )
+      )
+
+      if (!updateResult || (updateResult.affectedRows === 0)) {
+        return res.status(404).json({ error: "Tarefa não encontrado!" })
+      }
+      
+
+      res.status(200).json({ status })
+    } catch (err) {
+      console.error(err)
+      res.status(500).json({ error: "Erro ao atualizar a tarefa!" })
+    }
+  }
+
   static async getAll(req, res) {
     try {
       const { idDiscipline } = req.params

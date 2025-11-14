@@ -6,33 +6,44 @@ import AddDiscipline from "../containers/discipline/AddDiscipline"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
 import { useLocation } from 'react-router-dom'
+import { useLoading } from "@/context/LoadingContext"
 
 const Disciplines = () => {
   const location = useLocation()
+
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
-
   const [disciplines, setDisciplines] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+
+  const { isLoading, setLoading } = useLoading()
 
   useEffect(() => {
     const fetchDisciplines = async () => {
-      try {
-        const response = await fetch('http://localhost:8800/discipline/1');
-        if (!response.ok) {
-          throw new Error('Falha ao buscar dados');
-        }
-        const data = await response.json();
-        setDisciplines(data);
-      } catch (error) {
-        console.error("Erro buscando disciplinas:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      const MIN_TIME = 1200 
+      setLoading(true)
+      const start = Date.now()
 
-    fetchDisciplines();
-  }, []);
+      try {
+        const response = await fetch('http://localhost:8800/discipline/1')
+        if (!response.ok) throw new Error()
+        const data = await response.json()
+        setDisciplines(data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        const elapsed = Date.now() - start
+        const remaining = MIN_TIME - elapsed
+        if (remaining > 0) {
+          setTimeout(() => setLoading(false), remaining)
+        } else {
+          setLoading(false)
+        }
+      }
+    }
+
+    fetchDisciplines()
+  }, [])
+
 
   const openLoginModal = () => {
     setIsSignupModalOpen(false)
@@ -72,23 +83,13 @@ const Disciplines = () => {
                 />
               ))
             )}
-            {!isLoading && (
-              <AddDiscipline startOpen={disciplines.length === 0} />
-            )}
+            {!isLoading && <AddDiscipline startOpen={disciplines.length === 0} />}
           </div>
         </div>
       </div>
 
-      {isLoginModalOpen && (
-        <LoginModal onClose={closeLoginModal} />
-      )}
-
-      {isSignupModalOpen && (
-        <SignupModal
-          onClose={closeSignupModal}
-          onLoginClick={switchToLogin}
-        />
-      )}
+      {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}
+      {isSignupModalOpen && <SignupModal onClose={closeSignupModal} onLoginClick={switchToLogin} />}
     </Layout>
   )
 }

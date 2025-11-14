@@ -58,43 +58,43 @@ const Home = () => {
   const timeBlocks = [
     // SEG
     [
-      { h: 'h-1/4', color: 'bg-blue-800', label: 'Aula C.' },
-      { h: 'h-[10%]', color: 'bg-neutral-600' },
-      { h: 'h-1/3', color: 'bg-orange-600', label: 'Estudo P1' },
-      { h: 'h-[10%]', color: 'bg-neutral-600' },
-      { h: 'h-1/5', color: 'bg-green-700', label: 'Revisão Lógica' },
+      { h: 'h-1/4', color: 'bg-blue-600', label: 'Leitura' },
+      { h: 'h-[10%]', color: 'bg-neutral-400' },
+      { h: 'h-1/3', color: 'bg-red-600', label: 'Estudo P1' },
+      { h: 'h-[10%]', color: 'bg-neutral-400' },
+      { h: 'h-1/5', color: 'bg-green-600', label: 'Revisão Lógica' },
     ],
     // TER
     [
-      { h: 'h-1/5', color: 'bg-blue-800', label: 'Aula Lógica' },
-      { h: 'h-1/4', color: 'bg-orange-600', label: 'Estudo P2' },
-      { h: 'h-[10%]', color: 'bg-neutral-600' },
-      { h: 'h-1/4', color: 'bg-green-700', label: 'Revisão C.' },
-      { h: 'h-1/5', color: 'bg-blue-800', label: 'Aula P2' },
+      { h: 'h-1/5', color: 'bg-blue-600', label: 'Estudar algoritmos' },
+      { h: 'h-1/4', color: 'bg-red-600', label: 'Trabalho de grafos' },
+      { h: 'h-[10%]', color: 'bg-neutral-400' },
+      { h: 'h-1/4', color: 'bg-green-600', label: 'Vídeo de pesquisa' },
+      { h: 'h-1/5', color: 'bg-blue-600', label: 'Estudo P1' },
     ],
     // QUA
     [
-      { h: 'h-1/3', color: 'bg-orange-600', label: 'Trabalho G.' },
-      { h: 'h-1/5', color: 'bg-blue-800', label: 'Aula G.' },
-      { h: 'h-[10%]', color: 'bg-neutral-600' },
-      { h: 'h-1/4', color: 'bg-green-700', label: 'Ex. Física' },
-      { h: 'h-1/5', color: 'bg-blue-800', label: 'Aula C.' },
+      { h: 'h-1/3', color: 'bg-orange-600', label: 'Iniciação científica.' },
+      { h: 'h-1/5', color: 'bg-blue-600', label: 'Monitoria.' },
+      { h: 'h-[10%]', color: 'bg-neutral-400' },
+      { h: 'h-1/4', color: 'bg-green-600', label: 'Lista de algoritmos' },
+      { h: 'h-1/5', color: 'bg-blue-600', label: 'Estudar java.' },
     ],
     // QUI
     [
-      { h: 'h-1/5', color: 'bg-blue-800', label: 'Aula Lógica' },
-      { h: 'h-1/4', color: 'bg-orange-600', label: 'Projeto F.' },
-      { h: 'h-[10%]', color: 'bg-neutral-600' },
-      { h: 'h-1/3', color: 'bg-green-700', label: 'Revisão P2' },
-      { h: 'h-[10%]', color: 'bg-neutral-600' },
+      { h: 'h-1/5', color: 'bg-blue-600', label: 'Trabalho de rust' },
+      { h: 'h-1/4', color: 'bg-orange-600', label: 'Pesquisa.' },
+      { h: 'h-[10%]', color: 'bg-neutral-400' },
+      { h: 'h-1/3', color: 'bg-green-600', label: 'Revisão P2' },
+      { h: 'h-[10%]', color: 'bg-neutral-400' },
     ],
     // SEX
     [
-      { h: 'h-1/4', color: 'bg-orange-600', label: 'Prova P1' },
-      { h: 'h-1/4', color: 'bg-blue-800', label: 'Aula C.' },
-      { h: 'h-[10%]', color: 'bg-neutral-600' },
-      { h: 'h-1/3', color: 'bg-green-700', label: 'Leitura G.' },
-      { h: 'h-[10%]', color: 'bg-neutral-600' },
+      { h: 'h-1/4', color: 'bg-orange-600', label: 'Estudo P1' },
+      { h: 'h-1/4', color: 'bg-blue-600', label: 'Trabalho de pesquisa' },
+      { h: 'h-[10%]', color: 'bg-neutral-400' },
+      { h: 'h-1/3', color: 'bg-green-600', label: 'Estudo grafos' },
+      { h: 'h-[10%]', color: 'bg-neutral-400' },
     ]
   ]
 
@@ -105,12 +105,17 @@ const Home = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 pt-10">
           <div className="lg:w-1/2">
 
-            <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight 
-                  bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-orange-500 
-                  drop-shadow-lg">
+            <h1
+              className="text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight 
+             bg-clip-text text-transparent 
+             bg-gradient-to-b from-yellow-400 to-orange-500 
+             drop-shadow-lg
+             [-webkit-text-stroke:2px_black]"
+            >
               Domine seus estudos com o poder da I.A.
             </h1>
-            <p className="text-neutral-300 text-xl mb-8 leading-relaxed">
+
+            <p className="font-semibold text-neutral-800 mb-14">
               Beezer: A ferramenta definitiva que planeja, realoca e otimiza sua agenda acadêmica, garantindo que todas as suas tarefas sejam concluídas no prazo, sem sobrecarga.
             </p>
 
@@ -118,7 +123,7 @@ const Home = () => {
               <Button
                 size="xl"
                 variant="yellow-primary"
-                className="text-lg font-semibold shadow-lg transition duration-200"
+                className="w-full text-lg font-semibold border border-neutral-400 transition duration-200"
                 onClick={openSignupModal}
               >
                 Comece Grátis <Zap className="ml-2 h-5 w-5" />
@@ -126,16 +131,16 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="lg:w-1/2 p-6 bg-neutral-700 rounded-xl border border-neutral-600 shadow-2xl relative min-h-[300px]">
-            <div className="absolute top-4 left-4 text-sm text-yellow-400 font-bold flex items-center gap-1">
-              <Clock /> Planejamento Otimizado por I.A.
+          <div className="lg:w-1/2 p-6 bg-neutral-300 rounded-xl border border-neutral-400 relative min-h-[300px] ransition duration-300 hover:scale-102">
+            <div className="absolute top-4 left-7 mt-4 text-sm text-neutral-800 font-bold flex items-center gap-1">
+              <Clock /> Cronograma otimizado por I.A.
             </div>
-            <div className="h-64 bg-neutral-800 rounded-lg flex items-center justify-center p-2 mt-8">
+            <div className="h-64 bg-neutral-300 rounded-lg flex items-center justify-center p-2 mt-8">
 
               <div className="grid grid-cols-5 gap-1 w-full h-full text-[9px] font-semibold">
                 {['SEG', 'TER', 'QUA', 'QUI', 'SEX'].map((day, i) => (
                   <div key={day} className="flex flex-col">
-                    <div className="text-neutral-400 text-center mb-1 text-xs">{day}</div>
+                    <div className="text-neutral-800 text-center mb-1 text-xs">{day}</div>
                     <div className="flex-grow flex flex-col justify-start space-y-0.5">
                       {timeBlocks[i].map((block, index) => (
                         <div key={index} className={`${block.h} ${block.color} text-white flex items-center justify-center rounded-sm px-0.5 whitespace-nowrap overflow-hidden text-center`}>
@@ -147,71 +152,64 @@ const Home = () => {
                 ))}
               </div>
             </div>
-            <p className="text-center text-xs text-neutral-500 mt-3">Visualização Semanal Otimizada por I.A. (Totalmente Alocada)</p>
+            <p className="text-center text-xs text-neutral-800 mt-3">Visualização semanal otimizada por I.A. (totalmente alocada)</p>
           </div>
         </div>
 
-        <div className="pt-10">
-          <h2 className="text-4xl font-bold text-neutral-200 mb-8 text-center border-b border-neutral-700 pb-4">
-            Como Beezer Transforma Sua Jornada
+        <div className="pt-10 mt-40">
+          <h2 className="text-4xl font-bold text-neutral-800 text-center border-b border-neutral-700 pb-4 mb-20">
+            Como Beezer transforma sua jornada
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
 
-            <div className="bg-neutral-800 p-6 rounded-lg border border-neutral-700 shadow-xl col-span-2">
-              <h3 className="text-2xl font-bold text-neutral-100 mb-4 flex items-center gap-2">
-                <DatasetIcon className="text-yellow-500" /> Otimização Inteligente de Tempo
+            <div className="col-span-2">
+              <h3 className="text-2xl font-bold text-neutral-700 mb-4 flex items-center gap-2">
+                <DatasetIcon className="text-yellow-500" /> Otimização inteligente de tempo
               </h3>
-              <p className="text-neutral-400 mb-6">Veja a diferença entre a alocação manual e o planejamento do Beezer:</p>
+              <p className="text-neutral-800 mb-6">Veja a diferença entre a alocação manual e o planejamento do Beezer:</p>
 
               <div className="h-40 p-1">
 
-                <div className="mb-6">
-                  <p className="text-sm text-neutral-300 mb-1">Seu Planejamento Manual (Fictício)</p>
-                  <div className="flex h-6 w-full relative">
+                <div className="mb-4">
+                  <p className="font-semibold text-neutral-800 mb-2">Seu planejamento manual (fictício)</p>
+                  <div className="flex h-12 w-full relative hover:scale-102 transition duration-300">
                     <div className="bg-red-700 w-[20%] rounded-l-md" title="Tempo Alocado"></div>
                     <div className="bg-red-900 w-[80%] rounded-r-md" title="Tempo Restante Necessário"></div>
                     <span className="absolute left-0 top-0 h-full flex items-center pl-2 text-white text-xs">20% Alocado</span>
                   </div>
-                  <p className="text-xs text-red-400 mt-1">Falta de tempo e sobrecarga.</p>
+                  <p className="text-sm text-neutral-700 mt-2">Tarefas mal-feitas ou não feitas. Falta de tempo e sobrecarga. </p>
                 </div>
 
                 <div>
-                  <p className="text-sm text-neutral-300 mb-1">Planejamento Beezer (I.A. Otimizado)</p>
-                  <div className="flex h-6 w-full relative">
-                    <div className="bg-green-600 w-full rounded-md" title="100% de Alocação Otimizada"></div>
+                  <p className="font-semibold text-neutral-800 mt-8 mb-2">Planejamento Beezer (Otimizado por I.A.)</p>
+                  <div className="flex h-12 w-full relative">
+                    <div className="bg-green-600 w-full rounded-md ransition duration-300 hover:scale-102" title="100% de Alocação Otimizada"></div>
                     <span className="absolute left-0 top-0 h-full flex items-center pl-2 text-white text-xs">100% Otimizado</span>
                   </div>
-                  <p className="text-xs text-green-400 mt-1">Todas as tarefas concluídas no prazo.</p>
+                  <p className="text-sm text-neutral-700 mt-2">Todas as tarefas concluídas no prazo.</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-neutral-800 p-6 rounded-lg border border-neutral-700 shadow-xl">
-              <h3 className="text-2xl font-bold text-neutral-100 mb-4 flex items-center gap-2">
-                <CheckCircle className="text-blue-500" /> Ciclo de Revisão e Conclusão
+            <div className="bg-neutral-300 p-10 rounded-lg border border-neutral-400 h-80 ransition duration-300 hover:scale-102">
+              <h3 className="text-2xl font-bold text-neutral-600 mb-12 flex items-center gap-2">
+                <CheckCircle /> Ciclo de revisão e conclusão
               </h3>
 
-              <ul className="space-y-4 text-neutral-400">
-                <li className="flex items-start gap-3">
-                  <NotificationsActiveIcon className="h-5 w-5 mt-1 text-orange-400 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-white">Notificações e Lembretes:</p>
-                    <p className="text-sm">Receba alertas para as atividades que precisam ser cumpridas.</p>
-                  </div>
-                </li>
+              <ul className="space-y-4 text-yellow-600">
                 <li className="flex items-start gap-3">
                   <AlarmIcon className="h-5 w-5 mt-1 text-green-500 flex-shrink-0" />
                   <div>
-                    <p className="font-semibold text-white">Confirmação Diária:</p>
-                    <p className="text-sm">Verificamos se a atividade foi feita e reagendamos o que falhou.</p>
+                    <p className="font-semibold text-neutral-800">Confirmação diária:</p>
+                    <p className="text-sm text-neutral-600">Verificamos se a atividade foi feita e reagendamos o que falhou.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Zap className="h-5 w-5 mt-1 text-yellow-500 flex-shrink-0" />
                   <div>
-                    <p className="font-semibold text-white">Realocação Imediata:</p>
-                    <p className="text-sm">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
+                    <p className="font-semibold text-neutral-800">Realocação imediata:</p>
+                    <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
                   </div>
                 </li>
               </ul>
@@ -220,34 +218,34 @@ const Home = () => {
         </div>
 
         <div className="pt-10">
-          <h2 className="text-4xl font-bold text-neutral-200 mb-8 text-center border-b border-neutral-700 pb-4">
-            Funcionalidades Essenciais
+          <h2 className="text-4xl font-bold text-neutral-800 text-center border-b border-neutral-700 pb-4 mt-20 mb-20">
+            Funcionalidades essenciais
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
 
-            <div className="feature-card bg-neutral-700 p-6 rounded-lg border-t-4 border-yellow-500 shadow-lg hover:bg-neutral-600 transition duration-300">
-              <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                <Zap className="h-6 w-6 text-yellow-500" /> Otimização por Prioridade
+            <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-green-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
+              <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
+                <Zap className="h-6 w-6 text-yellow-500" /> Otimização por prioridade
               </h3>
-              <p className="text-neutral-400 text-sm">
+              <p className="text-neutral-600 text-sm">
                 Coloque a duração e data de entrega. A I.A. usa a prioridade da matéria para garantir que o mais importante tenha tempo suficiente alocado.
               </p>
             </div>
 
-            <div className="feature-card bg-neutral-700 p-6 rounded-lg border-t-4 border-blue-500 shadow-lg hover:bg-neutral-600 transition duration-300">
-              <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                <Clock className="h-6 w-6 text-blue-500" /> Gestão de Tempo Livre
+            <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-blue-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
+              <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
+                <Clock className="h-6 w-6 text-blue-500" /> Gestão de tempo livre
               </h3>
-              <p className="text-neutral-400 text-sm">
+              <p className="text-neutral-600 text-sm">
                 Defina seus de estudo, permitindo que o programa preencha os espaços de forma eficiente.
               </p>
             </div>
 
-            <div className="feature-card bg-neutral-700 p-6 rounded-lg border-t-4 border-green-500 shadow-lg hover:bg-neutral-600 transition duration-300">
-              <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                <DatasetIcon className="h-6 w-6 text-green-500" /> Sincronização Google Calendar
+            <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-red-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
+              <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
+                <DatasetIcon className="h-6 w-6" /> Sincronização Google Calendar
               </h3>
-              <p className="text-neutral-400 text-sm">
+              <p className="text-neutral-600 text-sm">
                 Após a confirmação, sua agenda otimizada é automaticamente atualizada no Google Calendar, mantendo você em dia em todas as plataformas.
               </p>
             </div>

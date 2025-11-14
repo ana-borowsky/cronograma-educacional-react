@@ -105,33 +105,27 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-400/70 backdrop-blur-sm p-4"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="bg-neutral-800 rounded-xl shadow-2xl w-full max-w-md border border-neutral-700"
+        className="bg-background rounded-lg border border-neutral-400 shadow-xl w-full max-w-md sm:p-8 transform transition-all"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-5 border-b border-neutral-700 flex justify-between items-center">
-          <h3 className="text-xl font-bold text-white">
+        <div className="fspace-y-4 mt-4">
+          <h2 id="modal-title" className="text-center text-neutral-600 text-2xl font-semibold mb-6">
             {isEditMode
               ? `Editar ${type.toLowerCase()}`
               : `Adicionar ${type.toLowerCase()}`}
-          </h3>
-          <Button
-            className="bg-transparent text-neutral-400 hover:bg-neutral-700 p-1 rounded-full"
-            onClick={onClose}
-            aria-label="Fechar"
-          >
-            <XMark />
-          </Button>
+          </h2>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 p-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
+
           <div className="flex flex-col">
-            <label className="text-neutral-400 text-xs mb-1 font-medium">
+            <label className="block text-neutral-600 font-semibold text-sm mb-1">
               Nome
             </label>
             <Input
@@ -139,14 +133,13 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
               name="name"
               placeholder="Ex: Revisão Bibliográfica"
               required
-              variant="dark"
               value={formData.name}
               onChange={handleChange}
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="text-neutral-400 text-xs mb-1 font-medium">
+            <label className="block text-neutral-600 font-semibold text-sm mb-1">
               Duração estimada (horas)
             </label>
             <Input
@@ -156,74 +149,78 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
               min="0.5"
               step="0.5"
               required
-              variant="dark"
               value={formData.estimatedHours}
               onChange={handleChange}
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="text-neutral-400 text-xs mb-1 font-medium">
+            <label className="block text-neutral-600 font-semibold text-sm mb-1">
               Data de entrega
             </label>
             <Input
               type="date"
               name="dueDate"
               required
-              variant="dark"
               value={formData.dueDate}
               onChange={handleChange}
             />
           </div>
 
-          <div className="flex flex-col">
-            <label className="text-neutral-400 text-xs mb-1 font-medium">
-              Peso
-            </label>
+          <div className="space-y-1">
+            <label className="block text-neutral-600 font-semibold text-sm">Nível de dificuldade</label>
             <Input
-              type="number"
               name="weight"
-              placeholder="Ex: 8"
-              min="1"
-              step="1"
-              required
-              variant="dark"
+              type="number"
               value={formData.weight}
               onChange={handleChange}
+              required
+              min="1"
+              max="10"
+              placeholder="1 a 10"
             />
           </div>
 
-          <div className="flex flex-col">
-            <label className="text-neutral-400 text-xs mb-1 font-medium">
-              Upload de Arquivo (opcional)
+          <div className="space-y-2 mb-8">
+            <label htmlFor="file-upload-ensalamento" className="block text-neutral-600 font-semibold text-sm">
+              Selecione o Arquivo do Ensalamento
             </label>
             <Input
               type="file"
-              name="file"
+              id="file-upload-ensalamento"
+              name="schedule-file"
+              required
               variant="dark"
-              onChange={handleChange}
-              className="w-full p-3 border border-neutral-600 rounded-lg bg-neutral-700 text-neutral-300 file:mr-3 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-600 file:text-white hover:file:bg-yellow-500 cursor-pointer"
+              className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
             />
           </div>
 
-          <div className="flex space-x-2">
+          <div className="flex space-x-4">
             {isEditMode ? (
               <>
                 <Button
                   type="button"
-                  className="w-1/2"
+                  className="w-1/2 transition duration-200"
                   variant="destructive"
                   onClick={handleDelete}
                 >
                   Excluir
                 </Button>
 
-                <Button type="submit" className="w-1/2" variant="yellow-primary">
+                <Button
+                  type="submit"
+                  className="w-1/2 transition duration-200"
+                  variant="yellow-primary"
+                >
                   Salvar alterações
                 </Button>
               </>
             ) : (
-              <Button type="submit" className="w-full" variant="yellow-primary">
+              <Button
+                type="submit"
+                  className="w-full transition duration-200"
+                variant="yellow-primary"
+              >
                 Adicionar
               </Button>
             )}

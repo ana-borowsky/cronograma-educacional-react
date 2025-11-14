@@ -14,11 +14,8 @@ const PencilIcon = () => (
 )
 
 const borderColors = {
-  yellow: "border-yellow-600",
   green: "border-green-600",
-  red: "border-red-600",
   blue: "border-blue-600",
-  purple: "border-purple-600",
 }
 
 export function ListItem({
@@ -45,9 +42,9 @@ export function ListItem({
   return (
     <div
       className={cn(
-        "relative bg-neutral-700 rounded-md border-l-4 transition duration-200",
-        borderColors[borderColor] || "border-neutral-500",
-        isCompleted ? "hover:bg-neutral-700" : "hover:bg-neutral-600",
+        "relative bg-neutral-100 rounded-md border-l-4 transition duration-200 hover:scale-102",
+        borderColors[borderColor] || "border-neutral-400",
+        isCompleted ? "border-neutral-400 bg-neutral-200" : "", 
         "p-2"
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -59,13 +56,13 @@ export function ListItem({
             id={`checkbox-${id}`}
             checked={isCompleted}
             onCheckedChange={handleCheck}
-            className="mr-2 data-[state=checked]:bg-neutral-00 border-neutral-500 data-[state=checked]:text-white"
+            className="mr-2 data-[state=checked]:bg-neutral-400 border-neutral-400 data-[state=checked]:text-neutral-100"
           />
           <Label
             htmlFor={`checkbox-${id}`}
             className={cn(
-              "flex-grow text-xs font-medium cursor-pointer",
-              isCompleted ? "line-through opacity-70 text-neutral-500" : "text-neutral-400",
+              "flex-grow cursor-pointer",
+              isCompleted ? "line-through opacity-70 text-neutral-400" : "text-neutral-400",
               isExpanded ? "whitespace-normal" : "truncate"
             )}
             onClick={() => setIsExpanded(!isExpanded)}
@@ -75,19 +72,11 @@ export function ListItem({
         </div>
 
         <div className="flex items-center">
-          <ChevronDown
-            className={cn(
-              "h-4 w-4 ml-2 text-neutral-400 transition-transform cursor-pointer",
-              isExpanded ? "rotate-180" : "rotate-0"
-            )}
-            onClick={() => setIsExpanded(!isExpanded)}
-          />
-
           {isHovered && (
             <Button
               variant="ghost"
               size="icon"
-              className="ml-1 text-neutral-400 hover:text-yellow-400 hover:bg-transparent"
+              className="ml-1 text-neutral-400 hover:text-yellow-600 hover:bg-transparent hover:cursor-pointer"
               onClick={() => onEdit && onEdit(taskData)}
               title="Editar trabalho"
             >

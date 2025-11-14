@@ -8,22 +8,16 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
   const isEditing = !!disciplineData
 
   const colorOptions = [
-    { pt: "Vermelho", en: "red" },
-    { pt: "Azul", en: "blue" },
-    { pt: "Verde", en: "green" },
     { pt: "Amarelo", en: "yellow" },
+    { pt: "Vermelho", en: "red" },
+    { pt: "Verde", en: "green" },
+    { pt: "Azul", en: "blue" },
     { pt: "Roxo", en: "purple" },
     { pt: "Laranja", en: "orange" },
     { pt: "Rosa", en: "pink" },
-    { pt: "Cinza", en: "gray" },
-    { pt: "Preto", en: "black" },
     { pt: "Branco", en: "white" },
-    { pt: "Marrom", en: "brown" },
-    { pt: "Ciano", en: "cyan" },
-    { pt: "Magenta", en: "magenta" },
-    { pt: "Dourado", en: "gold" },
-    { pt: "Prata", en: "silver" },
-  ]
+    { pt: "Preto", en: "black" },
+  ];
 
   const dayOptions = [
     "Segunda-feira",
@@ -118,24 +112,24 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Nome</label>
-        <Input name="name" value={formData.name} onChange={handleChange} required variant="dark" placeholder="Ex: Banco de Dados" />
+        <label className="block text-neutral-600 font-semibold text-sm">Nome</label>
+        <Input name="name" value={formData.name} onChange={handleChange} required placeholder="Ex: Banco de Dados" />
       </div>
 
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Sala / Local</label>
-        <Input name="classroom" value={formData.classroom} onChange={handleChange} required variant="dark" placeholder="Ex: Sala 203" />
+        <label className="block text-neutral-600 font-semibold text-sm">Sala / Local</label>
+        <Input name="classroom" value={formData.classroom} onChange={handleChange} required placeholder="Ex: Sala 203" />
       </div>
 
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Dia</label>
+        <label className="block text-neutral-600 font-semibold text-sm">Dia</label>
         <div className="relative">
           <select
             name="day"
             value={formData.day}
             onChange={handleChange}
             required
-            className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-yellow-500 text-sm appearance-none pr-10"
+            className="w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-600 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
           >
             <option value="" disabled>Selecione um dia</option>
             {dayOptions.map((day) => (
@@ -159,26 +153,25 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
         </div>
       </div>
 
-      <div className="flex space-x-2">
+      <div className="flex space-x-4">
         <div className="space-y-1 flex-1">
-          <label className="block text-neutral-300 font-semibold text-sm">Início</label>
-          <Input name="startTime" type="time" step="60" value={formData.startTime} onChange={handleChange} required variant="dark" />
+          <label className="block text-neutral-600 font-semibold text-sm">Início</label>
+          <Input name="startTime" type="time" step="60" value={formData.startTime} onChange={handleChange} required />
         </div>
         <div className="space-y-1 flex-1">
-          <label className="block text-neutral-300 font-semibold text-sm">Fim</label>
-          <Input name="endTime" type="time" step="60" value={formData.endTime} onChange={handleChange} required variant="dark" />
+          <label className="block text-neutral-600 font-semibold text-sm">Fim</label>
+          <Input name="endTime" type="time" step="60" value={formData.endTime} onChange={handleChange} required />
         </div>
       </div>
 
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Nível de dificuldade</label>
+        <label className="block text-neutral-600 font-semibold text-sm">Nível de dificuldade</label>
         <Input
           name="weight"
           type="number"
           value={formData.weight}
           onChange={handleChange}
           required
-          variant="dark"
           min="1"
           max="10"
           placeholder="1 a 10"
@@ -186,14 +179,14 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
       </div>
 
       <div className="space-y-1">
-        <label className="block text-neutral-300 font-semibold text-sm">Cor</label>
+        <label className="block text-neutral-600 font-semibold text-sm">Cor</label>
         <div className="relative">
           <select
             name="color"
             value={formData.color}
             onChange={handleChange}
             required
-            className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-yellow-500 text-sm appearance-none pr-10"
+            className="w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-500 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
           >
             {colorOptions.map((color) => (
               <option key={color.en} value={color.en}>
@@ -219,16 +212,16 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
       </div>
 
       {isEditing ? (
-        <div className="flex justify-between gap-3 pt-3">
-          <Button type="button" variant="destructive" className="flex-1" onClick={handleDelete}>
+        <div className="flex justify-between gap-4 pt-3 ">
+          <Button type="button" variant="destructive" className="flex-1 transition duration-200 mt-2" onClick={handleDelete}>
             Excluir
           </Button>
-          <Button type="submit" variant="yellow-primary" className="flex-1">
+          <Button type="submit" variant="yellow-primary" className="flex-1 transition duration-200 mt-2">
             Salvar
           </Button>
         </div>
       ) : (
-        <Button type="submit" className="w-full" variant="yellow-primary">
+          <Button type="submit" className="w-full transition duration-200 mt-2" variant="yellow-primary">
           Adicionar disciplina
         </Button>
       )}

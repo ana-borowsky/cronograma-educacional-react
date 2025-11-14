@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/container"
 import { useState, useEffect } from 'react'
 
 const PencilIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-400 group-hover:text-yellow-400 transition-colors">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-400 group-hover:text-neutral-800 transition-colors">
     <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6.3 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
   </svg>
 )
@@ -91,95 +91,87 @@ const Discipline = ({ disciplineData }) => {
   }
 
   return (
-    <Container className="w-[330px]">
+    <Container className="w-[400px]">
       <div
-        className="relative flex items-start justify-between cursor-pointer group mb-6 transition-all duration-200"
+        className="relative flex items-start justify-between cursor-pointer group mb-4 transition-all duration-200"
         onClick={openDisciplineModal}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <DisciplineTitle title={name} color={color} />
+        <DisciplineTitle title={name} color={color} project={project} weight={weight} classroom={classroom} />
         <div
-          className={`absolute top-0 right-0 p-1.5 bg-neutral-800 flex items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute top-0 right-0 p-1.5 bg-neutral-300 flex items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
         >
           <PencilIcon className="w-4 h-4 text-white" />
         </div>
 
       </div>
 
-      <div className="mb-4 text-neutral-300">
-        <p className="text-sm"><strong>Projeto:</strong> {project}</p>
-        <p className="text-sm"><strong>Local:</strong> {classroom}</p>
-        <p className="text-sm"><strong>Dia:</strong> {day}</p>
-        <p className="text-sm"><strong>Horário:</strong> {startTime} - {endTime}</p>
-        <p className="text-sm"><strong>Peso:</strong> {weight}</p>
+      <div className="mb-10 text-neutral-500">
+        <p className="text-neutral-600 text-sm">{day}: {startTime} - {endTime}</p>
       </div>
 
-      <hr className="my-6 border-neutral-600" />
-
       {loading ? (
-        <p className="text-neutral-500 text-sm">Carregando tarefas...</p>
+        <p className="text-neutral-600 text-sm">Carregando tarefas...</p>
       ) : (
         <>
           <div className="mb-6">
-            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
+            <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">
               Atividades e Trabalhos
             </h2>
-            <div className="space-y-2 mb-4">
+            <div className="space-y-4 mb-4">
               {works.length > 0 ? (
                 works.map((work) => (
                   <ListItem
                     key={work.idTask}
                     id={work.idTask}
                     fullDescription={work.name}
-                    borderColor="blue"
+                    borderColor="green"
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Trabalho", work)}
                     taskData={work}
                   />
                 ))
               ) : (
-                <p className="text-neutral-500 text-sm">Nenhum trabalho cadastrado.</p>
+                    <p className="text-neutral-600 text-sm">Nenhum trabalho cadastrado.</p>
               )}
             </div>
             <Button
-              className="w-full"
+              className="w-full transition duration-200 mt-2 mb-6"
               variant="yellow-primary"
               onClick={() => handleOpenModal("Trabalho")}
             >
-              <p className="font-medium text-sm">Adicionar trabalho</p>
+              <p>Adicionar trabalho</p>
             </Button>
           </div>
 
-          <hr className="my-6 border-neutral-600" />
-
           <div className="mb-4">
-            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">
+            <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">
               Provas e Avaliações
             </h2>
-            <div className="space-y-2 mb-4">
+            <div className="space-y-4 mb-4">
               {exams.length > 0 ? (
                 exams.map((exam) => (
                   <ListItem
                     key={exam.idTask}
                     id={exam.idTask}
                     fullDescription={exam.name}
-                    borderColor="red"
+                    borderColor="blue"
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Prova", exam)}
                     taskData={exam}
                   />
                 ))
               ) : (
-                <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
+                    <p className="text-neutral-600 text-sm">Nenhuma prova cadastrada.</p>
               )}
             </div>
             <Button
-              className="w-full"
+              className="w-full transition duration-200  mt-2"
               variant="yellow-primary"
               onClick={() => handleOpenModal("Prova")}
             >
-              <p className="font-medium text-sm">Adicionar prova</p>
+              <p>Adicionar prova</p>
             </Button>
           </div>
         </>

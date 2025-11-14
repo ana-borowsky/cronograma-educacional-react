@@ -15,23 +15,26 @@ const NavigationBar = ({ currentPath = "/disciplines" }) => {
           transition duration-200 ease-in-out cursor-pointer relative z-10
           
           ${isActive
-            ? 'text-yellow-400 border-t border-l border-r border-yellow-400/50 rounded-t-lg **bg-neutral-900**'
-            : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+            ? 'text-neutral-700 border-t border-l border-r border-neutral-500 rounded-tl-lg rounded-tr-lg' // APENAS AQUI
+            : 'text-neutral-500 hover:text-white hover:bg-neutral-500/50 hover:rounded-tl-lg hover:rounded-tr-lg'
           }
-          // Garante que o estado inativo se alinhe com a borda do container, MANTENDO A TRANSPARÊNCIA
           ${!isActive && 'border-b border-transparent'} 
         `}
       >
         {icon}
         <span>{children}</span>
+        {isActive && (
+          <div
+            className="absolute bottom-[-2px] left-0 right-0 h-[2px] bg-background z-20"
+          />
+        )}
       </a>
     );
   };
 
   return (
     <div className="w-full min-w-[1674px] flex justify-center">
-
-      <div className="w-full border-b border-neutral-700 flex justify-center items-end">
+      <div className="w-full border-b border-neutral-500 flex justify-center items-end">
 
         <div className="flex flex-row gap-0">
           <NavTab href="/disciplines" icon={<MdDescription className="w-5 h-5" />}>

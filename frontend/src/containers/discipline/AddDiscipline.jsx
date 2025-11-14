@@ -50,27 +50,27 @@ export const AddDiscipline = ({ startOpen = false }) => {
   }
 
   return (
-    <div className="w-[330px] space-y-8 mb-8 md:mb-0 transition-all duration-500 ease-in-out">
-      <Container className="overflow-hidden duration-500 ease-in-out">
+    <div className="w-[400px] transition-all duration-500 ease-in-out">
+      <Container className="duration-500 ease-in-out">
         <div className="flex justify-between items-center cursor-pointer w-full" onClick={toggleForm}>
-          <h2 className="w-full text-xl font-bold text-white border-b border-neutral-700 pb-2">Insira disciplinas</h2>
+          <h2 className="w-full text-xl font-bold text-neutral-600  pb-2">Insira disciplinas</h2>
           {isFormVisible ? <ChevronUp /> : <ChevronDown />}
         </div>
 
-        <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isFormVisible ? "max-h-[1600px] mt-5 pt-5" : "max-h-0"}`}>
+        <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isFormVisible ? "max-h-[1600px]" : "max-h-0"}`}>
           <div className="pt-5">
             <div>
-              <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Projeto</h2>
+              <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">Projeto</h2>
               <form className="space-y-6">
                 <div className="space-y-1">
-                  <label htmlFor="project-select" className="block text-neutral-300 font-semibold text-sm">
+                  <label htmlFor="project-select" className="block text-neutral-600 font-semibold text-sm">
                     Selecione o projeto
                   </label>
                   <div className="relative">
                     <select
                       id="project-select"
                       name="project-select"
-                      className="w-full p-2.5 border border-neutral-600 rounded-md bg-neutral-700 text-white focus:outline-none focus:border-yellow-500 text-sm appearance-none pr-10"
+                      className="w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-500 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
                       value={selectedProject}
                       onChange={(e) => setSelectedProject(e.target.value)}
                     >
@@ -101,7 +101,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
                 </div>
 
                 <div className="space-y-1">
-                  <label htmlFor="new-project" className="block text-neutral-300 font-semibold text-sm">
+                  <label htmlFor="new-project" className="block text-neutral-600 font-semibold text-sm">
                     Ou crie um novo projeto
                   </label>
                   <div className="flex space-x-2">
@@ -110,29 +110,27 @@ export const AddDiscipline = ({ startOpen = false }) => {
                       id="new-project"
                       name="new-project"
                       placeholder="Nome do novo projeto..."
-                      variant="dark"
                       value={newProject}
                       onChange={(e) => setNewProject(e.target.value)}
                     />
-                    <Button type="button" variant="yellow-primary" onClick={handleCreateProject}>
+                    <Button type="button" variant="yellow-primary" onClick={handleCreateProject} className="transition duration-200">
                       Criar
                     </Button>
                   </div>
                 </div>
               </form>
 
-              <hr className="border-t border-neutral-700 my-6" />
             </div>
 
-            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Ler arquivo com IA</h2>
+            <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-2 mt-8 pb-2 truncate">Ler arquivo com IA</h2>
             <form className="space-y-6">
-              <p className="text-neutral-400 text-sm text-center">
+              <p className="text-neutral-600 text-sm">
                 Carregue um arquivo (ex: print) contendo a lista de disciplinas, salas e horários.
               </p>
 
               <div className="space-y-2">
-                <label htmlFor="file-upload-ensalamento" className="block text-neutral-300 font-semibold text-sm">
-                  Selecione o Arquivo do Ensalamento
+                <label htmlFor="file-upload-ensalamento" className="block text-neutral-600 font-semibold text-sm">
+                  Selecione o arquivo do ensalamento
                 </label>
                 <Input
                   type="file"
@@ -145,7 +143,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
               </div>
 
               <div className="space-y-1">
-                <label htmlFor="file-upload-planos" className="block text-neutral-300 font-semibold text-sm">
+                <label htmlFor="file-upload-planos" className="block text-neutral-600 font-semibold text-sm">
                   Selecione os arquivos dos planos de ensino das disciplinas
                 </label>
                 <Input
@@ -159,15 +157,13 @@ export const AddDiscipline = ({ startOpen = false }) => {
                 />
               </div>
 
-              <Button className="w-full" asChild variant="yellow-primary">
+              <Button className="w-full transition duration-200" asChild variant="yellow-primary">
                 <a href="/disciplines">{mainButtonText}s (via IA)</a>
               </Button>
             </form>
 
             <br />
-            <hr className="border-t border-neutral-700 my-4" />
-
-            <h2 className="text-neutral-300 flex items-center text-xl font-bold mb-4 border-b border-neutral-700 pb-2 truncate">Ou insira manualmente</h2>
+            <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">Ou insira manualmente</h2>
 
             <DisciplineForm
               mode="add"

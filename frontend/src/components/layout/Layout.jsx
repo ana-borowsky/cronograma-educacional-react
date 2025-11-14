@@ -32,24 +32,23 @@ const Layout = ({ subtitle, children }) => {
     <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh] overflow-x-hidden">
 
       <header className="relative w-full p-5">
-        <div className="flex flex-col items-center min-h-[100px] justify-start">
+        <div className="flex flex-col items-center min-h-[100px] justify-start mb-20 mt-20">
           <Title>
             <img
               src="/assets/logo.svg" 
-              alt="Logo da Empresa"
               style={{ width: '600px', height: 'auto' }}
             />
           </Title>
-          <h3 className="text-xl md:text-2xl font-medium text-neutral-400 mb-5 tracking-wide 
-                      drop-shadow-sm">
+          <h3 className="text-2xl font-bold text-neutral-800 mb-4 flex items-center gap-2">
             {subtitle}
           </h3>
         </div>
 
-        <div className="absolute top-5 right-5 space-x-4">
+        <div className="absolute top-5 right-5 space-x-4 mr-4">
           <Button
             variant="secondary"
             onClick={openSignupModal}
+            className="bg-neutral-200"
           >
             Cadastro
           </Button>
@@ -57,6 +56,7 @@ const Layout = ({ subtitle, children }) => {
           <Button
             variant="yellow-primary"
             onClick={openLoginModal}
+            className="border border-neutral-400"
           >
             Login
           </Button>

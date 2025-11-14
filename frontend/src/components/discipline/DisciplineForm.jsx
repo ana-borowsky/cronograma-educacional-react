@@ -212,11 +212,11 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
       </div>
 
       {isEditing ? (
-        <div className="flex justify-between gap-4 pt-3">
-          <Button type="button" variant="destructive" className="flex-1" onClick={handleDelete}>
+        <div className="flex justify-between gap-4 pt-3 ">
+          <Button type="button" variant="destructive" className="flex-1 transition duration-200" onClick={handleDelete}>
             Excluir
           </Button>
-          <Button type="submit" variant="yellow-primary" className="flex-1">
+          <Button type="submit" variant="yellow-primary" className="flex-1 transition duration-200">
             Salvar
           </Button>
         </div>

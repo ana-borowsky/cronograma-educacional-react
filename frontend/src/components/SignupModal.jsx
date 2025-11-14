@@ -93,7 +93,7 @@ const SignupModal = ({ onClose, onLoginClick }) => {
 
           <Button
             type="button"
-            className="w-full"
+            className="w-full transition duration-200"
             variant="yellow-primary"
             onClick={handleSignupClick}
           >

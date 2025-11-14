@@ -195,12 +195,12 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
             />
           </div>
 
-          <div className="flex space-x-2">
+          <div className="flex space-x-4">
             {isEditMode ? (
               <>
                 <Button
                   type="button"
-                  className="w-1/2"
+                  className="w-1/2 transition duration-200"
                   variant="destructive"
                   onClick={handleDelete}
                 >
@@ -209,7 +209,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
 
                 <Button
                   type="submit"
-                  className="w-1/2"
+                  className="w-1/2 transition duration-200"
                   variant="yellow-primary"
                 >
                   Salvar alterações
@@ -218,7 +218,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
             ) : (
               <Button
                 type="submit"
-                className="w-full"
+                  className="w-full transition duration-200"
                 variant="yellow-primary"
               >
                 Adicionar

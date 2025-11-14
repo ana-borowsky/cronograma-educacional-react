@@ -141,7 +141,7 @@ const Discipline = ({ disciplineData }) => {
               )}
             </div>
             <Button
-              className="w-full"
+                className="w-full transition duration-200"
               variant="yellow-primary"
               onClick={() => handleOpenModal("Trabalho")}
             >
@@ -171,7 +171,7 @@ const Discipline = ({ disciplineData }) => {
               )}
             </div>
             <Button
-              className="w-full"
+                className="w-full transition duration-200"
               variant="yellow-primary"
               onClick={() => handleOpenModal("Prova")}
             >

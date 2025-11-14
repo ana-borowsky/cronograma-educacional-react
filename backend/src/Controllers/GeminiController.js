@@ -4,6 +4,7 @@ import FreeTimeService from "../Services/FreeTimeService.js"
 import DisciplineService from "../Services/DisciplineService.js"
 import TasksService from "../Services/TaskService.js"
 import ScheduleService from "../Services/ScheduleService.js"
+import { console } from "inspector"
 dotenv.config()
 
 export class GeminiController {
@@ -41,7 +42,7 @@ export class GeminiController {
           idDiscipline: task.idDiscipline,
         })),
         instructions: {
-          objective: "Retorne apenas um json de cronograma seguindo as regras especificas",
+          objective: "Retorne apenas um aquivo no formato 'JSON' de cronograma seguindo as regras especificas",
           rules: [
             "Os horários dos planejamentos devem ser nos mesmos horários dos tempos livres",
             "Atividades com o nível de prioridade (weight) maior devem ser finalizadas antes das demais",
@@ -50,7 +51,7 @@ export class GeminiController {
           ],
           outputFormat: {
             type: "array",
-            description: "Array de objetos com estrutura de planejamento",
+            description: "Array de objetos com estrutura de planejamento no formato JSON",
             schema: {
               idPlanning: "number|null",
               executionDate: "ISO 8601 date string",
@@ -80,9 +81,9 @@ export class GeminiController {
         }
       ]
       const response = await googleAI.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: contents,
-      })
+          model: "gemini-2.5-flash",
+          contents: contents,
+        })
 
       const result = await new ScheduleService().insert(idUser)
       return res.status(200).json(response.text)
@@ -91,11 +92,32 @@ export class GeminiController {
     }
   }
 
-  static async createDisciplineAndTasksByPdfUsingAI(req, res) {
+  static async generateDisciplineAndTasksFromPdf(req, res) {
     try {
       const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
       const { idUser } = req.params
-      const { pdfArchive } = req.body
+      // suportar upload via multipart (multer) ou via body (base64)
+      if (!req.file) {
+        if (req.body && req.body.file) {
+          const fileData = req.body.file
+          const base64 = typeof fileData === "string" ? fileData.split(",").pop() : null
+          if (!base64) {
+            return res.status(400).json({ error: "arquivo inválido no body" })
+          }
+          const buffer = Buffer.from(base64, "base64")
+          req.file = {
+            originalname: req.body.filename || "file.pdf",
+            mimetype: req.body.mimetype || "application/pdf",
+            size: buffer.length,
+            buffer,
+          }
+        } else {
+          return res.status(400).json({ error: "nenhum arquivo pdf enviado" })
+        }
+      }
+      const pdf = req.file
+      console.log("PDF received:", pdf.originalname, pdf.mimetype, pdf.size)
+
       const payload = {
         instructions: {
           objective: "Retorne apenas um json com duas posições: discipline e tasks, seguindo as regras especificas em 'rules'",
@@ -113,7 +135,7 @@ export class GeminiController {
                 idDiscipline: "number|null",
                 idUser: `${idUser}`,
                 name: "string",
-                color: "number",
+                color: "ENUM('yellow', 'red', 'green', 'blue', 'purple', 'orange', 'pink', 'white', 'black')",
                 project: "string|null",
                 classroom: "string|null",
                 day: "string|null",
@@ -125,7 +147,7 @@ export class GeminiController {
                 idTask: "null",
                 idDiscipline: "null",
                 name: "varchar(50) NOT NULL",
-                type:  "ENUM('Prova', 'Trabalho') NOT NULL",
+                type: "ENUM('Prova', 'Trabalho') NOT NULL",
                 estimatedHours: "TIME NOT NULL",
                 dueDate: "DATE NOT NULL",
                 status: "ENUM('Pendente', 'Concluído') NOT NULL",
@@ -138,7 +160,7 @@ export class GeminiController {
                   idDiscipline: null,
                   idUser: 1,
                   name: "Introdução à Programação",
-                  color: 5,
+                  color: "red",
                   project: "Projeto A",
                   classroom: "Sala 101",
                   day: "Segunda-feira",
@@ -165,22 +187,62 @@ export class GeminiController {
           },
         }
       }
-      const prompt = payload.jsonStringify(payload, null, 2)
-      const contents = [
-        { text: prompt },
-        {
-          inlineData: {
-            mineType: "aplication/pdf",
-            data: Buffer.from(pdfArchive).toString("base64"),
-          }
+      const prompt = JSON.stringify(payload, null, 2)
+      // Tentar extrair texto localmente do PDF para enviar ao modelo como texto.
+      // Isso costuma ser mais confiável do que depender apenas de attachment inline.
+      let extractedText = null
+      try {
+        const pdfParse = (await import('pdf-parse')).default
+        const parsed = await pdfParse(pdf.buffer)
+        extractedText = parsed && parsed.text ? parsed.text.trim() : null
+        if (extractedText && extractedText.length > 20000) {
+          // truncar para evitar payloads enormes; adaptar conforme necessário
+          extractedText = extractedText.slice(0, 20000)
         }
-      ]
-      const response = await googleAI.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: contents,
-      });
+      } catch (parseErr) {
+        console.warn('Falha ao extrair texto do PDF localmente:', parseErr)
+        extractedText = null
+      }
 
-      return res.status(200).json({ message: "Disciplinas e tarefas criadas com sucesso usando AI." })
+      const contents = [{ text: prompt }]
+      if (extractedText) {
+        contents.push({ text: `EXTRAIR_PDF:\n${extractedText}` })
+      } else {
+        // fallback: enviar inlineData como antes (base64 + mime)
+        contents.push({
+          inlineData: {
+            mimeType: 'application/pdf',
+            data: pdf.buffer ? pdf.buffer.toString('base64') : Buffer.from(pdf).toString('base64'),
+          }
+        })
+      }
+
+      // Aqui você pode chamar o Google GenAI para processar o PDF.
+      // Se a chamada à API for desativada/localmente não utilizada, evitamos referenciar `response` indefinido.
+      let response
+      try {
+        response = await googleAI.models.generateContent({
+          model: "gemini-2.5-flash",
+          contents: contents,
+        })
+      } catch (apiErr) {
+        console.error('Erro na chamada ao Google GenAI (generateFromPdf):', apiErr)
+        const details = apiErr.response || apiErr.message || apiErr
+        return res.status(502).json({ error: 'Falha ao chamar a API Gemini', details })
+      }
+
+      if (response && response.text) {
+        try {
+          const responseJson = JSON.parse(response.text)
+          console.log('Resposta AI (parsed):', responseJson)
+        } catch (err) {
+          console.warn('Não foi possível parsear response.text:', err)
+          console.log('Resposta raw:', response.text)
+        }
+      } else {
+        console.log('Resposta da AI sem texto em `response.text`:', response)
+      }
+      return res.status(200).json({ message: response.text })
     } catch (err) {
       return res.status(500).json({ error: err.message })
     }

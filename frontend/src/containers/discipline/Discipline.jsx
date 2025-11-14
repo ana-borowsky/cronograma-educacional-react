@@ -100,7 +100,7 @@ const Discipline = ({ disciplineData }) => {
       >
         <DisciplineTitle title={name} color={color} />
         <div
-          className={`absolute top-0 right-0 p-1.5 bg-background flex items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute top-0 right-0 p-1.5 bg-neutral-300 flex items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
         >
           <PencilIcon className="w-4 h-4 text-white" />
         </div>

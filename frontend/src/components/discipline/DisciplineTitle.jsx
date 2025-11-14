@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from "@/lib/utils"; 
+import { cn } from "@/lib/utils";
 
 const colorMap = {
   yellow: "bg-yellow-600",
@@ -14,21 +14,40 @@ const colorMap = {
 };
 
 /**
- * * @param {object} props
- * @param {string} props.title 
- * @param {('yellow' | 'red' | 'green' | 'blue' | 'purple' | 'orange' | 'pink' | 'white' | 'black' | string)} props.color
+ * @param {object} props
+ * @param {string} props.title
+ * @param {string} props.project
+ * @param {string | number} props.weight
+ * @param {string} props.color
  */
-export function DisciplineTitle({ title, color }) {
-
+export function DisciplineTitle({ title, project, weight, color, classroom }) {
   const colorClass = colorMap[color] || "bg-neutral-500";
 
   return (
-    <h2 className="w-full flex items-center text-xl font-bold text-neutral-700 mb-2 truncate">
-      <span className={cn(
-        "w-3 h-3 rounded-full mr-3 flex-shrink-0",
-        colorClass
-      )}></span>
-      {title}
-    </h2>
+    <div className="w-full">
+      {/* Título */}
+      <h2 className="flex items-center text-2xl font-semibold text-neutral-700 mb-1 truncate">
+        <span
+          className={cn("w-3 h-3 rounded-full mr-3 flex-shrink-0", colorClass)}
+        ></span>
+        {title}
+      </h2>
+
+      <div className="mt-1 mb-2 flex items-center gap-3 text-sm text-neutral-500">
+
+        <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
+          {project}
+        </span>
+
+        <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
+          Peso: {weight}
+        </span>
+
+        <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
+          {classroom}
+        </span>
+
+      </div>
+    </div>
   );
 }

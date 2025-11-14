@@ -91,14 +91,14 @@ const Discipline = ({ disciplineData }) => {
   }
 
   return (
-    <Container className="w-[330px]">
+    <Container className="w-[400px]">
       <div
         className="relative flex items-start justify-between cursor-pointer group mb-2 transition-all duration-200"
         onClick={openDisciplineModal}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <DisciplineTitle title={name} color={color} />
+        <DisciplineTitle title={name} color={color} project={project} weight={weight} classroom={classroom} />
         <div
           className={`absolute top-0 right-0 p-1.5 bg-neutral-300 flex items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
         >
@@ -108,22 +108,19 @@ const Discipline = ({ disciplineData }) => {
       </div>
 
       <div className="mb-4 text-neutral-500">
-        <p className="text-xs font-medium"><strong>Projeto:</strong> {project}</p>
-        <p className="text-xs font-medium"><strong>Local:</strong> {classroom}</p>
         <p className="text-xs font-medium"><strong>Dia:</strong> {day}</p>
         <p className="text-xs font-medium"><strong>Horário:</strong> {startTime} - {endTime}</p>
-        <p className="text-xs font-medium"><strong>Peso:</strong> {weight}</p>
       </div>
 
       {loading ? (
-        <p className="text-tx text-sm">Carregando tarefas...</p>
+        <p className="text-tx">Carregando tarefas...</p>
       ) : (
         <>
           <div className="mb-6">
             <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">
               Atividades e Trabalhos
             </h2>
-            <div className="space-y-2 mb-4">
+            <div className="space-y-4 mb-4">
               {works.length > 0 ? (
                 works.map((work) => (
                   <ListItem
@@ -137,15 +134,15 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                <p className="text-500 text-sm">Nenhum trabalho cadastrado.</p>
+                <p className="text-neutral-500">Nenhum trabalho cadastrado.</p>
               )}
             </div>
             <Button
-                className="w-full transition duration-200"
+              className="w-full transition duration-200 mt-2"
               variant="yellow-primary"
               onClick={() => handleOpenModal("Trabalho")}
             >
-              <p className="font-medium text-sm">Adicionar trabalho</p>
+              <p>Adicionar trabalho</p>
             </Button>
           </div>
 
@@ -153,7 +150,7 @@ const Discipline = ({ disciplineData }) => {
             <h2 className="text-neutral-500 flex items-center text-xl font-bold mb-4  pb-2 truncate">
               Provas e Avaliações
             </h2>
-            <div className="space-y-2 mb-4">
+            <div className="space-y-4 mb-4">
               {exams.length > 0 ? (
                 exams.map((exam) => (
                   <ListItem
@@ -167,15 +164,15 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                <p className="text-neutral-500 text-sm">Nenhuma prova cadastrada.</p>
+                    <p className="text-neutral-500">Nenhuma prova cadastrada.</p>
               )}
             </div>
             <Button
-                className="w-full transition duration-200"
+              className="w-full transition duration-200  mt-2"
               variant="yellow-primary"
               onClick={() => handleOpenModal("Prova")}
             >
-              <p className="font-medium text-sm">Adicionar prova</p>
+              <p>Adicionar prova</p>
             </Button>
           </div>
         </>

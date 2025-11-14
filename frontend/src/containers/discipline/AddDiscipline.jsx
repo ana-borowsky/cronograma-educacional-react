@@ -51,7 +51,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
 
   return (
     <div className="w-[400px] transition-all duration-500 ease-in-out">
-      <Container className="overflow-hidden duration-500 ease-in-out">
+      <Container className="duration-500 ease-in-out">
         <div className="flex justify-between items-center cursor-pointer w-full" onClick={toggleForm}>
           <h2 className="w-full text-xl font-bold text-neutral-600  pb-2">Insira disciplinas</h2>
           {isFormVisible ? <ChevronUp /> : <ChevronDown />}
@@ -113,7 +113,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
                       value={newProject}
                       onChange={(e) => setNewProject(e.target.value)}
                     />
-                    <Button type="button" variant="yellow-primary" onClick={handleCreateProject}>
+                    <Button type="button" variant="yellow-primary" onClick={handleCreateProject} className="transition duration-200">
                       Criar
                     </Button>
                   </div>
@@ -157,7 +157,7 @@ export const AddDiscipline = ({ startOpen = false }) => {
                 />
               </div>
 
-              <Button className="w-full" asChild variant="yellow-primary">
+              <Button className="w-full transition duration-200" asChild variant="yellow-primary">
                 <a href="/disciplines">{mainButtonText}s (via IA)</a>
               </Button>
             </form>

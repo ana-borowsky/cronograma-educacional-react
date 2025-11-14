@@ -28,7 +28,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, variant, ...props }, ref) => {
 
     const fileStyles = variant === 'dark' && type === 'file'
-      ? "text-neutral-300 file:mr-3 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-600 file:text-white hover:file:bg-yellow-700 cursor-pointer \
+      ? "text-neutral-300 file:mr-3 file:py-2 file:px-3 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-600 file:text-white hover:file:bg-yellow-600 hover:file:cursor-pointer cursor-pointer \
          !bg-neutral-100 !text-neutral-500"
       : ""
 

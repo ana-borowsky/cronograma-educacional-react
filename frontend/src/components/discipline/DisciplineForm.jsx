@@ -213,15 +213,15 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
 
       {isEditing ? (
         <div className="flex justify-between gap-4 pt-3 ">
-          <Button type="button" variant="destructive" className="flex-1 transition duration-200" onClick={handleDelete}>
+          <Button type="button" variant="destructive" className="flex-1 transition duration-200 mt-2" onClick={handleDelete}>
             Excluir
           </Button>
-          <Button type="submit" variant="yellow-primary" className="flex-1 transition duration-200">
+          <Button type="submit" variant="yellow-primary" className="flex-1 transition duration-200 mt-2">
             Salvar
           </Button>
         </div>
       ) : (
-        <Button type="submit" className="w-full" variant="yellow-primary">
+          <Button type="submit" className="w-full transition duration-200 mt-2" variant="yellow-primary">
           Adicionar disciplina
         </Button>
       )}

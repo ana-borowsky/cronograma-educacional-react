@@ -108,7 +108,7 @@ const Home = () => {
             <h1
               className="text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight 
              bg-clip-text text-transparent 
-             bg-gradient-to-b from-yellow-300 to-orange-500 
+             bg-gradient-to-b from-yellow-400 to-orange-500 
              drop-shadow-lg
              [-webkit-text-stroke:2px_black]"
             >

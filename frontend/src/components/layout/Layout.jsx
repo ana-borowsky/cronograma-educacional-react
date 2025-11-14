@@ -32,16 +32,14 @@ const Layout = ({ subtitle, children }) => {
     <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh] overflow-x-hidden">
 
       <header className="relative w-full p-5">
-        <div className="flex flex-col items-center min-h-[100px] justify-start">
+        <div className="flex flex-col items-center min-h-[100px] justify-start mb-20 mt-20">
           <Title>
             <img
               src="/assets/logo.svg" 
-              alt="Logo da Empresa"
               style={{ width: '600px', height: 'auto' }}
             />
           </Title>
-          <h3 className="text-xl md:text-2xl font-medium text-tx mb-5 
-                      drop-shadow-sm">
+          <h3 className="text-2xl font-bold text-neutral-800 mb-4 flex items-center gap-2">
             {subtitle}
           </h3>
         </div>

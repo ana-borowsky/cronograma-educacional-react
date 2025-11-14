@@ -61,7 +61,7 @@ export function ListItem({
           <Label
             htmlFor={`checkbox-${id}`}
             className={cn(
-              "flex-grow text-xs font-medium cursor-pointer",
+              "flex-grow cursor-pointer",
               isCompleted ? "line-through opacity-70 text-neutral-400" : "text-neutral-400",
               isExpanded ? "whitespace-normal" : "truncate"
             )}

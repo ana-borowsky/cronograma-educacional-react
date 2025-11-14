@@ -40,7 +40,7 @@ const Layout = ({ subtitle, children }) => {
               style={{ width: '600px', height: 'auto' }}
             />
           </Title>
-          <h3 className="text-xl md:text-2xl font-medium text-tx mb-5 tracking-wide 
+          <h3 className="text-xl md:text-2xl font-medium text-tx mb-5 
                       drop-shadow-sm">
             {subtitle}
           </h3>

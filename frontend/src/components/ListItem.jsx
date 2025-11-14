@@ -46,8 +46,8 @@ export function ListItem({
     <div
       className={cn(
         "relative bg-neutral-100 rounded-md border-l-4 transition duration-200 hover:scale-102",
-        borderColors[borderColor] || "border-neutral-500",
-        isCompleted ? "border-neutral-500 bg-neutral-200" : "", 
+        borderColors[borderColor] || "border-neutral-400",
+        isCompleted ? "border-neutral-400 bg-neutral-200" : "", 
         "p-2"
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -59,13 +59,13 @@ export function ListItem({
             id={`checkbox-${id}`}
             checked={isCompleted}
             onCheckedChange={handleCheck}
-            className="mr-2 data-[state=checked]:bg-neutral-00 border-neutral-500 data-[state=checked]:text-neutral-500"
+            className="mr-2 data-[state=checked]:bg-neutral-400 border-neutral-400 data-[state=checked]:text-neutral-100"
           />
           <Label
             htmlFor={`checkbox-${id}`}
             className={cn(
               "flex-grow text-xs font-medium cursor-pointer",
-              isCompleted ? "line-through opacity-70 text-neutral-500" : "text-neutral-400",
+              isCompleted ? "line-through opacity-70 text-neutral-400" : "text-neutral-400",
               isExpanded ? "whitespace-normal" : "truncate"
             )}
             onClick={() => setIsExpanded(!isExpanded)}
@@ -77,7 +77,7 @@ export function ListItem({
         <div className="flex items-center">
           <ChevronDown
             className={cn(
-              "h-4 w-4 ml-2 text-neutral-500 transition-transform cursor-pointer",
+              "h-4 w-4 ml-2 text-neutral-400 transition-transform cursor-pointer",
               isExpanded ? "rotate-180" : "rotate-0"
             )}
             onClick={() => setIsExpanded(!isExpanded)}
@@ -87,7 +87,7 @@ export function ListItem({
             <Button
               variant="ghost"
               size="icon"
-              className="ml-1 text-neutral-500 hover:text-yellow-600 hover:bg-transparent hover:cursor-pointer"
+              className="ml-1 text-neutral-400 hover:text-yellow-600 hover:bg-transparent hover:cursor-pointer"
               onClick={() => onEdit && onEdit(taskData)}
               title="Editar trabalho"
             >

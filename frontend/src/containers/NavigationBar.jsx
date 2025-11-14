@@ -15,7 +15,7 @@ const NavigationBar = ({ currentPath = "/disciplines" }) => {
           transition duration-200 ease-in-out cursor-pointer relative z-10
           
           ${isActive
-            ? 'text-yellow-600 border-t border-l border-r border-neutral-400 rounded-tl-lg rounded-tr-lg' // APENAS AQUI
+            ? 'text-neutral-500 border-t border-l border-r border-neutral-500 rounded-tl-lg rounded-tr-lg' // APENAS AQUI
             : 'text-neutral-500 hover:text-white hover:bg-neutral-500/50 hover:rounded-tl-lg hover:rounded-tr-lg'
           }
           ${!isActive && 'border-b border-transparent'} 
@@ -34,7 +34,7 @@ const NavigationBar = ({ currentPath = "/disciplines" }) => {
 
   return (
     <div className="w-full min-w-[1674px] flex justify-center">
-      <div className="w-full border-b border-neutral-400 flex justify-center items-end">
+      <div className="w-full border-b border-neutral-500 flex justify-center items-end">
 
         <div className="flex flex-row gap-0">
           <NavTab href="/disciplines" icon={<MdDescription className="w-5 h-5" />}>

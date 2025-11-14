@@ -1,6 +1,12 @@
 import DisciplineModel from "../Models/DisciplineModel.js"
 import DisciplineService from "../Services/DisciplineService.js"
 
+function isColorAllowed(color){
+  const allowedColors = ["yellow", "red", "green", "blue", "purple", "orange", "pink", "white", "black"]
+
+  return allowedColors.includes(color)
+}
+
 class DisciplineController {
 
   static async insertDiscipline(req, res) {
@@ -17,6 +23,10 @@ class DisciplineController {
         endTime,
         weight
       } = req.body
+
+      if(!isColorAllowed(color)) {
+        return res.status(422).json({ error: "Cor inválida!" })
+      }
 
       const result = await new DisciplineService().insert(
         new DisciplineModel(
@@ -59,7 +69,23 @@ class DisciplineController {
 
   static async updateDiscipline(req, res) {
     try {
-      const { idUser, idDiscipline, name, color, project, classroom, day, startTime, endTime, weight } = req.body
+      const { 
+        idUser, 
+        idDiscipline, 
+        name, 
+        color, 
+        project, 
+        classroom, 
+        day, 
+        startTime, 
+        endTime, 
+        weight 
+      } = req.body
+
+      if(!isColorAllowed(color)) {
+        return res.status(422).json({ error: "Cor inválida!" })
+      }
+
       const updateResult = await new DisciplineService().update(
         new DisciplineModel(
           idDiscipline,

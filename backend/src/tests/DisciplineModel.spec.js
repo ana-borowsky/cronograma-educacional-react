@@ -12,7 +12,7 @@ describe("Testes da disciplina", () => {
         idDiscipline: null,
         idUser: 1,
         name: "Português",
-        color: "red",
+        color: "blue",
         project: "Projeto A",
         classroom: "101",
         day: "Segunda-Feira",

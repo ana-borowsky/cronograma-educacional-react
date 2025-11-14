@@ -57,6 +57,7 @@ const Layout = ({ subtitle, children }) => {
           <Button
             variant="yellow-primary"
             onClick={openLoginModal}
+            className="border border-neutral-400"
           >
             Login
           </Button>

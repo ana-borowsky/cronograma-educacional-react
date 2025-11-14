@@ -46,7 +46,7 @@ const Layout = ({ subtitle, children }) => {
           </h3>
         </div>
 
-        <div className="absolute top-5 right-5 space-x-4">
+        <div className="absolute top-5 right-5 space-x-4 mr-4">
           <Button
             variant="secondary"
             onClick={openSignupModal}

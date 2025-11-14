@@ -1,29 +1,27 @@
 import { Button } from "@/components/ui/button"
-import { Link } from 'react-router-dom'
 import { Input } from "@/components/ui/input"
 
-const LoginModal = ({ onClose }) => {
+const LoginModal = ({ onClose, onSignupClick }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm transition-opacity"
-      onClick={onClose} 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-neutral-400/70 backdrop-blur-sm transition-opacity"
+      onClick={onClose}
     >
       <div
-        className="bg-neutral-800 rounded-lg shadow-2xl w-full max-w-md border border-neutral-600 transform transition-all duration-300 scale-100"
+        className="bg-background sm:p-10 border border-neutral-400 rounded-lg w-full max-w-md transform transition-all duration-300 scale-100"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-        <form className="p-8 md:p-10 space-y-4">
-
-          <h2 id="modal-title" className="text-center text-white text-2xl font-semibold mb-6 border-b-2 border-completed-text pb-3">
+        <form className="space-y-4 mt-4">
+          <h2 id="modal-title" className="text-center text-neutral-500 text-2xl font-semibold mb-6">
             Acesso
           </h2>
 
           <div className="mb-4">
-            <label htmlFor="email" className="block mb-1 text-neutral-300 font-bold text-sm">
+            <label htmlFor="email" className="block mb-1 text-neutral-500 font-bold text-sm">
               E-mail
             </label>
             <Input
@@ -32,12 +30,11 @@ const LoginModal = ({ onClose }) => {
               name="email"
               placeholder="nome@email.com"
               required
-              variant="dark"
             />
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block mb-1 text-neutral-300 font-bold text-sm">
+            <label htmlFor="password" className="block mb-1 text-neutral-500 font-bold text-sm">
               Senha
             </label>
             <Input
@@ -46,34 +43,26 @@ const LoginModal = ({ onClose }) => {
               name="password"
               placeholder="********"
               required
-              variant="dark"
             />
           </div>
 
           <Button
-            type="button" 
-            className="w-full"
+            type="button"
+            className="w-full mb-4 mt-4"
             variant="yellow-primary"
-            asChild 
+            onClick={() => console.log("Login submit...")}
           >
-            <Link to="/disciplines">
-              Entrar
-            </Link>
+            Entrar
           </Button>
-
         </form>
 
-        <p className="text-center pb-8 px-8 text-neutral-400 text-sm">
+        <p className="text-center mb-2 text-neutral-500 text-sm">
           Não tem conta?
-          <Link to="/signup" className="ml-1 text-white font-bold no-underline hover:underline">
-            Cadastre-se
-          </Link>
           <button
-            onClick={onClose}
-            className="block w-full mt-4 text-sm text-neutral-500 hover:text-white transition-colors"
-            aria-label="Fechar Modal"
+            onClick={onSignupClick}
+            className="ml-1 text-neutral-100 font-bold hover:underline"
           >
-            Ou fechar
+            Cadastre-se
           </button>
         </p>
 

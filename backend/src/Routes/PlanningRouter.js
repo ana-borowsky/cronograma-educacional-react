@@ -7,6 +7,7 @@ router.post("/", PlanningController.insertPlannning)
 router.put("/", PlanningController.updatePlanning)
 router.get("/all/:idTask", PlanningController.getAll)
 router.get("/dayPlannings/:idTask", PlanningController.getDayPlanning)
+router.get("/userDayPlannings/:idUser", PlanningController.getDayPlanningByUser)
 router.delete("/:idPlanning", PlanningController.delete)
 
 export default router

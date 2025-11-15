@@ -33,6 +33,7 @@
 
 - get/plannings/all/:idTask
 - get/plannings/dayPlannings/id:Task
+- get/plannings/userDayPlannings/:idUser
 - put/plannings/
 - delete/plannings/:idPlanning
 - post/plannings/
@@ -48,6 +49,6 @@
 
 - post/schedules
 - get/schedules/all/:idUser
-- get/schedules/weekSchedule/:idUser
+- get/schedules/weekSchedule/:idUser (a rota foi criada assim, mas quando for acessar precisa do startDate, dai fica assim localhost:8800/schedules/weekSchedule/1?startDate=2025-11-10)
 - get/shedules/monthSchedule/:idUser
 

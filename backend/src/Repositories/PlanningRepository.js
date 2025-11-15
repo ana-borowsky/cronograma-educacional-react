@@ -55,7 +55,7 @@ class PlanningRepository {
     return plannings
   }
 
-    async getDayPlanning(idTask) {
+  async getDayPlanning(idTask) {
     const values = [idTask]
     const query = "SELECT * FROM planning WHERE idTask = ? AND executionDate = CURDATE()"
     const [result] = await db.query(query, values)
@@ -71,6 +71,52 @@ class PlanningRepository {
         planning.idTask
       ))
     })
+
+    return plannings
+  }
+
+  async getDayPlanningByUser(idUser){
+    const values = [idUser]
+    const query = "SELECT planning.idPlanning, \
+                          planning.executionDate, \
+                          planning.idTask, \
+                          task.name AS fullDescription, \
+                          discipline.color AS borderColor, \
+                          task.status AS defaultChecked \
+                  FROM beezer.planning AS planning \
+                  JOIN beezer.task AS task ON planning.idTask = task.idTask \
+                  JOIN beezer.discipline ON discipline.idDiscipline = task.idDiscipline \
+                  WHERE discipline.idUser = ? AND task.status = 'Pendente' AND planning.executionDate = CURDATE();"
+    
+    const [result] = await db.query(query, values)
+    let plannings = []
+
+    result.forEach(planning => {
+      if(planning.defaultChecked === "Pendente") {
+        planning.defaultChecked = false
+      } else if(planning.defaultChecked === "Concluído"){
+        planning.defaultChecked = true
+      }
+      
+      plannings.push(new PlanningModel(
+        planning.idPlanning,
+        planning.executionDate,
+        planning.startTime,
+        planning.endTime,
+        planning.finalWeight,
+        planning.idTask,
+        planning.fullDescription,
+        planning.borderColor,
+        planning.defaultChecked
+      ))
+    })
+
+    plannings = plannings.map(newPlanning => {
+      delete newPlanning.executionDate
+
+      return newPlanning
+    })
+
     return plannings
   }
 

@@ -23,6 +23,11 @@ class PlanningService {
     return await repo.getDayPlanning(idPlanning)
   }
 
+  async getDayPlanningByUser(idUser) {
+    const repo = new PlanningRepository()
+    return await repo.getDayPlanningByUser(idUser)
+  }
+
   async delete(idPlanning) {
     const repo = new PlanningRepository()
     return await repo.delete(idPlanning)

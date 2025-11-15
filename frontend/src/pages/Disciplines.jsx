@@ -61,7 +61,6 @@ const Disciplines = () => {
   const closeSignupModal = () => setIsSignupModalOpen(false)
 
   const openAddDisciplineModal = () => {
-    console.log("aeww")
     setIsAddDisciplineModalOpen(true)
   }
 

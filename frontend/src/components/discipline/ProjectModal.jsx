@@ -47,9 +47,6 @@ export function ProjectModal() {
 
   return (
     <div className="w-full">
-      <div className="text-center">
-        <p className="text-neutral-100 text-sm mb-2"><strong>Passo 1</strong> → Passo 2 → Passo 3</p>
-      </div>
       <h2 className="text-neutral-600 flex items-center text-xl font-bold mb-4  pb-2 truncate">Projeto</h2>
       <form className="space-y-6">
         <div className="space-y-1">
@@ -108,10 +105,6 @@ export function ProjectModal() {
             </Button>
           </div>
         </div>
-
-        <Button type="submit" variant="yellow-primary" className="w-full flex-1 transition duration-200 mt-2">
-          Próximo
-        </Button>
       </form>
     </div>
   )

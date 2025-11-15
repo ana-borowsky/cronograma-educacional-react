@@ -1,5 +1,5 @@
-import React from 'react';
-import { cn } from "@/lib/utils";
+import React from 'react'
+import { cn } from "@/lib/utils"
 
 const colorMap = {
   yellow: "bg-yellow-600",
@@ -21,11 +21,10 @@ const colorMap = {
  * @param {string} props.color
  */
 export function DisciplineTitle({ title, project, weight, color, classroom }) {
-  const colorClass = colorMap[color] || "bg-neutral-500";
+  const colorClass = colorMap[color] || "bg-neutral-500"
 
   return (
     <div className="w-full">
-      {/* Título */}
       <h2 className="flex items-center text-xl font-semibold text-neutral-600 mb-1 truncate">
         <span
           className={cn("w-3 h-3 rounded-full mr-3 flex-shrink-0", colorClass)}
@@ -49,5 +48,5 @@ export function DisciplineTitle({ title, project, weight, color, classroom }) {
 
       </div>
     </div>
-  );
+  )
 }

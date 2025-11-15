@@ -77,7 +77,7 @@ const Disciplines = () => {
 
       <div className="flex flex-col p-5 gap-6">
         <div className="w-full flex flex-col md:flex-row md:space-x-8">
-          <div className="w-full flex overflow-x-auto space-x-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="w-full flex overflow-x-auto space-x-6 pb-4">
             {isLoading ? (
               <p className="text-neutral-400">Carregando disciplinas...</p>
             ) : (

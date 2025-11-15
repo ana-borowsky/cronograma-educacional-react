@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { cn } from "@/lib/utils"
+import { cn, truncateText } from "@/lib/utils"
 import { ChevronDown, Pencil } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -67,7 +67,7 @@ export function ListItem({
             )}
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            {fullDescription}
+            {truncateText(fullDescription, 40)}
           </Label>
         </div>
 

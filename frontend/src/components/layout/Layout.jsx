@@ -29,7 +29,7 @@ const Layout = ({ subtitle, children }) => {
   }
 
   return (
-    <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh] overflow-x-hidden">
+    <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh]">
 
       <header className="relative w-full">
         <div className="flex flex-col items-center min-h-[100px] justify-start mb-20 mt-20">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn } from "@/lib/utils"
+import { cn, truncateText } from "@/lib/utils"
 
 const colorMap = {
   yellow: "bg-yellow-600",
@@ -11,7 +11,7 @@ const colorMap = {
   pink: "bg-pink-500",
   white: "bg-white",
   black: "bg-black",
-};
+}
 
 /**
  * @param {object} props
@@ -29,7 +29,7 @@ export function DisciplineTitle({ title, project, weight, color, classroom }) {
         <span
           className={cn("w-3 h-3 rounded-full mr-3 flex-shrink-0", colorClass)}
         ></span>
-        {title || "Edite o nome da disciplina"}
+        {truncateText(title, 30) || "Edite o nome da disciplina"}
       </h2>
 
       <div className="mt-1 mb-2 flex items-center gap-3 text-sm text-neutral-500">

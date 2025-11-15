@@ -4,7 +4,8 @@ import FreeTimeService from "../Services/FreeTimeService.js"
 import DisciplineService from "../Services/DisciplineService.js"
 import TasksService from "../Services/TaskService.js"
 import ScheduleService from "../Services/ScheduleService.js"
-import { console } from "inspector"
+import DisciplineModel from "../Models/DisciplineModel.js"
+import TasksModel from "../Models/TasksModel.js"
 dotenv.config()
 
 export class GeminiController {
@@ -57,7 +58,7 @@ export class GeminiController {
               executionDate: "ISO 8601 date string",
               startTime: "HH:MM:SS format",
               endTime: "HH:MM:SS format",
-              finalWeight: "number (0-100)",
+              finalWeight: "number (0-10)",
               idTask: "number",
             },
             example: [
@@ -66,7 +67,7 @@ export class GeminiController {
                 executionDate: "2025-11-08T03:00:00.000Z",
                 startTime: "14:00:00",
                 endTime: "16:00:00",
-                finalWeight: 90,
+                finalWeight: 8,
                 idTask: 1,
               },
             ],
@@ -81,9 +82,9 @@ export class GeminiController {
         }
       ]
       const response = await googleAI.models.generateContent({
-          model: "gemini-2.5-flash",
-          contents: contents,
-        })
+        model: "gemini-2.5-flash",
+        contents: contents,
+      })
 
       const result = await new ScheduleService().insert(idUser)
       return res.status(200).json(response.text)
@@ -96,7 +97,7 @@ export class GeminiController {
     try {
       const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
       const { idUser } = req.params
-      // suportar upload via multipart (multer) ou via body (base64)
+      // lida com o upload do PDF via multer ou body      
       if (!req.file) {
         if (req.body && req.body.file) {
           const fileData = req.body.file
@@ -120,16 +121,16 @@ export class GeminiController {
 
       const payload = {
         instructions: {
-          objective: "Retorne apenas um json com duas posições: discipline e tasks, seguindo as regras especificas em 'rules'",
+          objective: "Retorne apenas um objeto json com duas posições: discipline e tasks, seguindo as regras especificas em 'rules'",
           rules: [
             "Leia o plano de ensino do arquivo PDF anexado",
             "Crie uma 'discipline' com os dados do plano de ensino",
             "Crie as 'tasks' relacionadas à disciplina criada, baseando-se nas atividades descritas no plano de ensino",
-            "Retorne os dados no formato especificado em 'outputFormat' de schema para 'discipline' sendo a posição 0 e 'tasks' sendo a posição 1",
+            "Retorne os dados no formato especificado em 'outputFormat' de schema para 'discipline' sendo a chave 'discipline' e 'tasks' sendo a chave 'tasks'",
           ],
           outputFormat: {
             type: "array",
-            description: "Array com duas posições: [ discipline, tasks ]",
+            description: "Objeto com duas chaves: 'discipline' e 'tasks', cada uma seguindo o  formato de  'schema' especificado",
             schema: {
               discipline: {
                 idDiscipline: "number|null",
@@ -141,7 +142,7 @@ export class GeminiController {
                 day: "string|null",
                 startTime: "HH:MM:SS|null",
                 endTime: "HH:MM:SS|null",
-                weight: "number",
+                weight: "number(0-10)",
               },
               tasks: {
                 idTask: "null",
@@ -151,7 +152,7 @@ export class GeminiController {
                 estimatedHours: "TIME NOT NULL",
                 dueDate: "DATE NOT NULL",
                 status: "ENUM('Pendente', 'Concluído') NOT NULL",
-                weight: "SMALLINT NOT NULL",
+                weight: "SMALLINT NOT NULL(0-10)",
               },
             },
             example: [
@@ -166,7 +167,7 @@ export class GeminiController {
                   day: "Segunda-feira",
                   startTime: "08:00:00",
                   endTime: "10:00:00",
-                  weight: 10,
+                  weight: 8,
                 }
               },
               {
@@ -178,7 +179,7 @@ export class GeminiController {
                     estimatedHours: 1,
                     dueDate: "2025-11-10",
                     status: "Pendente",
-                    weight: 10,
+                    weight: 5,
                     idDiscipline: null,
                   }
                 ]
@@ -188,37 +189,17 @@ export class GeminiController {
         }
       }
       const prompt = JSON.stringify(payload, null, 2)
-      // Tentar extrair texto localmente do PDF para enviar ao modelo como texto.
-      // Isso costuma ser mais confiável do que depender apenas de attachment inline.
-      let extractedText = null
-      try {
-        const pdfParse = (await import('pdf-parse')).default
-        const parsed = await pdfParse(pdf.buffer)
-        extractedText = parsed && parsed.text ? parsed.text.trim() : null
-        if (extractedText && extractedText.length > 20000) {
-          // truncar para evitar payloads enormes; adaptar conforme necessário
-          extractedText = extractedText.slice(0, 20000)
-        }
-      } catch (parseErr) {
-        console.warn('Falha ao extrair texto do PDF localmente:', parseErr)
-        extractedText = null
-      }
 
       const contents = [{ text: prompt }]
-      if (extractedText) {
-        contents.push({ text: `EXTRAIR_PDF:\n${extractedText}` })
-      } else {
-        // fallback: enviar inlineData como antes (base64 + mime)
-        contents.push({
-          inlineData: {
-            mimeType: 'application/pdf',
-            data: pdf.buffer ? pdf.buffer.toString('base64') : Buffer.from(pdf).toString('base64'),
-          }
-        })
-      }
 
-      // Aqui você pode chamar o Google GenAI para processar o PDF.
-      // Se a chamada à API for desativada/localmente não utilizada, evitamos referenciar `response` indefinido.
+      // fallback: enviar inlineData como antes (base64 + mime)
+      contents.push({
+        inlineData: {
+          mimeType: 'application/pdf',
+          data: pdf.buffer ? pdf.buffer.toString('base64') : Buffer.from(pdf).toString('base64'),
+        }
+      })
+
       let response
       try {
         response = await googleAI.models.generateContent({
@@ -231,17 +212,49 @@ export class GeminiController {
         return res.status(502).json({ error: 'Falha ao chamar a API Gemini', details })
       }
 
-      if (response && response.text) {
-        try {
-          const responseJson = JSON.parse(response.text)
-          console.log('Resposta AI (parsed):', responseJson)
-        } catch (err) {
-          console.warn('Não foi possível parsear response.text:', err)
-          console.log('Resposta raw:', response.text)
-        }
-      } else {
-        console.log('Resposta da AI sem texto em `response.text`:', response)
+      const responseJson = JSON.parse((response.text)
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim()
+      )
+      console.log('Parsed json do gemini:', responseJson)
+      const disciplineData = responseJson[0].discipline
+      console.log('Discipline Data:', disciplineData)
+      const tasksData = responseJson[1].tasks
+      console.log('Tasks Data:', tasksData)
+
+      const disciplineService = new DisciplineService()
+      const insertedDiscipline = await disciplineService.insert(
+        new DisciplineModel(
+          disciplineData.idDiscipline,
+          disciplineData.idUser,
+          disciplineData.name,
+          disciplineData.color,
+          disciplineData.project,
+          disciplineData.classroom,
+          disciplineData.day,
+          disciplineData.startTime,
+          disciplineData.endTime,
+          disciplineData.weight
+        )
+      )
+
+      const tasksService = new TasksService()
+      for (const task of tasksData) {
+        await tasksService.insert(
+          new TasksModel(
+            task.idTask,
+            task.name,
+            task.type,
+            task.estimatedHours,
+            task.dueDate,
+            task.status,
+            task.weight,
+            insertedDiscipline.insertId  // ← Alterado: usar o ID da disciplina inserida
+          )
+        )
       }
+
       return res.status(200).json({ message: response.text })
     } catch (err) {
       return res.status(500).json({ error: err.message })

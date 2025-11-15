@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS freeTime (
 CREATE TABLE IF NOT EXISTS discipline (
     idDiscipline INTEGER NOT NULL AUTO_INCREMENT,
     idUser INTEGER NOT NULL,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(150) NOT NULL,
     color VARCHAR(12) NOT NULL,
     project VARCHAR(45) NOT NULL,
     classroom VARCHAR(45),
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS discipline (
 CREATE TABLE IF NOT EXISTS task (
     idTask INTEGER NOT NULL AUTO_INCREMENT,
     idDiscipline INTEGER NOT NULL,
-    name VARCHAR(50) NOT NULL,
+    name VARCHAR(150) NOT NULL,
     type ENUM('Prova', 'Trabalho') NOT NULL,
     estimatedHours TIME NOT NULL,
     dueDate DATE NOT NULL,

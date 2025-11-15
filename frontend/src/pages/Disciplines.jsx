@@ -93,7 +93,8 @@ const Disciplines = () => {
           </div>
         </div>    
       </div>
-      <div className="w-1/5 flex justify-center transition duration-200 mb-50">
+      <div className="w-1/5 flex-col mx-auto items-center flex justify-center transition duration-200 mt-10 mb-20">
+
         {disciplines.length == 0 ? <img
           src="/assets/gatinho_balao.svg"
           style={{ width: '300px', height: 'auto' }}

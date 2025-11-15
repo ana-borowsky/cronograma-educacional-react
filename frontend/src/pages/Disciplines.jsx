@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react'
 import Layout from "../components/layout/Layout"
 import NavigationBar from "../containers/NavigationBar"
 import Discipline from "../containers/discipline/Discipline"
-import AddDiscipline from "../containers/discipline/AddDiscipline"
+import AddDisciplineModal from "../components/discipline/AddDisciplineModal"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
-import AddDisciplineModal from "../components/discipline/AddDisciplineModal"
 import { useLocation } from 'react-router-dom'
 import { useLoading } from "@/context/LoadingContext"
 import { Button } from "@/components/ui/button"
@@ -22,7 +21,7 @@ const Disciplines = () => {
 
   useEffect(() => {
     const fetchDisciplines = async () => {
-      const MIN_TIME = 1200 
+      const MIN_TIME = 1200
       setLoading(true)
       const start = Date.now()
 
@@ -47,7 +46,6 @@ const Disciplines = () => {
     fetchDisciplines()
   }, [])
 
-
   const openLoginModal = () => {
     setIsSignupModalOpen(false)
     setIsLoginModalOpen(true)
@@ -60,10 +58,7 @@ const Disciplines = () => {
   }
   const closeSignupModal = () => setIsSignupModalOpen(false)
 
-  const openAddDisciplineModal = () => {
-    setIsAddDisciplineModalOpen(true)
-  }
-
+  const openAddDisciplineModal = () => setIsAddDisciplineModalOpen(true)
   const closeAddDisciplineModal = () => setIsAddDisciplineModalOpen(false)
 
   const switchToLogin = () => {
@@ -93,17 +88,16 @@ const Disciplines = () => {
                 />
               ))
             )}
-            {!isLoading && <AddDiscipline startOpen={disciplines.length === 0} />}
           </div>
+
           <Button
-            className="w-1/3 transition duration-200 mt-2 mb-6"
-            variant="yellow-primary"
+            className="w-1/3 transition duration-200"
+            variant="secondary"
             onClick={openAddDisciplineModal}
           >
-            <p>Inserir disciplinas</p>
+            Inserir disciplinas
           </Button>
         </div>
-        
       </div>
 
       {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}

@@ -75,7 +75,7 @@ const Disciplines = () => {
         openAddDisciplineModal={openAddDisciplineModal}
       />
 
-      <div className="flex flex-col p-5 gap-6 min-h-screen">
+      <div className="flex flex-col p-5 gap-6">
         <div className="w-full flex flex-col md:flex-row md:space-x-8">
           <div className="w-full flex overflow-x-auto space-x-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {isLoading ? (
@@ -89,25 +89,24 @@ const Disciplines = () => {
                 />
               ))
             )}
-            <div>
 
-              {disciplines.length == 0 ? <img
-                src="/assets/gatinho_balao.svg"
-                style={{ width: '300px', height: 'auto' }}
-                className="mt-30 mb-10"
-              /> : null}
-
-              <Button
-                className="w-full transition duration-200"
-                variant={disciplines.length == 0 ? "yellow-primary" : "secondary"}
-                onClick={openAddDisciplineModal}
-              >
-                Inserir disciplinas
-              </Button>
-
-            </div>
           </div>
-        </div>
+        </div>    
+      </div>
+      <div className="w-1/5 flex justify-center transition duration-200 mb-50">
+        {disciplines.length == 0 ? <img
+          src="/assets/gatinho_balao.svg"
+          style={{ width: '300px', height: 'auto' }}
+          className="mt-30 mb-10"
+        /> : null}
+
+        <Button
+          className="w-full transition duration-200"
+          variant="yellow-primary"
+          onClick={openAddDisciplineModal}
+        >
+          Inserir disciplinas
+        </Button>
       </div>
 
       {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}

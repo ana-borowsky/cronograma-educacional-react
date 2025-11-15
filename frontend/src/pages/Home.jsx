@@ -162,9 +162,9 @@ const Home = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-
+            
             <div className="col-span-2">
-              <h3 className="text-2xl font-bold text-neutral-700 mb-4 flex items-center gap-2">
+              <h3 className="text-2xl font-bold text-neutral-700 mb-4 mt-25 flex items-center gap-2">
                 <DatasetIcon className="text-yellow-600" /> Otimização inteligente de tempo
               </h3>
               <p className="text-neutral-800 mb-6">Veja a diferença entre a alocação manual e o planejamento do Beezer:</p>
@@ -180,7 +180,7 @@ const Home = () => {
                   </div>
                   <p className="text-sm text-neutral-700 mt-2">Tarefas mal-feitas ou não feitas. Falta de tempo e sobrecarga. </p>
                 </div>
-
+                
                 <div>
                   <p className="font-semibold text-neutral-800 mt-8 mb-2">Planejamento Beezer (Otimizado por I.A.)</p>
                   <div className="flex h-12 w-full relative">
@@ -191,28 +191,33 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            <div className="flex mx-auto flex-col justify-center items-center">
+              <img
+                src="/assets/gatinho_rostinho_cortado.svg"
+                style={{ width: '170px', height: 'auto' }}
+              />
+              <div className="bg-neutral-300 p-10 rounded-lg border border-neutral-400 h-80 ransition duration-300 hover:scale-102">
+                <h3 className="text-2xl font-bold text-neutral-600 mb-12 flex items-center gap-2">
+                  <CheckCircle /> Ciclo de revisão e conclusão
+                </h3>
 
-            <div className="bg-neutral-300 p-10 rounded-lg border border-neutral-400 h-80 ransition duration-300 hover:scale-102">
-              <h3 className="text-2xl font-bold text-neutral-600 mb-12 flex items-center gap-2">
-                <CheckCircle /> Ciclo de revisão e conclusão
-              </h3>
-
-              <ul className="space-y-4 text-yellow-600">
-                <li className="flex items-start gap-3">
-                  <AlarmIcon className="h-5 w-5 mt-1 text-green-500 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-neutral-800">Confirmação diária:</p>
-                    <p className="text-sm text-neutral-600">Verificamos se a atividade foi feita e reagendamos o que falhou.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Zap className="h-5 w-5 mt-1 text-yellow-600 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-neutral-800">Realocação imediata:</p>
-                    <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
-                  </div>
-                </li>
-              </ul>
+                <ul className="space-y-4 text-yellow-600">
+                  <li className="flex items-start gap-3">
+                    <AlarmIcon className="h-5 w-5 mt-1 text-green-500 flex-shrink-0" />
+                    <div>
+                      <p className="font-semibold text-neutral-800">Confirmação diária:</p>
+                      <p className="text-sm text-neutral-600">Verificamos se a atividade foi feita e reagendamos o que falhou.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Zap className="h-5 w-5 mt-1 text-yellow-600 flex-shrink-0" />
+                    <div>
+                      <p className="font-semibold text-neutral-800">Realocação imediata:</p>
+                      <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

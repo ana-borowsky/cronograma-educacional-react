@@ -5,14 +5,20 @@ class PlanningModel {
         startTime,
         endTime,
         finalWeight,
-        idTask
+        idTask,
+        fullDescription,
+        borderColor,
+        defaultChecked,
     ) {
         this.idPlanning = idPlanning,
         this.executionDate = executionDate,
         this.startTime = startTime,
         this.endTime = endTime,
         this.finalWeight = finalWeight,
-        this.idTask = idTask
+        this.idTask = idTask,
+        this.fullDescription = fullDescription,
+        this.borderColor = borderColor,
+        this.defaultChecked = defaultChecked
     }
 }
 

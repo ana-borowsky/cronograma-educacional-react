@@ -56,18 +56,22 @@ describe("Testes planejamento", () => {
   it("Selecionar todas os planejamentos", async() => {
     const res = await request(app).get("/plannings/all/1").query({ idTask: created.idTask })
 
-
     expect(res.statusCode).toBe(200)
   })
   
-    it("Selecionar todas os planejamentos do dia", async() => {
+  it("Selecionar todos os planejamentos do dia", async() => {
     const res = await request(app).get("/plannings/dayPlannings/1").query({ idTask: created.idTask })
 
     expect(res.statusCode).toBe(200)
   })
 
-  it("Deletar planejamento",  async() => {
+  it("Selecionar todos os planejamento do dia por usuário", async() => {
+    const res = await request(app).get("/plannings/dayPlannings/1").query({ idUser: 1 })
 
+    expect(res.statusCode).toBe(200)
+  })
+
+  it("Deletar planejamento",  async() => {
     const res = await request(app).delete(`/plannings/${created.body.idPlanning}`).query({ idPlanning: created.idPlanning })
     
     expect(res.statusCode).toBe(200)

@@ -103,6 +103,23 @@ class PlanningController {
     }
   }
 
+  static async getDayPlanningByUser(req, res) {
+    try {
+      const {idUser} = req.params
+      const result = await new PlanningService().getDayPlanningByUser(Number(idUser))
+
+      if(!result || result.length == 0){
+        return res.status(400).json({ error: "O planejamento não foi encontrada!"})
+      }
+
+      return res.status(200).json(result)
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ error: "Erro ao obter os planejamentos!"})
+      
+    }
+  }
+
   static async delete(req, res) {
     try {
       const {idPlanning} = req.params

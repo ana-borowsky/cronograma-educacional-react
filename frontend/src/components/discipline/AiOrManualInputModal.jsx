@@ -2,7 +2,7 @@ import React from 'react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
-export function AiOrManualInputModal() {
+export function AiOrManualInputModal({onDisciplineInputSelected}) {
 
   return (
     <div>
@@ -11,14 +11,15 @@ export function AiOrManualInputModal() {
         <label className="block text-neutral-600 font-semibold text-sm">Modo de inserção</label>
         <div className="relative">
           <select
+            onChange={onDisciplineInputSelected}
             id="project-select"
             name="project-select"
             className="cursor-pointer w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-500 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
           >
-            <option key="ia" value="Insira via I.A.">
+            <option value="ai">
               Insira via I.A.
             </option>
-            <option key="manual" value="Insira manualmente">
+            <option value="manual">
               Insira manualmente
             </option>
           </select>
@@ -37,8 +38,6 @@ export function AiOrManualInputModal() {
           </svg>
         </div>
       </div>
-      
-
     </div>
   )
 }

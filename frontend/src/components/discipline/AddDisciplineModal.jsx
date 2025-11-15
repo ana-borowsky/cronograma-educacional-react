@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 export const AddDisciplineModal = ({ onClose }) => {
 
   const [step, setStep] = useState(1) 
+  const [disciplineInput, setDisciplineInput] = useState("ai") 
 
   useEffect(() => {
     document.body.style.overflow = "hidden"
@@ -25,6 +26,10 @@ export const AddDisciplineModal = ({ onClose }) => {
 
   const nextStep = () => {
     setStep(step + 1)
+  }
+
+  const onDisciplineInputSelected = (e) => {
+    setDisciplineInput(e.target.value)
   }
 
   console.log(step)
@@ -51,9 +56,10 @@ export const AddDisciplineModal = ({ onClose }) => {
           </div>
 
           {step == 1 ? <ProjectModal /> : null}
-          {step == 2 ? <AiOrManualInputModal /> : null}
-          {step == 3 ? <DisciplineManualInputModal /> : null}
-          {step == 4 ? <DisciplineAInputModal /> : null}
+          {step == 2 ? <AiOrManualInputModal onDisciplineInputSelected={onDisciplineInputSelected} /> : null}
+          {step == 3 ? 
+            disciplineInput == "manual" ? <DisciplineManualInputModal /> : <DisciplineAInputModal /> 
+            : null}
           
           <Button onClick={nextStep} type="submit" variant="yellow-primary" className="w-full flex-1 transition duration-200 mt-8">
             Próximo

@@ -12,7 +12,7 @@ const PencilIcon = () => (
   </svg>
 )
 
-const Discipline = ({ disciplineData }) => {
+const Discipline = ({ disciplineData, onRefresh }) => {
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
   const [isDisciplineModalOpen, setIsDisciplineModalOpen] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
@@ -133,7 +133,7 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                    <p className="text-neutral-600 text-sm">Nenhum trabalho cadastrado.</p>
+                <p className="text-neutral-600 text-sm">Nenhum trabalho cadastrado.</p>
               )}
             </div>
             <Button
@@ -163,7 +163,7 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                    <p className="text-neutral-600 text-sm">Nenhuma prova cadastrada.</p>
+                <p className="text-neutral-600 text-sm">Nenhuma prova cadastrada.</p>
               )}
             </div>
             <Button
@@ -188,6 +188,7 @@ const Discipline = ({ disciplineData }) => {
       <DisciplineFormModal
         isOpen={isDisciplineModalOpen}
         onClose={() => setIsDisciplineModalOpen(false)}
+        onRefresh={onRefresh}
         disciplineData={disciplineData}
       />
     </Container>

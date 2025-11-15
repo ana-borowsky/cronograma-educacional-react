@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useEffect } from "react"
 import { DisciplineForm } from "@/containers/discipline/DisciplineForm"
 
-export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
+export const DisciplineFormModal = ({ isOpen, onClose, disciplineData, onRefresh }) => {
   const isEditing = !!disciplineData
   const modalTitle = isEditing
     ? `Editar ${disciplineData.name}`
@@ -44,6 +44,7 @@ export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
         <DisciplineForm
           disciplineData={disciplineData}
           onCancel={onClose}
+          onRefresh={onRefresh}
           onDelete={() => console.log("Excluir disciplina")}
           onSave={() => console.log("Salvar disciplina")}
         />

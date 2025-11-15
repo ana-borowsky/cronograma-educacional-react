@@ -20,31 +20,31 @@ const Disciplines = () => {
   const { isLoading, setLoading } = useLoading()
 
   useEffect(() => {
-    const fetchDisciplines = async () => {
-      const MIN_TIME = 1000
-      setLoading(true)
-      const start = Date.now()
-
-      try {
-        const response = await fetch('http://localhost:8800/discipline/1')
-        if (!response.ok) throw new Error()
-        const data = await response.json()
-        setDisciplines(data)
-      } catch (error) {
-        console.error(error)
-      } finally {
-        const elapsed = Date.now() - start
-        const remaining = MIN_TIME - elapsed
-        if (remaining > 0) {
-          setTimeout(() => setLoading(false), remaining)
-        } else {
-          setLoading(false)
-        }
-      }
-    }
-
     fetchDisciplines()
   }, [])
+
+  const fetchDisciplines = async () => {
+    const MIN_TIME = 1000
+    setLoading(true)
+    const start = Date.now()
+
+    try {
+      const response = await fetch('http://localhost:8800/discipline/1')
+      if (!response.ok) throw new Error()
+      const data = await response.json()
+      setDisciplines(data)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      const elapsed = Date.now() - start
+      const remaining = MIN_TIME - elapsed
+      if (remaining > 0) {
+        setTimeout(() => setLoading(false), remaining)
+      } else {
+        setLoading(false)
+      }
+    }
+  }
 
   const openLoginModal = () => {
     setIsSignupModalOpen(false)
@@ -85,25 +85,33 @@ const Disciplines = () => {
                 <Discipline
                   key={discipline.idDiscipline}
                   disciplineData={discipline}
+                  onRefresh={fetchDisciplines}
                 />
               ))
             )}
+            <div>
 
-            <Button
-              className="w-1/3 transition duration-200"
-              variant="secondary"
-              onClick={openAddDisciplineModal}
-            >
-              Inserir disciplinas
-            </Button>
+              {disciplines.length == 0 ? <img
+                src="/assets/gatinho_balao.svg"
+                style={{ width: '300px', height: 'auto' }}
+                className="mt-30 mb-10"
+              /> : null}
+
+              <Button
+                className="w-full transition duration-200"
+                variant={disciplines.length == 0 ? "yellow-primary" : "secondary"}
+                onClick={openAddDisciplineModal}
+              >
+                Inserir disciplinas
+              </Button>
+
+            </div>
           </div>
-
-
         </div>
       </div>
 
       {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}
-      {isAddDisciplineModalOpen && <AddDisciplineModal idUser={1} onClose={closeAddDisciplineModal} />}
+      {isAddDisciplineModalOpen && <AddDisciplineModal idUser={1} onClose={closeAddDisciplineModal} onRefresh={fetchDisciplines} />}
       {isSignupModalOpen && <SignupModal onClose={closeSignupModal} onLoginClick={switchToLogin} />}
     </Layout>
   )

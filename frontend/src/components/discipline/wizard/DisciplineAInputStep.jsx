@@ -3,7 +3,12 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-export function DisciplineAInputStep() {
+export function DisciplineAInputStep({ onFileSelected }) {
+  const handleFileSelection = (e) => {
+    const input = e.currentTarget
+    const file = input.files[0]
+    onFileSelected(file)
+  }
 
   return (
     <div>
@@ -15,19 +20,21 @@ export function DisciplineAInputStep() {
 
         <div className="space-y-2">
           <label htmlFor="file-upload-ensalamento" className="block text-neutral-600 font-semibold text-sm">
-            Selecione o arquivo do ensalamento
+            Selecione o arquivo do plano de ensino
           </label>
           <Input
             type="file"
-            id="file-upload-ensalamento"
+            id="file-upload-planos"
             name="schedule-file"
             required
+            multiple
             variant="dark"
             className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
+            onChange={handleFileSelection}
           />
         </div>
 
-        <div className="space-y-1">
+        {/* <div className="space-y-1">
           <label htmlFor="file-upload-planos" className="block text-neutral-600 font-semibold text-sm">
             Selecione os arquivos dos planos de ensino das disciplinas
           </label>
@@ -40,9 +47,9 @@ export function DisciplineAInputStep() {
             variant="dark"
             className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
           />
-        </div>
+        </div> */}
       </form>
-      
+
     </div>
   )
 }

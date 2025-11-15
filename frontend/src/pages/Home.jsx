@@ -218,9 +218,14 @@ const Home = () => {
         </div>
 
         <div className="pt-10">
+          
           <h2 className="text-4xl font-bold text-neutral-800 text-center border-b border-neutral-700 pb-4 mt-20 mb-20">
             Funcionalidades essenciais
           </h2>
+          <img
+            src="/assets/gatinho_sentado.svg"
+            style={{ width: '200px', height: 'auto' }}
+          />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-green-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">

@@ -7,9 +7,11 @@ import { DisciplineAInputStep } from "@/components/discipline/wizard/DisciplineA
 import { Button } from "@/components/ui/button"
 import { createDiscipline } from "@/lib/api/discipline"
 import { formatTimeForBackend } from "@/lib/utils"
+import { uploadFile } from "@/lib/api/gemini"
+import { useLoading } from "@/context/LoadingContext"
 
-export const AddDisciplineModal = ({ idUser, onClose }) => {
-
+export const AddDisciplineModal = ({ idUser, onClose, onRefresh }) => {
+  const { isLoading, setLoading } = useLoading()
   const [step, setStep] = useState(1)
   const [disciplineInputMethod, setDisciplineInputMethod] = useState("ai")
   const [project, setProject] = useState("vestibular")
@@ -22,6 +24,7 @@ export const AddDisciplineModal = ({ idUser, onClose }) => {
     weight: "",
     color: "blue",
   })
+  const [file, setFile] = useState()
 
   useEffect(() => {
     document.body.style.overflow = "hidden"
@@ -36,7 +39,7 @@ export const AddDisciplineModal = ({ idUser, onClose }) => {
     onClose()
   }
 
-  const save = async () => {
+  const saveManual = async () => {
     const payload = {
       ...disciplineData,
       project,
@@ -55,14 +58,55 @@ export const AddDisciplineModal = ({ idUser, onClose }) => {
       alert("Disciplina adicionada com sucesso!")
 
       document.body.style.overflow = ""
+      onRefresh()
       onClose()
     } catch (err) {
       alert(err.message)
     }
   }
 
+  const saveFile = async () => {
+    setLoading(true)
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const base64Data = event.target.result
+
+      const uploadPayload = {
+        file: base64Data,
+        filename: file.name,
+        mimetype: file.type,
+      }
+
+      upload(uploadPayload)
+    }
+    reader.readAsDataURL(file);
+  }
+
+  const upload = async (file) => {
+    try {
+      const response = await uploadFile(1, file)
+
+      if (!response.ok) throw new Error("Erro ao salvar a disciplina.")
+
+      alert("Disciplina adicionada com sucesso!")
+
+      document.body.style.overflow = ""
+      onRefresh()
+      onClose()
+    } catch (err) {
+      alert(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const nextStep = () => {
-    step == 3 ? save() : setStep(step + 1)
+    if (step != 3) {
+      setStep(step + 1)
+      return
+    }
+
+    disciplineInputMethod === "manual" ? saveManual() : saveFile()
   }
 
   return (
@@ -90,7 +134,9 @@ export const AddDisciplineModal = ({ idUser, onClose }) => {
         {step == 1 ? <ProjectStep selectedProject={project} onProjectSelected={setProject} /> : null}
         {step == 2 ? <DisciplineInputMethodStep disciplineInputMethod={disciplineInputMethod} setDisciplineInputMethod={setDisciplineInputMethod} /> : null}
         {step == 3 ?
-          disciplineInputMethod == "manual" ? <DisciplineManualInputStep disciplineData={disciplineData} setDisciplineData={setDisciplineData} /> : <DisciplineAInputStep />
+          disciplineInputMethod == "manual"
+            ? <DisciplineManualInputStep disciplineData={disciplineData} setDisciplineData={setDisciplineData} />
+            : <DisciplineAInputStep onFileSelected={setFile} />
           : null}
 
         <Button onClick={nextStep} type="submit" variant="yellow-primary" className="w-full flex-1 transition duration-200 mt-8">

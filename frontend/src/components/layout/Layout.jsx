@@ -31,7 +31,7 @@ const Layout = ({ subtitle, children }) => {
   return (
     <div className="flex flex-col w-screen min-w-[320px] min-h-[100vh] overflow-x-hidden">
 
-      <header className="relative w-full p-5">
+      <header className="relative w-full">
         <div className="flex flex-col items-center min-h-[100px] justify-start mb-20 mt-20">
           <Title>
             <img
@@ -63,7 +63,7 @@ const Layout = ({ subtitle, children }) => {
         </div>
       </header>
 
-      <main className="flex flex-col justify-center items-center flex-grow p-5">
+      <main className="flex flex-col justify-center items-center flex-grow">
         {children}
       </main>
 

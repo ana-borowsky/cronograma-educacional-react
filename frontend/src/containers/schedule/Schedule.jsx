@@ -79,10 +79,10 @@ const Schedule = () => {
 
   return (
     <div className="flex-grow flex flex-col gap-6">
-      <div className="bg-neutral-800 p-6 border border-neutral-700 rounded-lg shadow-2xl flex-grow">
+      <div className="bg-neutral-300 p-6 border border-neutral-400 rounded-lg shadow-lg flex-grow">
 
-        <div className="flex mb-4 border-neutral-700 -mt-6 -mx-6 px-6 pt-6 ">
-          <div className="flex flex-row gap-0 border-b-2 border-neutral-700 w-full">
+        <div className="flex mb-4 border-neutral-400 -mt-6 -mx-6 px-6 pt-6 ">
+          <div className="flex flex-row gap-0 border-b-2 border-neutral-400 w-full">
             <TabButton tabId="agenda" activeTab={activeTab} setActiveTab={setActiveTab}>Agenda da Semana</TabButton>
             <TabButton tabId="estudo" activeTab={activeTab} setActiveTab={setActiveTab}>Horários de Estudo</TabButton>
           </div>
@@ -93,20 +93,20 @@ const Schedule = () => {
         />
 
         {isLoading ? (
-          <p className="text-neutral-400 text-center">Carregando agenda...</p>
+          <p className="text-neutral-500 text-center">Carregando agenda...</p>
         ) : (
           <div
-            className="calendar-grid grid gap-px bg-neutral-700 border border-neutral-700 rounded-lg overflow-hidden relative"
+            className="calendar-grid grid gap-px bg-neutral-400 border border-neutral-400 rounded-lg overflow-hidden relative"
             style={{
               gridTemplateColumns: `80px repeat(${daysOfWeek.length}, 1fr)`,
               gridTemplateRows: `auto repeat(${totalGridSlots}, 40px)`,
             }}
           >
-            <div className="day-label bg-neutral-700 text-neutral-300 font-bold p-2 text-sm" style={{ gridColumn: 1, gridRow: 1 }}>Hora</div>
+            <div className="day-label bg-neutral-200 text-neutral-600 font-bold p-2 text-sm" style={{ gridColumn: 1, gridRow: 1 }}>Hora</div>
             {daysOfWeek.map((day, dayIndex) => (
               <div
                 key={day}
-                className={`day-label bg-neutral-700 text-neutral-300 font-bold p-2 text-center text-sm ${dayIndex >= 5 ? 'text-yellow-500' : ''}`}
+                className={`day-label bg-neutral-200 text-neutral-600 font-bold p-2 text-center text-sm ${dayIndex >= 5 ? 'text-yellow-600' : ''}`}
                 style={{ gridColumn: dayIndex + 2, gridRow: 1 }}
               >
                 {day}
@@ -116,7 +116,7 @@ const Schedule = () => {
             {timeSlots.map((time, timeIndex) => (
               <div
                 key={time}
-                className="time-slot bg-neutral-800 text-neutral-400 text-xs font-semibold p-1 text-center border-r border-neutral-700 flex items-center justify-center"
+                className="time-slot bg-neutral-300 text-neutral-500 text-xs font-semibold p-1 text-center border-r border-neutral-400 flex items-center justify-center"
                 style={{ gridRow: timeIndex + 2, gridColumn: 1 }}
               >
                 {time}
@@ -124,7 +124,7 @@ const Schedule = () => {
             ))}
 
             <div
-              className="time-slot bg-neutral-800 text-neutral-400 text-xs font-semibold p-1 text-center border-r border-neutral-700 flex items-center justify-center"
+              className="time-slot bg-neutral-300 text-neutral-500 text-xs font-semibold p-1 text-center border-r border-neutral-400 flex items-center justify-center"
               style={{ gridRow: totalGridRows, gridColumn: 1 }}
             >
               00:00

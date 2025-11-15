@@ -56,7 +56,7 @@ const ToDoList = () => {
   }
 
   return (
-    <div className="flex-grow p-6 bg-neutral-800 border border-neutral-700 rounded-lg shadow-lg">
+    <div className="flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg shadow-lg">
 
       <DateTitle
         currentDate={displayedDate}
@@ -71,7 +71,7 @@ const ToDoList = () => {
 
       <div className="space-y-4">
         {isLoading ? (
-          <p className="text-neutral-400 text-center">Carregando tarefas...</p>
+          <p className="text-neutral-500 text-center">Carregando tarefas...</p>
         ) : (
           tasks.map((task) => (
             <ListItem

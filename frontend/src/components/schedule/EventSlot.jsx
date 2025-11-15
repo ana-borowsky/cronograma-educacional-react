@@ -2,16 +2,16 @@ import { getGridRow } from "@/components/schedule/ScheduleData.jsx"
 import { cn } from "@/lib/utils"
 
 const colorMap = {
-  yellow: "bg-yellow-700/80 hover:bg-yellow-700 border-yellow-900",
-  blue: "bg-blue-700/80 hover:bg-blue-700 border-blue-900",
-  purple: "bg-purple-700/80 hover:bg-purple-700 border-purple-900",
-  green: "bg-green-700/80 hover:bg-green-700 border-green-900",
-  red: "bg-red-700/80 hover:bg-red-700 border-red-900",
+  yellow: "bg-yellow-500/80 hover:bg-yellow-500 border-yellow-600",
+  blue: "bg-blue-500/80 hover:bg-blue-500 border-blue-600",
+  purple: "bg-purple-500/80 hover:bg-purple-500 border-purple-600",
+  green: "bg-green-500/80 hover:bg-green-500 border-green-600",
+  red: "bg-red-500/80 hover:bg-red-500 border-red-600",
 };
 
 export const EventSlot = ({ event, isVisible }) => {
 
-  const colorClass = colorMap[event.color] || "bg-neutral-600/80 hover:bg-neutral-600 border-neutral-700";
+  const colorClass = colorMap[event.color] || "bg-neutral-400/80 hover:bg-neutral-500 border-neutral-500";
 
   return (
     <div
@@ -31,4 +31,3 @@ export const EventSlot = ({ event, isVisible }) => {
     </div>
   )
 }
-

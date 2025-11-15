@@ -13,7 +13,7 @@ const SignupModal = ({ onClose, onLoginClick }) => {
       onClick={onClose}
     >
       <div
-        className="bg-background p-6 sm:p-10 border border-neutral-400 rounded-lg shadow-xl w-full max-w-md transform transition-all duration-300 scale-100"
+        className="bg-neutral-300 p-6 sm:p-10 border border-neutral-400 rounded-lg shadow-xl w-full max-w-md transform transition-all duration-300 scale-100"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"

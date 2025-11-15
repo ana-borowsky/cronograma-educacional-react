@@ -41,7 +41,7 @@ export const AddDisciplineModal = ({ onClose }) => {
         role="dialog"
       >
         <div
-          className="relative bg-background rounded-lg border border-neutral-400 shadow-xl w-full max-w-md p-6 sm:p-8 transform transition-all max-h-[90vh] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="relative bg-neutral-300 rounded-lg border border-neutral-400 shadow-xl w-full max-w-md p-6 sm:p-8 transform transition-all max-h-[90vh] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           onClick={(e) => e.stopPropagation()}
         >
           <h2 className="text-center text-neutral-600 text-2xl font-semibold mb-6">

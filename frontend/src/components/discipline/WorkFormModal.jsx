@@ -111,7 +111,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
       aria-modal="true"
     >
       <div
-        className="bg-background rounded-lg border border-neutral-400 shadow-xl w-full max-w-md sm:p-8 transform transition-all"
+        className="bg-neutral-300 rounded-lg border border-neutral-400 shadow-xl w-full max-w-md sm:p-8 transform transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="fspace-y-4 mt-4">

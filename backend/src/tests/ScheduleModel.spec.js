@@ -24,14 +24,7 @@ describe("Testes cronograma",  () => {
 
   it("Selecionar cronograma semanal do usuário", async () => {
 
-    const res = await request(app).get("/schedules/weekSchedule/1").query({ idUser: 1 })
-  
-    expect(res.statusCode).toBe(200)
-  })
-
-  it("Selecionar cronograma mensal do usuário", async () => {
-
-    const res = await request(app).get("/schedules/monthSchedule/1").query({ idUser: 1 })
+    const res = await request(app).get("/schedules/weekSchedule/1").query({ startDate: "2025-11-10" })
   
     expect(res.statusCode).toBe(200)
   })

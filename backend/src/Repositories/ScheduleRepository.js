@@ -1,77 +1,32 @@
 import { db } from "../db.js";
 import ScheduleModel from "../Models/ScheduleModel.js"
 
-function getWeekMonth(date){
-  const currentDate = new Date(date)
-  const firstDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
-  const dayMonth = currentDate.getDate()
-  const firstDayWeek = firstDate.getDay()
-  const getWeek = Math.ceil((dayMonth + firstDayWeek) / 7)
 
-  return getWeek
-}
 
-function formatDateArray(date) {
-  const currentDate = new Date(date)
-  const day = currentDate.getDate().toString()
-  const month = currentDate.toLocaleString('pt-BR', { month: 'short' })
-  const year = currentDate.getFullYear().toString()
+function groupByWeekDay(dateString) {
+  const [year, month, day] = dateString.split("-");
 
-  return [day, month, year]
-}
+  const date = new Date(
+    Number(year),
+    Number(month) - 1,
+    Number(day),
+    12, 0, 0  
+  )
 
-function groupByWeekDay(schedules) {
-  const weeks = {}
+  let dayWeek = date.getDay()
 
-    schedules.forEach(schedule => {
-      const dateNow = new Date(schedule.executionDate)
-      const week = getWeekMonth(dateNow)
+  if (dayWeek == 0) {
+    dayWeek = 7
+  }
 
-      const firstDay = new Date(dateNow)
-      let dayOfWeek = dateNow.getDay()
+  const firstDate = new Date(date)
+  firstDate.setDate(date.getDate() - (dayWeek))
 
-      if (dayOfWeek === 0) {
-        dayOfWeek = 7 
-      }
+  const lastDate = new Date(firstDate)
+  lastDate.setDate(lastDate.getDate() + 7)
 
-      firstDay.setDate(dateNow.getDate() - (dayOfWeek - 1))
-
-      const lastDay = new Date(firstDay)
-      lastDay.setDate(firstDay.getDate() + 6)
-
-      const formatDate = (date) => 
-        date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric'})
-
-      const range = `${formatDate(firstDay)} - ${formatDate(lastDay)}`
-
-      const daysOfWeek = {
-        0: 'Domingo',
-        1: 'Segunda',
-        2: 'Terca',
-        3: 'Quarta',
-        4: 'Quinta',
-        5: 'Sexta',
-        6: 'Sabado'
-      }
-      
-      const dayName = daysOfWeek[dateNow.getDay()]
-
-      if(!weeks[range]) {
-          weeks[range] = {
-            startDate: formatDateArray(firstDay),
-            endDate: formatDateArray(lastDay),
-            dayWeek: {}
-          }
-        }
-
-      if (!weeks[range].dayWeek[dayName]) {
-        weeks[range].dayWeek[dayName] = []
-      }
-
-      weeks[range].dayWeek[dayName].push(schedule)
-  })
-
-  return weeks
+  return {firstDate, lastDate}
+  
 }
 
 class ScheduleRespository {
@@ -142,8 +97,12 @@ class ScheduleRespository {
   return schedules
 }
 
-  async getWeekScheduleByUser(idUser){
-    const values = [idUser]
+  async getWeekScheduleByUser(idUser, startDate){
+
+    const { firstDate, lastDate } = groupByWeekDay(startDate)
+
+    const values = [idUser, firstDate, lastDate]
+
     const query = "SELECT \
                     user.idUser, \
                     planning.startTime AS startHour, \
@@ -156,7 +115,7 @@ class ScheduleRespository {
                 JOIN beezer.task AS task ON planning.idTask = task.idTask \
                 JOIN beezer.discipline AS discipline ON task.idDiscipline = discipline.idDiscipline \
                 JOIN beezer.user AS user ON beezer.schedule.idUser = user.idUser \
-                WHERE user.idUser = ? AND task.status = 'Pendente' \
+                WHERE user.idUser = ? AND task.status = 'Pendente' AND planning.executionDate BETWEEN ? AND ?\
                 ORDER BY planning.executionDate;"
                       
     const [result] = await db.query(query, values)
@@ -190,41 +149,6 @@ class ScheduleRespository {
     })
 
   return weekSchedules
-  }
-
-  async getMonthScheduleByUser(idUser){
-    const values = [idUser]
-    const query = "SELECT user.idUser,\
-                    task.name AS taskName,\
-                    task.status,\
-                    discipline.color,\
-                    planning.startTime,\
-                    planning.endTime,\
-                    planning.executionDate\
-                  FROM beezer.schedule\
-                  JOIN beezer.planning AS planning ON beezer.schedule.idPlanning = planning.idPlanning\
-                  JOIN beezer.task AS task ON planning.idTask = task.idTask\
-                  JOIN beezer.discipline AS discipline ON task.idDiscipline = discipline.idDiscipline\
-                  JOIN beezer.user AS user ON beezer.schedule.idUser = user.idUser\
-                  WHERE planning.executionDate BETWEEN DATE_FORMAT(CURDATE(), '%Y-%m-01')  AND LAST_DAY(CURDATE())  AND user.idUser = ? AND task.status = 'Pendente'\
-                  ORDER BY planning.executionDate;"
-
-    const [result] = await db.query(query, values)
-    let MonthSchedules = []
-    
-    result.forEach(schedule => {
-      MonthSchedules.push(new ScheduleModel(
-        schedule.idUser,
-        schedule.taskName,
-        schedule.status,
-        schedule.color,
-        schedule.executionDate,
-        schedule.startTime,
-        schedule.endTime,
-      ))
-    })
-
-    return groupByWeekDay(MonthSchedules)
   }
 }
 

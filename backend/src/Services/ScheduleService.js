@@ -13,14 +13,9 @@ class ScheduleService {
     return await repo.getScheduleByUser(Number(idUser))
   }
 
-  async getWeekScheduleByUser(idUser) {
+  async getWeekScheduleByUser(idUser, startDate) {
     const repo = new ScheduleRespository()
-    return await repo.getWeekScheduleByUser(Number(idUser))
-  }
-
-  async getMonthScheduleByUser(idUser) {
-    const repo = new ScheduleRespository()
-    return await repo.getMonthScheduleByUser(Number(idUser))
+    return await repo.getWeekScheduleByUser(Number(idUser), startDate)
   }
 
 } export default ScheduleService

@@ -3,6 +3,7 @@ import { GeminiController } from "../Controllers/GeminiController.js"
 
 const router = express.Router()
 
-router.get("/:idUser", GeminiController.buildPlanning)
+router.get("/buildPlanning/:idUser", GeminiController.buildPlanning)
+router.post("/pdf/:idUser", GeminiController.generateDisciplineAndTasksFromPdf)
 
 export default router

@@ -41,6 +41,7 @@
 ---
 
 - get/buildPlanning/:idUser  ( retorna os plannings gerados )
+- post/pdf/:idUser (FAZ AS DISCIPLINAS E TAREFAS DE UM PDF)
 
 ## Schedule
 ---

@@ -1,5 +1,4 @@
 import express from "express"
-import FreeTimeController from "../Controllers/FreeTimeController.js"
 import PlanningController from "../Controllers/PlanningController.js"
 
 const router = express.Router()

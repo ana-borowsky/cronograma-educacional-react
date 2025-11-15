@@ -147,10 +147,14 @@ export class GeminiController {
             "Crie uma 'discipline' com os dados do plano de ensino",
             "Crie as 'tasks' relacionadas à disciplina criada, baseando-se nas atividades descritas no plano de ensino",
             "Retorne os dados no formato especificado em 'outputFormat' de schema para 'discipline' sendo a chave 'discipline' e 'tasks' sendo a chave 'tasks'",
+            "Se algum campo não puder ser extraído do PDF, utilize um valor ficticio comum como valor para esse campo com excessão de classrroom, day, startTime e endTime que podem ser null",
+            "Verifique se os dados extraídos fazem sentido para cada campo",
+            "Garanta que todas as regras de tipos e formatos dos campos sejam seguidas conforme o schema em 'outputFormat'",
+            "Garanta que todas as regras dessa seçao sejam seguidas rigorosamente!",
           ],
           outputFormat: {
             type: "array",
-            description: "Objeto com duas chaves: 'discipline' e 'tasks', cada uma seguindo o  formato de  'schema' especificado",
+            description: "Array com duas posições e suas chaves são respectivamente: 'discipline' e 'tasks', cada uma seguindo o  formato de  'schema' especificado",
             schema: {
               discipline: {
                 idDiscipline: "number|null",
@@ -225,6 +229,11 @@ export class GeminiController {
         response = await googleAI.models.generateContent({
           model: "gemini-2.5-flash",
           contents: contents,
+          generationConfig: {
+            temperature: 0.1, 
+            topP: 0.95,
+            topK: 40,
+          },
         })
       } catch (apiErr) {
         console.error('Erro na chamada ao Google GenAI (generateFromPdf):', apiErr)

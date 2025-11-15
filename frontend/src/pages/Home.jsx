@@ -165,7 +165,7 @@ const Home = () => {
 
             <div className="col-span-2">
               <h3 className="text-2xl font-bold text-neutral-700 mb-4 flex items-center gap-2">
-                <DatasetIcon className="text-yellow-500" /> Otimização inteligente de tempo
+                <DatasetIcon className="text-yellow-600" /> Otimização inteligente de tempo
               </h3>
               <p className="text-neutral-800 mb-6">Veja a diferença entre a alocação manual e o planejamento do Beezer:</p>
 
@@ -206,7 +206,7 @@ const Home = () => {
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Zap className="h-5 w-5 mt-1 text-yellow-500 flex-shrink-0" />
+                  <Zap className="h-5 w-5 mt-1 text-yellow-600 flex-shrink-0" />
                   <div>
                     <p className="font-semibold text-neutral-800">Realocação imediata:</p>
                     <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
@@ -225,7 +225,7 @@ const Home = () => {
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-green-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
-                <Zap className="h-6 w-6 text-yellow-500" /> Otimização por prioridade
+                <Zap className="h-6 w-6 text-yellow-600" /> Otimização por prioridade
               </h3>
               <p className="text-neutral-600 text-sm">
                 Coloque a duração e data de entrega. A I.A. usa a prioridade da matéria para garantir que o mais importante tenha tempo suficiente alocado.

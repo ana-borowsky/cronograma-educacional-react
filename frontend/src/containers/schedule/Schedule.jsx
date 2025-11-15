@@ -106,7 +106,7 @@ const Schedule = () => {
             {daysOfWeek.map((day, dayIndex) => (
               <div
                 key={day}
-                className={`day-label bg-neutral-200 text-neutral-600 font-bold p-2 text-center text-sm ${dayIndex >= 5 ? 'text-yellow-600' : ''}`}
+                className={`day-label bg-neutral-700 text-neutral-300 font-bold p-2 text-center text-sm ${dayIndex >= 5 ? 'text-yellow-600' : ''}`}
                 style={{ gridColumn: dayIndex + 2, gridRow: 1 }}
               >
                 {day}

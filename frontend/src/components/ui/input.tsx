@@ -11,7 +11,7 @@ const inputVariants = cva(
         default:
           "h-12  bg-neutral-100 px-3 py-1 text-base md:text-sm",
         dark:
-          "h-auto p-3 text-sm  bg-neutral-700 text-white placeholder-neutral-500 focus:ring-yellow-500 focus:border-yellow-500",
+          "h-auto p-3 text-sm  bg-neutral-700 text-white placeholder-neutral-500 focus:ring-yellow-600 focus:border-yellow-600",
       },
     },
     defaultVariants: {

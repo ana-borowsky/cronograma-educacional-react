@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { useEffect } from "react"
-import { DisciplineForm } from "@/components/discipline/DisciplineForm"
+import { DisciplineForm } from "@/containers/discipline/DisciplineForm"
 
 export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
   const isEditing = !!disciplineData

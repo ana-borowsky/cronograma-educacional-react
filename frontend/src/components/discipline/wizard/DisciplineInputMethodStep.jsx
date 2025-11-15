@@ -2,7 +2,7 @@ import React from 'react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
-export function AiOrManualInputModal({onDisciplineInputSelected}) {
+export function DisciplineInputMethodStep({ disciplineInputMethod, setDisciplineInputMethod }) {
 
   return (
     <div>
@@ -11,9 +11,10 @@ export function AiOrManualInputModal({onDisciplineInputSelected}) {
         <label className="block text-neutral-600 font-semibold text-sm">Modo de inserção</label>
         <div className="relative">
           <select
-            onChange={onDisciplineInputSelected}
+            onChange={(e) => setDisciplineInputMethod(e.target.value)}
             id="project-select"
             name="project-select"
+            value={disciplineInputMethod}
             className="cursor-pointer w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-500 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
           >
             <option value="ai">

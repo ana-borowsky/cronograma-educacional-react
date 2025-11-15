@@ -16,10 +16,7 @@ const colorMap = {
   black: "bg-black",
 }
 
-export function ProjectModal() {
-    
-  const [selectedProject, setSelectedProject] = useState("vestibular")
-
+export function ProjectStep({ selectedProject, onProjectSelected }) {
   const [projects, setProjects] = useState([
     "vestibular",
     "concurso",
@@ -41,7 +38,7 @@ export function ProjectModal() {
     if (!trimmed) return alert("Digite um nome válido para o projeto.")
     if (projects.includes(trimmed)) return alert("Esse projeto já existe.")
     setProjects([...projects, trimmed])
-    setSelectedProject(trimmed)
+    onProjectSelected(trimmed)
     setNewProject("")
   }
 
@@ -59,7 +56,7 @@ export function ProjectModal() {
               name="project-select"
               className="w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-500 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
               value={selectedProject}
-              onChange={(e) => setSelectedProject(e.target.value)}
+              onChange={(e) => onProjectSelected(e.target.value)}
             >
               {projects.map((p) => (
                 <option key={p} value={p}>

@@ -4,3 +4,8 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export const formatTimeForBackend = (time) => {
+  if (!time) return null
+  return time.length === 5 ? `${time}:00` : time
+}

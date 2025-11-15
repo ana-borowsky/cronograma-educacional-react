@@ -4,9 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "", onCancel, onRefresh }) => {
-  const isEditing = !!disciplineData
-
+const DisciplineForm = ({ disciplineData, setDisciplineData }) => {
   const colorOptions = [
     { pt: "Amarelo", en: "yellow" },
     { pt: "Vermelho", en: "red" },
@@ -17,7 +15,7 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
     { pt: "Rosa", en: "pink" },
     { pt: "Branco", en: "white" },
     { pt: "Preto", en: "black" },
-  ];
+  ]
 
   const dayOptions = [
     "Segunda-feira",
@@ -29,96 +27,21 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
     "Domingo",
   ]
 
-  const formatTimeForInput = (time) => {
-    if (!time) return ""
-    return time.length === 8 ? time.slice(0, 5) : time
-  }
-
-  const [formData, setFormData] = useState({
-    name: disciplineData?.name || "",
-    project: disciplineData?.project || selectedProject || "",
-    classroom: disciplineData?.classroom || "",
-    day: disciplineData?.day || "",
-    startTime: formatTimeForInput(disciplineData?.startTime) || "",
-    endTime: formatTimeForInput(disciplineData?.endTime) || "",
-    weight: disciplineData?.weight || "",
-    color: disciplineData?.color || "blue",
-  })
-
-  useEffect(() => {
-    if (selectedProject && selectedProject !== formData.project) {
-      setFormData((prev) => ({ ...prev, project: selectedProject }))
-    }
-  }, [selectedProject])
-
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const formatTimeForBackend = (time) => {
-    if (!time) return null
-    return time.length === 5 ? `${time}:00` : time
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const payload = {
-      ...formData,
-      project: formData.project || selectedProject,
-      startTime: formatTimeForBackend(formData.startTime),
-      endTime: formatTimeForBackend(formData.endTime),
-      idUser,
-      ...(isEditing && { idDiscipline: disciplineData.idDiscipline }),
-    }
-
-    console.log("📦 Enviando payload:", payload)
-
-    const method = isEditing ? "PUT" : "POST"
-
-    try {
-      const response = await fetch("http://localhost:8800/discipline/", {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      })
-
-      if (!response.ok) throw new Error("Erro ao salvar a disciplina.")
-
-      alert(isEditing ? "Disciplina atualizada com sucesso!" : "Disciplina adicionada com sucesso!")
-      onRefresh?.()
-      onCancel?.()
-    } catch (err) {
-      alert(err.message)
-    }
-  }
-
-  const handleDelete = async () => {
-    if (!disciplineData?.idDiscipline) return alert("ID da disciplina não encontrado.")
-    if (!confirm("Tem certeza que deseja excluir esta disciplina?")) return
-
-    try {
-      const response = await fetch(`http://localhost:8800/discipline/${disciplineData.idDiscipline}`, { method: "DELETE" })
-      if (!response.ok) throw new Error("Erro ao excluir a disciplina.")
-      alert("Disciplina excluída com sucesso!")
-      onRefresh?.()
-      onCancel?.()
-    } catch (err) {
-      alert(err.message)
-    }
+    setDisciplineData((prev) => ({ ...prev, [name]: value }))
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <>
       <div className="space-y-1">
         <label className="block text-neutral-600 font-semibold text-sm">Nome</label>
-        <Input name="name" value={formData.name} onChange={handleChange} required placeholder="Ex: Banco de Dados" />
+        <Input name="name" value={disciplineData.name} onChange={handleChange} required placeholder="Ex: Banco de Dados" />
       </div>
 
       <div className="space-y-1">
         <label className="block text-neutral-600 font-semibold text-sm">Sala / Local</label>
-        <Input name="classroom" value={formData.classroom} onChange={handleChange} required placeholder="Ex: Sala 203" />
+        <Input name="classroom" value={disciplineData.classroom} onChange={handleChange} required placeholder="Ex: Sala 203" />
       </div>
 
       <div className="space-y-1">
@@ -126,7 +49,7 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
         <div className="relative">
           <select
             name="day"
-            value={formData.day}
+            value={disciplineData.day}
             onChange={handleChange}
             required
             className="w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-600 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
@@ -156,11 +79,11 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
       <div className="flex space-x-4">
         <div className="space-y-1 flex-1">
           <label className="block text-neutral-600 font-semibold text-sm">Início</label>
-          <Input name="startTime" type="time" step="60" value={formData.startTime} onChange={handleChange} required />
+          <Input name="startTime" type="time" step="60" value={disciplineData.startTime} onChange={handleChange} required />
         </div>
         <div className="space-y-1 flex-1">
           <label className="block text-neutral-600 font-semibold text-sm">Fim</label>
-          <Input name="endTime" type="time" step="60" value={formData.endTime} onChange={handleChange} required />
+          <Input name="endTime" type="time" step="60" value={disciplineData.endTime} onChange={handleChange} required />
         </div>
       </div>
 
@@ -169,7 +92,7 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
         <Input
           name="weight"
           type="number"
-          value={formData.weight}
+          value={disciplineData.weight}
           onChange={handleChange}
           required
           min="1"
@@ -183,7 +106,7 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
         <div className="relative">
           <select
             name="color"
-            value={formData.color}
+            value={disciplineData.color}
             onChange={handleChange}
             required
             className="w-full h-12 p-2.5 rounded-md bg-neutral-100 text-neutral-500 focus:outline-none focus:border-yellow-600 text-sm appearance-none pr-10"
@@ -210,21 +133,8 @@ export const DisciplineForm = ({ disciplineData, idUser = 1, selectedProject = "
           </svg>
         </div>
       </div>
-
-      {isEditing ? (
-        <div className="flex justify-between gap-4 pt-3 ">
-          <Button type="button" variant="destructive" className="flex-1 transition duration-200 mt-2" onClick={handleDelete}>
-            Excluir
-          </Button>
-          <Button type="submit" variant="yellow-primary" className="flex-1 transition duration-200 mt-2">
-            Salvar
-          </Button>
-        </div>
-      ) : (
-          <Button type="submit" className="w-full transition duration-200 mt-2" variant="yellow-primary">
-          Adicionar disciplina
-        </Button>
-      )}
-    </form>
+    </>
   )
 }
+
+export default DisciplineForm

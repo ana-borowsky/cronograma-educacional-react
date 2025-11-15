@@ -21,7 +21,7 @@ const Disciplines = () => {
 
   useEffect(() => {
     const fetchDisciplines = async () => {
-      const MIN_TIME = 1200
+      const MIN_TIME = 1000
       setLoading(true)
       const start = Date.now()
 
@@ -88,20 +88,22 @@ const Disciplines = () => {
                 />
               ))
             )}
+
+            <Button
+              className="w-1/3 transition duration-200"
+              variant="secondary"
+              onClick={openAddDisciplineModal}
+            >
+              Inserir disciplinas
+            </Button>
           </div>
 
-          <Button
-            className="w-1/3 transition duration-200"
-            variant="secondary"
-            onClick={openAddDisciplineModal}
-          >
-            Inserir disciplinas
-          </Button>
+
         </div>
       </div>
 
       {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}
-      {isAddDisciplineModalOpen && <AddDisciplineModal onClose={closeAddDisciplineModal} />}
+      {isAddDisciplineModalOpen && <AddDisciplineModal idUser={1} onClose={closeAddDisciplineModal} />}
       {isSignupModalOpen && <SignupModal onClose={closeSignupModal} onLoginClick={switchToLogin} />}
     </Layout>
   )

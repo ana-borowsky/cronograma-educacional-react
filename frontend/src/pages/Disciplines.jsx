@@ -5,14 +5,17 @@ import Discipline from "../containers/discipline/Discipline"
 import AddDiscipline from "../containers/discipline/AddDiscipline"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
+import AddDisciplineModal from "../components/discipline/AddDisciplineModal"
 import { useLocation } from 'react-router-dom'
 import { useLoading } from "@/context/LoadingContext"
+import { Button } from "@/components/ui/button"
 
 const Disciplines = () => {
   const location = useLocation()
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false)
+  const [isAddDisciplineModalOpen, setIsAddDisciplineModalOpen] = useState(false)
   const [disciplines, setDisciplines] = useState([])
 
   const { isLoading, setLoading } = useLoading()
@@ -57,6 +60,13 @@ const Disciplines = () => {
   }
   const closeSignupModal = () => setIsSignupModalOpen(false)
 
+  const openAddDisciplineModal = () => {
+    console.log("aeww")
+    setIsAddDisciplineModalOpen(true)
+  }
+
+  const closeAddDisciplineModal = () => setIsAddDisciplineModalOpen(false)
+
   const switchToLogin = () => {
     closeSignupModal()
     openLoginModal()
@@ -68,6 +78,7 @@ const Disciplines = () => {
         currentPath={location.pathname}
         openLoginModal={openLoginModal}
         openSignupModal={openSignupModal}
+        openAddDisciplineModal={openAddDisciplineModal}
       />
 
       <div className="flex flex-col p-5 gap-6 min-h-screen">
@@ -85,10 +96,19 @@ const Disciplines = () => {
             )}
             {!isLoading && <AddDiscipline startOpen={disciplines.length === 0} />}
           </div>
+          <Button
+            className="w-1/3 transition duration-200 mt-2 mb-6"
+            variant="yellow-primary"
+            onClick={openAddDisciplineModal}
+          >
+            <p>Inserir disciplinas</p>
+          </Button>
         </div>
+        
       </div>
 
       {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}
+      {isAddDisciplineModalOpen && <AddDisciplineModal onClose={closeAddDisciplineModal} />}
       {isSignupModalOpen && <SignupModal onClose={closeSignupModal} onLoginClick={switchToLogin} />}
     </Layout>
   )

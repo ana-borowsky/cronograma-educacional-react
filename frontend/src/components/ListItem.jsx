@@ -50,7 +50,7 @@ export function ListItem({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="h-8 flex items-center justify-between relative  truncate w-80 truncate overflow-hidden whitespace-nowrap">
+      <div className="h-8 flex items-center justify-between relative w-80 truncate overflow-hidden whitespace-nowrap">
         <div className="flex items-center flex-grow">
           <Checkbox
             id={`checkbox-${id}`}
@@ -76,7 +76,7 @@ export function ListItem({
             <Button
               variant="ghost"
               size="icon"
-              className="absolute  right-0 ml-1 text-neutral-400 hover:text-yellow-600 hover:bg-transparent hover:cursor-pointer bg-neutral-100"
+              className="absolute right-0 ml-1 text-neutral-400 hover:text-yellow-600 hover:bg-transparent hover:cursor-pointer bg-neutral-100"
               onClick={() => onEdit && onEdit(taskData)}
               title="Editar trabalho"
             >

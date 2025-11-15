@@ -195,6 +195,7 @@ const Home = () => {
               <img
                 src="/assets/gatinho_rostinho_cortado.svg"
                 style={{ width: '170px', height: 'auto' }}
+                className="-mb-1"
               />
               <div className="bg-neutral-300 p-10 rounded-lg border border-neutral-400 h-80 ransition duration-300 hover:scale-102">
                 <h3 className="text-2xl font-bold text-neutral-600 mb-12 flex items-center gap-2">

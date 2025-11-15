@@ -108,7 +108,7 @@ const Discipline = ({ disciplineData, onRefresh }) => {
       </div>
 
       <div className="mb-10 text-neutral-500">
-        <p className="text-neutral-600 text-sm">{day}: {startTime} - {endTime}</p>
+        <p className="text-neutral-600 text-sm">{day || "Edite o dia"}: {startTime || "Edite o horário de início"} - {endTime || "Edite o horário de término"}</p>
       </div>
 
       {loading ? (
@@ -125,7 +125,7 @@ const Discipline = ({ disciplineData, onRefresh }) => {
                   <ListItem
                     key={work.idTask}
                     id={work.idTask}
-                    fullDescription={work.name}
+                    fullDescription={work.name || "Edite o nome do trabalho"}
                     borderColor="green"
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Trabalho", work)}
@@ -155,7 +155,7 @@ const Discipline = ({ disciplineData, onRefresh }) => {
                   <ListItem
                     key={exam.idTask}
                     id={exam.idTask}
-                    fullDescription={exam.name}
+                    fullDescription={exam.name || "Edite o nome da prova"}
                     borderColor="blue"
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Prova", exam)}

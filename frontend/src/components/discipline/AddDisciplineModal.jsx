@@ -22,7 +22,7 @@ export const AddDisciplineModal = ({ idUser, onClose, onRefresh }) => {
     startTime: "",
     endTime: "",
     weight: "",
-    color: "blue",
+    color: "",
   })
   const [file, setFile] = useState()
 

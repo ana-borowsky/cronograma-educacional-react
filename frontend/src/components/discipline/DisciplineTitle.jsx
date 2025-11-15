@@ -29,21 +29,21 @@ export function DisciplineTitle({ title, project, weight, color, classroom }) {
         <span
           className={cn("w-3 h-3 rounded-full mr-3 flex-shrink-0", colorClass)}
         ></span>
-        {title}
+        {title || "Edite o nome da disciplina"}
       </h2>
 
       <div className="mt-1 mb-2 flex items-center gap-3 text-sm text-neutral-500">
 
         <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
-          {project}
+          {project || "Edite o nome do projeto"}
         </span>
 
         <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
-          Peso: {weight}
+          Peso: {weight || "Edite o nível de dificuldade"}
         </span>
 
         <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
-          {classroom}
+          {classroom || "Edite a sala"}
         </span>
 
       </div>

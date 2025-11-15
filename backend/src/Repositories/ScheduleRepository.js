@@ -92,74 +92,104 @@ class ScheduleRespository {
     return result
   }
 
-  async getScheduleByUser(idUser){
-    const values = [idUser]
-    const query = "SELECT \
+  async getScheduleByUser(idUser) {
+  const values = [idUser]
+  const query = "SELECT \
                     user.idUser, \
-                    task.name AS taskName, \
-                    task.status, \
-                    discipline.color,\
-                    planning.executionDate, \
-                    planning.startTime, \
-                    planning.endTime \
-                  FROM beezer.schedule \
-                  JOIN beezer.planning AS planning ON beezer.schedule.idPlanning = planning.idPlanning \
-                  JOIN beezer.task AS task ON planning.idTask = task.idTask \
-                  JOIN beezer.discipline AS discipline ON task.idDiscipline = discipline.idDiscipline \
-                  JOIN beezer.user AS user ON beezer.schedule.idUser = user.idUser WHERE user.idUser = ? AND task.status = 'Pendente'\
-                  ORDER BY planning.executionDate;"
+                    planning.startTime AS startHour, \
+                    planning.endTime AS endHour, \
+                    task.name AS text, \
+                    discipline.color, \
+                    planning.executionDate \
+                FROM beezer.schedule \
+                JOIN beezer.planning AS planning ON beezer.schedule.idPlanning = planning.idPlanning \
+                JOIN beezer.task AS task ON planning.idTask = task.idTask \
+                JOIN beezer.discipline AS discipline ON task.idDiscipline = discipline.idDiscipline \
+                JOIN beezer.user AS user ON beezer.schedule.idUser = user.idUser \
+                WHERE user.idUser = ? AND task.status = 'Pendente' \
+                ORDER BY planning.executionDate;"
 
-    const [result] = await db.query(query, values)
-    let schedules = []
+  const [result] = await db.query(query, values)
 
-    result.forEach(schedule => {
-      schedules.push(new ScheduleModel(
-        schedule.idUser,
-        schedule.taskName,
-        schedule.status,
-        schedule.color,
-        schedule.executionDate,
-        schedule.startTime,
-        schedule.endTime
-      ))
-    })
-    return groupByWeekDay(schedules)
-  }
+  let schedules = [] 
+  
+  result.forEach(schedule => {
+    const dateFormat = schedule.executionDate.toISOString().split("T")[0]
+    const [year, month, day] = dateFormat.split("-")
+
+    const dayIndex = Number(day)
+    const startHourFormat =  Number(schedule.startHour.split(":")[0])
+    const endHourFormat =  Number(schedule.endHour.split(":")[0])
+
+    schedules.push(new ScheduleModel(
+      schedule.idUser,
+      dayIndex,
+      startHourFormat,
+      endHourFormat,
+      schedule.text,
+      schedule.color,
+      schedule.executionDate
+    ))
+  })
+
+  schedules = schedules.map(newSchedule => {
+    delete newSchedule.idUser
+    delete newSchedule.executionDate
+
+    return newSchedule
+  })
+
+  return schedules
+}
 
   async getWeekScheduleByUser(idUser){
     const values = [idUser]
-    const query ="SELECT \
-                    user.idUser,\
-                    task.name AS taskName, \
-                    task.status,\
+    const query = "SELECT \
+                    user.idUser, \
+                    planning.startTime AS startHour, \
+                    planning.endTime AS endHour, \
+                    task.name AS text, \
                     discipline.color, \
-                    planning.startTime, \
-                    planning.endTime, \
                     planning.executionDate \
-                  FROM beezer.schedule \
-                  JOIN beezer.planning AS planning ON beezer.schedule.idPlanning = planning.idPlanning\
-                  JOIN beezer.task AS task ON planning.idTask = task.idTask JOIN beezer.discipline AS discipline ON task.idDiscipline = discipline.idDiscipline \
-                  JOIN beezer.user AS user  ON beezer.schedule.idUser = user.idUser \
-                  WHERE planning.executionDate BETWEEN DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) AND DATE_ADD(CURDATE(), \
-                  INTERVAL(6- WEEKDAY(CURDATE())) DAY) AND user.idUser = ? AND task.status = 'Pendente'\
-                  ORDER BY WEEKDAY(planning.executionDate), planning.executionDate;"
+                FROM beezer.schedule \
+                JOIN beezer.planning AS planning ON beezer.schedule.idPlanning = planning.idPlanning \
+                JOIN beezer.task AS task ON planning.idTask = task.idTask \
+                JOIN beezer.discipline AS discipline ON task.idDiscipline = discipline.idDiscipline \
+                JOIN beezer.user AS user ON beezer.schedule.idUser = user.idUser \
+                WHERE user.idUser = ? AND task.status = 'Pendente' \
+                ORDER BY planning.executionDate;"
                       
     const [result] = await db.query(query, values)
-    let WeekSchedules = []
+    let weekSchedules = []
     
     result.forEach(schedule => {
-      WeekSchedules.push(new ScheduleModel(
+    
+      const dateFormat = schedule.executionDate.toISOString().split("T")[0]
+      const [year, month, day] = dateFormat.split("-")
+
+      const dayIndex = Number(day)
+      const startHourFormat =  Number(schedule.startHour.split(":")[0])
+      const endHourFormat =  Number(schedule.endHour.split(":")[0])
+      
+      weekSchedules.push(new ScheduleModel(
         schedule.idUser,
-        schedule.taskName,
-        schedule.status,
+        dayIndex,
+        startHourFormat,
+        endHourFormat,
+        schedule.text,
         schedule.color,
-        schedule.executionDate,
-        schedule.startTime,
-        schedule.endTime,
+        schedule.executionDate
       ))
     })
 
-  return groupByWeekDay(WeekSchedules)
+    weekSchedules = weekSchedules.map( newWeekSchedule =>{
+      delete newWeekSchedule.idUser
+      delete newWeekSchedule.executionDate
+
+      return newWeekSchedule
+    })
+
+  return weekSchedules
   }
 
   async getMonthScheduleByUser(idUser){

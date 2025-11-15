@@ -1,20 +1,20 @@
 class ScheduleModel {
   constructor(
     idUser,
-    taskName,
-    status,
+    dayIndex,
+    startHour,
+    endHour,
+    text,
     color,
-    executionDate,
-    startTime,
-    endTime
+    executionDate
   ) {
     this.idUser = idUser
-    this.taskName = taskName
-    this.status = status
-    this.color = color
+    this.dayIndex = dayIndex,
+    this.startHour = startHour,
+    this.endHour = endHour,
+    this.text = text,
+    this.color = color,
     this.executionDate = executionDate
-    this.startTime = startTime
-    this.endTime = endTime
   }
 }
 

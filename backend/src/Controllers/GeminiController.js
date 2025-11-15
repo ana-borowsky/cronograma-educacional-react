@@ -6,6 +6,8 @@ import TasksService from "../Services/TaskService.js"
 import ScheduleService from "../Services/ScheduleService.js"
 import DisciplineModel from "../Models/DisciplineModel.js"
 import TasksModel from "../Models/TasksModel.js"
+import PlanningModel from "../Models/PlanningModel.js"
+import PlanningService from "../Services/PlanningService.js"
 dotenv.config()
 
 export class GeminiController {
@@ -55,7 +57,7 @@ export class GeminiController {
             description: "Array de objetos com estrutura de planejamento no formato JSON",
             schema: {
               idPlanning: "number|null",
-              executionDate: "ISO 8601 date string",
+              executionDate: "YYYY-MM-DD",
               startTime: "HH:MM:SS format",
               endTime: "HH:MM:SS format",
               finalWeight: "number (0-10)",
@@ -64,11 +66,11 @@ export class GeminiController {
             example: [
               {
                 idPlanning: null,
-                executionDate: "2025-11-08T03:00:00.000Z",
-                startTime: "14:00:00",
-                endTime: "16:00:00",
-                finalWeight: 8,
-                idTask: 1,
+                executionDate: "2025-11-16",
+                startTime: "15:00:00",
+                endTime: "19:00:00",
+                finalWeight: 92,
+                idTask: 4
               },
             ],
           },
@@ -85,7 +87,25 @@ export class GeminiController {
         model: "gemini-2.5-flash",
         contents: contents,
       })
-
+      const responseJson = JSON.parse((response.text)
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim()
+      )
+      const planningService = new PlanningService()
+      for (const p of responseJson) {
+        planningService.insert(
+          new PlanningModel(
+            p.idPlanning,
+            p.executionDate,
+            p.startTime,
+            p.endTime,
+            p.finalWeight,
+            p.idTask
+          )
+        )
+        console.log('Planning inserted:', p)
+      }
       const result = await new ScheduleService().insert(idUser)
       return res.status(200).json(response.text)
     } catch (err) {

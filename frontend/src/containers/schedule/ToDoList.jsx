@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ListItem } from "@/components/ListItem"
 import { DateTitle } from "@/components/schedule/DateTitle"
 import { TimeProgress } from "@/components/schedule/TimeProgress"
+import { ChevronLeft, ChevronRight } from "@/components/schedule/ScheduleData.jsx"
 
 const getNextDate = (currentDate) => {
   return "Quarta-feira, 16 de Outubro"
@@ -83,12 +84,15 @@ const ToDoList = () => {
 
   return (
     <div className="w-1/3 flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg">
-
-      <DateTitle
-        currentDate={displayedDate}
-        onPrevClick={handlePrevDate}
-        onNextClick={handleNextDate}
-      />
+      <div className="text-neutral-600 flex items-center justify-between mb-4 bg-neutral-200 rounded-lg h-12 pl-4 pr-4">
+       <ChevronLeft />
+        <DateTitle
+          currentDate={displayedDate}
+          onPrevClick={handlePrevDate}
+          onNextClick={handleNextDate}
+        />
+        <ChevronRight />
+      </div>
 
       <TimeProgress
         progressValue={progressPercent}

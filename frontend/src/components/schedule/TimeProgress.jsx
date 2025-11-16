@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
  */
 export function TimeProgress({ progressValue, progressText }) {
   return (
-    <div className="mb-8 p-4 bg-neutral-200 rounded-lg border border-neutral-400">
+    <div className="mb-8 p-4 bg-neutral-200 rounded-lg">
       <div className="h-2 bg-neutral-400 rounded-full mb-1">
         <Progress
           value={progressValue}

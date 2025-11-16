@@ -1,18 +1,16 @@
 import ScheduleService from "../Services/ScheduleService.js"
 
- class ScheduleController {
+class ScheduleController {
   static async insertSchedule (req, res) {
     try {
       const {idUser} = req.body
       const result =  await new ScheduleService().insert(Number(idUser))
       res.status(200).json({ message: "Cronograma criado!", result })
-      
     } catch (err) {
       console.error(err)
       res.status(500).json({error: "Erro ao inserir o cronograma"})
     }
   }
- 
 
   static async getScheduleByUser (req, res) {
     try {
@@ -30,18 +28,16 @@ import ScheduleService from "../Services/ScheduleService.js"
     }
   }
 
-
-   static async getWeekScheduleByUser (req, res) {
+  static async getWeekScheduleByUser (req, res) {
     try {
       const {idUser} = req.params
-      const { startDate } = req.query
+      const { weekStartDate } = req.query
 
-      if (!startDate) {
-        return res.status(400).json({ error: "A data de início é obrigatória!" })
+      if (!weekStartDate) {
+        return res.status(400).json({ error: "A data de início (weekStartDate) é obrigatória!" })
       }
 
-      const result = await new ScheduleService().getWeekScheduleByUser(Number(idUser), startDate)
-
+      const result = await new ScheduleService().getWeekScheduleByUser(Number(idUser), weekStartDate)
 
       if(!result || result.length == 0){
         return res.status(404).json({message: "Nenhum cronograma encontrado!"})
@@ -53,6 +49,6 @@ import ScheduleService from "../Services/ScheduleService.js"
       res.status(500).json({ error: "Erro ao obter o cronograma!"})
     }
   }
- }
+}
 
- export default ScheduleController
+export default ScheduleController

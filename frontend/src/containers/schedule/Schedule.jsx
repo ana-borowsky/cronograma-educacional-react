@@ -12,6 +12,28 @@ import {
   totalGridSlots,
 } from "@/components/schedule/ScheduleData.jsx"
 
+const getStartOfWeek = (date) => {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(d.setDate(diff));
+};
+
+const formatDateForAPI = (date) => {
+  return date.toISOString().split('T')[0];
+};
+
+const getWeekRangeText = (startDate) => {
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + 6);
+  
+  const options = { month: 'short', day: 'numeric' };
+  const startText = startDate.toLocaleDateString('pt-BR', options); 
+  const endText = endDate.toLocaleDateString('pt-BR', options);
+  
+  return `${startText} - ${endText}`;
+};
+
 const convertDbToSlotKey = (freeTimeItem) => {
   const dayName = freeTimeItem.weekDay.replace("-feira", "");
   const dayIndex = daysOfWeek.indexOf(dayName);
@@ -34,6 +56,8 @@ const Schedule = () => {
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate();
 
+  const [weekStartDate, setWeekStartDate] = useState(getStartOfWeek(new Date('2025-11-10T12:00:00')));
+
   const fetchFreeTimes = async () => {
     try {
       const response = await fetch('http://localhost:8800/freeTime/1');
@@ -53,31 +77,43 @@ const Schedule = () => {
     }
   };
 
-  const fetchEvents = async () => {
+  const fetchEvents = async (date) => {
     try {
-      const response = await fetch('http://localhost:8800/schedules/all/1');
+      setIsLoading(true);
+      const apiDate = formatDateForAPI(date);
+      
+      const response = await fetch(`http://localhost:8800/schedules/weekSchedule/1?weekStartDate=${apiDate}`);
+      
       if (response.ok) {
         const data = await response.json();
         setDayEvents(data);
+      } else if (response.status === 404) {
+        setDayEvents([]);
       } else {
-         console.error("Erro buscando eventos");
+         console.error("Erro buscando eventos (não-404)");
+         setDayEvents([]);
       }
     } catch (error) {
       console.error("Erro buscando eventos:", error);
+      setDayEvents([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    const loadAllData = async () => {
+    const loadInitialFreeTimes = async () => {
       setIsLoading(true);
-      await Promise.all([
-        fetchEvents(),
-        fetchFreeTimes()
-      ]);
+      await fetchFreeTimes();
       setIsLoading(false);
     };
-    loadAllData();
+    
+    loadInitialFreeTimes();
   }, []);
+
+  useEffect(() => {
+    fetchEvents(weekStartDate);
+  }, [weekStartDate]);
 
   const handleSlotClick = (dayIndex, timeIndex) => {
     if (activeTab !== 'estudo') return;
@@ -101,8 +137,9 @@ const Schedule = () => {
           method: 'GET',
         });
         if (!response.ok) throw new Error('Erro ao recalcular cronograma');
-        alert("Cronograma recalculado! A página será atualizada.");
-        navigate(0);
+        alert("Cronograma recalculado!");
+        
+        await fetchEvents(weekStartDate);
 
       } else {
         console.log("Sincronizando horários de estudo...");
@@ -131,6 +168,11 @@ const Schedule = () => {
             startTime: `${timeSlots[timeIndex]}:00`,
             durationTime: 60
           };
+          
+          if (daysOfWeek[dayIndex] !== 'Sábado' && daysOfWeek[dayIndex] !== 'Domingo') {
+             payload.weekDay = `${daysOfWeek[dayIndex]}-feira`;
+          }
+
           return fetch('http://localhost:8800/freeTime', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -172,8 +214,26 @@ const Schedule = () => {
     }
   }
 
+  const handlePrevWeek = () => {
+    setWeekStartDate(prevDate => {
+      const newDate = new Date(prevDate);
+      newDate.setDate(newDate.getDate() - 7);
+      return newDate;
+    });
+  };
+
+  const handleNextWeek = () => {
+    setWeekStartDate(prevDate => {
+      const newDate = new Date(prevDate);
+      newDate.setDate(newDate.getDate() + 7);
+      return newDate;
+    });
+  };
+
+
   const totalGridRows = 1 + totalGridSlots
-  const currentWeekText = "14 Outubro - 20 Outubro"
+  
+  const currentWeekText = getWeekRangeText(weekStartDate);
 
   return (
     <div className="flex-grow flex flex-col gap-6">
@@ -186,12 +246,23 @@ const Schedule = () => {
           </div>
         </div>
 
-        <DateTitle
-          currentDate={currentWeekText}
-        />
+        <div className="flex items-center justify-between mb-4">
+          <Button onClick={handlePrevWeek} variant="ghost" className="px-2" aria-label="Semana anterior" disabled={isLoading}>
+            &lt;
+          </Button>
+          
+          <DateTitle
+            currentDate={currentWeekText}
+          />
+          
+          <Button onClick={handleNextWeek} variant="ghost" className="px-2" aria-label="Próxima semana" disabled={isLoading}>
+            &gt;
+          </Button>
+        </div>
+
 
         {isLoading ? (
-          <p className="text-neutral-500 text-center">Carregando...</p>
+          <p className="text-neutral-500 text-center py-10">Carregando...</p>
         ) : (
           <div
             className="calendar-grid grid gap-px bg-neutral-400 border border-neutral-400 rounded-lg overflow-hidden relative"

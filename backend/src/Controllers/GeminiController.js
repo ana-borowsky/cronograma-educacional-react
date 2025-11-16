@@ -117,6 +117,7 @@ export class GeminiController {
     try {
       const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
       const { idUser } = req.params
+      const  { project }  = req.body
       // lida com o upload do PDF via multer ou body      
       if (!req.file) {
         if (req.body && req.body.file) {
@@ -161,7 +162,7 @@ export class GeminiController {
                 idUser: `${idUser}`,
                 name: "string",
                 color: "ENUM('yellow', 'red', 'green', 'blue', 'purple', 'orange', 'pink', 'white', 'black')",
-                project: "string|null",
+                project:  `${project}`,
                 classroom: "string|null",
                 day: "string|null",
                 startTime: "HH:MM:SS|null",
@@ -186,7 +187,7 @@ export class GeminiController {
                   idUser: 1,
                   name: "Introdução à Programação",
                   color: "red",
-                  project: "Projeto A",
+                  project: `${project}`,
                   classroom: "Sala 101",
                   day: "Segunda-feira",
                   startTime: "08:00:00",
@@ -259,7 +260,7 @@ export class GeminiController {
           disciplineData.idUser,
           disciplineData.name,
           disciplineData.color,
-          disciplineData.project,
+          project,
           disciplineData.classroom,
           disciplineData.day,
           disciplineData.startTime,

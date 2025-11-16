@@ -99,7 +99,7 @@ const Disciplines = () => {
         {disciplines.length == 0 ? <img
           src="/assets/gatinho_balao.svg"
           style={{ width: '300px', height: 'auto' }}
-          className="mt-30 mb-10"
+          className="mt-30"
         /> : null}
 
         <Button

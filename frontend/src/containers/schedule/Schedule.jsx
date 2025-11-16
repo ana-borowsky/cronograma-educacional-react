@@ -5,13 +5,15 @@ import { DateTitle } from "@/components/schedule/DateTitle"
 import { TabButton } from "@/components/schedule/TabButton"
 import { GridSlot } from "@/components/schedule/GridSlot"
 import { EventSlot } from "@/components/schedule/EventSlot"
+import { ChevronLeft, ChevronRight } from "@/components/schedule/ScheduleData.jsx"
+import { useLoading } from "@/context/LoadingContext"
+
 import {
   daysOfWeek,
   timeSlots,
   getAllActivitySlots,
   totalGridSlots,
 } from "@/components/schedule/ScheduleData.jsx"
-import { ChevronLeft, ChevronRight } from "@/components/schedule/ScheduleData.jsx"
 
 const getStartOfWeek = (date) => {
   const d = new Date(date);
@@ -54,7 +56,7 @@ const Schedule = () => {
   const [dayEvents, setDayEvents] = useState([])
   const [studySlots, setStudySlots] = useState([])
   const [dbFreeTimes, setDbFreeTimes] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const { isLoading, setLoading } = useLoading()
   const navigate = useNavigate();
 
   const [weekStartDate, setWeekStartDate] = useState(getStartOfWeek(new Date('2025-11-10T12:00:00')));
@@ -80,7 +82,7 @@ const Schedule = () => {
 
   const fetchEvents = async (date) => {
     try {
-      setIsLoading(true);
+      setLoading(true);
       const apiDate = formatDateForAPI(date);
       
       const response = await fetch(`http://localhost:8800/schedules/weekSchedule/1?weekStartDate=${apiDate}`);
@@ -98,15 +100,15 @@ const Schedule = () => {
       console.error("Erro buscando eventos:", error);
       setDayEvents([]);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     const loadInitialFreeTimes = async () => {
-      setIsLoading(true);
+      setLoading(true);
       await fetchFreeTimes();
-      setIsLoading(false);
+      setLoading(false);
     };
     
     loadInitialFreeTimes();
@@ -130,7 +132,7 @@ const Schedule = () => {
   }
 
   const handleScheduleAction = async () => {
-    setIsLoading(true)
+    setLoading(true)
     try {
       if (activeTab === 'agenda') {
         console.log("Recalculando cronograma...");
@@ -191,7 +193,7 @@ const Schedule = () => {
 
         if (allRequests.length === 0) {
           alert("Nenhuma alteração para salvar.");
-          setIsLoading(false);
+          setLoading(false);
           return;
         }
 
@@ -211,7 +213,7 @@ const Schedule = () => {
       console.error("Falha na ação do cronograma:", error);
       alert(`Erro: ${error.message}`);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   }
 

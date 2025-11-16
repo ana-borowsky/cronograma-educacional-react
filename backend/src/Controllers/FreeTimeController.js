@@ -89,7 +89,7 @@ class FreeTimeController {
       const { idUser } = req.params
       const result = await new FreeTimeService().getAll(Number(idUser))
 
-      if (!result || (result.length === 0)) {
+      if (!result) {
         return res.status(404).json({ error: "Usuário não encontrado!" })
       }
 

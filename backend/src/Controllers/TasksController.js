@@ -123,7 +123,7 @@ class TasksController {
         Number(idDiscipline)
       )
 
-      if (!result || result.length == 0) {
+      if (!result) {
         return res.status(404).json({ error: "A disciplina não foi encontrada!" })
       }
 
@@ -141,7 +141,7 @@ class TasksController {
         Number(idDiscipline)
       )
 
-      if (!result || result.length == 0) {
+      if (!result ) {
         return res.status(404).json({ error: "A disciplina não foi encontrada!" })
       }
 
@@ -158,7 +158,7 @@ class TasksController {
       const result = await new TasksService().getWork(
         Number(idDiscipline)
       )
-      if (!result || result.length == 0) {
+      if (!result) {
         return res.status(404).json({ error: "A disciplina não foi encontrada!" })
       }
 
@@ -175,7 +175,7 @@ class TasksController {
       const result = await new TasksService().getDayTask(
         Number(idDiscipline)
       )
-      if (!result || result.length == 0) {
+      if (!result) {
         return res.status(404).json({ error: "A disciplina não foi encontrada!" })
       }
 

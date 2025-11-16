@@ -26,16 +26,8 @@ const Schedule = () => {
         const response = await fetch('http://localhost:8800/schedules/all/1');
         const data = await response.json();
 
-        // A API já envia os dados no formato que o EventSlot espera
-        // (dayIndex, startHour, endHour).
-        // Não precisamos de NENHUMA transformação.
         setDayEvents(data);
 
-        // NOTA: A função 'getAllActivitySlots' provavelmente também está
-        // esperando 'weekDay' e 'startTime', mas a API envia 'dayIndex'.
-        // Isso pode quebrar a aba "Horários de Estudo".
-        // Esta função (em ScheduleData.jsx) também precisa ser atualizada
-        // para ler os dados da API corretamente.
         setStudySlots(getAllActivitySlots(data));
 
       } catch (error) {
@@ -78,7 +70,6 @@ const Schedule = () => {
           const payload = {
             idTime: null,
             idUser: 1,
-            // O backend precisa traduzir este 'weekDay' para um índice 0-6
             weekDay: daysOfWeek[dayIndex], 
             startTime: `${timeSlots[timeIndex]}:00`,
             durationTime: 60

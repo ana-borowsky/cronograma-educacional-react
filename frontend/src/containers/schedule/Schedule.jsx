@@ -11,6 +11,7 @@ import {
   getAllActivitySlots,
   totalGridSlots,
 } from "@/components/schedule/ScheduleData.jsx"
+import { ChevronLeft, ChevronRight } from "@/components/schedule/ScheduleData.jsx"
 
 const getStartOfWeek = (date) => {
   const d = new Date(date);
@@ -246,17 +247,17 @@ const Schedule = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between mb-4">
-          <Button onClick={handlePrevWeek} variant="ghost" className="px-2" aria-label="Semana anterior" disabled={isLoading}>
-            &lt;
+        <div className="flex items-center justify-between mb-4 bg-neutral-200 rounded-lg h-12">
+          <Button onClick={handlePrevWeek} variant="ghost" className="text-neutral-600" aria-label="Semana anterior" disabled={isLoading}>
+            <ChevronLeft />
           </Button>
           
           <DateTitle
             currentDate={currentWeekText}
           />
           
-          <Button onClick={handleNextWeek} variant="ghost" className="px-2" aria-label="Próxima semana" disabled={isLoading}>
-            &gt;
+          <Button onClick={handleNextWeek} variant="ghost" className="text-neutral-600" aria-label="Próxima semana" disabled={isLoading}>
+            <ChevronRight />
           </Button>
         </div>
 

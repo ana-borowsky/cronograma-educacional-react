@@ -14,7 +14,7 @@ export const GridSlot = ({ slotKey, dayIndex, timeIndex, isSelected, activeTab, 
     <div
       key={slotKey}
       className={`
-        time-slot border-t border-l border-neutral-400 text-xs transition-colors duration-200 
+        time-slot text-xs transition-colors duration-200 
         ${bgColor} 
         ${cursor}
       `}

@@ -1,5 +1,5 @@
-import React from 'react';
-import { cn } from "@/lib/utils";
+import React from 'react'
+import { cn, truncateText, highlightIfEditable } from "@/lib/utils"
 
 const colorMap = {
   yellow: "bg-yellow-600",
@@ -11,7 +11,7 @@ const colorMap = {
   pink: "bg-pink-500",
   white: "bg-white",
   black: "bg-black",
-};
+}
 
 /**
  * @param {object} props
@@ -21,33 +21,46 @@ const colorMap = {
  * @param {string} props.color
  */
 export function DisciplineTitle({ title, project, weight, color, classroom }) {
-  const colorClass = colorMap[color] || "bg-neutral-500";
+  const colorClass = colorMap[color] || "bg-neutral-500"
 
   return (
     <div className="w-full">
-      {/* Título */}
       <h2 className="flex items-center text-xl font-semibold text-neutral-600 mb-1 truncate">
         <span
           className={cn("w-3 h-3 rounded-full mr-3 flex-shrink-0", colorClass)}
         ></span>
-        {title}
+        {truncateText(title, 30) || "Edite o nome da disciplina"}
       </h2>
 
       <div className="mt-1 mb-2 flex items-center gap-3 text-sm text-neutral-500">
-
-        <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
-          {project}
+        <span
+          className={`
+      px-2 py-0.5 rounded-md font-medium
+      ${highlightIfEditable(project || "Edite o nome do projeto")}
+    `}
+        >
+          {truncateText(project || "Edite o nome do projeto", 20)}
         </span>
 
-        <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
-          Peso: {weight}
+        <span
+          className={`
+      px-2 py-0.5 rounded-md font-medium
+      ${highlightIfEditable(weight || "Edite o nível de dificuldade")}
+    `}
+        >
+          {truncateText(weight || "Edite o nível de dificuldade", 20)}
         </span>
 
-        <span className="px-2 py-0.5 bg-neutral-200 rounded-md font-medium">
-          {classroom}
+        <span
+          className={`
+      px-2 py-0.5 rounded-md font-medium
+      ${highlightIfEditable(classroom || "Edite a sala")}
+    `}
+        >
+          {truncateText(classroom || "Edite a sala", 20)}
         </span>
-
       </div>
+
     </div>
-  );
+  )
 }

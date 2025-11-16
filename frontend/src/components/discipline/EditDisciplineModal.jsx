@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { useEffect } from "react"
-import { DisciplineForm } from "@/components/discipline/DisciplineForm"
+import { DisciplineForm } from "@/containers/discipline/DisciplineForm"
 
-export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
+export const DisciplineFormModal = ({ isOpen, onClose, disciplineData, onRefresh }) => {
   const isEditing = !!disciplineData
   const modalTitle = isEditing
     ? `Editar ${disciplineData.name}`
@@ -34,7 +34,7 @@ export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
       role="dialog"
     >
       <div
-        className="relative bg-background rounded-lg border border-neutral-400 shadow-xl w-full max-w-md p-6 sm:p-8 transform transition-all max-h-[90vh] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="relative bg-neutral-300 rounded-lg border border-neutral-400 shadow-xl w-full max-w-md p-6 sm:p-8 transform transition-all max-h-[90vh] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-center text-neutral-600 text-2xl font-semibold mb-6">
@@ -44,6 +44,7 @@ export const DisciplineFormModal = ({ isOpen, onClose, disciplineData }) => {
         <DisciplineForm
           disciplineData={disciplineData}
           onCancel={onClose}
+          onRefresh={onRefresh}
           onDelete={() => console.log("Excluir disciplina")}
           onSave={() => console.log("Salvar disciplina")}
         />

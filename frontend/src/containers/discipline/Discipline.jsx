@@ -5,14 +5,15 @@ import { WorkFormModal } from "@/components/discipline/WorkFormModal"
 import { DisciplineFormModal } from "@/components/discipline/EditDisciplineModal"
 import { Container } from "@/components/ui/container"
 import { useState, useEffect } from 'react'
+import { truncateText, highlightIfEditable } from "@/lib/utils"
 
 const PencilIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-400 group-hover:text-neutral-800 transition-colors">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-400 group-hover:text-yellow-600 transition-colors">
     <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6.3 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
   </svg>
 )
 
-const Discipline = ({ disciplineData }) => {
+const Discipline = ({ disciplineData, onRefresh }) => {
   const [isWorkModalOpen, setIsWorkModalOpen] = useState(false)
   const [isDisciplineModalOpen, setIsDisciplineModalOpen] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
@@ -40,7 +41,7 @@ const Discipline = ({ disciplineData }) => {
   const handleStatusChange = async (idTask, newStatus) => {
     try {
       const response = await fetch(`http://localhost:8800/tasks/${idTask}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
       })
@@ -100,15 +101,46 @@ const Discipline = ({ disciplineData }) => {
       >
         <DisciplineTitle title={name} color={color} project={project} weight={weight} classroom={classroom} />
         <div
-          className={`absolute top-0 right-0 p-1.5 bg-neutral-300 flex items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute top-0 right-0 p-1.5 bg-neutral-300 flex hover:text-yellow-600 items-center justify-center transition-opacity duration-200 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
         >
-          <PencilIcon className="w-4 h-4 text-white" />
+          <PencilIcon className="w-4 h-4" />
         </div>
 
       </div>
 
       <div className="mb-10 text-neutral-500">
-        <p className="text-neutral-600 text-sm">{day}: {startTime} - {endTime}</p>
+        <p className="text-neutral-600 text-sm flex gap-2 flex-wrap">
+
+          <span
+            className={`
+        px-2 py-0.5 rounded-md font-medium
+        ${highlightIfEditable(day || "Edite o dia")}
+      `}
+          >
+            {truncateText(day || "Edite o dia", 20)}
+          </span>
+
+          <span
+            className={`
+        px-2 py-0.5 rounded-md font-medium
+        ${highlightIfEditable(startTime || "Edite o horário de início")}
+      `}
+          >
+            {truncateText(startTime || "Edite o horário de início", 20)}
+          </span>
+
+          <span>-</span>
+
+          <span
+            className={`
+        px-2 py-0.5 rounded-md font-medium
+        ${highlightIfEditable(endTime || "Edite o horário de término")}
+      `}
+          >
+            {truncateText(endTime || "Edite o horário de término", 20)}
+          </span>
+
+        </p>
       </div>
 
       {loading ? (
@@ -125,7 +157,7 @@ const Discipline = ({ disciplineData }) => {
                   <ListItem
                     key={work.idTask}
                     id={work.idTask}
-                    fullDescription={work.name}
+                    fullDescription={work.name || "Edite o nome do trabalho"}
                     borderColor="green"
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Trabalho", work)}
@@ -133,7 +165,7 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                    <p className="text-neutral-600 text-sm">Nenhum trabalho cadastrado.</p>
+                <p className="text-neutral-600 text-sm">Nenhum trabalho cadastrado.</p>
               )}
             </div>
             <Button
@@ -155,7 +187,7 @@ const Discipline = ({ disciplineData }) => {
                   <ListItem
                     key={exam.idTask}
                     id={exam.idTask}
-                    fullDescription={exam.name}
+                    fullDescription={exam.name || "Edite o nome da prova"}
                     borderColor="blue"
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Prova", exam)}
@@ -163,7 +195,7 @@ const Discipline = ({ disciplineData }) => {
                   />
                 ))
               ) : (
-                    <p className="text-neutral-600 text-sm">Nenhuma prova cadastrada.</p>
+                <p className="text-neutral-600 text-sm">Nenhuma prova cadastrada.</p>
               )}
             </div>
             <Button
@@ -183,11 +215,13 @@ const Discipline = ({ disciplineData }) => {
         idDiscipline={idDiscipline}
         editData={editingTask ? { ...editingTask, id: selectedIdTask } : null}
         type={modalType}
+        onRefresh={onRefresh}
       />
 
       <DisciplineFormModal
         isOpen={isDisciplineModalOpen}
         onClose={() => setIsDisciplineModalOpen(false)}
+        onRefresh={onRefresh}
         disciplineData={disciplineData}
       />
     </Container>

@@ -131,7 +131,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="lg:w-1/2 p-6 bg-neutral-300 rounded-xl border border-neutral-400 relative min-h-[300px] ransition duration-300 hover:scale-102">
+          <div className="lg:w-1/2 p-6 hover:bg-neutral-200  bg-neutral-300 rounded-xl border border-neutral-400 relative min-h-[300px] ransition duration-300 hover:scale-102">
             <div className="absolute top-4 left-7 mt-4 text-sm text-neutral-800 font-bold flex items-center gap-1">
               <Clock /> Cronograma otimizado por I.A.
             </div>
@@ -162,10 +162,10 @@ const Home = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-
+            
             <div className="col-span-2">
-              <h3 className="text-2xl font-bold text-neutral-700 mb-4 flex items-center gap-2">
-                <DatasetIcon className="text-yellow-500" /> Otimização inteligente de tempo
+              <h3 className="text-2xl font-bold text-neutral-700 mb-4 mt-25 flex items-center gap-2">
+                <DatasetIcon className="text-yellow-600" /> Otimização inteligente de tempo
               </h3>
               <p className="text-neutral-800 mb-6">Veja a diferença entre a alocação manual e o planejamento do Beezer:</p>
 
@@ -180,7 +180,7 @@ const Home = () => {
                   </div>
                   <p className="text-sm text-neutral-700 mt-2">Tarefas mal-feitas ou não feitas. Falta de tempo e sobrecarga. </p>
                 </div>
-
+                
                 <div>
                   <p className="font-semibold text-neutral-800 mt-8 mb-2">Planejamento Beezer (Otimizado por I.A.)</p>
                   <div className="flex h-12 w-full relative">
@@ -191,41 +191,52 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            <div className="flex mx-auto flex-col justify-center items-center">
+              <img
+                src="/assets/gatinho_rostinho_cortado.svg"
+                style={{ width: '170px', height: 'auto' }}
+                className="-mb-1"
+              />
+              <div className="bg-neutral-300 hover:bg-neutral-200 p-10 rounded-lg border border-neutral-400 h-80 ransition duration-300 hover:scale-102">
+                <h3 className="text-2xl font-bold text-neutral-600 mb-12 flex items-center gap-2">
+                  <CheckCircle /> Ciclo de revisão e conclusão
+                </h3>
 
-            <div className="bg-neutral-300 p-10 rounded-lg border border-neutral-400 h-80 ransition duration-300 hover:scale-102">
-              <h3 className="text-2xl font-bold text-neutral-600 mb-12 flex items-center gap-2">
-                <CheckCircle /> Ciclo de revisão e conclusão
-              </h3>
-
-              <ul className="space-y-4 text-yellow-600">
-                <li className="flex items-start gap-3">
-                  <AlarmIcon className="h-5 w-5 mt-1 text-green-500 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-neutral-800">Confirmação diária:</p>
-                    <p className="text-sm text-neutral-600">Verificamos se a atividade foi feita e reagendamos o que falhou.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Zap className="h-5 w-5 mt-1 text-yellow-500 flex-shrink-0" />
-                  <div>
-                    <p className="font-semibold text-neutral-800">Realocação imediata:</p>
-                    <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
-                  </div>
-                </li>
-              </ul>
+                <ul className="space-y-4 text-yellow-600">
+                  <li className="flex items-start gap-3">
+                    <AlarmIcon className="h-5 w-5 mt-1 text-green-500 flex-shrink-0" />
+                    <div>
+                      <p className="font-semibold text-neutral-800">Confirmação diária:</p>
+                      <p className="text-sm text-neutral-600">Verificamos se a atividade foi feita e reagendamos o que falhou.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Zap className="h-5 w-5 mt-1 text-yellow-600 flex-shrink-0" />
+                    <div>
+                      <p className="font-semibold text-neutral-800">Realocação imediata:</p>
+                      <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="pt-10">
+          
           <h2 className="text-4xl font-bold text-neutral-800 text-center border-b border-neutral-700 pb-4 mt-20 mb-20">
             Funcionalidades essenciais
           </h2>
+          <img
+            src="/assets/gatinho_sentado.svg"
+            style={{ width: '200px', height: 'auto' }}
+          />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-green-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
-                <Zap className="h-6 w-6 text-yellow-500" /> Otimização por prioridade
+                <Zap className="h-6 w-6 text-yellow-600" /> Otimização por prioridade
               </h3>
               <p className="text-neutral-600 text-sm">
                 Coloque a duração e data de entrega. A I.A. usa a prioridade da matéria para garantir que o mais importante tenha tempo suficiente alocado.
@@ -252,7 +263,22 @@ const Home = () => {
 
           </div>
         </div>
+        <div className="flex justify-center items-center mb-30 flex-col">
+          <img
+            src="/assets/gatinho_balao_cadastre_se.svg"
+            style={{ width: '400px', height: 'auto' }}
+            className="-mb-1"
+          />
 
+          <Button
+            size="xl"
+            variant="yellow-primary"
+            className="w-[500px] text-lg font-semibold border border-neutral-400 transition duration-200"
+            onClick={openSignupModal}
+          >
+            Comece Grátis <Zap className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
       </div>
 
       {isLoginModalOpen && (

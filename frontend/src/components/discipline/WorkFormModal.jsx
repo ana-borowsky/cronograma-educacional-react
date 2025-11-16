@@ -12,7 +12,7 @@ const XMark = () => (
   </svg>
 )
 
-export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type }) => {
+export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type, onRefresh }) => {
   const isEditMode = !!editData
 
   const [formData, setFormData] = useState({
@@ -52,7 +52,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
 
     try {
       const body = {
-        id: editData?.id,
+        idTask: editData?.id,
         name: formData.name,
         type: "Trabalho",
         estimatedHours: `${formData.estimatedHours}:00:00`,
@@ -77,6 +77,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
       if (!response.ok) throw new Error("Falha ao salvar atividade")
 
       alert(isEditMode ? "Trabalho atualizado com sucesso!" : "Atividade adicionada com sucesso!")
+      onRefresh()
       onClose()
     } catch (error) {
       console.error("Erro ao enviar atividade:", error)
@@ -96,6 +97,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
       if (!response.ok) throw new Error("Erro ao excluir atividade")
 
       alert("Atividade excluída com sucesso!")
+      onRefresh()
       onClose()
     } catch (error) {
       console.error("Erro ao excluir atividade:", error)
@@ -111,7 +113,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
       aria-modal="true"
     >
       <div
-        className="bg-background rounded-lg border border-neutral-400 shadow-xl w-full max-w-md sm:p-8 transform transition-all"
+        className="bg-neutral-300 rounded-lg border border-neutral-400 shadow-xl w-full max-w-md sm:p-8 transform transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="fspace-y-4 mt-4">
@@ -181,20 +183,6 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
             />
           </div>
 
-          <div className="space-y-2 mb-8">
-            <label htmlFor="file-upload-ensalamento" className="block text-neutral-600 font-semibold text-sm">
-              Selecione o Arquivo do Ensalamento
-            </label>
-            <Input
-              type="file"
-              id="file-upload-ensalamento"
-              name="schedule-file"
-              required
-              variant="dark"
-              className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
-            />
-          </div>
-
           <div className="flex space-x-4">
             {isEditMode ? (
               <>
@@ -218,7 +206,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
             ) : (
               <Button
                 type="submit"
-                  className="w-full transition duration-200"
+                className="w-full transition duration-200"
                 variant="yellow-primary"
               >
                 Adicionar

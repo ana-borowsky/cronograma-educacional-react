@@ -172,7 +172,7 @@ const Home = () => {
               <div className="h-40 p-1">
 
                 <div className="mb-4">
-                  <p className="font-semibold text-neutral-800 mb-2">Seu planejamento manual (fictício)</p>
+                  <p className="font-semibold text-neutral-800 mb-2">Seu planejamento manual</p>
                   <div className="flex h-12 w-full relative hover:scale-102 transition duration-300">
                     <div className="bg-red-700 w-[20%] rounded-l-md" title="Tempo Alocado"></div>
                     <div className="bg-red-900 w-[80%] rounded-r-md" title="Tempo Restante Necessário"></div>
@@ -207,14 +207,14 @@ const Home = () => {
                     <AlarmIcon className="h-5 w-5 mt-1 text-green-500 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-800">Confirmação diária:</p>
-                      <p className="text-sm text-neutral-600">Verificamos se a atividade foi feita e reagendamos o que falhou.</p>
+                      <p className="text-sm text-neutral-600">Marque as atividades que realizou durante o dia.</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <Zap className="h-5 w-5 mt-1 text-yellow-600 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-neutral-800">Realocação imediata:</p>
-                      <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
+                      <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca na agenda pra você.</p>
                     </div>
                   </li>
                 </ul>
@@ -239,7 +239,8 @@ const Home = () => {
                 <Zap className="h-6 w-6 text-yellow-600" /> Otimização por prioridade
               </h3>
               <p className="text-neutral-600 text-sm">
-                Coloque a duração e data de entrega. A I.A. usa a prioridade da matéria para garantir que o mais importante tenha tempo suficiente alocado.
+                Defina o nível de dificuldade de cada atividade.<br>
+                </br>Coloque o tempo que levará para fazer a atividade e a data de entrega. <br></br>A I.A. usa a prioridade da matéria para garantir que as mais importantes tenham tempo suficiente alocado.
               </p>
             </div>
 
@@ -248,16 +249,21 @@ const Home = () => {
                 <Clock className="h-6 w-6 text-blue-500" /> Gestão de tempo livre
               </h3>
               <p className="text-neutral-600 text-sm">
-                Defina seus de estudo, permitindo que o programa preencha os espaços de forma eficiente.
+                Defina seus horários de de estudo, permitindo que o Beezer preencha-os de forma eficiente e otimizada.<br></br>
+                Você pode mudar facilmente para cada semana, adaptando-se às suas necessidades.
               </p>
             </div>
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-red-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
-                <DatasetIcon className="h-6 w-6" /> Sincronização Google Calendar
+                <DatasetIcon className="h-6 w-6" /> Sua rotina facilitada
               </h3>
               <p className="text-neutral-600 text-sm">
-                Após a confirmação, sua agenda otimizada é automaticamente atualizada no Google Calendar, mantendo você em dia em todas as plataformas.
+                Do caos ao controle em poucos cliques.<br></br><br></br>
+                Sua rotina otimizada de forma inteligente e eficiente.<br></br>
+
+
+
               </p>
             </div>
 

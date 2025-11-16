@@ -159,7 +159,7 @@ const Home = () => {
         </div>
 
         <div className="pt-10 mt-40">
-          <h2 className="text-4xl font-bold text-neutral-800 text-center border-b border-neutral-700 pb-4 mb-20">
+          <h2 className="text-5xl font-bold text-neutral-800 text-center  pb-4 mb-10">
             Como Beezer transforma sua jornada
           </h2>
 
@@ -204,20 +204,20 @@ const Home = () => {
                   <CheckCircle /> Ciclo de revisão e conclusão
                 </h3>
 
-                <ul className="space-y-4 text-yellow-600">
-                  <li className="flex items-start gap-3">
-                    <AlarmIcon className="h-5 w-5 mt-1 text-green-500 flex-shrink-0" />
-                    <div>
+                <ul className="space-y-4 list-disc marker:text-yellow-600 ml-5">
+
+                  <li className="text-2xl text-neutral-600">
+                    <span className="text-sm">
                       <p className="font-semibold text-neutral-800">Confirmação diária:</p>
                       <p className="text-sm text-neutral-600">Marque as atividades que realizou durante o dia.</p>
-                    </div>
+                    </span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <Zap className="h-5 w-5 mt-1 text-yellow-600 flex-shrink-0" />
-                    <div>
+
+                  <li className="text-2xl text-neutral-600">
+                    <span className="text-sm">
                       <p className="font-semibold text-neutral-800">Realocação imediata:</p>
                       <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca na agenda pra você.</p>
-                    </div>
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -227,48 +227,65 @@ const Home = () => {
 
         <div className="pt-10">
           
-          <h2 className="text-4xl font-bold text-neutral-800 text-center border-b border-neutral-700 pb-4 mt-20 mb-20">
+          <h2 className="text-5xl font-bold text-neutral-800 text-center pb-4 mt-20 -mb-20">
             Funcionalidades essenciais
           </h2>
           <img
             src="/assets/gatinho_sentado.svg"
             style={{ width: '200px', height: 'auto' }}
           />
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-green-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
                 <Zap className="h-6 w-6 text-yellow-600" /> Otimização por prioridade
               </h3>
-              <p className="text-neutral-600 text-sm">
-                Defina o nível de dificuldade de cada atividade.<br>
-                </br>Coloque o tempo que levará para fazer a atividade e a data de entrega. <br></br>A I.A. usa a prioridade da matéria para garantir que as mais importantes tenham tempo suficiente alocado.
-              </p>
+
+              <ul className="list-disc marker:text-yellow-600 ml-5">
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Defina o nível de dificuldade de cada atividade.</span>
+                </li>
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Coloque o tempo que levará para fazer a atividade e a data de entrega.</span>
+                </li>
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">A I.A. usa a prioridade da matéria para garantir que as mais importantes tenham tempo suficiente alocado.</span>
+                </li>
+              </ul>
             </div>
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-blue-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
                 <Clock className="h-6 w-6 text-blue-500" /> Gestão de tempo livre
               </h3>
-              <p className="text-neutral-600 text-sm">
-                Defina seus horários de de estudo, permitindo que o Beezer preencha-os de forma eficiente e otimizada.<br></br>
-                Você pode mudar facilmente para cada semana, adaptando-se às suas necessidades.
-              </p>
+              <ul className="list-disc marker:text-yellow-600 ml-5">
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Defina seus horários de de estudo, permitindo que o Beezer preencha-os de forma eficiente e otimizada.</span>
+                </li>
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Você pode mudar facilmente para cada semana, adaptando-se às suas necessidades.</span>
+                </li>
+              </ul>
             </div>
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-red-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
                 <DatasetIcon className="h-6 w-6" /> Sua rotina facilitada
               </h3>
-              <p className="text-neutral-600 text-sm">
-                Do caos ao controle em poucos cliques.<br></br><br></br>
-                Sua rotina otimizada de forma inteligente e eficiente.<br></br>
-              </p>
+              <ul className="list-disc marker:text-yellow-600 ml-5">
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Do caos ao controle em poucos cliques.</span>
+                </li>
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Sua rotina otimizada de forma inteligente e eficiente.</span>
+                </li>
+              </ul>
             </div>
 
           </div>
         </div>
-        <div className="flex justify-center items-center mb-30 flex-col">
+        <div className="flex justify-center items-center mb-30 flex-col -mt-20">
 
           <Lottie
             animationData={gatinhoBalao}
@@ -283,9 +300,7 @@ const Home = () => {
             onClick={openSignupModal}
           >
             Comece Grátis <Zap className="ml-2 h-5 w-5" />
-          </Button>
-
-          
+          </Button>          
         </div>
       </div>
 

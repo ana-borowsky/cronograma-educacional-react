@@ -7,8 +7,8 @@ export const TabButton = ({ tabId, children, activeTab, setActiveTab }) => {
       className={`
         relative z-10 text-lg font-bold px-4 pt-3 pb-2 transition duration-200 ease-in-out cursor-pointer
         ${isActive
-          ? 'text-yellow-600 bg-neutral-800 border-t border-l border-r border-yellow-600/50 rounded-t-lg border-b-2'
-          : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50 border-b border-transparent'
+          ? 'text-neutral-600 bg-neutral-300 border-t border-l border-r border-neutral-600 rounded-t-lg'
+          : 'text-neutral-400 hover:text-white hover:bg-neutral-400 border-b border-transparent'
         }
       `}
     >

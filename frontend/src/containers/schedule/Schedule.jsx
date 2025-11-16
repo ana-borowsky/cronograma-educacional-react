@@ -240,7 +240,7 @@ const Schedule = () => {
       <div className="bg-neutral-300 p-6 border border-neutral-400 rounded-lg shadow-lg flex-grow">
 
         <div className="flex mb-4 border-neutral-400 -mt-6 -mx-6 px-6 pt-6 ">
-          <div className="flex flex-row gap-0 border-b-2 border-neutral-400 w-full">
+          <div className="flex flex-row gap-0 border-b-2 border-neutral-500 w-full">
             <TabButton tabId="agenda" activeTab={activeTab} setActiveTab={setActiveTab}>Agenda da Semana</TabButton>
             <TabButton tabId="estudo" activeTab={activeTab} setActiveTab={setActiveTab}>Horários de Estudo</TabButton>
           </div>

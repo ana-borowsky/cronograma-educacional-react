@@ -16,39 +16,39 @@ import {
 } from "@/components/schedule/ScheduleData.jsx"
 
 const getStartOfWeek = (date) => {
-  const d = new Date(date);
-  const day = d.getDay();
-  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-  return new Date(d.setDate(diff));
-};
+  const d = new Date(date)
+  const day = d.getDay()
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1)
+  return new Date(d.setDate(diff))
+}
 
 const formatDateForAPI = (date) => {
-  return date.toISOString().split('T')[0];
-};
+  return date.toISOString().split('T')[0]
+}
 
 const getWeekRangeText = (startDate) => {
-  const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + 6);
+  const endDate = new Date(startDate)
+  endDate.setDate(startDate.getDate() + 6)
   
-  const options = { month: 'short', day: 'numeric' };
-  const startText = startDate.toLocaleDateString('pt-BR', options); 
-  const endText = endDate.toLocaleDateString('pt-BR', options);
+  const options = { month: 'short', day: 'numeric' }
+  const startText = startDate.toLocaleDateString('pt-BR', options) 
+  const endText = endDate.toLocaleDateString('pt-BR', options)
   
-  return `${startText} - ${endText}`;
-};
+  return `${startText} - ${endText}`
+}
 
 const convertDbToSlotKey = (freeTimeItem) => {
-  const dayName = freeTimeItem.weekDay.replace("-feira", "");
-  const dayIndex = daysOfWeek.indexOf(dayName);
+  const dayName = freeTimeItem.weekDay.replace("-feira", "")
+  const dayIndex = daysOfWeek.indexOf(dayName)
 
-  const time = freeTimeItem.startTime.slice(0, 5);
-  const timeIndex = timeSlots.indexOf(time);
+  const time = freeTimeItem.startTime.slice(0, 5)
+  const timeIndex = timeSlots.indexOf(time)
 
   if (dayIndex > -1 && timeIndex > -1) {
-    return `${dayIndex}-${timeIndex}`;
+    return `${dayIndex}-${timeIndex}`
   }
-  return null;
-};
+  return null
+}
 
 
 const Schedule = () => {
@@ -57,69 +57,69 @@ const Schedule = () => {
   const [studySlots, setStudySlots] = useState([])
   const [dbFreeTimes, setDbFreeTimes] = useState([])
   const { isLoading, setLoading } = useLoading()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [weekStartDate, setWeekStartDate] = useState(getStartOfWeek(new Date('2025-11-10T12:00:00')));
+  const [weekStartDate, setWeekStartDate] = useState(getStartOfWeek(new Date('2025-11-10T12:00:00')))
 
   const fetchFreeTimes = async () => {
     try {
-      const response = await fetch('http://localhost:8800/freeTime/1');
+      const response = await fetch('http://localhost:8800/freeTime/1')
       if (response.ok) {
-        const data = await response.json();
-        setDbFreeTimes(data);
-        const initialStudySlots = data.map(convertDbToSlotKey).filter(Boolean);
-        setStudySlots(initialStudySlots);
+        const data = await response.json()
+        setDbFreeTimes(data)
+        const initialStudySlots = data.map(convertDbToSlotKey).filter(Boolean)
+        setStudySlots(initialStudySlots)
       } else if (response.status === 404) {
-        setDbFreeTimes([]);
-        setStudySlots([]);
+        setDbFreeTimes([])
+        setStudySlots([])
       } else {
-        console.error("Erro ao buscar horários livres (não-404)");
+        console.error("Erro ao buscar horários livres (não-404)")
       }
     } catch (error) {
-       console.error("Falha ao carregar horários livres:", error);
+       console.error("Falha ao carregar horários livres:", error)
     }
-  };
+  }
 
   const fetchEvents = async (date) => {
     try {
-      setLoading(true);
-      const apiDate = formatDateForAPI(date);
+      setLoading(true)
+      const apiDate = formatDateForAPI(date)
       
-      const response = await fetch(`http://localhost:8800/schedules/weekSchedule/1?weekStartDate=${apiDate}`);
+      const response = await fetch(`http://localhost:8800/schedules/weekSchedule/1?weekStartDate=${apiDate}`)
       
       if (response.ok) {
-        const data = await response.json();
-        setDayEvents(data);
+        const data = await response.json()
+        setDayEvents(data)
       } else if (response.status === 404) {
-        setDayEvents([]);
+        setDayEvents([])
       } else {
-         console.error("Erro buscando eventos (não-404)");
-         setDayEvents([]);
+         console.error("Erro buscando eventos (não-404)")
+         setDayEvents([])
       }
     } catch (error) {
-      console.error("Erro buscando eventos:", error);
-      setDayEvents([]);
+      console.error("Erro buscando eventos:", error)
+      setDayEvents([])
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
     const loadInitialFreeTimes = async () => {
-      setLoading(true);
-      await fetchFreeTimes();
-      setLoading(false);
-    };
+      setLoading(true)
+      await fetchFreeTimes()
+      setLoading(false)
+    }
     
-    loadInitialFreeTimes();
-  }, []);
+    loadInitialFreeTimes()
+  }, [])
 
   useEffect(() => {
-    fetchEvents(weekStartDate);
-  }, [weekStartDate]);
+    fetchEvents(weekStartDate)
+  }, [weekStartDate])
 
   const handleSlotClick = (dayIndex, timeIndex) => {
-    if (activeTab !== 'estudo') return;
+    if (activeTab !== 'estudo') return
 
     const slotKey = `${dayIndex}-${timeIndex}`
     setStudySlots(prevSlots => {
@@ -132,111 +132,112 @@ const Schedule = () => {
   }
 
   const handleScheduleAction = async () => {
+
     setLoading(true)
     try {
       if (activeTab === 'agenda') {
-        console.log("Recalculando cronograma...");
+        console.log("Recalculando cronograma...")
         const response = await fetch('http://localhost:8800/buildPlanning/1', {
           method: 'GET',
-        });
-        if (!response.ok) throw new Error('Erro ao recalcular cronograma');
-        alert("Cronograma recalculado!");
+        })
+        if (!response.ok) throw new Error('Erro ao recalcular cronograma')
+        alert("Cronograma recalculado!")
         
-        await fetchEvents(weekStartDate);
+        await fetchEvents(weekStartDate)
 
       } else {
-        console.log("Sincronizando horários de estudo...");
+        console.log("Sincronizando horários de estudo...")
 
-        const dbSlotKeys = dbFreeTimes.map(convertDbToSlotKey).filter(Boolean);
-        const dbSlotKeysSet = new Set(dbSlotKeys);
+        const dbSlotKeys = dbFreeTimes.map(convertDbToSlotKey).filter(Boolean)
+        const dbSlotKeysSet = new Set(dbSlotKeys)
 
-        const uiSlotKeys = studySlots;
-        const uiSlotKeysSet = new Set(uiSlotKeys);
+        const uiSlotKeys = studySlots
+        const uiSlotKeysSet = new Set(uiSlotKeys)
 
-        const slotsToCreateKeys = uiSlotKeys.filter(key => !dbSlotKeysSet.has(key));
+        const slotsToCreateKeys = uiSlotKeys.filter(key => !dbSlotKeysSet.has(key))
         
         const slotsToDeleteIds = dbFreeTimes
           .filter(item => {
-            const key = convertDbToSlotKey(item);
-            return key && !uiSlotKeysSet.has(key);
+            const key = convertDbToSlotKey(item)
+            return key && !uiSlotKeysSet.has(key)
           })
-          .map(item => item.idTime);
+          .map(item => item.idTime)
 
         const createRequests = slotsToCreateKeys.map(slotKey => {
-          const [dayIndex, timeIndex] = slotKey.split('-').map(Number);
+          const [dayIndex, timeIndex] = slotKey.split('-').map(Number)
           const payload = {
             idTime: null,
             idUser: 1,
             weekDay: daysOfWeek[dayIndex],
             startTime: `${timeSlots[timeIndex]}:00`,
             durationTime: 60
-          };
+          }
           
           if (daysOfWeek[dayIndex] !== 'Sábado' && daysOfWeek[dayIndex] !== 'Domingo') {
-             payload.weekDay = `${daysOfWeek[dayIndex]}-feira`;
+             payload.weekDay = `${daysOfWeek[dayIndex]}-feira`
           }
 
           return fetch('http://localhost:8800/freeTime', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
-          });
-        });
+          })
+        })
 
         const deleteRequests = slotsToDeleteIds.map(idTime => {
           return fetch(`http://localhost:8800/freeTime/${idTime}`, {
             method: 'DELETE',
-          });
-        });
+          })
+        })
 
-        const allRequests = [...createRequests, ...deleteRequests];
+        const allRequests = [...createRequests, ...deleteRequests]
 
         if (allRequests.length === 0) {
-          alert("Nenhuma alteração para salvar.");
-          setLoading(false);
-          return;
+          alert("Nenhuma alteração para salvar.")
+          setLoading(false)
+          return
         }
 
-        const responses = await Promise.all(allRequests);
+        const responses = await Promise.all(allRequests)
 
-        const failed = responses.filter(res => !res.ok);
+        const failed = responses.filter(res => !res.ok)
         if (failed.length > 0) {
-          throw new Error(`Falha ao sincronizar ${failed.length} horários.`);
+          throw new Error(`Falha ao sincronizar ${failed.length} horários.`)
         }
 
-        await fetchFreeTimes(); 
+        await fetchFreeTimes() 
 
-        alert('Horários de estudo salvas com sucesso!');
-        setActiveTab('agenda');
+        alert('Horários de estudo salvas com sucesso!')
+        setActiveTab('agenda')
       }
     } catch (error) {
-      console.error("Falha na ação do cronograma:", error);
-      alert(`Erro: ${error.message}`);
+      console.error("Falha na ação do cronograma:", error)
+      alert(`Erro: ${error.message}`)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   const handlePrevWeek = () => {
     setWeekStartDate(prevDate => {
-      const newDate = new Date(prevDate);
-      newDate.setDate(newDate.getDate() - 7);
-      return newDate;
-    });
-  };
+      const newDate = new Date(prevDate)
+      newDate.setDate(newDate.getDate() - 7)
+      return newDate
+    })
+  }
 
   const handleNextWeek = () => {
     setWeekStartDate(prevDate => {
-      const newDate = new Date(prevDate);
-      newDate.setDate(newDate.getDate() + 7);
-      return newDate;
-    });
-  };
+      const newDate = new Date(prevDate)
+      newDate.setDate(newDate.getDate() + 7)
+      return newDate
+    })
+  }
 
 
   const totalGridRows = 1 + totalGridSlots
   
-  const currentWeekText = getWeekRangeText(weekStartDate);
+  const currentWeekText = getWeekRangeText(weekStartDate)
 
   return (
     <div className="w-2/3 flex flex-col gap-6">

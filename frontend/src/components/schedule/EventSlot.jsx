@@ -16,7 +16,7 @@ export const EventSlot = ({ event, isVisible }) => {
   return (
     <div
       className={cn(
-        "event text-white p-1 rounded-md text-xs font-medium shadow-md z-20 overflow-hidden text-center transition-opacity duration-300 border",
+        "event text-white p-1 rounded-md text-xs font-medium m-1 z-20 overflow-hidden text-center transition-opacity duration-300 p-4",
         colorClass,
         isVisible ? 'opacity-100' : 'opacity-0'
       )}

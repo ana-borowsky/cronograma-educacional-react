@@ -15,6 +15,7 @@ export class GeminiController {
     try {
       const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
       const { idUser } = req.params
+      const dropPlanning = await new PlanningService().deleteByUser(idUser)
       const freeTime = await new FreeTimeService().getAll(Number(idUser))
       const disciplines = await new DisciplineService().getAll(Number(idUser))
 

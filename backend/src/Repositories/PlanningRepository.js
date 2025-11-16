@@ -128,6 +128,16 @@ class PlanningRepository {
     return result
   }
 
+  async deleteByUser(idUser) {
+    const values = [idUser]
+    const query = `DELETE planning FROM planning
+                   JOIN task ON planning.idTask = task.idTask
+                   JOIN discipline ON task.idDiscipline = discipline.idDiscipline
+                   WHERE discipline.idUser = ?`
+    const [result] = await db.query(query, values)  
+    return result
+  }
+
 
 }
 

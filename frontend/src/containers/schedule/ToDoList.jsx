@@ -103,7 +103,7 @@ const ToDoList = () => {
         <div className="flex justify-center items-center">
           <img
             src="/assets/gatinho_balao_disciplinas.svg"
-            style={{ width: '300px', height: 'auto' }}
+            style={{ width: '400px', height: 'auto' }}
             className="mt-10"
           />
         </div>

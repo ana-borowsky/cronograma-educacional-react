@@ -76,7 +76,7 @@ const Home = () => {
     ],
     // QUA
     [
-      { h: 'h-1/3', color: 'bg-orange-600', label: 'Iniciação científica.' },
+      { h: 'h-1/3', color: 'bg-red-600', label: 'Iniciação científica.' },
       { h: 'h-1/5', color: 'bg-blue-600', label: 'Monitoria.' },
       { h: 'h-[10%]', color: 'bg-neutral-400' },
       { h: 'h-1/4', color: 'bg-green-600', label: 'Lista de algoritmos' },
@@ -85,14 +85,14 @@ const Home = () => {
     // QUI
     [
       { h: 'h-1/5', color: 'bg-blue-600', label: 'Trabalho de rust' },
-      { h: 'h-1/4', color: 'bg-orange-600', label: 'Pesquisa.' },
+      { h: 'h-1/4', color: 'bg-red-600', label: 'Pesquisa.' },
       { h: 'h-[10%]', color: 'bg-neutral-400' },
       { h: 'h-1/3', color: 'bg-green-600', label: 'Revisão P2' },
       { h: 'h-[10%]', color: 'bg-neutral-400' },
     ],
     // SEX
     [
-      { h: 'h-1/4', color: 'bg-orange-600', label: 'Estudo P1' },
+      { h: 'h-1/4', color: 'bg-red-600', label: 'Estudo P1' },
       { h: 'h-1/4', color: 'bg-blue-600', label: 'Trabalho de pesquisa' },
       { h: 'h-[10%]', color: 'bg-neutral-400' },
       { h: 'h-1/3', color: 'bg-green-600', label: 'Estudo grafos' },

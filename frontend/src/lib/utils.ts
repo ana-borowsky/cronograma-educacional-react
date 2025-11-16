@@ -17,3 +17,13 @@ export function truncateText(text, maxLength) {
 
   return text;
 }
+
+export function highlightIfEditable(text) {
+  const normalized = String(text).toLowerCase()
+
+  const shouldHighlight = normalized.includes("edite")
+
+  return shouldHighlight
+    ? "bg-yellow-600 text-white"
+    : "bg-neutral-200"
+}

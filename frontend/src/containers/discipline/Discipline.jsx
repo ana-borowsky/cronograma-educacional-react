@@ -5,6 +5,7 @@ import { WorkFormModal } from "@/components/discipline/WorkFormModal"
 import { DisciplineFormModal } from "@/components/discipline/EditDisciplineModal"
 import { Container } from "@/components/ui/container"
 import { useState, useEffect } from 'react'
+import { truncateText, highlightIfEditable } from "@/lib/utils"
 
 const PencilIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-neutral-400 group-hover:text-yellow-600 transition-colors">
@@ -108,7 +109,38 @@ const Discipline = ({ disciplineData, onRefresh }) => {
       </div>
 
       <div className="mb-10 text-neutral-500">
-        <p className="text-neutral-600 text-sm">{day || "Edite o dia"}: {startTime || "Edite o horário de início"} - {endTime || "Edite o horário de término"}</p>
+        <p className="text-neutral-600 text-sm flex gap-2 flex-wrap">
+
+          <span
+            className={`
+        px-2 py-0.5 rounded-md font-medium
+        ${highlightIfEditable(day || "Edite o dia")}
+      `}
+          >
+            {truncateText(day || "Edite o dia", 20)}
+          </span>
+
+          <span
+            className={`
+        px-2 py-0.5 rounded-md font-medium
+        ${highlightIfEditable(startTime || "Edite o horário de início")}
+      `}
+          >
+            {truncateText(startTime || "Edite o horário de início", 20)}
+          </span>
+
+          <span>-</span>
+
+          <span
+            className={`
+        px-2 py-0.5 rounded-md font-medium
+        ${highlightIfEditable(endTime || "Edite o horário de término")}
+      `}
+          >
+            {truncateText(endTime || "Edite o horário de término", 20)}
+          </span>
+
+        </p>
       </div>
 
       {loading ? (

@@ -75,6 +75,7 @@ export const AddDisciplineModal = ({ idUser, onClose, onRefresh }) => {
         file: base64Data,
         filename: file.name,
         mimetype: file.type,
+        project
       }
 
       upload(uploadPayload)

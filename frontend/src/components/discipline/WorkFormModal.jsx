@@ -181,20 +181,6 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
             />
           </div>
 
-          <div className="space-y-2 mb-8">
-            <label htmlFor="file-upload-ensalamento" className="block text-neutral-600 font-semibold text-sm">
-              Selecione o Arquivo do Ensalamento
-            </label>
-            <Input
-              type="file"
-              id="file-upload-ensalamento"
-              name="schedule-file"
-              required
-              variant="dark"
-              className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
-            />
-          </div>
-
           <div className="flex space-x-4">
             {isEditMode ? (
               <>

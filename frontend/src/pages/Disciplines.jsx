@@ -75,9 +75,10 @@ const Disciplines = () => {
         openAddDisciplineModal={openAddDisciplineModal}
       />
 
-      <div className="flex flex-col p-5 gap-6 items-center">
-        <div className="w-4/5 flex flex-col md:flex-row md:space-x-8">
-          <div className="flex overflow-x-scroll space-x-6 pb-4">
+      <div className="w-4/5  flex flex-col p-5 gap-6 items-center overflow-x-scroll">
+        <div className="flex flex-col md:flex-row md:space-x-8 max-w-[1900px] mx-auto w-full px-4">
+
+          <div className="flex space-x-6 pb-4">
             {isLoading ? (
               <p className="text-neutral-400">Carregando disciplinas...</p>
             ) : (

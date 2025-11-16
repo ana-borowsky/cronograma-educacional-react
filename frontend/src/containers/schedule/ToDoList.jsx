@@ -21,18 +21,44 @@ const ToDoList = () => {
 
   useEffect(() => {
     const fetchTasks = async () => {
+      setIsLoading(true);
       try {
-        const response = await fetch('http://localhost:8800/Tasks');
-        const data = await response.json();
-        setTasks(data);
+        const response = await fetch('http://localhost:8800/plannings/userDayPlannings/1');
+        if (response.status === 400 || response.status === 404) {
+          setTasks([]);
+        } else if (response.ok) {
+          const data = await response.json();
+          setTasks(data);
+        } else {
+          throw new Error("Falha ao buscar tarefas do dia");
+        }
       } catch (error) {
         console.error("Erro buscando tarefas:", error);
+        setTasks([]);
       } finally {
         setIsLoading(false);
       }
     };
     fetchTasks();
-  }, []);
+  }, [displayedDate]);
+
+  const handleStatusChange = async (idTask, newStatus) => {
+    try {
+      const response = await fetch(`http://localhost:8800/tasks/${idTask}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      if (!response.ok) throw new Error('Erro ao atualizar status');
+      setTasks(prevTasks =>
+        prevTasks.map(task =>
+          task.idTask === idTask ? { ...task, defaultChecked: newStatus === 'Concluído' } : task
+        )
+      );
+    } catch (error) {
+      console.error("Erro ao atualizar status:", error);
+    }
+  };
 
   useEffect(() => {
     const totalTasks = tasks.length;
@@ -73,13 +99,15 @@ const ToDoList = () => {
         {isLoading ? (
           <p className="text-neutral-500 text-center">Carregando tarefas...</p>
         ) : (
-          tasks.map((task) => (
+          tasks.map((planning) => (
             <ListItem
-              key={task.id}
-              id={task.id}
-              fullDescription={task.fullDescription}
-              borderColor={task.borderColor}
-              defaultChecked={task.defaultChecked}
+              key={planning.idPlanning}
+              id={planning.idPlanning}
+              fullDescription={planning.fullDescription}
+              borderColor={planning.borderColor}
+              defaultChecked={planning.defaultChecked}
+              onStatusChange={(id, newStatus) => handleStatusChange(planning.idTask, newStatus)}
+              taskData={planning} 
             />
           ))
         )}

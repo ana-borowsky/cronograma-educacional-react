@@ -4,6 +4,8 @@ import Layout from "../components/layout/Layout"
 import { Link } from "react-router-dom"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
+import Lottie from "lottie-react"
+import gatinhoBalao from "@/animations/gatinho_balao.json"
 
 const DatasetIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" strokeWidth={2} stroke="currentColor" fill="none" className="h-6 w-6">
@@ -261,21 +263,19 @@ const Home = () => {
               <p className="text-neutral-600 text-sm">
                 Do caos ao controle em poucos cliques.<br></br><br></br>
                 Sua rotina otimizada de forma inteligente e eficiente.<br></br>
-
-
-
               </p>
             </div>
 
           </div>
         </div>
         <div className="flex justify-center items-center mb-30 flex-col">
-          <img
-            src="/assets/gatinho_balao_cadastre_se.svg"
-            style={{ width: '400px', height: 'auto' }}
-            className="-mb-1"
-          />
 
+          <Lottie
+            animationData={gatinhoBalao}
+            loop={true}
+            className="w-100"
+            autoplay
+          />
           <Button
             size="xl"
             variant="yellow-primary"
@@ -284,6 +284,8 @@ const Home = () => {
           >
             Comece Grátis <Zap className="ml-2 h-5 w-5" />
           </Button>
+
+          
         </div>
       </div>
 

@@ -98,19 +98,16 @@ const ToDoList = () => {
         progressValue={progressPercent}
         progressText={progressLabel}
       />
-      <div className="flex justify-center items-center">
-        <img
-          src="/assets/gatinho_balao.svg"
-          style={{ width: '300px', height: 'auto' }}
-          className="mt-10"
-        />
-      </div>
 
-      {/* {totalTasks.length == 0 ? <img
-        src="/assets/gatinho_balao.svg"
-        style={{ width: '300px', height: 'auto' }}
-        className="mt-30"
-      /> : null} */}
+      {tasks.length === 0 && (
+        <div className="flex justify-center items-center">
+          <img
+            src="/assets/gatinho_balao_disciplinas.svg"
+            style={{ width: '300px', height: 'auto' }}
+            className="mt-10"
+          />
+        </div>
+      )}
 
       <div className="space-y-4">
         {isLoading ? (
@@ -125,8 +122,7 @@ const ToDoList = () => {
               defaultChecked={planning.defaultChecked}
               onStatusChange={(id, newStatus) => handleStatusChange(planning.idTask, newStatus)}
               taskData={planning} 
-            />
-            
+            />          
           ))
         )}
       </div>

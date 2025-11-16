@@ -23,10 +23,21 @@ const Schedule = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://localhost:8800/ScheduleEvents');
+        const response = await fetch('http://localhost:8800/schedules/all/1');
         const data = await response.json();
+
+        // A API já envia os dados no formato que o EventSlot espera
+        // (dayIndex, startHour, endHour).
+        // Não precisamos de NENHUMA transformação.
         setDayEvents(data);
+
+        // NOTA: A função 'getAllActivitySlots' provavelmente também está
+        // esperando 'weekDay' e 'startTime', mas a API envia 'dayIndex'.
+        // Isso pode quebrar a aba "Horários de Estudo".
+        // Esta função (em ScheduleData.jsx) também precisa ser atualizada
+        // para ler os dados da API corretamente.
         setStudySlots(getAllActivitySlots(data));
+
       } catch (error) {
         console.error("Erro buscando eventos:", error);
       } finally {
@@ -34,7 +45,7 @@ const Schedule = () => {
       }
     };
     fetchEvents();
-  }, []);
+  }, []); // O array de dependências vazio está correto
 
   const handleSlotClick = (dayIndex, timeIndex) => {
     const slotKey = `${dayIndex}-${timeIndex}`
@@ -48,29 +59,53 @@ const Schedule = () => {
   }
 
   const handleScheduleAction = async () => {
+    setIsLoading(true)
     try {
-      let response;
       if (activeTab === 'agenda') {
-        console.log("Chamado 😘")
-        response = await fetch('http://localhost:8800/buildPlanning/1', {
-          method: 'POST',
+        console.log("Recalculando cronograma...")
+        const response = await fetch('http://localhost:8800/buildPlanning/1', {
+          method: 'GET',
         });
         if (!response.ok) throw new Error('Erro ao recalcular cronograma');
+        alert("Cronograma recalculado! A página será atualizada.");
+        navigate(0);
       } else {
-        response = await fetch('http://localhost:8800/saveStudySlots', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ slots: studySlots }),
-        });
-        if (!response.ok) throw new Error('Erro ao salvar horários');
-      }
-      
-      navigate('../scheduleandtasks');
+        console.log("Salvando horários de estudo:", studySlots);
 
+        const requests = studySlots.map(slotKey => {
+          const [dayIndex, timeIndex] = slotKey.split('-').map(Number);
+
+          const payload = {
+            idTime: null,
+            idUser: 1,
+            // O backend precisa traduzir este 'weekDay' para um índice 0-6
+            weekDay: daysOfWeek[dayIndex], 
+            startTime: `${timeSlots[timeIndex]}:00`,
+            durationTime: 60
+          };
+
+          return fetch('http://localhost:8800/freeTime', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+        });
+
+        const responses = await Promise.all(requests);
+
+        const failed = responses.filter(res => !res.ok);
+        if (failed.length > 0) {
+          throw new Error(`Falha ao salvar ${failed.length} horários.`);
+        }
+
+        alert('Horários de estudo salvos com sucesso! Agora você pode recalcular o cronograma.');
+        setActiveTab('agenda');
+      }
     } catch (error) {
       console.error("Falha na ação do cronograma:", error);
+      alert(`Erro: ${error.message}`);
+    } finally {
+      setIsLoading(false);
     }
   }
 

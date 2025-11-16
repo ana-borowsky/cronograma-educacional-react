@@ -90,21 +90,35 @@ INSERT INTO user (name, email, password) VALUES
 -- Inserindo horários livres
 INSERT INTO freeTime (idUser, weekDay, startTime, durationTime) VALUES
 -- Maria Silva
-(1, 'Segunda-feira', '14:00:00', 240),
-(1, 'Terça-feira', '09:00:00', 180),
-(1, 'Quarta-feira', '14:00:00', 180),
-(1, 'Quinta-feira', '10:00:00', 120),
-(1, 'Sexta-feira', '15:00:00', 180),
+(1, 'Segunda-feira', '14:00:00', 60),
+(1, 'Segunda-feira', '15:00:00', 60),
+(1, 'Terça-feira', '09:00:00', 60),
+(1, 'Terça-feira', '10:00:00', 60),
+(1, 'Terça-feira', '11:00:00', 60),
+(1, 'Quarta-feira', '14:00:00', 60),
+(1, 'Quarta-feira', '15:00:00', 60),
+(1, 'Quarta-feira', '16:00:00', 60),
+(1, 'Quarta-feira', '17:00:00', 60),
+(1, 'Quinta-feira', '10:00:00', 60),
+(1, 'Sexta-feira', '15:00:00', 60),
+(1, 'Sexta-feira', '16:00:00', 60),
+(1, 'Sexta-feira', '17:00:00', 60),
+(1, 'Sexta-feira', '18:00:00', 60),
+(1, 'Sexta-feira', '19:00:00', 60),
+(1, 'Sexta-feira', '20:00:00', 60),
+(1, 'Sexta-feira', '21:00:00', 60),
+
+
 -- João Santos
-(2, 'Segunda-feira', '08:00:00', 120),
-(2, 'Terça-feira', '14:00:00', 240),
-(2, 'Quarta-feira', '08:00:00', 240),
-(2, 'Quinta-feira', '16:00:00', 180),
+(2, 'Segunda-feira', '08:00:00', 60),
+(2, 'Terça-feira', '14:00:00', 60),
+(2, 'Quarta-feira', '08:00:00', 60),
+(2, 'Quinta-feira', '16:00:00', 60),
 -- Ana Oliveira
-(3, 'Segunda-feira', '19:00:00', 180),
-(3, 'Quarta-feira', '19:00:00', 180),
-(3, 'Sexta-feira', '14:00:00', 240),
-(3, 'Sábado', '09:00:00', 180);
+(3, 'Segunda-feira', '19:00:00', 60),
+(3, 'Quarta-feira', '19:00:00', 60),
+(3, 'Sexta-feira', '14:00:00', 60),
+(3, 'Sábado', '09:00:00', 60);
 
 -- Inserindo disciplinas
 INSERT INTO discipline (idUser, name, color, project, classroom, day, startTime, endTime, weight) VALUES

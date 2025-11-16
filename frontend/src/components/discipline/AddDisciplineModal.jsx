@@ -22,7 +22,7 @@ export const AddDisciplineModal = ({ idUser, onClose, onRefresh }) => {
     startTime: "",
     endTime: "",
     weight: "",
-    color: "",
+    color: "blue",
   })
   const [file, setFile] = useState()
 
@@ -125,7 +125,7 @@ export const AddDisciplineModal = ({ idUser, onClose, onRefresh }) => {
         </h2>
         <div className="text-center mb-4">
           <p className="text-yellow-600 text-xl mb-2">
-            <span className={step == 1 && "font-bold"}>Passo 1</span>  →
+            <span className={step == 1 && "font-bold"}>Passo 1</span> →
             <span className={step == 2 && "font-bold"}>Passo 2</span> →
             <span className={step == 3 && "font-bold"}>Passo 3</span>
           </p>

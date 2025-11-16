@@ -131,7 +131,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="lg:w-1/2 p-6 bg-neutral-300 rounded-xl border border-neutral-400 relative min-h-[300px] ransition duration-300 hover:scale-102">
+          <div className="lg:w-1/2 p-6 hover:bg-neutral-200  bg-neutral-300 rounded-xl border border-neutral-400 relative min-h-[300px] ransition duration-300 hover:scale-102">
             <div className="absolute top-4 left-7 mt-4 text-sm text-neutral-800 font-bold flex items-center gap-1">
               <Clock /> Cronograma otimizado por I.A.
             </div>
@@ -197,7 +197,7 @@ const Home = () => {
                 style={{ width: '170px', height: 'auto' }}
                 className="-mb-1"
               />
-              <div className="bg-neutral-300 p-10 rounded-lg border border-neutral-400 h-80 ransition duration-300 hover:scale-102">
+              <div className="bg-neutral-300 hover:bg-neutral-200 p-10 rounded-lg border border-neutral-400 h-80 ransition duration-300 hover:scale-102">
                 <h3 className="text-2xl font-bold text-neutral-600 mb-12 flex items-center gap-2">
                   <CheckCircle /> Ciclo de revisão e conclusão
                 </h3>

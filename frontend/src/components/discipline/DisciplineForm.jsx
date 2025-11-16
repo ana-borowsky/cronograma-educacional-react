@@ -28,6 +28,7 @@ const DisciplineForm = ({ disciplineData, setDisciplineData }) => {
   ]
 
   const handleChange = (e) => {
+    console.log(e)
     const { name, value } = e.target
     setDisciplineData((prev) => ({ ...prev, [name]: value }))
   }

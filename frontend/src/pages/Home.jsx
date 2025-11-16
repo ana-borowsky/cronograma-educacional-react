@@ -263,7 +263,22 @@ const Home = () => {
 
           </div>
         </div>
+        <div className="flex justify-center items-center mb-30 flex-col">
+          <img
+            src="/assets/gatinho_balao_cadastre_se.svg"
+            style={{ width: '400px', height: 'auto' }}
+            className="-mb-1"
+          />
 
+          <Button
+            size="xl"
+            variant="yellow-primary"
+            className="w-[500px] text-lg font-semibold border border-neutral-400 transition duration-200"
+            onClick={openSignupModal}
+          >
+            Comece Grátis <Zap className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
       </div>
 
       {isLoginModalOpen && (

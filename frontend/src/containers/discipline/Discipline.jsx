@@ -41,7 +41,7 @@ const Discipline = ({ disciplineData, onRefresh }) => {
   const handleStatusChange = async (idTask, newStatus) => {
     try {
       const response = await fetch(`http://localhost:8800/tasks/${idTask}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
       })
@@ -215,6 +215,7 @@ const Discipline = ({ disciplineData, onRefresh }) => {
         idDiscipline={idDiscipline}
         editData={editingTask ? { ...editingTask, id: selectedIdTask } : null}
         type={modalType}
+        onRefresh={onRefresh}
       />
 
       <DisciplineFormModal

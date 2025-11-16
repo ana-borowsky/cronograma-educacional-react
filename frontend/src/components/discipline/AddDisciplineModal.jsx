@@ -40,6 +40,11 @@ export const AddDisciplineModal = ({ idUser, onClose, onRefresh }) => {
   }
 
   const saveManual = async () => {
+    if (!validateDisciplineData()) {
+      alert("Preencha todos os campos")
+      return
+    }
+
     const payload = {
       ...disciplineData,
       project,
@@ -108,6 +113,22 @@ export const AddDisciplineModal = ({ idUser, onClose, onRefresh }) => {
     }
 
     disciplineInputMethod === "manual" ? saveManual() : saveFile()
+  }
+
+  const validateDisciplineData = () => {
+    if (
+      !disciplineData.name ||
+      !disciplineData.classroom ||
+      !disciplineData.day ||
+      !disciplineData.startTime ||
+      !disciplineData.endTime ||
+      !disciplineData.weight ||
+      !disciplineData.color
+    ) {
+      return false
+    }
+
+    return true
   }
 
   return (

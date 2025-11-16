@@ -12,7 +12,7 @@ const XMark = () => (
   </svg>
 )
 
-export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type }) => {
+export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type, onRefresh }) => {
   const isEditMode = !!editData
 
   const [formData, setFormData] = useState({
@@ -52,7 +52,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
 
     try {
       const body = {
-        id: editData?.id,
+        idTask: editData?.id,
         name: formData.name,
         type: "Trabalho",
         estimatedHours: `${formData.estimatedHours}:00:00`,
@@ -77,6 +77,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
       if (!response.ok) throw new Error("Falha ao salvar atividade")
 
       alert(isEditMode ? "Trabalho atualizado com sucesso!" : "Atividade adicionada com sucesso!")
+      onRefresh()
       onClose()
     } catch (error) {
       console.error("Erro ao enviar atividade:", error)
@@ -96,6 +97,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
       if (!response.ok) throw new Error("Erro ao excluir atividade")
 
       alert("Atividade excluída com sucesso!")
+      onRefresh()
       onClose()
     } catch (error) {
       console.error("Erro ao excluir atividade:", error)
@@ -204,7 +206,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type })
             ) : (
               <Button
                 type="submit"
-                  className="w-full transition duration-200"
+                className="w-full transition duration-200"
                 variant="yellow-primary"
               >
                 Adicionar

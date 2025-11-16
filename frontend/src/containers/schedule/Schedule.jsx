@@ -236,7 +236,7 @@ const Schedule = () => {
   const currentWeekText = getWeekRangeText(weekStartDate);
 
   return (
-    <div className="flex-grow flex flex-col gap-6">
+    <div className="w-2/3 flex flex-col gap-6">
       <div className="bg-neutral-300 p-6 border border-neutral-400 rounded-lg shadow-lg flex-grow">
 
         <div className="flex mb-4 border-neutral-400 -mt-6 -mx-6 px-6 pt-6 ">

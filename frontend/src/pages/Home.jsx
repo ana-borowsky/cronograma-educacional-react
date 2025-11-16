@@ -247,8 +247,9 @@ const Home = () => {
           </h2>
 
           <img
-            src="/assets/gatinho_sentado.svg"
+            src="/assets/gatinho_esq.svg"
             style={{ width: '200px', height: 'auto' }}
+            className="ml-300"
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
 

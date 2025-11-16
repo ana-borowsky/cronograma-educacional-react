@@ -74,7 +74,7 @@ class PlanningController {
       const {idTask} = req.params
       const result =  await new PlanningService().getAll(Number(idTask))      
 
-      if(!result || result.length == 0){
+      if(!result){
         return res.status(400).json({ error: "A tarefa não foi encontrada!"})
       }
 
@@ -91,7 +91,7 @@ class PlanningController {
       const {idTask} = req.params
       const result = await new PlanningService().getDayPlanning(Number(idTask))
 
-      if(!result || result.length == 0){
+      if(!result){
         return res.status(400).json({ error: "A tarefa não foi encontrada!"})
       }
 
@@ -108,7 +108,7 @@ class PlanningController {
       const {idUser} = req.params
       const result = await new PlanningService().getDayPlanningByUser(Number(idUser))
 
-      if(!result || result.length == 0){
+      if(!result){
         return res.status(400).json({ error: "O planejamento não foi encontrada!"})
       }
 

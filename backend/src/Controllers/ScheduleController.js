@@ -17,7 +17,7 @@ class ScheduleController {
       const {idUser} = req.params
       const result = await new ScheduleService().getSchedule(Number(idUser))
 
-      if(!result || result.length == 0){
+      if(!result){
         return res.status(404).json({message: "Nenhum cronograma encontrado!"})
       }
 
@@ -39,7 +39,7 @@ class ScheduleController {
 
       const result = await new ScheduleService().getWeekScheduleByUser(Number(idUser), weekStartDate)
 
-      if(!result || result.length == 0){
+      if(!result){
         return res.status(404).json({message: "Nenhum cronograma encontrado!"})
       }
 

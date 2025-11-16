@@ -158,12 +158,12 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="pt-10 mt-40">
-          <h2 className="text-5xl font-bold text-neutral-800 text-center  pb-4 mb-10">
+        <div className="pt-10 mt-30">
+          <h2 className="text-5xl font-bold text-neutral-800 text-center  pb-4">
             Como Beezer transforma sua jornada
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 -mt-10">
             
             <div className="col-span-2">
               <h3 className="text-2xl font-bold text-neutral-700 mb-4 mt-25 flex items-center gap-2">
@@ -174,26 +174,41 @@ const Home = () => {
               <div className="h-40 p-1">
 
                 <div className="mb-4">
-                  <p className="font-semibold text-neutral-800 mb-2">Seu planejamento manual</p>
-                  <div className="flex h-12 w-full relative hover:scale-102 transition duration-300">
-                    <div className="bg-red-700 w-[20%] rounded-l-md" title="Tempo Alocado"></div>
-                    <div className="bg-red-900 w-[80%] rounded-r-md" title="Tempo Restante Necessário"></div>
-                    <span className="absolute left-0 top-0 h-full flex items-center pl-2 text-white text-xs">20% Alocado</span>
+                  <p className="font-semibold text-neutral-800 mb-8">Seu planejamento manual</p>
+                  <div className="flex space-x-4 justify-center">
+                    <img
+                      src="/assets/gatinho_rosto_triste.svg"
+                      style={{ width: '100px', height: '100px' }}
+                      className="-mt-6"
+                    />
+                    <div className="flex h-12 w-full relative hover:scale-102 transition duration-300">
+                      <div className="bg-red-700 w-[20%] rounded-l-md" title="Tempo Alocado"></div>
+                      <div className="bg-red-900 w-[80%] rounded-r-md" title="Tempo Restante Necessário"></div>
+                      <span className="absolute left-0 top-0 h-full flex items-center pl-2 text-white text-xs">20% Alocado</span>
+                    </div>
                   </div>
-                  <p className="text-sm text-neutral-700 mt-2">Tarefas mal-feitas ou não feitas. Falta de tempo e sobrecarga. </p>
+                    <p className="text-sm text-neutral-700 mt-2">Tarefas mal-feitas ou não feitas. Falta de tempo e sobrecarga. </p>
+                  
                 </div>
                 
                 <div>
-                  <p className="font-semibold text-neutral-800 mt-8 mb-2">Planejamento Beezer (Otimizado por I.A.)</p>
+                  <p className="font-semibold text-neutral-800 mt-8 mb-8">Planejamento Beezer (Otimizado por I.A.)</p>
+                  <div className="flex space-x-4 justify-center">
+                  <img
+                    src="/assets/gatinho_rosto_feliz.svg"
+                    style={{ width: '100px', height: '100px' }}
+                    className="-mt-6"
+                  />
                   <div className="flex h-12 w-full relative">
                     <div className="bg-green-600 w-full rounded-md ransition duration-300 hover:scale-102" title="100% de Alocação Otimizada"></div>
                     <span className="absolute left-0 top-0 h-full flex items-center pl-2 text-white text-xs">100% Otimizado</span>
+                  </div>
                   </div>
                   <p className="text-sm text-neutral-700 mt-2">Todas as tarefas concluídas no prazo.</p>
                 </div>
               </div>
             </div>
-            <div className="flex mx-auto flex-col justify-center items-center">
+            <div className="flex mx-auto flex-col justify-center items-center mt-20">
               <img
                 src="/assets/gatinho_rostinho_cortado.svg"
                 style={{ width: '170px', height: 'auto' }}
@@ -227,14 +242,14 @@ const Home = () => {
 
         <div className="pt-10">
           
-          <h2 className="text-5xl font-bold text-neutral-800 text-center pb-4 mt-20 -mb-20">
+          <h2 className="text-5xl font-bold text-neutral-800 text-center pb-4 mt-10 -mb-20">
             Funcionalidades essenciais
           </h2>
+
           <img
             src="/assets/gatinho_sentado.svg"
             style={{ width: '200px', height: 'auto' }}
           />
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-green-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">

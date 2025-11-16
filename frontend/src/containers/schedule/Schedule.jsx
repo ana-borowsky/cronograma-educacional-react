@@ -241,8 +241,8 @@ const Schedule = () => {
 
         <div className="flex mb-4 border-neutral-400 -mt-6 -mx-6 px-6 pt-6 ">
           <div className="flex flex-row gap-0 border-b-2 border-neutral-500 w-full">
-            <TabButton tabId="agenda" activeTab={activeTab} setActiveTab={setActiveTab}>Agenda da Semana</TabButton>
-            <TabButton tabId="estudo" activeTab={activeTab} setActiveTab={setActiveTab}>Horários de Estudo</TabButton>
+            <TabButton tabId="agenda" activeTab={activeTab} setActiveTab={setActiveTab}>Agenda da semana</TabButton>
+            <TabButton tabId="estudo" activeTab={activeTab} setActiveTab={setActiveTab}>Horários de estudo</TabButton>
           </div>
         </div>
 
@@ -294,7 +294,7 @@ const Schedule = () => {
             ))}
 
             <div
-              className="time-slot bg-neutral-300 text-neutral-500 text-xs font-semibold p-1 text-center border-r border-neutral-400 flex items-center justify-center"
+              className="time-slot bg-neutral-300 text-neutral-500 text-xs font-semibold p-1 text-center border-neutral-400 flex items-center justify-center"
               style={{ gridRow: totalGridRows, gridColumn: 1 }}
             >
               00:00
@@ -336,7 +336,7 @@ const Schedule = () => {
             onClick={handleScheduleAction}
             disabled={isLoading}
           >
-            {isLoading ? "Processando..." : (activeTab === 'agenda' ? 'Recalcular Cronograma' : 'Salvar Horários de Estudo')}
+            {isLoading ? "Processando..." : (activeTab === 'agenda' ? 'Recalcular cronograma' : 'Salvar horários de estudo')}
           </Button>
         </div>
       </div>

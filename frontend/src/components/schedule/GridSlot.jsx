@@ -5,7 +5,7 @@ export const GridSlot = ({ slotKey, dayIndex, timeIndex, isSelected, activeTab, 
   let cursor = isStudyMode ? 'cursor-pointer' : ''
 
   if (isStudyMode && isSelected) {
-    bgColor = 'bg-green-500/80 hover:bg-green-600'
+    bgColor = 'bg-neutral-400 hover:bg-green-600'
   } else if (isStudyMode) {
     bgColor = 'bg-neutral-100 hover:bg-neutral-200/50'
   }

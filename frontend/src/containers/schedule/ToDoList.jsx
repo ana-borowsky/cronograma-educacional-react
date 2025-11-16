@@ -82,7 +82,7 @@ const ToDoList = () => {
   }
 
   return (
-    <div className="w-1/3 flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg shadow-lg">
+    <div className="w-1/3 flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg">
 
       <DateTitle
         currentDate={displayedDate}

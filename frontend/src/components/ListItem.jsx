@@ -24,8 +24,8 @@ export function ListItem({
   borderColor,
   defaultChecked = false,
   onStatusChange,
-  onEdit,        
-  taskData       
+  onEdit,
+  taskData
 }) {
   const [isCompleted, setIsCompleted] = React.useState(defaultChecked)
   const [isExpanded, setIsExpanded] = React.useState(false)
@@ -44,7 +44,7 @@ export function ListItem({
       className={cn(
         "relative bg-neutral-100 rounded-md border-l-4 transition duration-200 hover:scale-102 w-full",
         borderColors[borderColor] || "border-neutral-400",
-        isCompleted ? "border-neutral-400 bg-neutral-200" : "", 
+        isCompleted ? "border-neutral-400 bg-neutral-200" : "",
         "p-2"
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -76,11 +76,22 @@ export function ListItem({
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-0 ml-1 text-neutral-400 hover:text-yellow-600 hover:bg-transparent hover:cursor-pointer bg-neutral-100"
+              className={cn(
+                "absolute right-0 ml-1 hover:cursor-pointer transition-colors duration-200",
+
+                "text-neutral-400 hover:text-yellow-600 bg-neutral-100",
+
+                isCompleted
+                  ? "bg-neutral-200 hover:bg-neutral-200"
+                  : ""
+              )}
               onClick={() => onEdit && onEdit(taskData)}
               title="Editar trabalho"
             >
-              <Pencil className="w-4 h-4 cursor-pointer" />
+
+              <Pencil className={cn(
+                "w-4 h-4 cursor-pointer"
+              )} />
             </Button>
           )}
         </div>

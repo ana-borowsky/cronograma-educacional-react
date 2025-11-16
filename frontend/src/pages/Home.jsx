@@ -4,6 +4,8 @@ import Layout from "../components/layout/Layout"
 import { Link } from "react-router-dom"
 import LoginModal from "../components/LoginModal"
 import SignupModal from "../components/SignupModal"
+import Lottie from "lottie-react"
+import gatinhoBalao from "@/animations/gatinho_balao.json"
 
 const DatasetIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" strokeWidth={2} stroke="currentColor" fill="none" className="h-6 w-6">
@@ -74,7 +76,7 @@ const Home = () => {
     ],
     // QUA
     [
-      { h: 'h-1/3', color: 'bg-orange-600', label: 'Iniciação científica.' },
+      { h: 'h-1/3', color: 'bg-red-600', label: 'Iniciação científica.' },
       { h: 'h-1/5', color: 'bg-blue-600', label: 'Monitoria.' },
       { h: 'h-[10%]', color: 'bg-neutral-400' },
       { h: 'h-1/4', color: 'bg-green-600', label: 'Lista de algoritmos' },
@@ -83,14 +85,14 @@ const Home = () => {
     // QUI
     [
       { h: 'h-1/5', color: 'bg-blue-600', label: 'Trabalho de rust' },
-      { h: 'h-1/4', color: 'bg-orange-600', label: 'Pesquisa.' },
+      { h: 'h-1/4', color: 'bg-red-600', label: 'Pesquisa.' },
       { h: 'h-[10%]', color: 'bg-neutral-400' },
       { h: 'h-1/3', color: 'bg-green-600', label: 'Revisão P2' },
       { h: 'h-[10%]', color: 'bg-neutral-400' },
     ],
     // SEX
     [
-      { h: 'h-1/4', color: 'bg-orange-600', label: 'Estudo P1' },
+      { h: 'h-1/4', color: 'bg-red-600', label: 'Estudo P1' },
       { h: 'h-1/4', color: 'bg-blue-600', label: 'Trabalho de pesquisa' },
       { h: 'h-[10%]', color: 'bg-neutral-400' },
       { h: 'h-1/3', color: 'bg-green-600', label: 'Estudo grafos' },
@@ -156,12 +158,12 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="pt-10 mt-40">
-          <h2 className="text-4xl font-bold text-neutral-800 text-center border-b border-neutral-700 pb-4 mb-20">
+        <div className="pt-10 mt-30">
+          <h2 className="text-5xl font-bold text-neutral-800 text-center  pb-4">
             Como Beezer transforma sua jornada
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 -mt-10">
             
             <div className="col-span-2">
               <h3 className="text-2xl font-bold text-neutral-700 mb-4 mt-25 flex items-center gap-2">
@@ -172,26 +174,41 @@ const Home = () => {
               <div className="h-40 p-1">
 
                 <div className="mb-4">
-                  <p className="font-semibold text-neutral-800 mb-2">Seu planejamento manual (fictício)</p>
-                  <div className="flex h-12 w-full relative hover:scale-102 transition duration-300">
-                    <div className="bg-red-700 w-[20%] rounded-l-md" title="Tempo Alocado"></div>
-                    <div className="bg-red-900 w-[80%] rounded-r-md" title="Tempo Restante Necessário"></div>
-                    <span className="absolute left-0 top-0 h-full flex items-center pl-2 text-white text-xs">20% Alocado</span>
+                  <p className="font-semibold text-neutral-800 mb-8">Seu planejamento manual</p>
+                  <div className="flex space-x-4 justify-center">
+                    <img
+                      src="/assets/gatinho_rosto_triste.svg"
+                      style={{ width: '100px', height: '100px' }}
+                      className="-mt-6"
+                    />
+                    <div className="flex h-12 w-full relative hover:scale-102 transition duration-300">
+                      <div className="bg-red-700 w-[20%] rounded-l-md" title="Tempo Alocado"></div>
+                      <div className="bg-red-900 w-[80%] rounded-r-md" title="Tempo Restante Necessário"></div>
+                      <span className="absolute left-0 top-0 h-full flex items-center pl-2 text-white text-xs">20% Alocado</span>
+                    </div>
                   </div>
-                  <p className="text-sm text-neutral-700 mt-2">Tarefas mal-feitas ou não feitas. Falta de tempo e sobrecarga. </p>
+                    <p className="text-sm text-neutral-700 mt-2">Tarefas mal-feitas ou não feitas. Falta de tempo e sobrecarga. </p>
+                  
                 </div>
                 
                 <div>
-                  <p className="font-semibold text-neutral-800 mt-8 mb-2">Planejamento Beezer (Otimizado por I.A.)</p>
+                  <p className="font-semibold text-neutral-800 mt-8 mb-8">Planejamento Beezer (Otimizado por I.A.)</p>
+                  <div className="flex space-x-4 justify-center">
+                  <img
+                    src="/assets/gatinho_rosto_feliz.svg"
+                    style={{ width: '100px', height: '100px' }}
+                    className="-mt-6"
+                  />
                   <div className="flex h-12 w-full relative">
                     <div className="bg-green-600 w-full rounded-md ransition duration-300 hover:scale-102" title="100% de Alocação Otimizada"></div>
                     <span className="absolute left-0 top-0 h-full flex items-center pl-2 text-white text-xs">100% Otimizado</span>
+                  </div>
                   </div>
                   <p className="text-sm text-neutral-700 mt-2">Todas as tarefas concluídas no prazo.</p>
                 </div>
               </div>
             </div>
-            <div className="flex mx-auto flex-col justify-center items-center">
+            <div className="flex mx-auto flex-col justify-center items-center mt-20">
               <img
                 src="/assets/gatinho_rostinho_cortado.svg"
                 style={{ width: '170px', height: 'auto' }}
@@ -202,20 +219,20 @@ const Home = () => {
                   <CheckCircle /> Ciclo de revisão e conclusão
                 </h3>
 
-                <ul className="space-y-4 text-yellow-600">
-                  <li className="flex items-start gap-3">
-                    <AlarmIcon className="h-5 w-5 mt-1 text-green-500 flex-shrink-0" />
-                    <div>
+                <ul className="space-y-4 list-disc marker:text-yellow-600 ml-5">
+
+                  <li className="text-2xl text-neutral-600">
+                    <span className="text-sm">
                       <p className="font-semibold text-neutral-800">Confirmação diária:</p>
-                      <p className="text-sm text-neutral-600">Verificamos se a atividade foi feita e reagendamos o que falhou.</p>
-                    </div>
+                      <p className="text-sm text-neutral-600">Marque as atividades que realizou durante o dia.</p>
+                    </span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <Zap className="h-5 w-5 mt-1 text-yellow-600 flex-shrink-0" />
-                    <div>
+
+                  <li className="text-2xl text-neutral-600">
+                    <span className="text-sm">
                       <p className="font-semibold text-neutral-800">Realocação imediata:</p>
-                      <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca automaticamente na agenda.</p>
-                    </div>
+                      <p className="text-sm text-neutral-600">Se uma tarefa falhar, a I.A. a realoca na agenda pra você.</p>
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -225,12 +242,14 @@ const Home = () => {
 
         <div className="pt-10">
           
-          <h2 className="text-4xl font-bold text-neutral-800 text-center border-b border-neutral-700 pb-4 mt-20 mb-20">
+          <h2 className="text-5xl font-bold text-neutral-800 text-center pb-4 mt-10 -mb-20">
             Funcionalidades essenciais
           </h2>
+
           <img
-            src="/assets/gatinho_sentado.svg"
+            src="/assets/gatinho_esq.svg"
             style={{ width: '200px', height: 'auto' }}
+            className="ml-300"
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
 
@@ -238,38 +257,58 @@ const Home = () => {
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
                 <Zap className="h-6 w-6 text-yellow-600" /> Otimização por prioridade
               </h3>
-              <p className="text-neutral-600 text-sm">
-                Coloque a duração e data de entrega. A I.A. usa a prioridade da matéria para garantir que o mais importante tenha tempo suficiente alocado.
-              </p>
+
+              <ul className="list-disc marker:text-yellow-600 ml-5">
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Defina o nível de dificuldade de cada atividade.</span>
+                </li>
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Coloque o tempo que levará para fazer a atividade e a data de entrega.</span>
+                </li>
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">A I.A. usa a prioridade da matéria para garantir que as mais importantes tenham tempo suficiente alocado.</span>
+                </li>
+              </ul>
             </div>
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-blue-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
                 <Clock className="h-6 w-6 text-blue-500" /> Gestão de tempo livre
               </h3>
-              <p className="text-neutral-600 text-sm">
-                Defina seus de estudo, permitindo que o programa preencha os espaços de forma eficiente.
-              </p>
+              <ul className="list-disc marker:text-yellow-600 ml-5">
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Defina seus horários de de estudo, permitindo que o Beezer preencha-os de forma eficiente e otimizada.</span>
+                </li>
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Você pode mudar facilmente para cada semana, adaptando-se às suas necessidades.</span>
+                </li>
+              </ul>
             </div>
 
             <div className="feature-card bg-neutral-300 p-10 rounded-lg border-l-4 border-red-600 hover:bg-neutral-200 transition duration-300 hover:scale-102">
               <h3 className="text-2xl font-bold text-neutral-600 mb-4 flex items-center gap-2">
-                <DatasetIcon className="h-6 w-6" /> Sincronização Google Calendar
+                <DatasetIcon className="h-6 w-6" /> Sua rotina facilitada
               </h3>
-              <p className="text-neutral-600 text-sm">
-                Após a confirmação, sua agenda otimizada é automaticamente atualizada no Google Calendar, mantendo você em dia em todas as plataformas.
-              </p>
+              <ul className="list-disc marker:text-yellow-600 ml-5">
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Do caos ao controle em poucos cliques.</span>
+                </li>
+                <li className="text-2xl text-neutral-600">
+                  <span className="text-sm">Sua rotina otimizada de forma inteligente e eficiente.</span>
+                </li>
+              </ul>
             </div>
 
           </div>
         </div>
-        <div className="flex justify-center items-center mb-30 flex-col">
-          <img
-            src="/assets/gatinho_balao_cadastre_se.svg"
-            style={{ width: '400px', height: 'auto' }}
-            className="-mb-1"
-          />
+        <div className="flex justify-center items-center mb-30 flex-col -mt-20">
 
+          <Lottie
+            animationData={gatinhoBalao}
+            loop={true}
+            className="w-100"
+            autoplay
+          />
           <Button
             size="xl"
             variant="yellow-primary"
@@ -277,7 +316,7 @@ const Home = () => {
             onClick={openSignupModal}
           >
             Comece Grátis <Zap className="ml-2 h-5 w-5" />
-          </Button>
+          </Button>          
         </div>
       </div>
 

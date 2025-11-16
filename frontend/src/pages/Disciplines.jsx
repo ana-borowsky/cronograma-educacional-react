@@ -74,26 +74,29 @@ const Disciplines = () => {
         openSignupModal={openSignupModal}
         openAddDisciplineModal={openAddDisciplineModal}
       />
+      {disciplines.length != 0 ?  
+        <div className="w-4/5  flex flex-col p-5 gap-6 items-center overflow-x-scroll">
+          <div className="flex flex-col md:flex-row md:space-x-8 max-w-[1900px] mx-auto w-full px-4">
 
-      <div className="w-4/5  flex flex-col p-5 gap-6 items-center overflow-x-scroll">
-        <div className="flex flex-col md:flex-row md:space-x-8 max-w-[1900px] mx-auto w-full px-4">
+            <div className="flex space-x-6 pb-4">
+              {isLoading ? (
+                <p className="text-neutral-400">Carregando disciplinas...</p>
+              ) : (
+                disciplines.map((discipline) => (
+                  <Discipline
+                    key={discipline.idDiscipline}
+                    disciplineData={discipline}
+                    onRefresh={fetchDisciplines}
+                  />
+                ))
+              )}
 
-          <div className="flex space-x-6 pb-4">
-            {isLoading ? (
-              <p className="text-neutral-400">Carregando disciplinas...</p>
-            ) : (
-              disciplines.map((discipline) => (
-                <Discipline
-                  key={discipline.idDiscipline}
-                  disciplineData={discipline}
-                  onRefresh={fetchDisciplines}
-                />
-              ))
-            )}
-
+            </div>
           </div>
-        </div>    
-      </div>
+        </div>
+      
+      : null}
+      
       <div className="w-1/5 flex-col mx-auto items-center flex justify-center transition duration-200 mt-10 mb-20">
 
         {disciplines.length == 0 ? <img

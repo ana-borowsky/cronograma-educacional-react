@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ListItem } from "@/components/ListItem"
 import { DateTitle } from "@/components/schedule/DateTitle"
 import { TimeProgress } from "@/components/schedule/TimeProgress"
+import { ChevronLeft, ChevronRight } from "@/components/schedule/ScheduleData.jsx"
 
 const getNextDate = (currentDate) => {
   return "Quarta-feira, 16 de Outubro"
@@ -82,18 +83,31 @@ const ToDoList = () => {
   }
 
   return (
-    <div className="flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg shadow-lg">
-
-      <DateTitle
-        currentDate={displayedDate}
-        onPrevClick={handlePrevDate}
-        onNextClick={handleNextDate}
-      />
+    <div className="w-1/3 flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg">
+      <div className="text-neutral-600 flex items-center justify-between mb-4 bg-neutral-200 rounded-lg h-12 pl-4 pr-4">
+       <ChevronLeft />
+        <DateTitle
+          currentDate={displayedDate}
+          onPrevClick={handlePrevDate}
+          onNextClick={handleNextDate}
+        />
+        <ChevronRight />
+      </div>
 
       <TimeProgress
         progressValue={progressPercent}
         progressText={progressLabel}
       />
+
+      {tasks.length === 0 && (
+        <div className="flex justify-center items-center">
+          <img
+            src="/assets/gatinho_balao_disciplinas.svg"
+            style={{ width: '400px', height: 'auto' }}
+            className="mt-10"
+          />
+        </div>
+      )}
 
       <div className="space-y-4">
         {isLoading ? (
@@ -108,7 +122,7 @@ const ToDoList = () => {
               defaultChecked={planning.defaultChecked}
               onStatusChange={(id, newStatus) => handleStatusChange(planning.idTask, newStatus)}
               taskData={planning} 
-            />
+            />          
           ))
         )}
       </div>

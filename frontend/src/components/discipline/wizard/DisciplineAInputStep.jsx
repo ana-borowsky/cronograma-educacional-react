@@ -27,7 +27,6 @@ export function DisciplineAInputStep({ onFileSelected }) {
             id="file-upload-planos"
             name="schedule-file"
             required
-            multiple
             variant="dark"
             className="file:bg-neutral-600 file:text-white hover:file:bg-neutral-500"
             onChange={handleFileSelection}

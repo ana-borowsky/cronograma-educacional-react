@@ -92,7 +92,7 @@ const Discipline = ({ disciplineData, onRefresh }) => {
   }
 
   return (
-    <Container className="w-[400px]">
+    <Container className="w-[400px] h-fit">
       <div
         className="relative flex items-start justify-between cursor-pointer group mb-4 transition-all duration-200"
         onClick={openDisciplineModal}

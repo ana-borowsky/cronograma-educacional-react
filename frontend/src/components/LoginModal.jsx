@@ -36,8 +36,9 @@ const LoginModal = ({ onClose, onSignupClick }) => {
               type="text"
               id="email"
               name="email"
-              placeholder="nome@email.com"
+              placeholder="ana@gmail.com"
               required
+              className="placeholder-neutral-600"
             />
           </div>
 
@@ -51,6 +52,7 @@ const LoginModal = ({ onClose, onSignupClick }) => {
               name="password"
               placeholder="********"
               required
+              className="placeholder-neutral-600"
             />
           </div>
 
@@ -63,17 +65,6 @@ const LoginModal = ({ onClose, onSignupClick }) => {
             Entrar
           </Button>
         </form>
-
-        <p className="text-center mb-2 text-neutral-600 text-sm">
-          Não tem conta?
-          <button
-            onClick={onSignupClick}
-            className="ml-1 text-neutral-100 font-bold hover:underline"
-          >
-            Cadastre-se
-          </button>
-        </p>
-
       </div>
     </div>
   )

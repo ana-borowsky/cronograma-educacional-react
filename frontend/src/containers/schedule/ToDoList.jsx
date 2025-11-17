@@ -34,7 +34,7 @@ const ToDoList = () => {
       console.log("2. Formatted Date for API:", apiDate);
 
       try {
-        const url = `http://localhost:8800/plannings/userDayPlannings/1?date=${apiDate}`;
+        const url = `http://localhost:8800/plannings/userDayPlannings/1`;
         console.log("3. Request URL:", url);
 
         const response = await fetch(url);
@@ -114,44 +114,12 @@ const ToDoList = () => {
     }
   };
 
-  const handlePrevDate = () => {
-    setCurrentDate(prev => {
-      const d = new Date(prev);
-      d.setDate(d.getDate() - 1);
-      return d;
-    })
-  }
-
-  const handleNextDate = () => {
-    setCurrentDate(prev => {
-      const d = new Date(prev);
-      d.setDate(d.getDate() + 1);
-      return d;
-    })
-  }
-
   return (
     <div className="w-1/3 flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg">
       <div className="text-neutral-600 flex items-center justify-between mb-4 bg-neutral-200 rounded-lg h-12 pl-4 pr-4">
-        <button 
-          onClick={handlePrevDate} 
-          className="p-2 hover:bg-neutral-300 rounded-full transition-colors"
-          disabled={isLoading}
-        >
-          <ChevronLeft />
-        </button>
-        
         <DateTitle
           currentDate={formatDateForDisplay(currentDate)}
         />
-        
-        <button 
-          onClick={handleNextDate} 
-          className="p-2 hover:bg-neutral-300 rounded-full transition-colors"
-          disabled={isLoading}
-        >
-          <ChevronRight />
-        </button>
       </div>
 
       <TimeProgress

@@ -4,17 +4,21 @@ import { DateTitle } from "@/components/schedule/DateTitle"
 import { TimeProgress } from "@/components/schedule/TimeProgress"
 import { ChevronLeft, ChevronRight } from "@/components/schedule/ScheduleData.jsx"
 
-const getNextDate = (currentDate) => {
-  return "Quarta-feira, 16 de Outubro"
+const formatDateForDisplay = (date) => {
+  const options = { weekday: 'long', day: 'numeric', month: 'long' };
+  const formatted = date.toLocaleDateString('pt-BR', options);
+  return formatted.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 }
 
-const getPrevDate = (currentDate) => {
-  return "Segunda-feira, 14 de Outubro"
+const formatDateForAPI = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 const ToDoList = () => {
-  const [displayedDate, setDisplayedDate] = useState("Terça-feira, 15 de Outubro")
-
+  const [currentDate, setCurrentDate] = useState(new Date())
   const [tasks, setTasks] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [progressPercent, setProgressPercent] = useState(0)
@@ -23,43 +27,54 @@ const ToDoList = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       setIsLoading(true);
+      
+      const apiDate = formatDateForAPI(currentDate);
+      console.group("Debugging ToDoList Fetch");
+      console.log("1. Current Date State:", currentDate);
+      console.log("2. Formatted Date for API:", apiDate);
+
       try {
-        const response = await fetch('http://localhost:8800/plannings/userDayPlannings/1');
-        if (response.status === 400 || response.status === 404) {
-          setTasks([]);
-        } else if (response.ok) {
+        const url = `http://localhost:8800/plannings/userDayPlannings/1?date=${apiDate}`;
+        console.log("3. Request URL:", url);
+
+        const response = await fetch(url);
+        console.log("4. Response Status:", response.status);
+
+        if (response.ok) {
           const data = await response.json();
-          setTasks(data);
+          console.log("5. Raw JSON Data from API:", data);
+
+          if (data.length === 0) {
+            console.warn("!!! API returned an empty array. No tasks found for this date in the DB.");
+          }
+
+          const formattedData = data.map(task => ({
+            ...task,
+            defaultChecked: task.defaultChecked === true || task.status === 'Concluído'
+          }));
+          
+          const uniqueTasks = formattedData.filter((task, index, self) =>
+            index === self.findIndex((t) => (
+              t.idPlanning === task.idPlanning
+            ))
+          );
+
+          console.log("6. Final Tasks sent to State:", uniqueTasks);
+          setTasks(uniqueTasks);
         } else {
-          throw new Error("Falha ao buscar tarefas do dia");
+          console.error("API Error - Status:", response.status);
+          setTasks([]);
         }
       } catch (error) {
-        console.error("Erro buscando tarefas:", error);
+        console.error("FETCH ERROR:", error);
         setTasks([]);
       } finally {
+        console.groupEnd();
         setIsLoading(false);
       }
     };
     fetchTasks();
-  }, [displayedDate]);
-
-  const handleStatusChange = async (idTask, newStatus) => {
-    try {
-      const response = await fetch(`http://localhost:8800/tasks/${idTask}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
-      });
-      if (!response.ok) throw new Error('Erro ao atualizar status');
-      setTasks(prevTasks =>
-        prevTasks.map(task =>
-          task.idTask === idTask ? { ...task, defaultChecked: newStatus === 'Concluído' } : task
-        )
-      );
-    } catch (error) {
-      console.error("Erro ao atualizar status:", error);
-    }
-  };
+  }, [currentDate]);
 
   useEffect(() => {
     const totalTasks = tasks.length;
@@ -74,24 +89,69 @@ const ToDoList = () => {
     }
   }, [tasks]);
 
+  const handleStatusChange = async (idTask, newStatus) => {
+    console.log(`Updating Task ${idTask} to status: ${newStatus}`);
+    try {
+      const response = await fetch(`http://localhost:8800/tasks/${idTask}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      
+      if (!response.ok) throw new Error('Erro ao atualizar status');
+      
+      setTasks(prevTasks =>
+        prevTasks.map(task =>
+          task.idTask === idTask ? { 
+            ...task, 
+            status: newStatus, 
+            defaultChecked: newStatus === 'Concluído' 
+          } : task
+        )
+      );
+    } catch (error) {
+      console.error("Erro ao atualizar status:", error);
+    }
+  };
+
   const handlePrevDate = () => {
-    setDisplayedDate(getPrevDate(displayedDate))
+    setCurrentDate(prev => {
+      const d = new Date(prev);
+      d.setDate(d.getDate() - 1);
+      return d;
+    })
   }
 
   const handleNextDate = () => {
-    setDisplayedDate(getNextDate(displayedDate))
+    setCurrentDate(prev => {
+      const d = new Date(prev);
+      d.setDate(d.getDate() + 1);
+      return d;
+    })
   }
 
   return (
     <div className="w-1/3 flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg">
       <div className="text-neutral-600 flex items-center justify-between mb-4 bg-neutral-200 rounded-lg h-12 pl-4 pr-4">
-       <ChevronLeft />
+        <button 
+          onClick={handlePrevDate} 
+          className="p-2 hover:bg-neutral-300 rounded-full transition-colors"
+          disabled={isLoading}
+        >
+          <ChevronLeft />
+        </button>
+        
         <DateTitle
-          currentDate={displayedDate}
-          onPrevClick={handlePrevDate}
-          onNextClick={handleNextDate}
+          currentDate={formatDateForDisplay(currentDate)}
         />
-        <ChevronRight />
+        
+        <button 
+          onClick={handleNextDate} 
+          className="p-2 hover:bg-neutral-300 rounded-full transition-colors"
+          disabled={isLoading}
+        >
+          <ChevronRight />
+        </button>
       </div>
 
       <TimeProgress
@@ -100,16 +160,20 @@ const ToDoList = () => {
       />
 
       {tasks.length === 0 ? (
-        <div className="flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
           <img
             src="/assets/gatinho_balao_disciplinas.svg"
             style={{ width: '400px', height: 'auto' }}
             className="mt-10"
+            alt="Sem tarefas"
           />
+           {!isLoading && (
+            <p className="text-neutral-500 mt-4">Sem tarefas para {formatDateForDisplay(currentDate)}</p>
+          )}
         </div>
       ) : ""}
 
-      <div className="space-y-4">
+      <div className="space-y-4 mt-4">
         {isLoading ? (
           <p className="text-neutral-500 text-center">Carregando tarefas...</p>
         ) : (

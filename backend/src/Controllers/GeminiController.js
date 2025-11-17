@@ -141,6 +141,8 @@ export class GeminiController {
             "Jamais altere a quantidade de horas planejadas, o idTask ou qualquer outro atributo que não seja explicitamente autorizado.",
             "Caso não exista nenhum freeTime compatível para realocação, o planning deve ser removido do array final.",
             "Todas as correções devem preservar o formato original do objeto planning.",
+            "Concatene as atividade com o mesmo nome, data de execução, horários consecutivos e ajustando os horários de início e fim conforme necessário. Assim ficando uma atividade com duração de mais de uma hora ao invés de multiplas de uma hora.",
+            "Garanta que tenha tarefas planejadas apenas em horários que coincidam EXATAMENTE com os intervalos de freeTime, SEM SOBREPOSIÇÕES ou EXCESSOS.",
             "Retorne APENAS o JSON corrigido, sem explicações ou texto adicional."
           ],
           outputFormat: {

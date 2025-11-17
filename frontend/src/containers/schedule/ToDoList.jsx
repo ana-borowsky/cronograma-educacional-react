@@ -116,7 +116,7 @@ const ToDoList = () => {
 
   return (
     <div className="w-1/3 flex-grow p-6 bg-neutral-300 border border-neutral-400 rounded-lg">
-      <div className="text-neutral-600 flex items-center justify-between mb-4 bg-neutral-200 rounded-lg h-12 pl-4 pr-4">
+      <div className="text-neutral-600 flex justify-center mb-4">
         <DateTitle
           currentDate={formatDateForDisplay(currentDate)}
         />

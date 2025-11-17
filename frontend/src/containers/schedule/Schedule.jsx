@@ -59,7 +59,7 @@ const Schedule = () => {
   const { isLoading, setLoading } = useLoading()
   const navigate = useNavigate()
 
-  const [weekStartDate, setWeekStartDate] = useState(getStartOfWeek(new Date('2025-11-10T12:00:00')))
+  const [weekStartDate, setWeekStartDate] = useState(getStartOfWeek(new Date('2025-11-17T12:00:00')))
 
   const fetchFreeTimes = async () => {
     try {

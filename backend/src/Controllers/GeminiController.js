@@ -15,7 +15,6 @@ export class GeminiController {
     try {
       const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
       const { idUser } = req.params
-      const dropPlanning = await new PlanningService().deleteByUser(idUser)
       const freeTime = await new FreeTimeService().getAll(Number(idUser))
       const disciplines = await new DisciplineService().getAll(Number(idUser))
 
@@ -184,6 +183,7 @@ export class GeminiController {
       console.log('Dados verificados!')
       console.log('Dados sendo inseridos!')
 
+      await new PlanningService().deleteByUser(idUser)
       const planningService = new PlanningService()
       for (const p of checkedResponse) {
         await planningService.insert(

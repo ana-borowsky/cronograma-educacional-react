@@ -50,7 +50,7 @@ const LoginModal = ({ onClose, onSignupClick }) => {
               type="password"
               id="password"
               name="password"
-              placeholder="********"
+              placeholder="**********"
               required
               className="placeholder-neutral-600"
             />

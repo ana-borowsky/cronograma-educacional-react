@@ -15,6 +15,7 @@ export class GeminiController {
     try {
       const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
       const { idUser } = req.params
+      const dropPlanning = await new PlanningService().deleteByUser(idUser)
       const freeTime = await new FreeTimeService().getAll(Number(idUser))
       const disciplines = await new DisciplineService().getAll(Number(idUser))
 
@@ -47,10 +48,24 @@ export class GeminiController {
         instructions: {
           objective: "Retorne apenas um aquivo no formato 'JSON' de cronograma seguindo as regras especificas",
           rules: [
-            "Os horários dos planejamentos devem ser nos mesmos horários dos tempos livres",
-            "Atividades com o nível de prioridade (weight) maior devem ser finalizadas antes das demais",
-            "Todas as atividades devem ser planejadas para que sejam concluídas antes da dueDate da atividade",
-            "Utilize apenas atividades com status 'Pendente' para o planejamento",
+            "Usar exclusivamente os horários disponíveis definidos em freeTime.",
+            "Planejar atividades apenas dentro dos intervalos de freeTime, sem ultrapassar nenhum minuto.",
+            "Utilizar somente tasks cujo status seja exatamente 'Pendente'.",
+            "Organizar e alocar atividades priorizando aquelas com maior valor de weight primeiro.",
+            "Garantir que toda task seja completamente finalizada antes da data limite dueDate.",
+            "Descartar automaticamente qualquer atividade que não caiba nos horários livres disponíveis.",
+            "Nunca criar planejamentos em horários que não existam explicitamente no freeTime.",
+            "Retornar a resposta exclusivamente no formato JSON descrito em outputFormat.",
+            "Gerar apenas um único arquivo JSON como resposta, sem qualquer texto adicional.",
+            "Manter o campo finalWeight rigorosamente no intervalo 0 a 10 conforme o schema.",
+            "Utilizar startTime e endTime exatamente no formato HH:MM:SS.",
+            "Utilizar executionDate exatamente no formato YYYY-MM-DD.",
+            "Seguir fielmente o schema fornecido: idPlanning, executionDate, startTime, endTime, finalWeight e idTask.",
+            "Validar todos os horários para garantir que nenhum planejamento ultrapasse o tempo livre.",
+            "Garantir que a soma de estimatedHours seja coerente com o intervalo disponível.",
+            "Nunca modificar os dados fornecidos pelo usuário (freeTime ou tasks).",
+            "Nunca criar, inventar ou alterar tasks ou horários.",
+            "Nunca retornar explicações, mensagens, comentários ou justificativas fora do JSON."
           ],
           outputFormat: {
             type: "array",
@@ -60,7 +75,7 @@ export class GeminiController {
               executionDate: "YYYY-MM-DD",
               startTime: "HH:MM:SS format",
               endTime: "HH:MM:SS format",
-              finalWeight: "number (0-10)",
+              finalWeight: "number (0-100)",
               idTask: "number",
             },
             example: [
@@ -78,23 +93,98 @@ export class GeminiController {
       }
 
       const prompt = JSON.stringify(payload, null, 2)
-      const contents = [
-        {
-          text: prompt
-        }
-      ]
+      const contents = [{ text: prompt }]
+
+      console.log("Entrando no primeiro gemini")
+
       const response = await googleAI.models.generateContent({
         model: "gemini-2.5-flash",
         contents: contents,
+        generationConfig: {
+          temperature: 0.1,
+          topP: 0.95,
+          topK: 40,
+        },
       })
+
       const responseJson = JSON.parse((response.text)
         .replace(/```json/g, "")
         .replace(/```/g, "")
         .trim()
       )
+
+      const checkPlanningPayload = {
+        freeTime: freeTime.map((free) => ({
+          idTime: free.idTime,
+          idUser: free.idUser,
+          weekDay: free.weekDay,
+          startTime: free.startTime,
+          durationTime: free.durationTime,
+        })),
+        proposedPlanning: responseJson.map((p) => ({
+          idPlanning: p.idPlanning,
+          executionDate: p.executionDate,
+          startTime: p.startTime,
+          endTime: p.endTime,
+          finalWeight: p.finalWeight,
+          idTask: p.idTask,
+        })),
+        instructions: {
+          objective: "Regras obrigatórias para verificação e correção de planejamentos com base nos tempos livres.",
+          rules: [
+            "Analise cuidadosamente a chave 'freeTime' e a chave 'proposedPlanning'. Ambas devem ser comparadas criteriosamente.",
+            "Para cada item em 'proposedPlanning', verifique se o intervalo entre 'startTime' e 'endTime' está totalmente contido em algum intervalo equivalente de 'freeTime' para o mesmo 'weekDay'.",
+            "Realize realocação somente dos plannings que apresentarem horários de execução incongruentes com os tempos livres definidos em 'freeTime'.",
+            "Somente três campos podem ser alterados durante a correção: 'executionDate', 'startTime' e 'endTime'. Nenhum outro campo deve ser modificado.",
+            "Nunca altere plannings que já estejam corretamente alinhados com os horários de 'freeTime'. Esses devem permanecer exatamente como estão.",
+            "Ao corrigir um planning, selecione o tempo livre adequado mais próximo que comporte completamente a duração da atividade.",
+            "Jamais altere a quantidade de horas planejadas, o idTask ou qualquer outro atributo que não seja explicitamente autorizado.",
+            "Caso não exista nenhum freeTime compatível para realocação, o planning deve ser removido do array final.",
+            "Todas as correções devem preservar o formato original do objeto planning.",
+            "Retorne APENAS o JSON corrigido, sem explicações ou texto adicional."
+          ],
+          outputFormat: {
+            type: "array",
+            description: "Array de objetos com estrutura de planejamento corrigida no formato JSON",
+            schema: {
+              idPlanning: null,
+              executionDate: "YYYY-MM-DD",
+              startTime: "HH:MM:SS format",
+              endTime: "HH:MM:SS format",
+              finalWeight: "number (0-100)",
+              idTask: "number",
+            },
+          },
+        },
+      }
+
+      const checkprompt = JSON.stringify(checkPlanningPayload, null, 2)
+      const checkContent = [{ text: checkprompt }]
+
+      console.log('Entrando no segundo gemini')
+
+      const checkGeminiResponse = await googleAI.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: checkContent,
+        generationConfig: {
+          temperature: 0.1,
+          topP: 0.95,
+          topK: 40,
+        },
+      })
+
+      const checkedResponse = JSON.parse((checkGeminiResponse.text)
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim()
+      )
+
+      console.log('Dados verificados!')
+      console.log('Dados sendo inseridos!')
+
       const planningService = new PlanningService()
-      for (const p of responseJson) {
-        planningService.insert(
+      for (const p of checkedResponse) {
+        await planningService.insert(
           new PlanningModel(
             p.idPlanning,
             p.executionDate,
@@ -104,11 +194,17 @@ export class GeminiController {
             p.idTask
           )
         )
-        console.log('Planning inserted:', p)
       }
+
       const result = await new ScheduleService().insert(idUser)
-      return res.status(200).json(response.text)
+
+      return res.status(200).json({
+        message: 'Planejamento criado com sucesso',
+        planningsCreated: checkedResponse.length
+      })
+
     } catch (err) {
+      console.error('Erro ao gerar planejamento:', err)
       return res.status(500).json({ error: err.message })
     }
   }
@@ -117,7 +213,7 @@ export class GeminiController {
     try {
       const googleAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
       const { idUser } = req.params
-      const  { project }  = req.body
+      const { project } = req.body
       // lida com o upload do PDF via multer ou body      
       if (!req.file) {
         if (req.body && req.body.file) {
@@ -162,7 +258,7 @@ export class GeminiController {
                 idUser: `${idUser}`,
                 name: "string",
                 color: "ENUM('yellow', 'red', 'green', 'blue', 'purple', 'orange', 'pink', 'white', 'black')",
-                project:  `${project}`,
+                project: `${project}`,
                 classroom: "string|null",
                 day: "string|null",
                 startTime: "HH:MM:SS|null",
@@ -231,7 +327,7 @@ export class GeminiController {
           model: "gemini-2.5-flash",
           contents: contents,
           generationConfig: {
-            temperature: 0.1, 
+            temperature: 0.1,
             topP: 0.95,
             topK: 40,
           },

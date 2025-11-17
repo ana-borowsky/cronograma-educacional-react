@@ -33,4 +33,9 @@ class PlanningService {
     return await repo.delete(idPlanning)
   }
 
+  async deleteByUser(idUser) {
+    const repo = new PlanningRepository()
+    return await repo.deleteByUser(idUser)
+  }
+
 } export default PlanningService

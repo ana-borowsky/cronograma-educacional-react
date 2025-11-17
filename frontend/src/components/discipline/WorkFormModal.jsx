@@ -54,7 +54,7 @@ export const WorkFormModal = ({ isOpen, onClose, idDiscipline, editData, type, o
       const body = {
         idTask: editData?.id,
         name: formData.name,
-        type: "Trabalho",
+        type: type,
         estimatedHours: `${formData.estimatedHours}:00:00`,
         dueDate: formData.dueDate,
         status: "Pendente",

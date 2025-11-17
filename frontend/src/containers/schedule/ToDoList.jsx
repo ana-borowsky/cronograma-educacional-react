@@ -154,6 +154,7 @@ const ToDoList = () => {
               defaultChecked={planning.defaultChecked}
               onStatusChange={(id, newStatus) => handleStatusChange(planning.idTask, newStatus)}
               taskData={planning} 
+              editButton={false}
             />          
           ))
         )}

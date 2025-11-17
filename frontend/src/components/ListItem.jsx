@@ -25,7 +25,8 @@ export function ListItem({
   defaultChecked = false,
   onStatusChange,
   onEdit,
-  taskData
+  taskData,
+  editButton
 }) {
   const [isCompleted, setIsCompleted] = React.useState(defaultChecked)
   const [isExpanded, setIsExpanded] = React.useState(false)
@@ -71,30 +72,32 @@ export function ListItem({
           </Label>
         </div>
 
-        <div className="flex items-center">
-          {isHovered && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "absolute right-0 ml-1 hover:cursor-pointer transition-colors duration-200",
+        { editButton ? 
+          <div className="flex items-center">
+            {isHovered && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className={cn(
+                  "absolute right-0 ml-1 hover:cursor-pointer transition-colors duration-200",
 
-                "text-neutral-400 hover:text-yellow-600 bg-neutral-100",
+                  "text-neutral-400 hover:text-yellow-600 bg-neutral-100",
 
-                isCompleted
-                  ? "bg-neutral-200 hover:bg-neutral-200"
-                  : ""
-              )}
-              onClick={() => onEdit && onEdit(taskData)}
-              title="Editar trabalho"
-            >
+                  isCompleted
+                    ? "bg-neutral-200 hover:bg-neutral-200"
+                    : ""
+                )}
+                onClick={() => onEdit && onEdit(taskData)}
+                title="Editar trabalho"
+              >
 
-              <Pencil className={cn(
-                "w-4 h-4 cursor-pointer"
-              )} />
-            </Button>
-          )}
-        </div>
+                <Pencil className={cn(
+                  "w-4 h-4 cursor-pointer"
+                )} />
+              </Button>
+            )}
+          </div>
+          : ""}
       </div>
     </div>
   )

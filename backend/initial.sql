@@ -82,125 +82,76 @@ CREATE TABLE IF NOT EXISTS file (
 SET FOREIGN_KEY_CHECKS = 0;
 -- Inserindo usuários
 INSERT INTO user (name, email, password) VALUES
-('Maria Silva', 'maria.silva@email.com', '$2a$10$abcdefghijklmnopqrstuvwxyz123456'), -- senha hash exemplo
-('João Santos', 'joao.santos@email.com', '$2a$10$bcdefghijklmnopqrstuvwxyz234567'),
-('Ana Oliveira', 'ana.oliveira@email.com', '$2a$10$cdefghijklmnopqrstuvwxyz345678'),
-('Pedro Costa', 'pedro.costa@email.com', '$2a$10$defghijklmnopqrstuvwxyz456789');
+('Maria Silva', 'maria.silva@email.com', '$2a$10$abcdefghijklmnopqrstuvwxyz123456');
 
 -- Inserindo horários livres
-INSERT INTO freeTime (idUser, weekDay, startTime, durationTime) VALUES
--- Maria Silva
-(1, 'Segunda-feira', '14:00:00', 60),
-(1, 'Segunda-feira', '15:00:00', 60),
-(1, 'Terça-feira', '09:00:00', 60),
-(1, 'Terça-feira', '10:00:00', 60),
-(1, 'Terça-feira', '11:00:00', 60),
-(1, 'Quarta-feira', '14:00:00', 60),
-(1, 'Quarta-feira', '15:00:00', 60),
-(1, 'Quarta-feira', '16:00:00', 60),
-(1, 'Quarta-feira', '17:00:00', 60),
-(1, 'Quinta-feira', '10:00:00', 60),
-(1, 'Sexta-feira', '15:00:00', 60),
-(1, 'Sexta-feira', '16:00:00', 60),
-(1, 'Sexta-feira', '17:00:00', 60),
-(1, 'Sexta-feira', '18:00:00', 60),
-(1, 'Sexta-feira', '19:00:00', 60),
-(1, 'Sexta-feira', '20:00:00', 60),
-(1, 'Sexta-feira', '21:00:00', 60),
-
-
--- João Santos
-(2, 'Segunda-feira', '08:00:00', 60),
-(2, 'Terça-feira', '14:00:00', 60),
-(2, 'Quarta-feira', '08:00:00', 60),
-(2, 'Quinta-feira', '16:00:00', 60),
--- Ana Oliveira
-(3, 'Segunda-feira', '19:00:00', 60),
-(3, 'Quarta-feira', '19:00:00', 60),
-(3, 'Sexta-feira', '14:00:00', 60),
-(3, 'Sábado', '09:00:00', 60);
+insert into beezer.freeTime (idTime, idUser, weekDay, startTime, durationTime)
+values  (1, 1, 'Segunda-feira', '14:00:00', 60),
+        (2, 1, 'Segunda-feira', '15:00:00', 60),
+        (3, 1, 'Terça-feira', '14:00:00', 60),
+        (4, 1, 'Terça-feira', '15:00:00', 60),
+        (5, 1, 'Quarta-feira', '14:00:00', 60),
+        (6, 1, 'Quarta-feira', '15:00:00', 60),
+        (7, 1, 'Quinta-feira', '14:00:00', 60),
+        (8, 1, 'Quinta-feira', '15:00:00', 60),
+        (9, 1, 'Sexta-feira', '14:00:00', 60),
+        (10, 1, 'Sexta-feira', '15:00:00', 60),
+        (11, 1, 'Sexta-feira', '16:00:00', 60),
+        (12, 1, 'Sexta-feira', '17:00:00', 60),
+        (13, 1, 'Sexta-feira', '18:00:00', 60),
+        (14, 1, 'Sexta-feira', '19:00:00', 60),
+        (15, 1, 'Sexta-feira', '20:00:00', 60),
+        (16, 1, 'Sexta-feira', '21:00:00', 60),
+        (17, 1, 'Domingo', '14:00:00', 60),
+        (18, 1, 'Domingo', '16:00:00', 60),
+        (19, 1, 'Domingo', '15:00:00', 60),
+        (20, 1, 'Domingo', '17:00:00', 60);
 
 -- Inserindo disciplinas
-INSERT INTO discipline (idUser, name, color, project, classroom, day, startTime, endTime, weight) VALUES
--- Maria Silva
-(1, 'Algoritmos e Programação', "green", 'Projeto Final', 'Lab 101', 'Segunda-feira', '08:00:00', '10:00:00', 10),
-(1, 'Banco de Dados', "blue", 'Sistema Web', 'Sala 203', 'Terça-feira', '14:00:00', '16:00:00', 9),
-(1, 'Engenharia de Software', "sky", 'App Mobile', 'Sala 305', 'Quarta-feira', '10:00:00', '12:00:00', 8),
--- João Santos
-(2, 'Cálculo I', "yellow", 'Exercícios', 'Sala 104', 'Segunda-feira', '14:00:00', '16:00:00', 10),
-(2, 'Física I', "red", 'Laboratório', 'Lab 202', 'Quarta-feira', '14:00:00', '16:00:00', 9),
-(2, 'Programação Web', "purple", 'Site E-commerce', 'Lab 103', 'Quinta-feira', '10:00:00', '12:00:00', 8),
--- Ana Oliveira
-(3, 'Estrutura de Dados', "lime", 'Árvores Binárias', 'Lab 105', 'Terça-feira', '08:00:00', '10:00:00', 10),
-(3, 'Redes de Computadores', "emerald", 'Topologia Rede', 'Lab 301', 'Quinta-feira', '14:00:00', '16:00:00', 9);
+insert into beezer.discipline (idDiscipline, idUser, name, color, project, classroom, day, startTime, endTime, weight)
+values  (1, 1, 'Algoritmos e Programação', 'green', 'Projeto Final', 'Lab 101', 'Segunda-feira', '08:00:00', '10:00:00', 10),
+        (2, 1, 'Banco de Dados', 'blue', 'Sistema Web', 'Sala 203', 'Terça-feira', '08:00:00', '10:00:00', 9),
+        (3, 1, 'Engenharia de Software', 'sky', 'App Mobile', 'Sala 305', 'Quarta-feira', '10:00:00', '12:00:00', 8);
 
 -- Inserindo tarefas
-INSERT INTO task (idDiscipline, name, type, estimatedHours, dueDate, status, weight) VALUES
--- Algoritmos e Programação (Maria)
-(1, 'Prova Parcial 1', 'Prova', '02:00:00', '2025-11-15', 'Pendente', 10),
-(1, 'Trabalho de Ordenação', 'Trabalho', '08:00:00', '2025-11-20', 'Pendente', 8),
-(1, 'Lista de Exercícios 3', 'Trabalho', '04:00:00', '2025-11-10', 'Pendente', 5),
-(1, 'Prova Final - Estruturas de Dados', 'Prova', '03:00:00', '2025-12-15', 'Pendente', 10),
-(1, 'Trabalho Prático - Recursividade', 'Trabalho', '08:00:00', '2025-11-28', 'Pendente', 7),
-(1, 'Lista Exercícios - Ponteiros e Alocação', 'Trabalho', '05:00:00', '2025-11-20', 'Pendente', 5),
-(1, 'Prova Parcial 2 - Vetores e Matrizes', 'Prova', '02:00:00', '2025-11-24', 'Pendente', 10),
--- Banco de Dados (Maria)
-(2, 'Modelagem de Dados', 'Trabalho', '10:00:00', '2025-11-18', 'Pendente', 9),
-(2, 'Prova de SQL', 'Prova', '02:00:00', '2025-11-25', 'Pendente', 10),
-(2, 'Prova Prática - Joins e Views', 'Prova', '03:00:00', '2025-12-02', 'Pendente', 10),
-(2, 'Projeto Físico - Índices e Procedures', 'Trabalho', '12:00:00', '2025-12-08', 'Pendente', 9),
-(2, 'Trabalho Conceitual - Transações (ACID)', 'Trabalho', '06:00:00', '2025-11-26', 'Pendente', 6),
-(2, 'Prova Parcial 1 - MER/DER', 'Prova', '02:00:00', '2025-11-17', 'Pendente', 10),
--- Engenharia de Software (Maria)
-(3, 'Documentação do Projeto', 'Trabalho', '12:00:00', '2025-11-30', 'Pendente', 7),
-(3, 'Apresentação Seminário', 'Trabalho', '06:00:00', '2025-11-22', 'Pendente', 8),
-(3, 'Trabalho - Requisitos Funcionais (RF)', 'Trabalho', '10:00:00', '2025-11-29', 'Pendente', 8),
-(3, 'Prova Conceitual - Métodos Ágeis (Scrum)', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10),
-(3, 'Trabalho Prático - Diagramas de Caso de Uso', 'Trabalho', '07:00:00', '2025-12-04', 'Pendente', 7),
-(3, 'Relatório de Testes de Unidade', 'Trabalho', '09:00:00', '2025-12-10', 'Pendente', 5),
-(3, 'Prova de Modelagem de Casos de Uso', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10),
--- Cálculo I (João)
-(4, 'Prova Integral', 'Prova', '02:30:00', '2025-11-17', 'Pendente', 10),
-(4, 'Lista de Derivadas', 'Trabalho', '05:00:00', '2025-11-12', 'Pendente', 6),
--- Física I (João)
-(5, 'Relatório Lab 4', 'Trabalho', '04:00:00', '2025-11-14', 'Pendente', 7),
-(5, 'Prova Mecânica', 'Prova', '02:00:00', '2025-11-28', 'Pendente', 10),
--- Programação Web (João)
-(6, 'Site Responsivo', 'Trabalho', '15:00:00', '2025-12-05', 'Pendente', 9),
--- Estrutura de Dados (Ana)
-(7, 'Implementar AVL', 'Trabalho', '10:00:00', '2025-11-16', 'Pendente', 9),
-(7, 'Prova Árvores', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10),
--- Redes de Computadores (Ana)
-(8, 'Trabalho sobre TCP/IP', 'Trabalho', '08:00:00', '2025-11-19', 'Pendente', 8);
-
+insert into beezer.task (idTask, idDiscipline, name, type, estimatedHours, dueDate, status, weight)
+values  (1, 1, 'Prova Parcial 1', 'Prova', '02:00:00', '2025-11-15', 'Pendente', 10),
+        (2, 1, 'Trabalho de Ordenação', 'Trabalho', '08:00:00', '2025-11-20', 'Pendente', 8),
+        (3, 1, 'Lista de Exercícios 3', 'Trabalho', '04:00:00', '2025-11-10', 'Pendente', 5),
+        (4, 1, 'Prova Final - Estruturas de Dados', 'Prova', '03:00:00', '2025-12-15', 'Pendente', 10),
+        (5, 1, 'Trabalho Prático - Recursividade', 'Trabalho', '08:00:00', '2025-11-28', 'Pendente', 7),
+        (6, 1, 'Lista Exercícios - Ponteiros e Alocação', 'Trabalho', '05:00:00', '2025-11-20', 'Pendente', 5),
+        (7, 1, 'Prova Parcial 2 - Vetores e Matrizes', 'Prova', '02:00:00', '2025-11-24', 'Pendente', 10),
+        (8, 2, 'Modelagem de Dados', 'Trabalho', '10:00:00', '2025-11-18', 'Pendente', 9),
+        (9, 2, 'Prova de SQL', 'Prova', '02:00:00', '2025-11-25', 'Pendente', 10),
+        (10, 2, 'Prova Prática - Joins e Views', 'Prova', '03:00:00', '2025-12-02', 'Pendente', 10),
+        (11, 2, 'Projeto Físico - Índices e Procedures', 'Trabalho', '12:00:00', '2025-12-08', 'Pendente', 9),
+        (12, 2, 'Trabalho Conceitual - Transações (ACID)', 'Trabalho', '06:00:00', '2025-11-26', 'Pendente', 6),
+        (13, 2, 'Prova Parcial 1 - MER/DER', 'Prova', '02:00:00', '2025-11-17', 'Pendente', 10),
+        (14, 3, 'Documentação do Projeto', 'Trabalho', '12:00:00', '2025-11-30', 'Pendente', 7),
+        (15, 3, 'Apresentação Seminário', 'Trabalho', '06:00:00', '2025-11-22', 'Pendente', 8),
+        (16, 3, 'Trabalho - Requisitos Funcionais (RF)', 'Trabalho', '10:00:00', '2025-11-29', 'Pendente', 8),
+        (17, 3, 'Prova Conceitual - Métodos Ágeis (Scrum)', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10),
+        (18, 3, 'Trabalho Prático - Diagramas de Caso de Uso', 'Trabalho', '07:00:00', '2025-12-04', 'Pendente', 7),
+        (19, 3, 'Relatório de Testes de Unidade', 'Trabalho', '09:00:00', '2025-12-10', 'Pendente', 5),
+        (20, 3, 'Prova de Modelagem de Casos de Uso', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10);
 -- Inserindo planejamentos
-INSERT INTO planning (idTask, executionDate, startTime, endTime, finalWeight) VALUES
--- Planejamento para Maria
-(1, '2025-11-08', '14:00:00', '16:00:00', 90), -- Estudar para prova
-(1, '2025-11-12', '14:00:00', '17:00:00', 95),
-(2, '2025-11-10', '15:00:00', '18:00:00', 85), -- Trabalho ordenação
-(2, '2025-11-15', '14:00:00', '18:00:00', 90),
-(4, '2025-11-11', '14:00:00', '18:00:00', 88), -- Modelagem dados
-(4, '2025-11-16', '15:00:00', '19:00:00', 92),
--- Planejamento para João
-(8, '2025-11-09', '14:00:00', '17:00:00', 87), -- Prova Cálculo
-(8, '2025-11-14', '16:00:00', '19:00:00', 93),
-(9, '2025-11-10', '08:00:00', '12:00:00', 85), -- Lista Derivadas
-(10, '2025-11-11', '14:00:00', '17:00:00', 90), -- Relatório Física
--- Planejamento para Ana
-(13, '2025-11-08', '19:00:00', '22:00:00', 88), -- AVL
-(13, '2025-11-13', '19:00:00', '22:00:00', 92),
-(14, '2025-11-15', '19:00:00', '22:00:00', 90), -- Prova Árvores
-(15, '2025-11-12', '14:00:00', '18:00:00', 86); -- TCP/IP
+insert into beezer.planning (idPlanning, idTask, executionDate, startTime, endTime, finalWeight)
+values  (1, 2, '2025-11-10', '14:00:00', '16:00:00', 85),
+        (2, 4, '2025-11-11', '14:00:00', '16:00:00', 88),
+        (3, 1, '2025-11-12', '14:00:00', '16:00:00', 95),
+        (4, 2, '2025-11-13', '14:00:00', '16:00:00', 90),
+        (5, 2, '2025-11-14', '14:00:00', '18:00:00', 90),
+        (6, 4, '2025-11-14', '18:00:00', '21:00:00', 92);
 
 -- Inserindo agendamentos
-INSERT INTO schedule (idUser, idPlanning) VALUES
--- Maria
-(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6),
--- João
-(2, 7), (2, 8), (2, 9), (2, 10),
--- Ana
-(3, 11), (3, 12), (3, 13), (3, 14);
+insert into beezer.schedule (idSchedule, idUser, idPlanning)
+values  (1, 1, 1),
+        (2, 1, 2),
+        (3, 1, 3),
+        (4, 1, 4),
+        (5, 1, 5),
+        (6, 1, 6);
 
 -- Inserindo arquivos (exemplo com dados fictícios em BLOB)
 INSERT INTO file (idUser, name, type, data) VALUES

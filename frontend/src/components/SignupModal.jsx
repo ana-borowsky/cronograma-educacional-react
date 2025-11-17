@@ -38,8 +38,9 @@ const SignupModal = ({ onClose, onLoginClick }) => {
               type="text"
               id="name"
               name="name"
-              placeholder="Seu Nome"
+              placeholder="Ana Krestovozdvizhenski"
               required
+              className="placeholder-neutral-600"
             />
           </div>
 
@@ -54,8 +55,9 @@ const SignupModal = ({ onClose, onLoginClick }) => {
               type="email"
               id="email"
               name="email"
-              placeholder="nome@email.com"
+              placeholder="ana@gmail.com"
               required
+              className="placeholder-neutral-600"
             />
           </div>
 
@@ -70,8 +72,9 @@ const SignupModal = ({ onClose, onLoginClick }) => {
               type="password"
               id="password"
               name="password"
-              placeholder="Crie uma senha forte"
+              placeholder="**********"
               required
+              className="placeholder-neutral-600"
             />
           </div>
 
@@ -86,8 +89,9 @@ const SignupModal = ({ onClose, onLoginClick }) => {
               type="password"
               id="confirm-password"
               name="confirm-password"
-              placeholder="Repita a senha"
+              placeholder="**********"
               required
+              className="placeholder-neutral-600"
             />
           </div>
 

@@ -87,25 +87,30 @@ INSERT INTO user (name, email, password) VALUES
 -- Inserindo horários livres
 insert into beezer.freeTime (idTime, idUser, weekDay, startTime, durationTime)
 values  (1, 1, 'Segunda-feira', '14:00:00', 60),
-        (2, 1, 'Segunda-feira', '15:00:00', 60),
-        (3, 1, 'Terça-feira', '14:00:00', 60),
-        (4, 1, 'Terça-feira', '15:00:00', 60),
-        (5, 1, 'Quarta-feira', '14:00:00', 60),
-        (6, 1, 'Quarta-feira', '15:00:00', 60),
-        (7, 1, 'Quinta-feira', '14:00:00', 60),
-        (8, 1, 'Quinta-feira', '15:00:00', 60),
-        (9, 1, 'Sexta-feira', '14:00:00', 60),
-        (10, 1, 'Sexta-feira', '15:00:00', 60),
-        (11, 1, 'Sexta-feira', '16:00:00', 60),
-        (12, 1, 'Sexta-feira', '17:00:00', 60),
-        (13, 1, 'Sexta-feira', '18:00:00', 60),
-        (14, 1, 'Sexta-feira', '19:00:00', 60),
-        (15, 1, 'Sexta-feira', '20:00:00', 60),
-        (16, 1, 'Sexta-feira', '21:00:00', 60),
-        (17, 1, 'Domingo', '14:00:00', 60),
-        (18, 1, 'Domingo', '16:00:00', 60),
-        (19, 1, 'Domingo', '15:00:00', 60),
-        (20, 1, 'Domingo', '17:00:00', 60);
+		(2, 1, 'Segunda-feira', '16:00:00', 60),
+        (3, 1, 'Segunda-feira', '20:00:00', 60),
+        (4, 1, 'Segunda-feira', '21:00:00', 60),
+		(5, 1, 'Segunda-feira', '22:00:00', 60),
+        (6, 1, 'Terça-feira', '13:00:00', 60),
+        (7, 1, 'Terça-feira', '14:00:00', 60),
+		(8, 1, 'Terça-feira', '16:00:00', 60),
+        (9, 1, 'Terça-feira', '17:00:00', 60),
+        (10, 1, 'Quarta-feira', '07:00:00', 60),
+        (11, 1, 'Quarta-feira', '15:00:00', 60),
+        (12, 1, 'Quarta-feira', '16:00:00', 60),
+        (13, 1, 'Quinta-feira', '10:00:00', 60),
+        (14, 1, 'Quinta-feira', '11:00:00', 60),
+        (15, 1, 'Quinta-feira', '14:00:00', 60),
+        (16, 1, 'Quinta-feira', '15:00:00', 60),
+        (17, 1, 'Quinta-feira', '18:00:00', 60),
+        (18, 1, 'Quinta-feira', '19:00:00', 60),
+		(19, 1, 'Sexta-feira', '20:00:00', 60),
+		(20, 1, 'Sábado', '18:00:00', 60),
+		(21, 1, 'Sábado', '19:00:00', 60),
+        (22, 1, 'Sábado', '20:00:00', 60),
+        (23, 1, 'Domingo', '15:00:00', 60),
+		(24, 1, 'Domingo', '20:00:00', 60);
+
 
 -- Inserindo disciplinas
 insert into beezer.discipline (idDiscipline, idUser, name, color, project, classroom, day, startTime, endTime, weight)
@@ -115,34 +120,42 @@ values  (1, 1, 'Algoritmos e Programação', 'green', 'Projeto Final', 'Lab 101'
 
 -- Inserindo tarefas
 insert into beezer.task (idTask, idDiscipline, name, type, estimatedHours, dueDate, status, weight)
-values  (1, 1, 'Prova Parcial 1', 'Prova', '02:00:00', '2025-11-15', 'Pendente', 10),
-        (2, 1, 'Trabalho de Ordenação', 'Trabalho', '08:00:00', '2025-11-20', 'Pendente', 8),
-        (3, 1, 'Lista de Exercícios 3', 'Trabalho', '04:00:00', '2025-11-10', 'Pendente', 5),
-        (4, 1, 'Prova Final - Estruturas de Dados', 'Prova', '03:00:00', '2025-12-15', 'Pendente', 10),
-        (5, 1, 'Trabalho Prático - Recursividade', 'Trabalho', '08:00:00', '2025-11-28', 'Pendente', 7),
-        (6, 1, 'Lista Exercícios - Ponteiros e Alocação', 'Trabalho', '05:00:00', '2025-11-20', 'Pendente', 5),
-        (7, 1, 'Prova Parcial 2 - Vetores e Matrizes', 'Prova', '02:00:00', '2025-11-24', 'Pendente', 10),
-        (8, 2, 'Modelagem de Dados', 'Trabalho', '10:00:00', '2025-11-18', 'Pendente', 9),
-        (9, 2, 'Prova de SQL', 'Prova', '02:00:00', '2025-11-25', 'Pendente', 10),
-        (10, 2, 'Prova Prática - Joins e Views', 'Prova', '03:00:00', '2025-12-02', 'Pendente', 10),
-        (11, 2, 'Projeto Físico - Índices e Procedures', 'Trabalho', '12:00:00', '2025-12-08', 'Pendente', 9),
-        (12, 2, 'Trabalho Conceitual - Transações (ACID)', 'Trabalho', '06:00:00', '2025-11-26', 'Pendente', 6),
-        (13, 2, 'Prova Parcial 1 - MER/DER', 'Prova', '02:00:00', '2025-11-17', 'Pendente', 10),
-        (14, 3, 'Documentação do Projeto', 'Trabalho', '12:00:00', '2025-11-30', 'Pendente', 7),
-        (15, 3, 'Apresentação Seminário', 'Trabalho', '06:00:00', '2025-11-22', 'Pendente', 8),
-        (16, 3, 'Trabalho - Requisitos Funcionais (RF)', 'Trabalho', '10:00:00', '2025-11-29', 'Pendente', 8),
-        (17, 3, 'Prova Conceitual - Métodos Ágeis (Scrum)', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10),
-        (18, 3, 'Trabalho Prático - Diagramas de Caso de Uso', 'Trabalho', '07:00:00', '2025-12-04', 'Pendente', 7),
-        (19, 3, 'Relatório de Testes de Unidade', 'Trabalho', '09:00:00', '2025-12-10', 'Pendente', 5),
-        (20, 3, 'Prova de Modelagem de Casos de Uso', 'Prova', '02:00:00', '2025-11-21', 'Pendente', 10);
+values  (1, 1, 'Prova Parcial 1', 'Prova', '02:00:00', '2025-11-17', 'Pendente', 10),
+        (2, 1, 'Trabalho de Ordenação', 'Trabalho', '08:00:00', '2025-11-17', 'Pendente', 8),
+        (3, 1, 'Lista de Exercícios 3', 'Trabalho', '04:00:00', '2025-11-17', 'Pendente', 5),
+        (4, 1, 'Prova Final - Estruturas de Dados', 'Prova', '03:00:00', '2025-12-18', 'Pendente', 10),
+        (5, 1, 'Trabalho Prático - Recursividade', 'Trabalho', '08:00:00', '2025-11-17', 'Pendente', 7),
+        (6, 1, 'Prova Parcial 2 - Vetores e Matrizes', 'Prova', '02:00:00', '2025-11-24', 'Pendente', 10),
+        (7, 2, 'Modelagem de Dados', 'Trabalho', '10:00:00', '2025-11-26', 'Pendente', 9),
+        (8, 2, 'Prova de SQL', 'Prova', '02:00:00', '2025-11-25', 'Pendente', 10),
+        (9, 2, 'Prova Prática - Joins e Views', 'Prova', '03:00:00', '2025-12-24', 'Pendente', 10),
+        (10, 2, 'Projeto Físico - Índices e Procedures', 'Trabalho', '12:00:00', '2025-12-28', 'Pendente', 9),
+        (11, 2, 'Trabalho Conceitual - Transações (ACID)', 'Trabalho', '06:00:00', '2025-11-18', 'Pendente', 6),
+        (12, 2, 'Prova Parcial 1 - MER/DER', 'Prova', '02:00:00', '2025-11-19', 'Pendente', 10),
+        (13, 3, 'Documentação do Projeto', 'Trabalho', '12:00:00', '2025-11-28', 'Pendente', 7),
+        (14, 3, 'Apresentação Seminário', 'Trabalho', '06:00:00', '2025-11-26', 'Pendente', 8),
+        (15, 3, 'Trabalho - Requisitos Funcionais (RF)', 'Trabalho', '10:00:00', '2025-11-27', 'Pendente', 8),
+        (16, 3, 'Prova Conceitual - Métodos Ágeis (Scrum)', 'Prova', '02:00:00', '2025-11-19', 'Pendente', 10),
+        (17, 3, 'Prova de Modelagem de Diagrama de Classes', 'Prova', '02:00:00', '2025-11-18', 'Pendente', 10),
+        (18, 3, 'Prova de Modelagem de Casos de Uso', 'Prova', '02:00:00', '2025-11-17', 'Pendente', 10);
+        
 -- Inserindo planejamentos
 insert into beezer.planning (idPlanning, idTask, executionDate, startTime, endTime, finalWeight)
-values  (1, 2, '2025-11-10', '14:00:00', '16:00:00', 85),
-        (2, 4, '2025-11-11', '14:00:00', '16:00:00', 88),
-        (3, 1, '2025-11-12', '14:00:00', '16:00:00', 95),
-        (4, 2, '2025-11-13', '14:00:00', '16:00:00', 90),
-        (5, 2, '2025-11-17', '14:00:00', '18:00:00', 90),
-        (6, 4, '2025-11-17', '18:00:00', '21:00:00', 92); 
+values  (1, 4, '2025-11-17', '14:00:00', '15:00:00', 90),
+        (2, 4, '2025-11-17', '16:00:00', '17:00:00', 92),
+        (3, 11, '2025-11-17', '20:00:00', '22:00:00', 92),
+        (4, 17, '2025-11-17', '22:00:00', '23:00:00', 92),
+		(5, 12, '2025-11-18', '13:00:00', '15:00:00', 90),
+        (6, 16, '2025-11-18', '16:00:00', '18:00:00', 92), 
+		(7, 1, '2025-11-19', '07:00:00', '08:00:00', 90),
+        (8, 9, '2025-11-19', '15:00:00', '17:00:00', 90),
+        (9, 8, '2025-11-20', '10:00:00', '12:00:00', 92),
+		(10, 7, '2025-11-20', '14:00:00', '16:00:00', 90),
+        (11, 14, '2025-11-20', '18:00:00', '20:00:00', 92),
+        (12, 15, '2025-11-21', '20:00:00', '21:00:00', 92),
+		(13, 13, '2025-11-22', '18:00:00', '21:00:00', 90),
+        (14, 10, '2025-11-23', '15:00:00', '16:00:00', 92),
+        (15, 8, '2025-11-23', '20:00:00', '21:00:00', 92);
 
 -- Inserindo agendamentos
 insert into beezer.schedule (idSchedule, idUser, idPlanning)
@@ -151,8 +164,18 @@ values  (1, 1, 1),
         (3, 1, 3),
         (4, 1, 4),
         (5, 1, 5),
-        (6, 1, 6);
-
+        (6, 1, 6),
+        (7, 1, 7),
+        (8, 1, 8),
+        (9, 1, 9),
+        (10, 1, 10),
+        (11, 1, 11),
+        (12, 1, 12),
+        (13, 1, 13),
+        (14, 1, 14),
+        (15, 1, 15);
+        
+        
 -- Inserindo arquivos (exemplo com dados fictícios em BLOB)
 INSERT INTO file (idUser, name, type, data) VALUES
 (1, 'resumo_algoritmos.pdf', 'application/pdf', 0x255044462D312E34),

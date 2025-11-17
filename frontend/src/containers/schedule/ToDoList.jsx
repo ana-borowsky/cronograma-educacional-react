@@ -99,7 +99,7 @@ const ToDoList = () => {
         progressText={progressLabel}
       />
 
-      {tasks.length === 0 && (
+      {tasks.length === 0 ? (
         <div className="flex justify-center items-center">
           <img
             src="/assets/gatinho_balao_disciplinas.svg"
@@ -107,7 +107,7 @@ const ToDoList = () => {
             className="mt-10"
           />
         </div>
-      )}
+      ) : ""}
 
       <div className="space-y-4">
         {isLoading ? (

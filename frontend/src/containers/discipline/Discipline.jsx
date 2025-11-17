@@ -162,6 +162,7 @@ const Discipline = ({ disciplineData, onRefresh }) => {
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Trabalho", work)}
                     taskData={work}
+                    editButton={true}
                   />
                 ))
               ) : (
@@ -192,6 +193,7 @@ const Discipline = ({ disciplineData, onRefresh }) => {
                     onStatusChange={handleStatusChange}
                     onEdit={() => handleOpenModal("Prova", exam)}
                     taskData={exam}
+                    editButton={false}
                   />
                 ))
               ) : (

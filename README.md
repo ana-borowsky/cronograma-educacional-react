@@ -3,7 +3,7 @@
 ## O projeto
 Este projeto foi desenvolvido na disciplina de Experiência Criativa, da PUCPR, na qual foram explorados os conceitos do Design Thinking. Utilizando-se desta técnica, nós deveríamos achar uma "dor" para ser resolvida, e, ao final, entregar um MVP do produto, que é esta aplicação web.
 
-Como o foco principal era praticar o Design Thinking, o tempo para a produção do MVP em si era curto e os alunos deste grupo aproveitaram a oportunidade para testar tecnologias novas, com as quais não tinham familiaridade, ou se colocaram em situações nas quais não possuíam tanta experiência, a fim de utilizá-lo também como laboratório de aprendizado. E, por isso, é importante ressaltar que, apesar de funcionar e cumprir com os objetivos, a qualidade de código e organização de arquivos no geral está muito aquém da ideal.
+Como o foco principal era praticar o Design Thinking, o tempo para a produção do MVP em si era curto e os alunos deste grupo aproveitaram a oportunidade para testar tecnologias novas, com as quais não tinham familiaridade, ou se colocaram em situações nas quais não possuíam tanta experiência (como devs que geralmente fazem frontend, fazendo backend e vice versa), a fim de utilizá-lo também como laboratório de aprendizado. E, por isso, é importante ressaltar que, apesar de funcionar e cumprir com os objetivos, a qualidade de código e organização de arquivos no geral está muito aquém da ideal.
 
 ### Como funciona o Beezer?
 O Beezer nasceu de uma dor comum a qualquer estudante: muitas atividades a serem feitas, e pouco tempo para realizá-las. E o que os estudantes costumam fazer? Deixar para estudar tudo na última hora, o que é cientificamente comprovado que é ineficiente para reter os conhecimentos adquiridos nas disciplinas cursadas. 

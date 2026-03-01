@@ -1,8 +1,17 @@
 ![Image](https://github.com/user-attachments/assets/b6372cc8-2766-439f-8c88-d741eae766b9)
-## Sobre a disciplina
+> MVP de uma aplicação web em React que gera automaticamente - com o uso de IA - um cronograma de estudos e tarefas para estudantes
+## O projeto
 Este projeto foi desenvolvido na disciplina de Experiência Criativa, da PUCPR, na qual foram explorados os conceitos do Design Thinking. Utilizando-se desta técnica, nós deveríamos achar uma "dor" para ser resolvida, e, ao final, entregar um MVP do produto. 
 
 Como o foco principal era praticar o Design Thinking, o tempo para a produção do MVP em si era curto e os alunos deste grupo aproveitaram a oportunidade para testar tecnologias novas, com as quais não tinham familiaridade, ou se colocaram em situações onde não possuíam tanta experiência, a fim de aproveitar este trabalho também como laboratório de aprendizado. E, por isso, é importante ressaltar que, apesar de funcionar e cumprir com os objetivos, a qualidade de código e organização de arquivos no geral está muito aquém da ideal.
+
+<img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/6d3a8973-beae-4a46-8ce4-d97f782ffcc7" />
+
+<img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/f6f7fa7b-c929-4fc1-8ac1-19c4571fdcad" />
+
+<img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/da40d87f-fa94-40a7-b433-99dfb5330eb4" />
+
+
 
 ## Como rodar
 

@@ -1,4 +1,5 @@
-![Image](https://github.com/user-attachments/assets/b6372cc8-2766-439f-8c88-d741eae766b9)
+<img src="frontend/public/assets/logo.svg" alt="Logo do Beezer" width="600">
+
 > MVP de uma aplicação web em React que gera automaticamente - com o uso de IA - um cronograma de estudos e tarefas por disciplinas para estudantes
 ## O projeto
 Este projeto foi desenvolvido na disciplina de Experiência Criativa, da PUCPR, na qual foram explorados os conceitos do Design Thinking. Utilizando-se desta técnica, nós deveríamos achar uma "dor" para ser resolvida, e, ao final, entregar um MVP do produto, que é esta aplicação web.

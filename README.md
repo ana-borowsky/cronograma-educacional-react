@@ -26,6 +26,8 @@ Tanto o nome, como o mascote (desenhos e animações) foram todos desenvolvidos 
 
 <img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/da40d87f-fa94-40a7-b433-99dfb5330eb4" /><br>
 
+<img width="1067" height="510" alt="Image" src="https://github.com/user-attachments/assets/8a0ea76c-6394-475c-abf6-83653f9e9ef7" /><br>
+
 <img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/82a1c8ba-0a4d-4898-9d92-0e707247595c" /><br>
 
 <img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/8025e36f-aab0-4a83-818b-a720e3865fb6" /><br>
@@ -38,11 +40,9 @@ Tanto o nome, como o mascote (desenhos e animações) foram todos desenvolvidos 
 
 <img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/6f715ba7-64c7-4f6b-908b-99d526ee1077" /><br>
 
-<img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/1ea84aed-a723-4b20-99db-a0d72080f700" /><br>
-
 <img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/8ea33e91-2a3a-476a-8b40-dd2da167d974" /><br>
 
-<img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/1b7a90b9-6373-40e2-ac88-e590796c9750" /><br>
+<img width="1064" height="501" alt="Image" src="https://github.com/user-attachments/assets/0aff74d5-7e4e-47a9-8ae1-60ce0be38b98" /><br>
 
 <img width="1836" height="954" alt="Image" src="https://github.com/user-attachments/assets/e3abd0e8-31a8-46cc-831b-542edb970f19" />
 
